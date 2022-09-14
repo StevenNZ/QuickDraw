@@ -3,19 +3,37 @@ package nz.ac.auckland.se206;
 import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
 
 import ai.djl.ModelException;
+import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /**
  * This is the controller of the canvas. You are free to modify this class and the corresponding
@@ -30,16 +48,29 @@ import nz.ac.auckland.se206.ml.DoodlePrediction;
  * the canvas and brush sizes, make sure that the prediction works fine.
  */
 public class CanvasController {
-
+  private static final int DEFAULT_SECONDS = 60;
+  @FXML private Button btnSaveDrawing;
+  @FXML private Button btnStartTimer;
   @FXML private Canvas canvas;
-
+  @FXML private Label lblCategoryTxt;
+  @FXML private Label lblClickStartTimer;
+  @FXML private Label lblTimer;
+  @FXML private Label lblTopTenGuesses;
+  @FXML private Label lblWinOrLoss;
+  @FXML private Pane paneCategories;
+  @FXML private Pane paneEditCanvas;
+  @FXML private Pane paneGameEnd;
+  @FXML private Rectangle boxBlack;
+  @FXML private Rectangle boxBlue;
+  @FXML private Rectangle boxEraser;
+  @FXML private Rectangle boxRed;
   private GraphicsContext graphic;
-
   private DoodlePrediction model;
+  protected HashMap<String, ArrayList<String>> categories = new HashMap<>();
+  private int secondsLeft;
+  private String randomCategory;
+  private Timeline timeline;
 
-  // mouse coordinates
-  private double currentX;
-  private double currentY;
   /**
    * JavaFX calls this method once the GUI elements are loaded. In our case we create a listener for
    * the drawing, and we load the ML model.
@@ -48,33 +79,49 @@ public class CanvasController {
    * @throws IOException If the model cannot be found on the file system.
    */
   public void initialize() throws ModelException, IOException {
-    graphic = canvas.getGraphicsContext2D();
 
-    // save coordinates when mouse is pressed on the canvas
-    canvas.setOnMousePressed(
-        e -> {
-          currentX = e.getX();
-          currentY = e.getY();
-        });
+    processDataFromFile();
+    generateRandomCategory();
+    this.timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.seconds(1.0),
+                e -> {
+                  secondsLeft--;
+                  // Update the Timer label with how many seconds left
+                  lblTimer.setText(String.format("%02d:%02d", secondsLeft / 60, secondsLeft % 60));
+                  // Trigger Lose conditions if they run out of time
+                  if (secondsLeft == 0) {
+                    onGameEnd(false);
+                  }
+                  // Run ML predictions in the background
+                  Platform.runLater(
+                      () -> {
+                        try {
+                          onPredict();
+                        } catch (TranslateException ex) {
+                          throw new RuntimeException(ex);
+                        }
+                      });
+                }));
+    timeline.setCycleCount(Timeline.INDEFINITE);
+
+    // Replace lblCategoryTxt on the canvas
+    lblCategoryTxt.setText(this.randomCategory);
+
+    graphic = canvas.getGraphicsContext2D();
 
     canvas.setOnMouseDragged(
         e -> {
           // Brush size (you can change this, it should not be too small or too large).
-          final double size = 6;
+          final double size = 8.0;
 
           final double x = e.getX() - size / 2;
           final double y = e.getY() - size / 2;
 
           // This is the colour of the brush.
           graphic.setFill(Color.BLACK);
-          graphic.setLineWidth(size);
-
-          // Create a line that goes from the point (currentX, currentY) and (x,y)
-          graphic.strokeLine(currentX, currentY, x, y);
-
-          // update the coordinates
-          currentX = x;
-          currentY = y;
+          graphic.fillOval(x, y, size, size);
         });
 
     model = new DoodlePrediction();
@@ -86,6 +133,18 @@ public class CanvasController {
     graphic.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
   }
 
+  @FXML
+  private void onStartTimer() {
+    this.secondsLeft = DEFAULT_SECONDS;
+    timeline.play();
+    // Enable being able to edit the canvas and change pen colours
+    paneEditCanvas.setDisable(false);
+    canvas.setDisable(false);
+    btnStartTimer.setDisable(true);
+    btnStartTimer.setVisible(false);
+    lblClickStartTimer.setVisible(false);
+  }
+
   /**
    * This method executes when the user clicks the "Predict" button. It gets the current drawing,
    * queries the DL model and prints on the console the top 5 predictions of the DL model and the
@@ -95,14 +154,128 @@ public class CanvasController {
    */
   @FXML
   private void onPredict() throws TranslateException {
-    System.out.println("==== PREDICTION  ====");
-    System.out.println("Top 5 predictions");
-
+    List<Classifications.Classification> predictions =
+        model.getPredictions(getCurrentSnapshot(), 10);
     final long start = System.currentTimeMillis();
-
-    printPredictions(model.getPredictions(getCurrentSnapshot(), 5));
-
+    System.out.println("==== PREDICTION  ====");
+    System.out.println("Top 10 predictions");
     System.out.println("prediction performed in " + (System.currentTimeMillis() - start) + " ms");
+    printPredictions(predictions);
+
+    lblTopTenGuesses.setText(getStringOfPredictions(predictions).toString());
+
+    // Check the top 3 predictions whether they are what the word is.
+    for (int i = 0; i < 3; i++) {
+      String predictionClassName = predictions.get(i).getClassName();
+      // issue arose that underscores replaced spaces so need to replace them again for both types
+      predictionClassName = predictionClassName.replaceAll("_", " ");
+      if (randomCategory.equals(predictionClassName)) {
+        // This is the win condition.
+        System.out.println("win");
+        onGameEnd(true);
+      }
+    }
+  }
+
+  @FXML
+  private void onSaveDrawing() throws IOException {
+    // get the current stage
+    Stage stage = (Stage) btnSaveDrawing.getScene().getWindow();
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Save Drawing");
+    fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("BMP", "*.bmp"));
+    File file = fileChooser.showSaveDialog(stage);
+    if (file != null) {
+      fileChooser.setInitialDirectory(file.getParentFile()); // save the
+      ImageIO.write(getCurrentSnapshot(), "bmp", file);
+    }
+    // Save the image to a file.
+
+  }
+
+  @FXML
+  private void onNewGameClicked() {
+    reset();
+  }
+
+  private void onGameEnd(boolean isWin) {
+    TextToSpeech textToSpeech = new TextToSpeech();
+
+    Stage stage = (Stage) canvas.getScene().getWindow();
+    stage.setOnCloseRequest(
+        e -> {
+          Platform.exit();
+          textToSpeech.terminate();
+        });
+    String gameoverString;
+    // Stop the timer
+    timeline.stop();
+    if (isWin) {
+      gameoverString = "Congratulations! You WON!";
+    } else {
+      gameoverString = "Sorry, better luck next time.";
+    }
+
+    // Change labels to display win or loss
+    lblWinOrLoss.setText(gameoverString);
+    // Make buttons visible to save the drawing and reset appear.
+    paneGameEnd.setDisable(false);
+    paneGameEnd.setVisible(true);
+    // Hide category display information
+    paneCategories.setVisible(false);
+    // Disable changing the drawing
+    paneEditCanvas.setDisable(true);
+    Platform.runLater(
+        () -> {
+          // Text to speak the loss or win
+          textToSpeech.speak(gameoverString);
+        });
+  }
+
+  /** Reset the panes and timer */
+  private void reset() {
+    // Hide Game End Pane
+    paneGameEnd.setDisable(true);
+    paneGameEnd.setVisible(false);
+    // Clear the canvas
+    onClear();
+    generateRandomCategory();
+    // Replace lblCategoryTxt on the canvas
+    lblCategoryTxt.setText(this.randomCategory);
+    // Hide category display information
+    paneCategories.setVisible(true);
+    btnStartTimer.setVisible(true);
+    btnStartTimer.setDisable(false);
+    lblClickStartTimer.setVisible(true);
+    lblTopTenGuesses.setText("Your top 10 guesses to your drawing will appear here!");
+
+    // Reset the timer
+    this.secondsLeft = DEFAULT_SECONDS;
+    lblTimer.setText(String.format("%02d:%02d", secondsLeft / 60, secondsLeft % 60));
+  }
+
+  /**
+   * Retrieve List of predictions This is essentially the same as the printPredictions method in
+   * DoodlePredictions.java, but I didn't want to mess with the class as it could potentially break
+   * things.
+   */
+  private StringBuilder getStringOfPredictions(List<Classifications.Classification> predictions) {
+    StringBuilder sb = new StringBuilder();
+    int i = 1;
+    // Build a string with all of the top 10 predictions from the ml api
+    for (Classifications.Classification classification : predictions) {
+      sb.append(i)
+          .append(". ")
+          .append(classification.getClassName())
+          .append(": ")
+          // Include the confidence percentage
+          .append(String.format("%.2f%%", 100 * classification.getProbability()))
+          // Add new line
+          .append(System.lineSeparator());
+
+      i++;
+    }
+    return sb;
   }
 
   /**
@@ -150,5 +323,136 @@ public class CanvasController {
     ImageIO.write(getCurrentSnapshot(), "bmp", imageToClassify);
 
     return imageToClassify;
+  }
+
+  /**
+   * Takes all categories from the "category_difficulty.csv" file and places them into ArrayLists in
+   * the hashmap depending on their perceived difficulty in the second column
+   *
+   * @throws IOException if file cannot be found
+   */
+  private void processDataFromFile() throws IOException {
+    String splitBy = ",";
+    String line;
+    String[] splitColumns;
+    BufferedReader bufferedReader =
+        new BufferedReader(new FileReader("./src/main/resources/category_difficulty.csv"));
+    while ((line = bufferedReader.readLine()) != null) {
+      // Split the columns
+      splitColumns = line.split(splitBy);
+      categories.computeIfAbsent(splitColumns[1], k -> new ArrayList<>()).add(splitColumns[0]);
+    }
+  }
+
+  /** Randomly choose a category based on level difficulty */
+  private void generateRandomCategory() {
+    // Initialise random
+    Random rand = new Random();
+    String category;
+    int randomIndex;
+    // LEVEL EASY
+
+    // Get number of easy categories
+    randomIndex = rand.nextInt(categories.get("E").size());
+    category = categories.get("E").get(randomIndex);
+
+    this.randomCategory = category;
+  }
+  // TODO: tidy this up so that there are subclasses for selecting paint colours.
+  // Ideas:
+  // Could use reflector to chose rectangles.
+  /** This method is called when the Red block is clicked and changes the pen colour to red */
+  @FXML
+  private void onRedSelected() {
+    // Set colour selected to gray
+    boxRed.setOpacity(0.5);
+    // Set all other box strokes to black
+    boxBlue.setOpacity(1);
+    boxBlack.setOpacity(1);
+    boxEraser.setOpacity(1);
+    // Change brush colour
+    canvas.setOnMouseDragged(
+        e -> {
+          // Brush size (you can change this, it should not be too small or too large).
+          final double size = 8.0;
+
+          final double x = e.getX() - size / 2;
+          final double y = e.getY() - size / 2;
+
+          // This is the colour of the brush.
+          graphic.setFill(Color.RED);
+          graphic.fillOval(x, y, size, size);
+        });
+  }
+  /** This method is called when the blue block is clicked and changes the pen colour to blue */
+  @FXML
+  private void onBlueSelected() {
+
+    // Set colour selected to gray
+    boxBlue.setOpacity(0.5);
+    // Set all other box strokes to black
+    boxRed.setOpacity(1);
+    boxBlack.setOpacity(1);
+    boxEraser.setOpacity(1);
+
+    canvas.setOnMouseDragged(
+        e -> {
+          // Brush size (you can change this, it should not be too small or too large).
+          final double size = 8.0;
+
+          final double x = e.getX() - size / 2;
+          final double y = e.getY() - size / 2;
+
+          // This is the colour of the brush.
+          graphic.setFill(Color.BLUE);
+          graphic.fillOval(x, y, size, size);
+        });
+  }
+  /** This method is called when the black block is clicked and changes the pen colour to black */
+  @FXML
+  private void onBlackSelected() {
+
+    // Set colour selected to gray
+    boxBlack.setOpacity(0.5);
+    // Set all other box strokes to black
+    boxBlue.setOpacity(1);
+    boxRed.setOpacity(1);
+    boxEraser.setOpacity(1);
+
+    canvas.setOnMouseDragged(
+        e -> {
+          // Brush size (you can change this, it should not be too small or too large).
+          final double size = 8.0;
+
+          final double x = e.getX() - size / 2;
+          final double y = e.getY() - size / 2;
+
+          // This is the colour of the brush.
+          graphic.setFill(Color.BLACK);
+          graphic.fillOval(x, y, size, size);
+        });
+  }
+
+  /** This method is called when the black block is clicked and changes the pen colour to black */
+  @FXML
+  private void onEraserSelected() {
+    // Set colour selected to gray
+    boxEraser.setOpacity(0.5);
+    // Set all other box strokes to black
+    boxBlue.setOpacity(1);
+    boxRed.setOpacity(1);
+    boxBlack.setOpacity(1);
+
+    canvas.setOnMouseDragged(
+        e -> {
+          // Brush size (you can change this, it should not be too small or too large).
+          final double size = 8.0;
+
+          final double x = e.getX() - size / 2;
+          final double y = e.getY() - size / 2;
+
+          // This is the colour of the brush.
+          graphic.clearRect(x, y, size, size);
+        });
   }
 }

@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,9 +37,17 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    final Scene scene = new Scene(loadFxml("canvas"), 840, 680);
+    // Ensuring the app closes properly
+    stage.setOnCloseRequest(
+        e -> {
+          Platform.exit();
+        });
+    SceneManager.addUi(SceneManager.AppUi.MAINMENU, loadFxml("mainmenu"));
+    SceneManager.addUi(SceneManager.AppUi.CANVAS, loadFxml("canvas"));
+    final Scene mainMenuScene =
+        new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU), 768, 542);
 
-    stage.setScene(scene);
+    stage.setScene(mainMenuScene);
     stage.show();
   }
 }
