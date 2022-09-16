@@ -19,7 +19,9 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -454,5 +456,12 @@ public class CanvasController {
           // This is the colour of the brush.
           graphic.clearRect(x, y, size, size);
         });
+  }
+
+  @FXML
+  private void onBack(ActionEvent event) {
+    Button button = (Button) event.getSource();
+    Scene sceneOfButton = button.getScene();
+    sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU));
   }
 }
