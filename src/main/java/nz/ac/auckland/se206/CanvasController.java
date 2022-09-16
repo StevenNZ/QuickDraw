@@ -458,6 +458,7 @@ public class CanvasController {
         });
   }
 
+  /** This method is called when the back button is called and changes scene to main menu */
   @FXML
   private void onBack(ActionEvent event) {
     Button button = (Button) event.getSource();
