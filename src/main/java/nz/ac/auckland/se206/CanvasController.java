@@ -27,6 +27,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -62,7 +63,8 @@ public class CanvasController {
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
-  @FXML private Rectangle boxBlack;
+
+  @FXML private ImageView penBlack;
   @FXML private Rectangle boxBlue;
   @FXML private Rectangle boxEraser;
   @FXML private Rectangle boxRed;
@@ -370,7 +372,7 @@ public class CanvasController {
     boxRed.setOpacity(0.5);
     // Set all other box strokes to black
     boxBlue.setOpacity(1);
-    boxBlack.setOpacity(1);
+    // Black box removed
     boxEraser.setOpacity(1);
     // Change brush colour
     canvas.setOnMouseDragged(
@@ -394,7 +396,7 @@ public class CanvasController {
     boxBlue.setOpacity(0.5);
     // Set all other box strokes to black
     boxRed.setOpacity(1);
-    boxBlack.setOpacity(1);
+    // boxBlack.setOpacity(1);
     boxEraser.setOpacity(1);
 
     canvas.setOnMouseDragged(
@@ -415,7 +417,7 @@ public class CanvasController {
   private void onBlackSelected() {
 
     // Set colour selected to gray
-    boxBlack.setOpacity(0.5);
+    // boxBlack.setOpacity(0.5);
     // Set all other box strokes to black
     boxBlue.setOpacity(1);
     boxRed.setOpacity(1);
@@ -443,7 +445,7 @@ public class CanvasController {
     // Set all other box strokes to black
     boxBlue.setOpacity(1);
     boxRed.setOpacity(1);
-    boxBlack.setOpacity(1);
+    // boxBlack.setOpacity(1);
 
     canvas.setOnMouseDragged(
         e -> {
