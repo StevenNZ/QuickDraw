@@ -45,7 +45,7 @@ public class App extends Application {
     SceneManager.addUi(SceneManager.AppUi.MAINMENU, loadFxml("mainmenu"));
     SceneManager.addUi(SceneManager.AppUi.CANVAS, loadFxml("canvas"));
     final Scene mainMenuScene =
-        new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU), 768, 542);
+        new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU), 1920, 1080);
 
     stage.setScene(mainMenuScene);
     stage.show();

@@ -116,7 +116,7 @@ public class CanvasController {
     canvas.setOnMouseDragged(
         e -> {
           // Brush size (you can change this, it should not be too small or too large).
-          final double size = 8.0;
+          final double size = 12.0;
 
           final double x = e.getX() - size / 2;
           final double y = e.getY() - size / 2;
@@ -376,7 +376,7 @@ public class CanvasController {
     canvas.setOnMouseDragged(
         e -> {
           // Brush size (you can change this, it should not be too small or too large).
-          final double size = 8.0;
+          final double size = 12.0;
 
           final double x = e.getX() - size / 2;
           final double y = e.getY() - size / 2;
@@ -400,7 +400,7 @@ public class CanvasController {
     canvas.setOnMouseDragged(
         e -> {
           // Brush size (you can change this, it should not be too small or too large).
-          final double size = 8.0;
+          final double size = 12.0;
 
           final double x = e.getX() - size / 2;
           final double y = e.getY() - size / 2;
@@ -424,7 +424,7 @@ public class CanvasController {
     canvas.setOnMouseDragged(
         e -> {
           // Brush size (you can change this, it should not be too small or too large).
-          final double size = 8.0;
+          final double size = 12.0;
 
           final double x = e.getX() - size / 2;
           final double y = e.getY() - size / 2;
@@ -448,7 +448,7 @@ public class CanvasController {
     canvas.setOnMouseDragged(
         e -> {
           // Brush size (you can change this, it should not be too small or too large).
-          final double size = 8.0;
+          final double size = 12.0;
 
           final double x = e.getX() - size / 2;
           final double y = e.getY() - size / 2;
