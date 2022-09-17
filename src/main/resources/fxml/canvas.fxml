@@ -9,59 +9,85 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane minHeight="542.0" minWidth="768.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.CanvasController">
+<Pane maxHeight="1440.0" maxWidth="2560.0" minHeight="1080.0" minWidth="1920.0" style="-fx-background-image: #B2F7EF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.CanvasController">
    <children>
-      <Label id="lblTimer" fx:id="lblTimer" alignment="CENTER" contentDisplay="RIGHT" layoutX="621.0" layoutY="36.0" prefHeight="49.0" prefWidth="118.0" text="01:00" textAlignment="CENTER">
+      <Label id="lblTimer" fx:id="lblTimer" alignment="CENTER" contentDisplay="RIGHT" layoutX="1504.0" layoutY="72.0" prefHeight="132.0" prefWidth="304.0" text="01:00" textAlignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font size="85.0" />
          </font>
       </Label>
-      <Button id="btnStartTimer" fx:id="btnStartTimer" alignment="CENTER" defaultButton="true" layoutX="630.0" layoutY="83.0" mnemonicParsing="false" onAction="#onStartTimer" prefHeight="39.0" prefWidth="100.0" text="Start Timer" />
-      <Pane fx:id="paneEditCanvas" layoutX="19.0" layoutY="141.0" prefHeight="380.0" prefWidth="556.0">
+      <Button id="btnStartTimer" fx:id="btnStartTimer" alignment="CENTER" defaultButton="true" layoutX="1545.0" layoutY="187.0" mnemonicParsing="false" onAction="#onStartTimer" prefHeight="82.0" prefWidth="249.0" text="Start Timer">
+         <font>
+            <Font size="38.0" />
+         </font></Button>
+      <Pane fx:id="paneEditCanvas" layoutX="255.0" layoutY="284.0" prefHeight="728.0" prefWidth="1249.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="329.0" layoutX="15.0" stroke="BLACK" strokeType="INSIDE" width="526.0" />
-            <Canvas fx:id="canvas" disable="true" height="329.0" layoutX="15.0" width="526.0">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="605.0" layoutX="166.0" layoutY="10.0" stroke="#5b5f97" strokeType="INSIDE" style="-fx-fill: FFFFFF;" width="999.0" />
+            <Canvas fx:id="canvas" disable="true" height="605.0" layoutX="166.0" layoutY="10.0" width="999.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Canvas>
-            <Rectangle fx:id="boxRed" arcHeight="5.0" arcWidth="5.0" fill="#ff1100" height="20.0" layoutX="75.0" layoutY="343.0" onMouseClicked="#onRedSelected" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-            <Rectangle fx:id="boxBlue" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="47.0" layoutY="343.0" onMouseClicked="#onBlueSelected" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-            <Rectangle fx:id="boxBlack" arcHeight="5.0" arcWidth="5.0" height="20.0" layoutX="20.0" layoutY="343.0" onMouseClicked="#onBlackSelected" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-            <Rectangle fx:id="boxEraser" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="458.0" layoutY="343.0" onMouseClicked="#onEraserSelected" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-            <Button fx:id="clearButton" alignment="CENTER_RIGHT" layoutX="493.0" layoutY="339.0" mnemonicParsing="false" onAction="#onClear" text="Clear" textAlignment="CENTER" />
+            <Rectangle fx:id="boxRed" arcHeight="5.0" arcWidth="5.0" fill="#ff1100" height="58.0" layoutX="14.0" layoutY="164.0" onMouseClicked="#onRedSelected" stroke="BLACK" strokeType="INSIDE" visible="false" width="58.0" />
+            <Rectangle fx:id="boxBlue" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="58.0" layoutX="14.0" layoutY="97.0" onMouseClicked="#onBlueSelected" stroke="BLACK" strokeType="INSIDE" visible="false" width="58.0" />
+            <Rectangle fx:id="boxBlack" arcHeight="5.0" arcWidth="5.0" height="58.0" layoutX="14.0" layoutY="25.0" onMouseClicked="#onBlackSelected" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="boxEraser" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="14.0" layoutY="557.0" onMouseClicked="#onEraserSelected" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="1021.0" layoutY="625.0" mnemonicParsing="false" onAction="#onClear" prefHeight="45.0" prefWidth="144.0" text="Clear" textAlignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font></Button>
          </children>
       </Pane>
-      <Label alignment="CENTER" layoutX="572.0" layoutY="157.0" prefHeight="25.0" prefWidth="126.0" text="Top 10 Guesses:" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="1504.0" layoutY="292.0" prefHeight="45.0" prefWidth="249.0" text="Top 10 Guesses:" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="Ink Free" size="27.0" />
          </font>
       </Label>
-      <Label fx:id="lblTopTenGuesses" alignment="TOP_LEFT" layoutX="578.0" layoutY="195.0" prefHeight="290.0" prefWidth="170.0" text="Your top 10 guesses to your drawing will appear here!" wrapText="true" />
-      <Button fx:id="predictButton" disable="true" layoutX="640.0" layoutY="485.0" mnemonicParsing="false" onAction="#onPredict" text="Predict" visible="false" />
-      <Pane fx:id="paneGameEnd" disable="true" layoutX="36.0" layoutY="29.0" prefHeight="109.0" prefWidth="501.0" visible="false">
+      <Label fx:id="lblTopTenGuesses" alignment="TOP_LEFT" layoutX="1530.0" layoutY="347.0" prefHeight="552.0" prefWidth="264.0" text="Your top 10 guesses to your drawing will appear here!" wrapText="true">
+         <font>
+            <Font name="Leelawadee" size="23.0" />
+         </font></Label>
+      <Pane fx:id="paneGameEnd" disable="true" layoutX="418.0" layoutY="22.0" prefHeight="253.0" prefWidth="999.0" visible="false">
          <children>
-            <Button fx:id="btnSaveDrawing" layoutY="69.0" mnemonicParsing="false" onAction="#onSaveDrawing" prefHeight="27.0" prefWidth="100.0" text="Save Drawing" />
-            <Button fx:id="btnNewGame" layoutX="140.0" layoutY="69.0" mnemonicParsing="false" onAction="#onNewGameClicked" prefHeight="27.0" prefWidth="100.0" text="New Game" />
-            <Label fx:id="lblWinOrLoss" layoutY="14.0" prefHeight="49.0" prefWidth="419.0" text="WIN OR LOSS?">
+            <Button fx:id="btnSaveDrawing" layoutX="200.0" layoutY="193.0" mnemonicParsing="false" onAction="#onSaveDrawing" prefHeight="46.0" prefWidth="211.0" text="Save Drawing">
                <font>
-                  <Font size="30.0" />
+                  <Font size="22.0" />
+               </font></Button>
+            <Button fx:id="btnNewGame" layoutX="595.0" layoutY="190.0" mnemonicParsing="false" onAction="#onNewGameClicked" prefHeight="52.0" prefWidth="211.0" text="New Game">
+               <font>
+                  <Font size="22.0" />
+               </font></Button>
+            <Label fx:id="lblWinOrLoss" alignment="CENTER" contentDisplay="CENTER" layoutX="122.0" layoutY="14.0" prefHeight="88.0" prefWidth="756.0" text="WIN OR LOSS?">
+               <font>
+                  <Font size="45.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="paneCategories" layoutX="34.0" layoutY="6.0" prefHeight="124.0" prefWidth="526.0">
+      <Pane fx:id="paneCategories" layoutX="418.0" layoutY="72.0" prefHeight="199.0" prefWidth="999.0">
          <children>
-            <Label layoutX="6.0" layoutY="21.0" prefHeight="19.0" prefWidth="219.0" text="Your category is..." />
-            <Label fx:id="lblCategoryTxt" layoutX="6.0" layoutY="40.0" prefHeight="45.0" prefWidth="304.0" text="word">
+            <Label alignment="CENTER" layoutX="390.0" layoutY="14.0" prefHeight="19.0" prefWidth="219.0" text="Your word is:" textAlignment="CENTER">
                <font>
-                  <Font size="30.0" />
+                  <Font name="Consolas" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lblClickStartTimer" layoutX="6.0" layoutY="85.0" prefHeight="24.0" prefWidth="170.0" text="Click 'Start Timer' to start!" />
-            <Button fx:id="btnReturnMain" layoutX="481.0" layoutY="84.0" mnemonicParsing="false" onAction="#onBack" text="Back" />
+            <Label fx:id="lblCategoryTxt" alignment="CENTER" layoutX="122.0" layoutY="56.0" prefHeight="88.0" prefWidth="756.0" style="-fx-background-color: ffffff;" text="word" textAlignment="CENTER">
+               <font>
+                  <Font size="60.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblClickStartTimer" alignment="CENTER" contentDisplay="CENTER" layoutX="328.0" layoutY="163.0" prefHeight="36.0" prefWidth="343.0" text="Click 'Start Timer' to start!" textAlignment="CENTER">
+               <font>
+                  <Font name="Nirmala UI" size="25.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
+      <Button fx:id="btnReturnMain" layoutX="1775.0" layoutY="22.0" mnemonicParsing="false" onAction="#onBack" prefHeight="39.0" prefWidth="119.0" text="Back">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
