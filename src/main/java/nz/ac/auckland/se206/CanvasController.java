@@ -30,6 +30,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -52,6 +53,8 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
  */
 public class CanvasController {
   private static final int DEFAULT_SECONDS = 60;
+  @FXML public ImageView penBlack;
+  @FXML public ImageView eraser;
   @FXML private Button btnSaveDrawing;
   @FXML private Button btnStartTimer;
   @FXML private Canvas canvas;
@@ -63,10 +66,9 @@ public class CanvasController {
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
-
-  @FXML private ImageView penBlack;
+  @FXML private Circle circleBlackPen;
+  @FXML private Circle circleEraser;
   @FXML private Rectangle boxBlue;
-  @FXML private Rectangle boxEraser;
   @FXML private Rectangle boxRed;
   private GraphicsContext graphic;
   private DoodlePrediction model;
@@ -161,9 +163,11 @@ public class CanvasController {
     List<Classifications.Classification> predictions =
         model.getPredictions(getCurrentSnapshot(), 10);
     final long start = System.currentTimeMillis();
-    System.out.println("==== PREDICTION  ====");
-    System.out.println("Top 10 predictions");
-    System.out.println("prediction performed in " + (System.currentTimeMillis() - start) + " ms");
+    /**
+     * System.out.println("==== PREDICTION ===="); System.out.println("Top 10 predictions");
+     * System.out.println("prediction performed in " + (System.currentTimeMillis() - start) + "
+     * ms");
+     */
     printPredictions(predictions);
 
     lblTopTenGuesses.setText(getStringOfPredictions(predictions).toString());
@@ -374,7 +378,7 @@ public class CanvasController {
     // Set all other box strokes to black
     boxBlue.setOpacity(1);
     // Black box removed
-    boxEraser.setOpacity(1);
+    circleEraser.setOpacity(1);
     // Change brush colour
     canvas.setOnMouseDragged(
         e -> {
@@ -398,7 +402,7 @@ public class CanvasController {
     // Set all other box strokes to black
     boxRed.setOpacity(1);
     // boxBlack.setOpacity(1);
-    boxEraser.setOpacity(1);
+    // boxEraser.setOpacity(1);
 
     canvas.setOnMouseDragged(
         e -> {
@@ -417,12 +421,13 @@ public class CanvasController {
   @FXML
   private void onBlackSelected() {
 
-    // Set colour selected to gray
-    // boxBlack.setOpacity(0.5);
+    // Set colour selected to half opacity
+    penBlack.setOpacity(0.5);
+    eraser.setOpacity(1.0);
     // Set all other box strokes to black
     boxBlue.setOpacity(1);
     boxRed.setOpacity(1);
-    boxEraser.setOpacity(1);
+    // circleEraser.setOpacity(1);
 
     canvas.setOnMouseDragged(
         e -> {
@@ -442,11 +447,12 @@ public class CanvasController {
   @FXML
   private void onEraserSelected() {
     // Set colour selected to gray
-    boxEraser.setOpacity(0.5);
+    eraser.setOpacity(0.5);
+
     // Set all other box strokes to black
     boxBlue.setOpacity(1);
     boxRed.setOpacity(1);
-    // boxBlack.setOpacity(1);
+    penBlack.setOpacity(1.0);
 
     canvas.setOnMouseDragged(
         e -> {
