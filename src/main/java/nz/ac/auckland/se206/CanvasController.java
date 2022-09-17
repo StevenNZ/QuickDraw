@@ -363,6 +363,7 @@ public class CanvasController {
     this.randomCategory = category;
   }
   // TODO: tidy this up so that there are subclasses for selecting paint colours.
+  // Currently the colours are not in use as they are not needed until Zen mode.
   // Ideas:
   // Could use reflector to chose rectangles.
   /** This method is called when the Red block is clicked and changes the pen colour to red */
