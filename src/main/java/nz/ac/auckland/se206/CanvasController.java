@@ -423,8 +423,8 @@ public class CanvasController {
 
     // Set colour selected to half opacity
     penBlack.setOpacity(0.5);
-    eraser.setOpacity(1.0);
     // Set all other box strokes to black
+    eraser.setOpacity(1.0);
     boxBlue.setOpacity(1);
     boxRed.setOpacity(1);
     // circleEraser.setOpacity(1);
