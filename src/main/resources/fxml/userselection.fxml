@@ -45,6 +45,7 @@
                         <Circle fx:id="circleNewUser1" fill="WHITE" layoutX="152.0" layoutY="107.0" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-1.0" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" startX="126.0" startY="104.0" styleClass="iconCircle" />
+                        <Button fx:id="btnProfile1" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="214.0" prefWidth="307.0" style="-fx-background-color: transparent;" />
                      </children>
                   </Pane>
                   <Pane fx:id="panePlayer2" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1">
@@ -58,6 +59,7 @@
                         <Circle fx:id="circleNewUser2" fill="WHITE" layoutX="152.0" layoutY="107.0" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-1.0" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" startX="126.0" startY="104.0" styleClass="iconCircle" />
+                        <Button fx:id="btnProfile2" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="214.0" prefWidth="307.0" style="-fx-background-color: transparent;" />
                      </children>
                   </Pane>
                   <Pane fx:id="panePlayer3" prefHeight="215.0" prefWidth="326.0" visible="false" GridPane.columnIndex="2">
@@ -71,6 +73,7 @@
                         <Circle fx:id="circleNewUser3" fill="WHITE" layoutX="152.0" layoutY="107.0" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-1.0" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" startX="126.0" startY="104.0" styleClass="iconCircle" />
+                        <Button fx:id="btnProfile3" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="214.0" prefWidth="307.0" style="-fx-background-color: transparent;" />
                      </children>
                   </Pane>
                   <Pane fx:id="panePlayer4" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.rowIndex="1">
@@ -84,6 +87,7 @@
                         <Circle fx:id="circleNewUser4" fill="WHITE" layoutX="152.0" layoutY="107.0" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-1.0" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" startX="126.0" startY="104.0" styleClass="iconCircle" />
+                        <Button fx:id="btnProfile4" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="214.0" prefWidth="307.0" style="-fx-background-color: transparent;" />
                      </children>
                   </Pane>
                   <Pane fx:id="panePlayer5" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -97,6 +101,7 @@
                         <Circle fx:id="circleNewUser5" fill="WHITE" layoutX="152.0" layoutY="107.0" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-1.0" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" startX="126.0" startY="104.0" styleClass="iconCircle" />
+                        <Button fx:id="btnProfile5" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="214.0" prefWidth="307.0" style="-fx-background-color: transparent;" />
                      </children>
                   </Pane>
                   <Pane fx:id="panePlayer6" prefHeight="214.0" prefWidth="343.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -110,6 +115,7 @@
                         <Circle fx:id="circleNewUser6" fill="WHITE" layoutX="152.0" layoutY="107.0" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-2.0" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="2.0" startX="126.0" startY="104.0" styleClass="iconCircle" />
+                        <Button fx:id="btnProfile6" mnemonicParsing="false" onAction="#onCreateProfile" prefHeight="214.0" prefWidth="307.0" style="-fx-background-color: transparent;" />
                      </children>
                   </Pane>
                </children>
