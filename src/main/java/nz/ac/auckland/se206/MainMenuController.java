@@ -17,6 +17,6 @@ public class MainMenuController {
   private void onStartGame(ActionEvent event) {
     Button thisButton = (Button) event.getSource();
     Scene mainMenuScene = thisButton.getScene();
-    mainMenuScene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CANVAS));
+    mainMenuScene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
   }
 }
