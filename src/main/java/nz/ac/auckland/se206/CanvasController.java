@@ -27,8 +27,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -51,6 +53,8 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
  */
 public class CanvasController {
   private static final int DEFAULT_SECONDS = 60;
+  @FXML public ImageView penBlack;
+  @FXML public ImageView eraser;
   @FXML private Button btnSaveDrawing;
   @FXML private Button btnStartTimer;
   @FXML private Canvas canvas;
@@ -62,9 +66,9 @@ public class CanvasController {
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
-  @FXML private Rectangle boxBlack;
+  @FXML private Circle circleBlackPen;
+  @FXML private Circle circleEraser;
   @FXML private Rectangle boxBlue;
-  @FXML private Rectangle boxEraser;
   @FXML private Rectangle boxRed;
   private GraphicsContext graphic;
   private DoodlePrediction model;
@@ -116,7 +120,7 @@ public class CanvasController {
     canvas.setOnMouseDragged(
         e -> {
           // Brush size (you can change this, it should not be too small or too large).
-          final double size = 8.0;
+          final double size = 12.0;
 
           final double x = e.getX() - size / 2;
           final double y = e.getY() - size / 2;
@@ -159,9 +163,11 @@ public class CanvasController {
     List<Classifications.Classification> predictions =
         model.getPredictions(getCurrentSnapshot(), 10);
     final long start = System.currentTimeMillis();
-    System.out.println("==== PREDICTION  ====");
-    System.out.println("Top 10 predictions");
-    System.out.println("prediction performed in " + (System.currentTimeMillis() - start) + " ms");
+    /**
+     * System.out.println("==== PREDICTION ===="); System.out.println("Top 10 predictions");
+     * System.out.println("prediction performed in " + (System.currentTimeMillis() - start) + "
+     * ms");
+     */
     printPredictions(predictions);
 
     lblTopTenGuesses.setText(getStringOfPredictions(predictions).toString());
@@ -361,6 +367,7 @@ public class CanvasController {
     this.randomCategory = category;
   }
   // TODO: tidy this up so that there are subclasses for selecting paint colours.
+  // Currently the colours are not in use as they are not needed until Zen mode.
   // Ideas:
   // Could use reflector to chose rectangles.
   /** This method is called when the Red block is clicked and changes the pen colour to red */
@@ -370,13 +377,13 @@ public class CanvasController {
     boxRed.setOpacity(0.5);
     // Set all other box strokes to black
     boxBlue.setOpacity(1);
-    boxBlack.setOpacity(1);
-    boxEraser.setOpacity(1);
+    // Black box removed
+    circleEraser.setOpacity(1);
     // Change brush colour
     canvas.setOnMouseDragged(
         e -> {
           // Brush size (you can change this, it should not be too small or too large).
-          final double size = 8.0;
+          final double size = 12.0;
 
           final double x = e.getX() - size / 2;
           final double y = e.getY() - size / 2;
@@ -394,13 +401,13 @@ public class CanvasController {
     boxBlue.setOpacity(0.5);
     // Set all other box strokes to black
     boxRed.setOpacity(1);
-    boxBlack.setOpacity(1);
-    boxEraser.setOpacity(1);
+    // boxBlack.setOpacity(1);
+    // boxEraser.setOpacity(1);
 
     canvas.setOnMouseDragged(
         e -> {
           // Brush size (you can change this, it should not be too small or too large).
-          final double size = 8.0;
+          final double size = 12.0;
 
           final double x = e.getX() - size / 2;
           final double y = e.getY() - size / 2;
@@ -414,17 +421,18 @@ public class CanvasController {
   @FXML
   private void onBlackSelected() {
 
-    // Set colour selected to gray
-    boxBlack.setOpacity(0.5);
+    // Set colour selected to half opacity
+    penBlack.setOpacity(0.5);
     // Set all other box strokes to black
+    eraser.setOpacity(1.0);
     boxBlue.setOpacity(1);
     boxRed.setOpacity(1);
-    boxEraser.setOpacity(1);
+    // circleEraser.setOpacity(1);
 
     canvas.setOnMouseDragged(
         e -> {
           // Brush size (you can change this, it should not be too small or too large).
-          final double size = 8.0;
+          final double size = 12.0;
 
           final double x = e.getX() - size / 2;
           final double y = e.getY() - size / 2;
@@ -439,16 +447,17 @@ public class CanvasController {
   @FXML
   private void onEraserSelected() {
     // Set colour selected to gray
-    boxEraser.setOpacity(0.5);
+    eraser.setOpacity(0.5);
+
     // Set all other box strokes to black
     boxBlue.setOpacity(1);
     boxRed.setOpacity(1);
-    boxBlack.setOpacity(1);
+    penBlack.setOpacity(1.0);
 
     canvas.setOnMouseDragged(
         e -> {
           // Brush size (you can change this, it should not be too small or too large).
-          final double size = 8.0;
+          final double size = 12.0;
 
           final double x = e.getX() - size / 2;
           final double y = e.getY() - size / 2;

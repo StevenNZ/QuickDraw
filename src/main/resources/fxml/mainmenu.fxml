@@ -3,26 +3,31 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="542.0" minWidth="768.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.MainMenuController">
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.MainMenuController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="172.0" prefHeight="19.0" prefWidth="600.0" text="Quick, Draw! 206 Edition" textAlignment="CENTER">
+      <ImageView fitHeight="720.0" fitWidth="1280.0">
+         <image>
+            <Image url="@../images/qd.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="295.0" layoutX="221.0" layoutY="161.0" stroke="#faa504" strokeWidth="5.0" width="868.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="224.0" layoutY="175.0" prefHeight="162.0" prefWidth="863.0" styleClass="title" stylesheets="@../css/application.css" text="Quick, Draw! 206 Edition" textAlignment="CENTER">
          <font>
-            <Font size="33.0" />
+            <Font name="Ink Free" size="87.0" />
          </font>
       </Label>
-      <Button fx:id="btnStartGame" layoutX="196.0" layoutY="294.0" mnemonicParsing="false" onAction="#onStartGame" prefHeight="39.0" prefWidth="136.0" text="Start Game">
+      <Button fx:id="btnStartGame" layoutX="345.0" layoutY="338.0" mnemonicParsing="false" onAction="#onStartGame" prefHeight="63.0" prefWidth="230.0" style="-fx-background-color: #faa504;" styleClass="body" text="Start Game">
          <font>
-            <Font size="18.0" />
+            <Font size="38.0" />
          </font>
       </Button>
-      <Button fx:id="btnExit" layoutX="421.0" layoutY="294.0" mnemonicParsing="false" onAction="#onExit" prefHeight="39.0" prefWidth="136.0" text="Exit">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
+      <Button fx:id="btnExit" layoutX="740.0" layoutY="338.0" mnemonicParsing="false" onAction="#onExit" prefHeight="63.0" prefWidth="230.0" styleClass="body" stylesheets="@../css/application.css" text="Exit" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
