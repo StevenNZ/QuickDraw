@@ -1,8 +1,8 @@
-package nz.ac.auckland.se206.users;
+package nz.ac.auckland.se206.user;
 
 import java.io.IOException;
-import nz.ac.auckland.se206.UserFileHandler;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 
 public class UserFileHandlerTest {
@@ -17,5 +17,15 @@ public class UserFileHandlerTest {
     testUser.put("totalLoss", 3);
 
     UserFileHandler.saveUserData(testUser, 12);
+  }
+
+  @Test
+  void readUserFileTest() throws IOException, ParseException {
+
+    JSONObject testUser;
+
+    testUser = UserFileHandler.readUserData(12);
+
+    System.out.println(testUser);
   }
 }
