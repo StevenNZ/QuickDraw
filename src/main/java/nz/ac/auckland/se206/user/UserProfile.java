@@ -11,7 +11,7 @@ public class UserProfile {
   private String name = "";
   private int totalWins = 0;
   private int totalLoss = 0;
-  private int quickestWin;
+  private int quickestWin = 100;
   private List<String> wordHistory = new ArrayList<>();
 
   public UserProfile(String name) {
