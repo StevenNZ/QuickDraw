@@ -1,6 +1,11 @@
 package nz.ac.auckland.se206;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -10,9 +15,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import nz.ac.auckland.se206.user.UserProfile;
 
@@ -89,13 +96,41 @@ public class UserSelectionController {
   }
 
   @FXML
-  private void onSaveProfile() {
+  private void onSaveProfile() throws IOException {
     String name = textFieldName.getText();
     users[currentUser] = new UserProfile(name);
-    currentUser = 0;
+    setProfilePic();
 
+    currentUser = 0;
     paneUserProfile.setVisible(true);
     paneUserCreation.setVisible(false);
+  }
+
+  private void setProfilePic() throws IOException {
+    File file = new File("src/main/resources/images/userprofilepic/user" + currentUser + ".png");
+    try {
+      ImageIO.write(getCurrentSnapshot(), "png", file);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private BufferedImage getCurrentSnapshot() {
+    final Image snapshot = canvasUser.snapshot(null, null);
+    final BufferedImage image = SwingFXUtils.fromFXImage(snapshot, null);
+
+    // Convert into a binary image.
+    final BufferedImage imageBinary =
+        new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+
+    final Graphics2D graphics = imageBinary.createGraphics();
+
+    graphics.drawImage(image, 0, 0, null);
+
+    // To release memory we dispose.
+    graphics.dispose();
+
+    return imageBinary;
   }
 
   @FXML
