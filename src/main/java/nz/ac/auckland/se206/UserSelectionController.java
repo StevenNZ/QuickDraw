@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javax.swing.*;
 import nz.ac.auckland.se206.user.UserProfile;
 
@@ -21,6 +22,8 @@ public class UserSelectionController {
   @FXML private Pane paneUserCreation;
   @FXML private TextField textFieldName;
   @FXML private Canvas canvasUser;
+  @FXML private Circle circleEraser;
+  @FXML private Circle circleBlackPen1;
   private GraphicsContext graphic;
   private static final UserProfile[] users = new UserProfile[7];
   public static int currentUser = 0;
@@ -44,7 +47,7 @@ public class UserSelectionController {
   @FXML
   private void onCreateProfile(Event event) {
     currentUser = getProfile(event);
-
+    circleBlackPen1.setOpacity(0.5);
     graphic = canvasUser.getGraphicsContext2D();
 
     canvasUser.setOnMouseDragged(
@@ -96,11 +99,44 @@ public class UserSelectionController {
   }
 
   @FXML
-  private void onBlackSelected() {}
+  private void onBlackSelected() {
+    circleEraser.setOpacity(1);
+    circleBlackPen1.setOpacity(0.5);
+
+    canvasUser.setOnMouseDragged(
+        e -> {
+          // Brush size (you can change this, it should not be too small or too large).
+          final double size = 12.0;
+
+          final double x = e.getX() - size / 2;
+          final double y = e.getY() - size / 2;
+
+          // This is the colour of the brush.
+          graphic.setFill(Color.BLACK);
+          graphic.fillOval(x, y, size, size);
+        });
+  }
 
   @FXML
-  private void onEraserSelected() {}
+  private void onEraserSelected() {
+    circleEraser.setOpacity(0.5);
+    circleBlackPen1.setOpacity(1);
+
+    canvasUser.setOnMouseDragged(
+        e -> {
+          // Brush size (you can change this, it should not be too small or too large).
+          final double size = 12.0;
+
+          final double x = e.getX() - size / 2;
+          final double y = e.getY() - size / 2;
+
+          // This is the colour of the brush.
+          graphic.clearRect(x, y, size, size);
+        });
+  }
 
   @FXML
-  private void onClear() {}
+  private void onClear() {
+    graphic.clearRect(0, 0, canvasUser.getWidth(), canvasUser.getHeight());
+  }
 }
