@@ -34,7 +34,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="59.0" layoutX="395.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="312.0" />
             <Text layoutX="408.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Draw an icon that represents you!" wrappingWidth="292.0" />
             <Button layoutX="408.0" layoutY="422.0" mnemonicParsing="false" onAction="#onSaveProfile" prefHeight="40.0" prefWidth="312.0" text="Save Profile" />
-            <Canvas height="362.0" layoutX="17.0" layoutY="96.0" width="364.0" />
+            <Canvas fx:id="canvasUser" height="362.0" layoutX="17.0" layoutY="96.0" width="364.0" />
             <Circle fx:id="circleBlackPen1" fill="WHITE" layoutX="435.0" layoutY="217.0" onMouseClicked="#onBlackSelected" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
             <ImageView fx:id="penBlack1" fitHeight="45.0" fitWidth="49.0" layoutX="411.0" layoutY="195.0" onMouseClicked="#onBlackSelected">
                <image>
