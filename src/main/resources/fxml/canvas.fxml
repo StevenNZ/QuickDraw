@@ -103,7 +103,7 @@
                   <Font name="Ink Free" size="60.0" />
                </font>
             </Label>
-            <Label fx:id="lblClickStartTimer" alignment="CENTER" contentDisplay="CENTER" layoutX="140.0" layoutY="108.0" prefHeight="36.0" prefWidth="442.0" styleClass="heading" text="Click 'Start Timer' to start!" textAlignment="CENTER">
+            <Label fx:id="lblClickStartTimer" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="107.0" prefHeight="36.0" prefWidth="690.0" styleClass="heading" text="Click 'Start Timer' to start!" textAlignment="CENTER">
                <font>
                   <Font name="Consolas" size="25.0" />
                </font>
