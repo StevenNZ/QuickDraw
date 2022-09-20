@@ -1,15 +1,18 @@
 package nz.ac.auckland.se206;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.user.UserProfile;
 
 public class UserSelectionController {
 
+  @FXML private Pane paneUserProfile;
+  @FXML private Pane paneUserCreation;
   private static final UserProfile[] users = new UserProfile[7];
   private static int currentUser = 0;
 
@@ -21,35 +24,45 @@ public class UserSelectionController {
   }
 
   @FXML
-  private void onCreateProfile(ActionEvent event) {
+  private void onCreateProfile(Event event) {
     String id = ((Node) event.getSource()).getId();
     int idIndex = getProfile(id);
-    if (users[idIndex] == null) {
-      // Go to profile creation scene
-    } else {
-      currentUser = idIndex;
-      onStartCanvas(event);
-    }
+
+    paneUserProfile.setVisible(false);
+    paneUserCreation.setVisible(true);
   }
 
   private int getProfile(String id) {
     switch (id) {
-      case "btnProfile1":
+      case "circleNewUser1":
         return 1;
-      case "btnProfile2":
+      case "circleNewUser2":
         return 2;
-      case "btnProfile3":
+      case "circleNewUser3":
         return 3;
-      case "btnProfile4":
+      case "circleNewUser4":
         return 4;
-      case "btnProfile5":
+      case "circleNewUser5":
         return 5;
-      case "btnProfile6":
+      case "circleNewUser6":
         return 6;
       default:
         return 0;
     }
   }
 
-  public void onBlackSelected(MouseEvent mouseEvent) {}
+  @FXML
+  public void onSaveProfile() {
+    paneUserProfile.setVisible(true);
+    paneUserCreation.setVisible(false);
+  }
+
+  @FXML
+  public void onBlackSelected() {}
+
+  @FXML
+  public void onEraserSelected() {}
+
+  @FXML
+  public void onClear() {}
 }
