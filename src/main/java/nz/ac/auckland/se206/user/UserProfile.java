@@ -1,9 +1,13 @@
 package nz.ac.auckland.se206.user;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.simple.JSONObject;
 
 public class UserProfile {
+  public static int currentUser = 0;
+
   private String name = "";
   private int totalWins = 0;
   private int totalLoss = 0;
@@ -32,5 +36,20 @@ public class UserProfile {
 
   public int getTotalLoss() {
     return totalLoss;
+  }
+
+  public void saveUserData() {
+    JSONObject userData = new JSONObject();
+
+    userData.put("name", this.name);
+    userData.put("totalWins", this.totalWins);
+    userData.put("totalLoss", this.totalLoss);
+    userData.put("quickestWin", this.quickestWin);
+
+    try {
+      UserFileHandler.saveUserData(userData, currentUser);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
