@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 
 public class UserProfile {
   public static int currentUser = 0;
@@ -51,5 +52,16 @@ public class UserProfile {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public void readUserData() throws IOException, ParseException {
+    JSONObject userData;
+
+    userData = UserFileHandler.readUserData(currentUser);
+
+    this.name = (String) userData.get("name");
+    this.totalWins = (int) (long) userData.get("totalWins");
+    this.totalLoss = (int) (long) userData.get("totalLoss");
+    this.quickestWin = (int) (long) userData.get("quickestWin");
   }
 }
