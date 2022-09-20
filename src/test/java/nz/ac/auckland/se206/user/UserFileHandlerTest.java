@@ -16,7 +16,7 @@ public class UserFileHandlerTest {
     testUser.put("totalWins", 7);
     testUser.put("totalLoss", 3);
 
-    UserFileHandler.saveUserData(testUser, 12);
+    UserFileHandler.saveUserData(testUser, 10);
   }
 
   @Test
@@ -24,7 +24,7 @@ public class UserFileHandlerTest {
 
     JSONObject testUser;
 
-    testUser = UserFileHandler.readUserData(12);
+    testUser = UserFileHandler.readUserData(10);
 
     System.out.println(testUser);
   }
