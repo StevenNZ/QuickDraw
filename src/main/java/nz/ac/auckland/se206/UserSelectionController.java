@@ -14,7 +14,6 @@ public class UserSelectionController {
   @FXML private Pane paneUserProfile;
   @FXML private Pane paneUserCreation;
   private static final UserProfile[] users = new UserProfile[7];
-  private static int currentUser = 0;
 
   @FXML
   private void onStartCanvas(ActionEvent event) {
@@ -26,7 +25,7 @@ public class UserSelectionController {
   @FXML
   private void onCreateProfile(Event event) {
     String id = ((Node) event.getSource()).getId();
-    int idIndex = getProfile(id);
+    UserProfile.currentUser = getProfile(id);
 
     paneUserProfile.setVisible(false);
     paneUserCreation.setVisible(true);
