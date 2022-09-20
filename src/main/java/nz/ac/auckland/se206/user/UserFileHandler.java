@@ -1,9 +1,12 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.user;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class UserFileHandler {
 
@@ -25,5 +28,14 @@ public class UserFileHandler {
     userFileWriter.write(user.toJSONString());
     userFileWriter.flush();
     userFileWriter.close();
+  }
+
+  public static JSONObject readUserData(int userNumber) throws IOException, ParseException {
+
+    String fileLocation = "profiles/user" + userNumber + ".json";
+    JSONParser jsonParser = new JSONParser();
+
+    FileReader userFileReader = new FileReader(fileLocation);
+    return (JSONObject) jsonParser.parse(userFileReader);
   }
 }
