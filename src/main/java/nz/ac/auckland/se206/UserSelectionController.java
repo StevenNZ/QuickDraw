@@ -6,15 +6,18 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javax.swing.*;
 import nz.ac.auckland.se206.user.UserProfile;
 
 public class UserSelectionController {
 
   @FXML private Pane paneUserProfile;
   @FXML private Pane paneUserCreation;
+  @FXML private TextField textFieldName;
   private static final UserProfile[] users = new UserProfile[7];
-  private static int currentUser = 0;
+  public static int currentUser = 0;
 
   @FXML
   private void onStartCanvas(ActionEvent event) {
@@ -25,14 +28,19 @@ public class UserSelectionController {
 
   @FXML
   private void onCreateProfile(Event event) {
-    String id = ((Node) event.getSource()).getId();
-    int idIndex = getProfile(id);
+    currentUser = getProfile(event);
+
+    if (currentUser == 0) {
+      users[0] = new UserProfile("Guest");
+    }
 
     paneUserProfile.setVisible(false);
     paneUserCreation.setVisible(true);
   }
 
-  private int getProfile(String id) {
+  private int getProfile(Event event) {
+    String id = ((Node) event.getSource()).getId();
+
     switch (id) {
       case "circleNewUser1":
         return 1;
@@ -52,17 +60,21 @@ public class UserSelectionController {
   }
 
   @FXML
-  public void onSaveProfile() {
+  private void onSaveProfile() {
+    String name = textFieldName.getText();
+    users[currentUser] = new UserProfile(name);
+    currentUser = 0;
+
     paneUserProfile.setVisible(true);
     paneUserCreation.setVisible(false);
   }
 
   @FXML
-  public void onBlackSelected() {}
+  private void onBlackSelected() {}
 
   @FXML
-  public void onEraserSelected() {}
+  private void onEraserSelected() {}
 
   @FXML
-  public void onClear() {}
+  private void onClear() {}
 }
