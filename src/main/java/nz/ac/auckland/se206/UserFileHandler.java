@@ -19,11 +19,6 @@ public class UserFileHandler {
 
     File userFile = new File(fileLocation);
 
-    // Creates the user json file
-    if (!userFile.exists()) {
-      userFile.mkdir();
-    }
-
     // This writes the data to the json file
     FileWriter userFileWriter = new FileWriter(userFile, false);
 
