@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class UserProfileTest {
 
   @Test
-  void SaveUserDataTest() {
+  void saveUserDataTest() {
     UserProfile.currentUser = 11;
 
     UserProfile testSubject = new UserProfile("Test Subject");
@@ -24,7 +24,7 @@ public class UserProfileTest {
   }
 
   @Test
-  void ReadUserDataTest() throws IOException, ParseException {
+  void readUserDataTest() throws IOException, ParseException {
     UserProfile.currentUser = 11;
 
     UserProfile testSubject = new UserProfile("not right");
