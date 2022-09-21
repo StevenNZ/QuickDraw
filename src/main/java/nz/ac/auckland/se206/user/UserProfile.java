@@ -56,6 +56,7 @@ public class UserProfile {
     userData.put("totalWins", this.totalWins);
     userData.put("totalLoss", this.totalLoss);
     userData.put("quickestWin", this.quickestWin);
+    userData.put("wordHistory", this.wordHistory);
 
     try {
       UserFileHandler.saveUserData(userData, currentUser);
@@ -73,5 +74,6 @@ public class UserProfile {
     this.totalWins = (int) (long) userData.get("totalWins");
     this.totalLoss = (int) (long) userData.get("totalLoss");
     this.quickestWin = (int) (long) userData.get("quickestWin");
+    this.wordHistory = (List<String>) userData.get("wordHistory");
   }
 }
