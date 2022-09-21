@@ -32,6 +32,11 @@ public class UserSelectionController {
   @FXML private Circle circleEraser;
   @FXML private Circle circleBlackPen1;
   @FXML private ImageView imageUser1;
+  @FXML private ImageView imageUser2;
+  @FXML private ImageView imageUser3;
+  @FXML private ImageView imageUser4;
+  @FXML private ImageView imageUser5;
+  @FXML private ImageView imageUser6;
   private ImageView currentImageView;
   private GraphicsContext graphic;
   private static final UserProfile[] users = new UserProfile[7];
@@ -74,21 +79,26 @@ public class UserSelectionController {
   }
 
   private int getProfile(Event event) {
-    String id = ((Node) event.getSource()).getId();
+    String id = ((Node) event.getSource()).getParent().getId();
 
     switch (id) {
-      case "circleNewUser1":
+      case "paneNewUser1":
         currentImageView = imageUser1;
         return 1;
-      case "circleNewUser2":
+      case "paneNewUser2":
+        currentImageView = imageUser2;
         return 2;
-      case "circleNewUser3":
+      case "paneNewUser3":
+        currentImageView = imageUser3;
         return 3;
-      case "circleNewUser4":
+      case "paneNewUser4":
+        currentImageView = imageUser4;
         return 4;
-      case "circleNewUser5":
+      case "paneNewUser5":
+        currentImageView = imageUser5;
         return 5;
-      case "circleNewUser6":
+      case "paneNewUser6":
+        currentImageView = imageUser6;
         return 6;
       default:
         return 0;
@@ -99,7 +109,7 @@ public class UserSelectionController {
   private void onSaveProfile() throws IOException {
     String name = textFieldName.getText();
     users[UserProfile.currentUser] = new UserProfile(name);
-    users[UserProfile.currentUser].setImageView(imageUser1);
+    users[UserProfile.currentUser].setImageView(currentImageView);
     saveProfilePic();
 
     UserProfile.currentUser = 0;
