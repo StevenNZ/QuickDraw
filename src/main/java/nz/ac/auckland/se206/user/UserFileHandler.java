@@ -34,8 +34,24 @@ public class UserFileHandler {
 
     String fileLocation = "profiles/user" + userNumber + ".json";
     JSONParser jsonParser = new JSONParser();
+    JSONObject returnData;
 
     FileReader userFileReader = new FileReader(fileLocation);
-    return (JSONObject) jsonParser.parse(userFileReader);
+    returnData = (JSONObject) jsonParser.parse(userFileReader);
+    userFileReader.close();
+    return returnData;
+  }
+
+  public static Boolean deleteUserData(int userNumber) {
+
+    String fileLocation = "profiles/user" + userNumber + ".json";
+    File userFile = new File(fileLocation);
+
+    if (userFile.exists()) {
+      return userFile.delete();
+    } else {
+      System.out.println("File doesn't exist");
+      return false;
+    }
   }
 }
