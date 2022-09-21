@@ -5,9 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -48,11 +46,11 @@ public class UserSelectionController {
   }
 
   @FXML
-  private void onStartCanvas(ActionEvent event) {
+  private void onStartCanvas(Event event) {
     UserProfile.currentUser = getProfile(event);
     Node node = (Node) event.getSource();
-    Scene sceneOfButton = node.getScene();
-    sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CANVAS));
+    Scene sceneOfNode = node.getScene();
+    sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CANVAS));
   }
 
   @FXML
@@ -115,7 +113,6 @@ public class UserSelectionController {
     UserProfile.currentUser = 0;
     onClear();
     textFieldName.clear();
-    System.out.println(Arrays.toString(users));
     paneUserProfile.setVisible(true);
     paneUserCreation.setVisible(false);
   }
