@@ -28,4 +28,15 @@ public class UserFileHandlerTest {
 
     System.out.println(testUser);
   }
+
+  @Test
+  void deleteUserFileTest() {
+
+    // File is there to be deleted
+    System.out.println("Delete user10: " + UserFileHandler.deleteUserData(10));
+
+    // No such file exists
+    System.out.println("Delete user20: " + UserFileHandler.deleteUserData(20));
+    System.out.println();
+  }
 }
