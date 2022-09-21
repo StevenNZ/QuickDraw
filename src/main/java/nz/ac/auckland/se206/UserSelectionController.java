@@ -3,8 +3,8 @@ package nz.ac.auckland.se206;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -16,6 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -31,9 +32,9 @@ public class UserSelectionController {
   @FXML private Canvas canvasUser;
   @FXML private Circle circleEraser;
   @FXML private Circle circleBlackPen1;
+  @FXML private ImageView imageUser1;
   private GraphicsContext graphic;
   private static final UserProfile[] users = new UserProfile[7];
-  public static int currentUser = 0;
 
   @FXML
   public void initialize() {
@@ -43,8 +44,6 @@ public class UserSelectionController {
 
   @FXML
   private void onStartCanvas(ActionEvent event) {
-    System.out.println("canvas" + currentUser);
-    System.out.println(Arrays.toString(users));
 
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();
@@ -53,7 +52,7 @@ public class UserSelectionController {
 
   @FXML
   private void onCreateProfile(Event event) {
-    currentUser = getProfile(event);
+    UserProfile.currentUser = getProfile(event);
     circleBlackPen1.setOpacity(0.5);
     graphic = canvasUser.getGraphicsContext2D();
 
@@ -98,21 +97,26 @@ public class UserSelectionController {
   @FXML
   private void onSaveProfile() throws IOException {
     String name = textFieldName.getText();
-    users[currentUser] = new UserProfile(name);
+    users[UserProfile.currentUser] = new UserProfile(name);
     setProfilePic();
 
-    currentUser = 0;
+    UserProfile.currentUser = 0;
     paneUserProfile.setVisible(true);
     paneUserCreation.setVisible(false);
   }
 
   private void setProfilePic() throws IOException {
-    File file = new File("src/main/resources/images/userprofilepic/user" + currentUser + ".png");
+    File profilePicFile =
+        new File(
+            "src/main/resources/images/userprofilepic/user" + UserProfile.currentUser + ".png");
+
     try {
-      ImageIO.write(getCurrentSnapshot(), "png", file);
+      ImageIO.write(getCurrentSnapshot(), "png", profilePicFile);
     } catch (IOException e) {
       e.printStackTrace();
     }
+    Image profilePicImage = new Image(new FileInputStream(profilePicFile));
+    //    imageUser1.setImage(profilePicImage); //need to find an efficient way to display image
   }
 
   private BufferedImage getCurrentSnapshot() {

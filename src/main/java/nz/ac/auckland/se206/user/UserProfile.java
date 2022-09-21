@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserProfile {
+  public static int currentUser = 0;
   private String name = "";
   private int totalWins = 0;
   private int totalLoss = 0;
