@@ -14,7 +14,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -50,9 +49,9 @@ public class UserSelectionController {
 
   @FXML
   private void onStartCanvas(ActionEvent event) {
-
-    Button button = (Button) event.getSource();
-    Scene sceneOfButton = button.getScene();
+    UserProfile.currentUser = getProfile(event);
+    Node node = (Node) event.getSource();
+    Scene sceneOfButton = node.getScene();
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CANVAS));
   }
 
@@ -133,10 +132,10 @@ public class UserSelectionController {
     }
     Image profilePicImage = new Image(new FileInputStream(profilePicFile));
     users[UserProfile.currentUser].setProfilePic(profilePicImage);
-    displayProfilePic(UserProfile.currentUser, profilePicImage);
+    displayProfilePic(UserProfile.currentUser);
   }
 
-  private void displayProfilePic(int currentUser, Image profilePicImage) {
+  private void displayProfilePic(int currentUser) {
     UserProfile user = users[currentUser];
     user.getImageView().setImage(user.getProfilePic());
     currentImageView.setDisable(false);
