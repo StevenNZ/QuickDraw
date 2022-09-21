@@ -39,6 +39,16 @@ public class UserProfile {
     return totalLoss;
   }
 
+  public void setWord(String cat) {
+    for (String listCat : wordHistory) {
+      if (cat.equals(listCat)) {
+        return;
+      }
+    }
+
+    wordHistory.add(cat);
+  }
+
   public void saveUserData() {
     JSONObject userData = new JSONObject();
 
