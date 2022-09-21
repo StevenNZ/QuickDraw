@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -113,6 +114,9 @@ public class UserSelectionController {
     saveProfilePic();
 
     UserProfile.currentUser = 0;
+    onClear();
+    textFieldName.clear();
+    System.out.println(Arrays.toString(users));
     paneUserProfile.setVisible(true);
     paneUserCreation.setVisible(false);
   }
@@ -135,6 +139,7 @@ public class UserSelectionController {
   private void displayProfilePic(int currentUser, Image profilePicImage) {
     UserProfile user = users[currentUser];
     user.getImageView().setImage(user.getProfilePic());
+    currentImageView.setDisable(false);
   }
 
   private BufferedImage getCurrentSnapshot() {
