@@ -32,7 +32,7 @@ public class UserSelectionController {
   @FXML private Circle circleEraser;
   @FXML private Circle circleBlackPen1;
   @FXML private ImageView imageUser1;
-  @FXML private ImageView currentImageView;
+  private ImageView currentImageView;
   private GraphicsContext graphic;
   private static final UserProfile[] users = new UserProfile[7];
 

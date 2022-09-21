@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.user;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -14,7 +13,7 @@ public class UserProfile {
   private int quickestWin;
   private List<String> wordHistory = new ArrayList<>();
   private Image profilePic = null;
-  @FXML public ImageView imageView = null;
+  private ImageView imageView = null;
 
   public UserProfile(String name) {
     this.name = name;
