@@ -20,6 +20,10 @@ public class UserProfileTest {
       testSubject.updateLoss();
     }
 
+    testSubject.setWord("test1");
+    testSubject.setWord("test2");
+    testSubject.setWord("test3");
+
     testSubject.saveUserData();
   }
 
