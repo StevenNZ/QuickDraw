@@ -21,7 +21,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import nz.ac.auckland.se206.user.UserProfile;
 
 public class UserSelectionController {
@@ -33,6 +32,7 @@ public class UserSelectionController {
   @FXML private Circle circleEraser;
   @FXML private Circle circleBlackPen1;
   @FXML private ImageView imageUser1;
+  @FXML private ImageView currentImageView;
   private GraphicsContext graphic;
   private static final UserProfile[] users = new UserProfile[7];
 
@@ -78,6 +78,7 @@ public class UserSelectionController {
 
     switch (id) {
       case "circleNewUser1":
+        currentImageView = imageUser1;
         return 1;
       case "circleNewUser2":
         return 2;
@@ -98,14 +99,15 @@ public class UserSelectionController {
   private void onSaveProfile() throws IOException {
     String name = textFieldName.getText();
     users[UserProfile.currentUser] = new UserProfile(name);
-    setProfilePic();
+    users[UserProfile.currentUser].setImageView(imageUser1);
+    saveProfilePic();
 
     UserProfile.currentUser = 0;
     paneUserProfile.setVisible(true);
     paneUserCreation.setVisible(false);
   }
 
-  private void setProfilePic() throws IOException {
+  private void saveProfilePic() throws IOException {
     File profilePicFile =
         new File(
             "src/main/resources/images/userprofilepic/user" + UserProfile.currentUser + ".png");
@@ -116,7 +118,13 @@ public class UserSelectionController {
       e.printStackTrace();
     }
     Image profilePicImage = new Image(new FileInputStream(profilePicFile));
-    //    imageUser1.setImage(profilePicImage); //need to find an efficient way to display image
+    users[UserProfile.currentUser].setProfilePic(profilePicImage);
+    displayProfilePic(UserProfile.currentUser, profilePicImage);
+  }
+
+  private void displayProfilePic(int currentUser, Image profilePicImage) {
+    UserProfile user = users[currentUser];
+    user.getImageView().setImage(user.getProfilePic());
   }
 
   private BufferedImage getCurrentSnapshot() {

@@ -2,6 +2,9 @@ package nz.ac.auckland.se206.user;
 
 import java.util.ArrayList;
 import java.util.List;
+import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class UserProfile {
   public static int currentUser = 0;
@@ -10,6 +13,8 @@ public class UserProfile {
   private int totalLoss = 0;
   private int quickestWin;
   private List<String> wordHistory = new ArrayList<>();
+  private Image profilePic = null;
+  @FXML public ImageView imageView = null;
 
   public UserProfile(String name) {
     this.name = name;
@@ -33,5 +38,21 @@ public class UserProfile {
 
   public int getTotalLoss() {
     return totalLoss;
+  }
+
+  public Image getProfilePic() {
+    return profilePic;
+  }
+
+  public void setProfilePic(Image profilePic) {
+    this.profilePic = profilePic;
+  }
+
+  public ImageView getImageView() {
+    return imageView;
+  }
+
+  public void setImageView(ImageView imageView) {
+    this.imageView = imageView;
   }
 }
