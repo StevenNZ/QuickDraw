@@ -109,7 +109,7 @@ public class UserSelectionController {
     users[UserProfile.currentUser].setImageView(currentImageView);
     saveProfilePic();
 
-    onClear();
+    onClear(); // clear canvas
     textFieldName.clear();
     paneUserProfile.setVisible(true);
     paneUserCreation.setVisible(false);
@@ -125,14 +125,16 @@ public class UserSelectionController {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    Image profilePicImage = new Image(new FileInputStream(profilePicFile));
-    users[UserProfile.currentUser].setProfilePic(profilePicImage);
+    Image profilePicImage =
+        new Image(new FileInputStream(profilePicFile)); // gets image of the file of drawing
+    users[UserProfile.currentUser].setProfilePic(
+        profilePicImage); // stores image as an instance variable
     displayProfilePic(UserProfile.currentUser);
   }
 
   private void displayProfilePic(int currentUser) {
     UserProfile user = users[currentUser];
-    user.getImageView().setImage(user.getProfilePic());
+    user.getImageView().setImage(user.getProfilePic()); // set imageView to the user's image
     currentImageView.setDisable(false);
   }
 
