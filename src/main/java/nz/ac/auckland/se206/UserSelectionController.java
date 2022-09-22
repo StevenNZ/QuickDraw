@@ -56,7 +56,6 @@ public class UserSelectionController {
   @FXML
   private void onCreateProfile(Event event) {
     UserProfile.currentUser = getProfile(event);
-    circleBlackPen1.setOpacity(0.5);
     graphic = canvasUser.getGraphicsContext2D();
 
     canvasUser.setOnMouseDragged(
@@ -110,7 +109,6 @@ public class UserSelectionController {
     users[UserProfile.currentUser].setImageView(currentImageView);
     saveProfilePic();
 
-    UserProfile.currentUser = 0;
     onClear();
     textFieldName.clear();
     paneUserProfile.setVisible(true);
