@@ -26,8 +26,8 @@ public class UserFileHandler {
     FileWriter userFileWriter = new FileWriter(userFile, false);
 
     userFileWriter.write(user.toJSONString());
-    userFileWriter.flush();
-    userFileWriter.close();
+    userFileWriter.flush(); // Clears the data in the file writer
+    userFileWriter.close(); // Closes the data stream
   }
 
   public static JSONObject readUserData(int userNumber) throws IOException, ParseException {
@@ -38,7 +38,7 @@ public class UserFileHandler {
 
     FileReader userFileReader = new FileReader(fileLocation);
     returnData = (JSONObject) jsonParser.parse(userFileReader);
-    userFileReader.close();
+    userFileReader.close(); // Closes the data stream
     return returnData;
   }
 
@@ -48,6 +48,8 @@ public class UserFileHandler {
     File userFile = new File(fileLocation);
 
     if (userFile.exists()) {
+      // Returns true if the target file has been deleted
+      // Returns false if it has not been deleted
       return userFile.delete();
     } else {
       System.out.println("File doesn't exist");
