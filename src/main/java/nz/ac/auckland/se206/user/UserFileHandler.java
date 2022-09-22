@@ -12,8 +12,8 @@ public class UserFileHandler {
 
   public static void saveUserData(JSONObject user, int userNumber) throws IOException {
 
-    File profileFolder = new File("profiles");
-    String fileLocation = "profiles/user" + userNumber + ".json";
+    File profileFolder = new File(".profiles");
+    String fileLocation = ".profiles/user" + userNumber + ".json";
 
     // Creates the profiles folder
     if (!profileFolder.exists()) {
@@ -32,7 +32,7 @@ public class UserFileHandler {
 
   public static JSONObject readUserData(int userNumber) throws IOException, ParseException {
 
-    String fileLocation = "profiles/user" + userNumber + ".json";
+    String fileLocation = ".profiles/user" + userNumber + ".json";
     JSONParser jsonParser = new JSONParser();
     JSONObject returnData;
 
@@ -44,7 +44,7 @@ public class UserFileHandler {
 
   public static Boolean deleteUserData(int userNumber) {
 
-    String fileLocation = "profiles/user" + userNumber + ".json";
+    String fileLocation = ".profiles/user" + userNumber + ".json";
     File userFile = new File(fileLocation);
 
     if (userFile.exists()) {
