@@ -39,14 +39,14 @@ public class UserProfile {
     return totalLoss;
   }
 
-  public void setWord(String cat) {
-    for (String listCat : wordHistory) {
-      if (cat.equals(listCat)) {
+  public void setWord(String category) {
+    for (String listCategory : wordHistory) {
+      if (category.equals(listCategory)) {
         return;
       }
     }
 
-    wordHistory.add(cat);
+    wordHistory.add(category);
   }
 
   public void saveUserData() {
