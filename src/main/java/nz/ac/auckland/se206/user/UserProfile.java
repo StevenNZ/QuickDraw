@@ -3,17 +3,20 @@ package nz.ac.auckland.se206.user;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 public class UserProfile {
   public static int currentUser = 0;
-
   private String name = "";
   private int totalWins = 0;
   private int totalLoss = 0;
   private int quickestWin = 100;
   private List<String> wordHistory = new ArrayList<>();
+  private Image profilePic = null;
+  private ImageView imageView = null;
 
   public UserProfile(String name) {
     this.name = name;
@@ -37,6 +40,22 @@ public class UserProfile {
 
   public int getTotalLoss() {
     return totalLoss;
+  }
+
+  public Image getProfilePic() {
+    return profilePic;
+  }
+
+  public void setProfilePic(Image profilePic) {
+    this.profilePic = profilePic;
+  }
+
+  public ImageView getImageView() {
+    return imageView;
+  }
+
+  public void setImageView(ImageView imageView) {
+    this.imageView = imageView;
   }
 
   public void setWord(String category) {
