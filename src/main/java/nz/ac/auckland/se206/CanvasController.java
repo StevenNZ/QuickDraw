@@ -5,7 +5,7 @@ import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
 import ai.djl.ModelException;
 import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -163,11 +163,7 @@ public class CanvasController {
     List<Classifications.Classification> predictions =
         model.getPredictions(getCurrentSnapshot(), 10);
     final long start = System.currentTimeMillis();
-    /**
-     * System.out.println("==== PREDICTION ===="); System.out.println("Top 10 predictions");
-     * System.out.println("prediction performed in " + (System.currentTimeMillis() - start) + "
-     * ms");
-     */
+
     printPredictions(predictions);
 
     lblTopTenGuesses.setText(getStringOfPredictions(predictions).toString());
@@ -179,7 +175,6 @@ public class CanvasController {
       predictionClassName = predictionClassName.replaceAll("_", " ");
       if (randomCategory.equals(predictionClassName)) {
         // This is the win condition.
-        System.out.println("win");
         onGameEnd(true);
       }
     }
@@ -272,12 +267,13 @@ public class CanvasController {
     int i = 1;
     // Build a string with all of the top 10 predictions from the ml api
     for (Classifications.Classification classification : predictions) {
+      String className = classification.getClassName().replaceAll("_", " ");
       sb.append(i)
           .append(". ")
-          .append(classification.getClassName())
-          .append(": ")
           // Include the confidence percentage
-          .append(String.format("%.2f%%", 100 * classification.getProbability()))
+          .append(String.format("[%.0f%%] ", 100 * classification.getProbability()))
+          .append(className.substring(0, 1).toUpperCase() + className.substring(1))
+
           // Add new line
           .append(System.lineSeparator());
 
