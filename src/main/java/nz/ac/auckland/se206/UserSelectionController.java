@@ -116,9 +116,13 @@ public class UserSelectionController {
   }
 
   private void saveProfilePic() throws IOException {
-    File profilePicFile =
-        new File(
-            "src/main/resources/images/userprofilepic/user" + UserProfile.currentUser + ".png");
+    File profileFolder = new File(".profiles");
+
+    if (!profileFolder.exists()) {
+      profileFolder.mkdir();
+    }
+
+    File profilePicFile = new File(".profiles/user" + UserProfile.currentUser + "image.png");
 
     try {
       ImageIO.write(getCurrentSnapshot(), "png", profilePicFile);
