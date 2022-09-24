@@ -94,5 +94,7 @@ public class UserProfile {
     this.totalLoss = (int) (long) userData.get("totalLoss");
     this.quickestWin = (int) (long) userData.get("quickestWin");
     this.wordHistory = (List<String>) userData.get("wordHistory");
+
+    this.profilePic = UserFileHandler.readProfileImage(currentUser);
   }
 }
