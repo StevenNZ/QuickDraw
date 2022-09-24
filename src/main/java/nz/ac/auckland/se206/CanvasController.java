@@ -38,6 +38,7 @@ import javafx.util.Duration;
 import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.user.UserProfile;
 
 /**
  * This is the controller of the canvas. You are free to modify this class and the corresponding
@@ -78,6 +79,7 @@ public class CanvasController {
   private String randomCategory;
   private Timeline timeline;
   private boolean isStartPredictions = false;
+  private UserProfile currentUser;
 
   /**
    * JavaFX calls this method once the GUI elements are loaded. In our case we create a listener for
@@ -88,8 +90,9 @@ public class CanvasController {
    */
   public void initialize() throws ModelException, IOException {
 
-    processDataFromFile();
-    generateRandomCategory();
+    currentUser = UserSelectionController.users[UserProfile.currentUser];
+    randomCategory = currentUser.pickEasyCategory();
+
     this.timeline =
         new Timeline(
             new KeyFrame(
@@ -154,8 +157,11 @@ public class CanvasController {
     btnStartTimer.setDisable(true);
     btnStartTimer.setVisible(false);
     lblClickStartTimer.setVisible(false);
+
     btnReturnMain.setVisible(false);
     btnReturnMain.setDisable(true);
+
+    currentUser.setWord(randomCategory); // Add to user word history
   }
 
   /**
@@ -193,6 +199,8 @@ public class CanvasController {
     Stage stage = (Stage) btnSaveDrawing.getScene().getWindow();
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Save Drawing");
+    fileChooser.setInitialFileName(
+        randomCategory.replaceAll(" ", "_")); // initially meaningful name
     fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("BMP", "*.bmp"));
     File file = fileChooser.showSaveDialog(stage);
     if (file != null) {
@@ -253,7 +261,7 @@ public class CanvasController {
     paneGameEnd.setVisible(false);
     // Clear the canvas
     onClear();
-    generateRandomCategory();
+    randomCategory = currentUser.pickEasyCategory();
     // Replace lblCategoryTxt on the canvas
     lblCategoryTxt.setText(this.randomCategory);
     // Hide category display information
