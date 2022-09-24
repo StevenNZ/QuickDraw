@@ -88,7 +88,7 @@ public class CanvasController {
    */
   public void initialize() throws ModelException, IOException {
 
-    currentUser = UserSelectionController.getUser();
+    currentUser = UserSelectionController.users[UserProfile.currentUser];
     randomCategory = currentUser.pickEasyCategory();
 
     this.timeline =
@@ -152,6 +152,7 @@ public class CanvasController {
     btnStartTimer.setDisable(true);
     btnStartTimer.setVisible(false);
     lblClickStartTimer.setVisible(false);
+    currentUser.setWord(randomCategory); // Add to user word history
   }
 
   /**
