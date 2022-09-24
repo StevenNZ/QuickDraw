@@ -153,7 +153,7 @@ public class UserSelectionController {
     users[UserProfile.currentUser].setName(name);
     users[UserProfile.currentUser].setImageView(currentImageView);
     saveProfilePic();
-
+    users[UserProfile.currentUser].saveUserData();
     clearUserCreation();
   }
 
