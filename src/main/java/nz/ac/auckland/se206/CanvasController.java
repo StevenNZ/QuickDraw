@@ -58,6 +58,7 @@ public class CanvasController {
   @FXML private ImageView eraser;
   @FXML private Button btnSaveDrawing;
   @FXML private Button btnStartTimer;
+  @FXML private Button btnReturnMain;
   @FXML private Canvas canvas;
   @FXML private Label lblCategoryTxt;
   @FXML private Label lblClickStartTimer;
@@ -77,6 +78,7 @@ public class CanvasController {
   private int secondsLeft;
   private String randomCategory;
   private Timeline timeline;
+  private boolean isStartPredictions = false;
   private UserProfile currentUser;
 
   /**
@@ -107,7 +109,9 @@ public class CanvasController {
                   Platform.runLater(
                       () -> {
                         try {
-                          onPredict();
+                          if (isStartPredictions) {
+                            onPredict();
+                          }
                         } catch (TranslateException ex) {
                           throw new RuntimeException(ex);
                         }
@@ -122,6 +126,7 @@ public class CanvasController {
 
     canvas.setOnMouseDragged(
         e -> {
+          isStartPredictions = true;
           // Brush size (you can change this, it should not be too small or too large).
           final double size = 12.0;
 
@@ -152,6 +157,10 @@ public class CanvasController {
     btnStartTimer.setDisable(true);
     btnStartTimer.setVisible(false);
     lblClickStartTimer.setVisible(false);
+
+    btnReturnMain.setVisible(false);
+    btnReturnMain.setDisable(true);
+
     currentUser.setWord(randomCategory); // Add to user word history
   }
 
@@ -235,6 +244,10 @@ public class CanvasController {
     // Disable changing the drawing
     paneEditCanvas.setDisable(true);
     clearButton.setVisible(false);
+
+    btnReturnMain.setVisible(true);
+    btnReturnMain.setDisable(false);
+
     Platform.runLater(
         () -> {
           // Text to speak the loss or win
@@ -254,6 +267,8 @@ public class CanvasController {
     // Hide category display information
     paneCategories.setVisible(true);
     btnStartTimer.setVisible(true);
+    btnStartTimer.setDisable(false);
+    clearButton.setVisible(true);
     lblClickStartTimer.setVisible(true);
     lblTopTenGuesses.setText("Your top 10 guesses to your drawing will appear here!");
 

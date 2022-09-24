@@ -69,7 +69,29 @@ public class UserSelectionController {
     UserProfile.currentUser = getProfileById(id);
     Node node = (Node) event.getSource();
     Scene sceneOfNode = node.getScene();
-    sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CANVAS));
+    sceneOfNode.setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
+
+
+  }
+
+  private SceneManager.AppUi getNewRoot(int id) {
+    switch (id) {
+      case 1:
+        return SceneManager.AppUi.CANVAS_PLAYER1;
+      case 2:
+        return SceneManager.AppUi.CANVAS_PLAYER2;
+      case 3:
+        return SceneManager.AppUi.CANVAS_PLAYER3;
+      case 4:
+        return SceneManager.AppUi.CANVAS_PLAYER4;
+      case 5:
+        return SceneManager.AppUi.CANVAS_PLAYER5;
+      case 6:
+        return SceneManager.AppUi.CANVAS_PLAYER6;
+
+      default:
+        return SceneManager.AppUi.CANVAS;
+    }
   }
 
   @FXML

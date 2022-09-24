@@ -7,7 +7,13 @@ public class SceneManager {
   public enum AppUi {
     MAINMENU,
     CANVAS,
-    USER_SELECTION
+    USER_SELECTION,
+    CANVAS_PLAYER1,
+    CANVAS_PLAYER2,
+    CANVAS_PLAYER3,
+    CANVAS_PLAYER4,
+    CANVAS_PLAYER5,
+    CANVAS_PLAYER6,
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
