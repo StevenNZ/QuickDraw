@@ -5,7 +5,7 @@ import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
 import ai.djl.ModelException;
 import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;

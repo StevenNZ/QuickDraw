@@ -56,15 +56,18 @@ public class UserSelectionController {
 
   @FXML
   private void onStartCanvas(Event event) {
-    UserProfile.currentUser = getProfile(event);
+    String id = ((Node) event.getSource()).getParent().getParent().getId();
+    UserProfile.currentUser = getProfileById(id);
     Node node = (Node) event.getSource();
     Scene sceneOfNode = node.getScene();
     sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CANVAS));
+    System.out.println(UserProfile.currentUser);
   }
 
   @FXML
   private void onCreateProfile(Event event) {
-    UserProfile.currentUser = getProfile(event);
+    String id = ((Node) event.getSource()).getParent().getId();
+    UserProfile.currentUser = getProfileById(id);
     graphic = canvasUser.getGraphicsContext2D();
 
     canvasUser.setOnMouseDragged(
@@ -84,8 +87,7 @@ public class UserSelectionController {
     paneUserCreation.setVisible(true);
   }
 
-  private int getProfile(Event event) {
-    String id = ((Node) event.getSource()).getParent().getId();
+  private int getProfileById(String id) {
 
     switch (id) {
       case "paneNewUser1":
