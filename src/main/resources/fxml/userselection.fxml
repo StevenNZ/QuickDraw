@@ -154,8 +154,8 @@
                </children>
             </GridPane>
             <Button layoutX="458.0" layoutY="443.0" mnemonicParsing="false" onAction="#onStartCanvas" prefHeight="68.0" prefWidth="280.0" text="Play as Guest" />
-            <Circle fx:id="circleBlackPen" fill="WHITE" layoutX="1161.0" layoutY="477.0" onMouseClicked="#onBlackSelected" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
-            <ImageView fx:id="penBlack" fitHeight="45.0" fitWidth="49.0" layoutX="1137.0" layoutY="455.0" onMouseClicked="#onBlackSelected">
+            <Circle fx:id="circleBlackPen" fill="WHITE" layoutX="1161.0" layoutY="477.0" onMouseClicked="#onBlackSelected" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" visible="false" />
+            <ImageView fx:id="penBlack" fitHeight="45.0" fitWidth="49.0" layoutX="1137.0" layoutY="455.0" onMouseClicked="#onBlackSelected" visible="false">
                <image>
                   <Image url="@../images/pen-removebg-preview.png" />
                </image>

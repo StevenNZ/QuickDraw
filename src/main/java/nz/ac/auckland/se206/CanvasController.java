@@ -5,7 +5,7 @@ import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
 import ai.djl.ModelException;
 import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -53,8 +53,8 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
  */
 public class CanvasController {
   private static final int DEFAULT_SECONDS = 60;
-  @FXML public ImageView penBlack;
-  @FXML public ImageView eraser;
+  @FXML private ImageView penBlack;
+  @FXML private ImageView eraser;
   @FXML private Button btnSaveDrawing;
   @FXML private Button btnStartTimer;
   @FXML private Canvas canvas;
