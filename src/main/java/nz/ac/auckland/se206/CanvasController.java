@@ -1,20 +1,8 @@
 package nz.ac.auckland.se206;
 
-import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
-
 import ai.djl.ModelException;
 import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -35,10 +23,23 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 import nz.ac.auckland.se206.user.UserProfile;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
+import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
 
 /**
  * This is the controller of the canvas. You are free to modify this class and the corresponding
@@ -204,13 +205,20 @@ public class CanvasController {
   @FXML
   private void onViewStats() {
     // Update Label for wins
-    lblWins.setText("0");
+    lblWins.setText("" + currentUser.getTotalWins());
     // update label for losses
-    lblLosses.setText("0");
+    lblLosses.setText("" + currentUser.getTotalLoss());
     // update label for quickest win
-    lblQuickestWin.setText("0");
+    if(currentUser.getQuickestWin() == 100){
+      lblQuickestWin.setText("N/A");
+    }else{
+      lblQuickestWin.setText(""+ currentUser.getQuickestWin() + "s");
+    }
+
     // update label for word history
-    lblWordHistory.setText("0");
+    if(lblWordHistory != null){
+      lblWordHistory.setText(currentUser.getWordHistory().toString());
+    }
 
     paneCanvas.setDisable(true);
     paneCanvas.setVisible(false);
@@ -270,9 +278,15 @@ public class CanvasController {
     String gameoverString;
     // Stop the timer
     timeline.stop();
+
+    //UpdateStats
+
     if (isWin) {
       gameoverString = "Congratulations! You WON!";
       currentUser.updateWin();
+      if((DEFAULT_SECONDS-secondsLeft) < currentUser.getQuickestWin()){
+        currentUser.setQuickestWin(DEFAULT_SECONDS-secondsLeft);
+      }
     } else {
       gameoverString = "Sorry, better luck next time.";
       currentUser.updateLoss();
