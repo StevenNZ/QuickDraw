@@ -30,3 +30,8 @@
     -fx-stroke: "#faa504";
     -fx-stroke-width: 5px;
 }
+
+.predictionsText {
+    -fx-font-family: "Consolas";
+    -fx-font-size: 20px;
+}

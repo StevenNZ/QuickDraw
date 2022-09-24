@@ -5,7 +5,7 @@ import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
 import ai.djl.ModelException;
 import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -53,8 +53,8 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
  */
 public class CanvasController {
   private static final int DEFAULT_SECONDS = 60;
-  @FXML public ImageView penBlack;
-  @FXML public ImageView eraser;
+  @FXML private ImageView penBlack;
+  @FXML private ImageView eraser;
   @FXML private Button btnSaveDrawing;
   @FXML private Button btnStartTimer;
   @FXML private Canvas canvas;
@@ -66,7 +66,7 @@ public class CanvasController {
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
-  @FXML private Circle circleBlackPen;
+  @FXML private Button clearButton;
   @FXML private Circle circleEraser;
   @FXML private Rectangle boxBlue;
   @FXML private Rectangle boxRed;
@@ -163,11 +163,7 @@ public class CanvasController {
     List<Classifications.Classification> predictions =
         model.getPredictions(getCurrentSnapshot(), 10);
     final long start = System.currentTimeMillis();
-    /**
-     * System.out.println("==== PREDICTION ===="); System.out.println("Top 10 predictions");
-     * System.out.println("prediction performed in " + (System.currentTimeMillis() - start) + "
-     * ms");
-     */
+
     printPredictions(predictions);
 
     lblTopTenGuesses.setText(getStringOfPredictions(predictions).toString());
@@ -179,7 +175,6 @@ public class CanvasController {
       predictionClassName = predictionClassName.replaceAll("_", " ");
       if (randomCategory.equals(predictionClassName)) {
         // This is the win condition.
-        System.out.println("win");
         onGameEnd(true);
       }
     }
@@ -233,6 +228,7 @@ public class CanvasController {
     paneCategories.setVisible(false);
     // Disable changing the drawing
     paneEditCanvas.setDisable(true);
+    clearButton.setVisible(false);
     Platform.runLater(
         () -> {
           // Text to speak the loss or win
@@ -243,7 +239,6 @@ public class CanvasController {
   /** Reset the panes and timer */
   private void reset() {
     // Hide Game End Pane
-    paneGameEnd.setDisable(true);
     paneGameEnd.setVisible(false);
     // Clear the canvas
     onClear();
@@ -253,7 +248,6 @@ public class CanvasController {
     // Hide category display information
     paneCategories.setVisible(true);
     btnStartTimer.setVisible(true);
-    btnStartTimer.setDisable(false);
     lblClickStartTimer.setVisible(true);
     lblTopTenGuesses.setText("Your top 10 guesses to your drawing will appear here!");
 
@@ -270,14 +264,15 @@ public class CanvasController {
   private StringBuilder getStringOfPredictions(List<Classifications.Classification> predictions) {
     StringBuilder sb = new StringBuilder();
     int i = 1;
-    // Build a string with all of the top 10 predictions from the ml api
+    // Build a string with all the top 10 predictions from the ml api
     for (Classifications.Classification classification : predictions) {
+      String className = classification.getClassName().replaceAll("_", " ");
       sb.append(i)
           .append(". ")
-          .append(classification.getClassName())
-          .append(": ")
           // Include the confidence percentage
-          .append(String.format("%.2f%%", 100 * classification.getProbability()))
+          .append(String.format("[%.0f%%] ", 100 * classification.getProbability()))
+          .append(className.substring(0, 1).toUpperCase() + className.substring(1))
+
           // Add new line
           .append(System.lineSeparator());
 
