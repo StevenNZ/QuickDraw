@@ -34,6 +34,12 @@ public class UserProfile {
         e.printStackTrace();
       }
     }
+
+    try {
+      initializeAvailableWords();
+    } catch (CsvValidationException | IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public UserProfile(String name) {
