@@ -186,7 +186,8 @@ public class CanvasController {
     Stage stage = (Stage) btnSaveDrawing.getScene().getWindow();
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Save Drawing");
-    fileChooser.setInitialFileName(randomCategory.replaceAll(" ", "_"));
+    fileChooser.setInitialFileName(
+        randomCategory.replaceAll(" ", "_")); // initially meaningful name
     fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("BMP", "*.bmp"));
     File file = fileChooser.showSaveDialog(stage);
     if (file != null) {
