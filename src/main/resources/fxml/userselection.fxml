@@ -24,30 +24,30 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="113.0" layoutX="212.0" layoutY="52.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="852.0" />
-      <Pane fx:id="paneUserCreation" layoutX="276.0" layoutY="192.0" prefHeight="469.0" prefWidth="725.0" visible="false">
+      <Pane fx:id="paneUserCreation" layoutX="253.0" layoutY="193.0" prefHeight="469.0" prefWidth="770.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="68.0" layoutX="14.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="124.0" />
             <Text layoutX="35.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Name:" wrappingWidth="95.9814453125" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="68.0" layoutX="148.0" layoutY="17.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="559.0" />
-            <TextField fx:id="textFieldName" layoutX="173.0" layoutY="28.0" prefHeight="45.0" prefWidth="526.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="370.0" layoutX="14.0" layoutY="92.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="370.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="59.0" layoutX="395.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="312.0" />
-            <Text layoutX="408.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Draw an icon that represents you!" wrappingWidth="292.0" />
-            <Button layoutX="408.0" layoutY="422.0" mnemonicParsing="false" onAction="#onSaveProfile" prefHeight="40.0" prefWidth="312.0" text="Save Profile" />
-            <Canvas fx:id="canvasUser" height="362.0" layoutX="17.0" layoutY="96.0" width="364.0" />
-            <Circle fx:id="circleBlackPen1" fill="WHITE" layoutX="435.0" layoutY="217.0" onMouseClicked="#onBlackSelected" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
-            <ImageView fx:id="penBlack1" fitHeight="45.0" fitWidth="49.0" layoutX="411.0" layoutY="195.0" onMouseClicked="#onBlackSelected">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="68.0" layoutX="151.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="598.0" />
+            <TextField fx:id="textFieldName" layoutX="167.0" layoutY="27.0" prefHeight="45.0" prefWidth="565.0" styleClass="predictionsText" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="360.0" layoutX="13.0" layoutY="98.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="410.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="59.0" layoutX="437.0" layoutY="98.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="312.0" />
+            <Text layoutX="450.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Draw an icon that represents you!" wrappingWidth="292.0" />
+            <Button layoutX="441.0" layoutY="415.0" mnemonicParsing="false" onAction="#onSaveProfile" prefHeight="40.0" prefWidth="312.0" text="Save Profile" />
+            <Canvas fx:id="canvasUser" height="350.0" layoutX="17.0" layoutY="103.0" width="400.0" />
+            <Circle fx:id="circleBlackPen1" fill="WHITE" layoutX="478.0" layoutY="210.0" onMouseClicked="#onBlackSelected" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
+            <ImageView fx:id="penBlack1" fitHeight="45.0" fitWidth="49.0" layoutX="454.0" layoutY="188.0" onMouseClicked="#onBlackSelected">
                <image>
                   <Image url="@../images/pen-removebg-preview.png" />
                </image>
             </ImageView>
-            <Circle fx:id="circleEraser" fill="WHITE" layoutX="525.0" layoutY="217.0" onMouseClicked="#onEraserSelected" radius="36.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
-            <ImageView fx:id="eraser" fitHeight="45.0" fitWidth="49.0" layoutX="501.0" layoutY="195.0" onMouseClicked="#onEraserSelected">
+            <Circle fx:id="circleEraser" fill="WHITE" layoutX="568.0" layoutY="210.0" onMouseClicked="#onEraserSelected" radius="36.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
+            <ImageView fx:id="eraser" fitHeight="45.0" fitWidth="49.0" layoutX="544.0" layoutY="188.0" onMouseClicked="#onEraserSelected">
                <image>
                   <Image url="@../images/eraser.png" />
                </image>
             </ImageView>
-            <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="575.0" layoutY="195.0" mnemonicParsing="false" onAction="#onClear" prefHeight="45.0" prefWidth="124.0" style="-fx-background-color: #faa504;" styleClass="body" text="Clear" textAlignment="CENTER">
+            <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="618.0" layoutY="188.0" mnemonicParsing="false" onAction="#onClear" prefHeight="45.0" prefWidth="124.0" style="-fx-background-color: #faa504;" styleClass="body" text="Clear" textAlignment="CENTER">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
@@ -67,24 +67,18 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Pane fx:id="panePlayer1" prefHeight="200.0" prefWidth="200.0" visible="false">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="198.0" layoutX="33.0" layoutY="8.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="241.0" />
-                        <Text fx:id="txtPlayer1" layoutX="41.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 1" textAlignment="CENTER" wrappingWidth="224.9814453125" />
-                     </children>
-                  </Pane>
                   <Pane fx:id="paneNewUser1" prefHeight="214.0" prefWidth="307.0">
                      <children>
                         <Circle fx:id="circleNewUser1" fill="WHITE" layoutX="152.0" layoutY="107.0" onMouseClicked="#onCreateProfile" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-1.0" onMouseClicked="#onCreateProfile" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
-                        <ImageView fx:id="imageUser1" disable="true" fitHeight="214.0" fitWidth="307.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="panePlayer2" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="198.0" layoutX="32.0" layoutY="8.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="241.0" />
-                        <Text fx:id="txtPlayer2" layoutX="40.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 2" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                        <Pane fx:id="panePlayer1" prefHeight="214.0" prefWidth="307.0" visible="false">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <ImageView fx:id="imageUser1" fitHeight="156.0" fitWidth="178.0" layoutX="64.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <Text fx:id="txtPlayer1" layoutX="40.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 1" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                   <Pane fx:id="paneNewUser2" prefHeight="214.0" prefWidth="307.0" GridPane.columnIndex="1">
@@ -92,13 +86,13 @@
                         <Circle fx:id="circleNewUser2" fill="WHITE" layoutX="152.0" layoutY="107.0" onMouseClicked="#onCreateProfile" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-1.0" onMouseClicked="#onCreateProfile" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
-                        <ImageView fx:id="imageUser2" disable="true" fitHeight="214.0" fitWidth="307.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="panePlayer3" prefHeight="215.0" prefWidth="326.0" visible="false" GridPane.columnIndex="2">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="198.0" layoutX="32.0" layoutY="8.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="241.0" />
-                        <Text fx:id="txtPlayer3" layoutX="35.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 3" textAlignment="CENTER" wrappingWidth="235.0" />
+                        <Pane fx:id="panePlayer2" prefHeight="214.0" prefWidth="307.0" visible="false">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="36.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <ImageView fx:id="imageUser2" fitHeight="156.0" fitWidth="178.0" layoutX="65.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <Text fx:id="txtPlayer2" layoutX="41.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 2" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                   <Pane fx:id="paneNewUser3" prefHeight="214.0" prefWidth="307.0" GridPane.columnIndex="2">
@@ -106,13 +100,13 @@
                         <Circle fx:id="circleNewUser3" fill="WHITE" layoutX="152.0" layoutY="107.0" onMouseClicked="#onCreateProfile" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-1.0" onMouseClicked="#onCreateProfile" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
-                        <ImageView fx:id="imageUser3" disable="true" fitHeight="214.0" fitWidth="307.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="panePlayer4" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.rowIndex="1">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="198.0" layoutX="33.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="241.0" />
-                        <Text fx:id="txtPlayer4" layoutX="36.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 4" textAlignment="CENTER" wrappingWidth="235.0" />
+                        <Pane fx:id="panePlayer3" prefHeight="214.0" prefWidth="307.0" visible="false">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="39.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <ImageView fx:id="imageUser3" fitHeight="156.0" fitWidth="178.0" layoutX="68.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <Text fx:id="txtPlayer3" layoutX="45.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 3" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                   <Pane fx:id="paneNewUser4" prefHeight="214.0" prefWidth="307.0" GridPane.rowIndex="1">
@@ -120,13 +114,13 @@
                         <Circle fx:id="circleNewUser4" fill="WHITE" layoutX="152.0" layoutY="107.0" onMouseClicked="#onCreateProfile" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-1.0" onMouseClicked="#onCreateProfile" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
-                        <ImageView fx:id="imageUser4" disable="true" fitHeight="214.0" fitWidth="307.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="panePlayer5" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="198.0" layoutX="32.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="241.0" />
-                        <Text fx:id="txtPlayer5" layoutX="40.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 5" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                        <Pane fx:id="panePlayer4" prefHeight="214.0" prefWidth="307.0" visible="false">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <ImageView fx:id="imageUser4" fitHeight="156.0" fitWidth="178.0" layoutX="63.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <Text fx:id="txtPlayer4" layoutX="40.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 4" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                   <Pane fx:id="paneNewUser5" prefHeight="214.0" prefWidth="307.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -134,13 +128,13 @@
                         <Circle fx:id="circleNewUser5" fill="WHITE" layoutX="152.0" layoutY="107.0" onMouseClicked="#onCreateProfile" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-1.0" onMouseClicked="#onCreateProfile" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
-                        <ImageView fx:id="imageUser5" disable="true" fitHeight="214.0" fitWidth="307.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="panePlayer6" prefHeight="214.0" prefWidth="343.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="198.0" layoutX="32.0" layoutY="8.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="241.0" />
-                        <Text fx:id="txtPlayer6" layoutX="35.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 6" textAlignment="CENTER" wrappingWidth="235.0" />
+                        <Pane fx:id="panePlayer5" prefHeight="214.0" prefWidth="307.0" visible="false">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <ImageView fx:id="imageUser5" fitHeight="156.0" fitWidth="178.0" layoutX="65.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <Text fx:id="txtPlayer5" layoutX="40.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 5" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                   <Pane fx:id="paneNewUser6" prefHeight="214.0" prefWidth="307.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -148,12 +142,18 @@
                         <Circle fx:id="circleNewUser6" fill="WHITE" layoutX="152.0" layoutY="107.0" onMouseClicked="#onCreateProfile" radius="54.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <Line endX="149.0" endY="75.0" layoutX="3.0" layoutY="-2.0" onMouseClicked="#onCreateProfile" startX="149.0" startY="142.0" styleClass="iconCircle" />
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="2.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
-                        <ImageView fx:id="imageUser6" disable="true" fitHeight="214.0" fitWidth="307.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                        <Pane fx:id="panePlayer6" prefHeight="214.0" prefWidth="307.0" visible="false">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="39.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <ImageView fx:id="imageUser6" fitHeight="156.0" fitWidth="178.0" layoutX="68.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <Text fx:id="txtPlayer6" layoutX="45.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 6" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                </children>
             </GridPane>
-            <Button layoutX="467.0" layoutY="451.0" mnemonicParsing="false" onAction="#onStartCanvas" prefHeight="68.0" prefWidth="280.0" text="Play as Guest" />
+            <Button layoutX="458.0" layoutY="443.0" mnemonicParsing="false" onAction="#onStartCanvas" prefHeight="68.0" prefWidth="280.0" text="Play as Guest" />
             <Circle fx:id="circleBlackPen" fill="WHITE" layoutX="1161.0" layoutY="477.0" onMouseClicked="#onBlackSelected" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
             <ImageView fx:id="penBlack" fitHeight="45.0" fitWidth="49.0" layoutX="1137.0" layoutY="455.0" onMouseClicked="#onBlackSelected">
                <image>

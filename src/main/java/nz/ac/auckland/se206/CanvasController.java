@@ -228,7 +228,7 @@ public class CanvasController {
     paneCategories.setVisible(false);
     // Disable changing the drawing
     paneEditCanvas.setDisable(true);
-    clearButton.setVisible(true);
+    clearButton.setVisible(false);
     Platform.runLater(
         () -> {
           // Text to speak the loss or win
@@ -264,7 +264,7 @@ public class CanvasController {
   private StringBuilder getStringOfPredictions(List<Classifications.Classification> predictions) {
     StringBuilder sb = new StringBuilder();
     int i = 1;
-    // Build a string with all of the top 10 predictions from the ml api
+    // Build a string with all the top 10 predictions from the ml api
     for (Classifications.Classification classification : predictions) {
       String className = classification.getClassName().replaceAll("_", " ");
       sb.append(i)

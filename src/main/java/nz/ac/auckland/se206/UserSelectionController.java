@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.user.UserProfile;
 
@@ -35,7 +36,15 @@ public class UserSelectionController {
   @FXML private ImageView imageUser4;
   @FXML private ImageView imageUser5;
   @FXML private ImageView imageUser6;
+  @FXML private Text txtPlayer1;
+  @FXML private Text txtPlayer2;
+  @FXML private Text txtPlayer3;
+  @FXML private Text txtPlayer4;
+  @FXML private Text txtPlayer5;
+  @FXML private Text txtPlayer6;
+
   private ImageView currentImageView;
+  private Text currentNameLabel;
   private GraphicsContext graphic;
   private static final UserProfile[] users = new UserProfile[7];
 
@@ -81,21 +90,27 @@ public class UserSelectionController {
     switch (id) {
       case "paneNewUser1":
         currentImageView = imageUser1;
+        currentNameLabel = txtPlayer1;
         return 1;
       case "paneNewUser2":
         currentImageView = imageUser2;
+        currentNameLabel = txtPlayer2;
         return 2;
       case "paneNewUser3":
         currentImageView = imageUser3;
+        currentNameLabel = txtPlayer3;
         return 3;
       case "paneNewUser4":
         currentImageView = imageUser4;
+        currentNameLabel = txtPlayer4;
         return 4;
       case "paneNewUser5":
         currentImageView = imageUser5;
+        currentNameLabel = txtPlayer5;
         return 5;
       case "paneNewUser6":
         currentImageView = imageUser6;
+        currentNameLabel = txtPlayer6;
         return 6;
       default:
         return 0;
@@ -130,12 +145,18 @@ public class UserSelectionController {
     users[UserProfile.currentUser].setProfilePic(
         profilePicImage); // stores image as an instance variable
     displayProfilePic(UserProfile.currentUser);
+    displayName(UserProfile.currentUser);
   }
 
   private void displayProfilePic(int currentUser) {
     UserProfile user = users[currentUser];
     user.getImageView().setImage(user.getProfilePic()); // set imageView to the user's image
-    currentImageView.setDisable(false);
+    currentImageView.getParent().setVisible(true);
+  }
+
+  private void displayName(int currentUser) {
+    UserProfile user = users[currentUser];
+    currentNameLabel.setText(user.getName());
   }
 
   private BufferedImage getCurrentSnapshot() {
