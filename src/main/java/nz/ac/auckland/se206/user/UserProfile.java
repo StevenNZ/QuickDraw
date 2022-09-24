@@ -1,16 +1,17 @@
 package nz.ac.auckland.se206.user;
 
 import com.opencsv.exceptions.CsvValidationException;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.CategorySelector;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class UserProfile {
   public static int currentUser = 0;
@@ -79,6 +80,26 @@ public class UserProfile {
     return profilePic;
   }
 
+  public int getQuickestWin(){
+    return quickestWin;
+  }
+
+
+  public StringBuilder getWordHistory(){
+    StringBuilder sb = new StringBuilder();
+    int i = 1;
+    // Build a string with all the top 10 predictions from the ml api
+    for (String word : wordHistory) {
+        sb.append(word + "  ");
+
+        i++;
+      }
+    return sb;
+  }
+
+  public void setQuickestWin(int newQuickest){
+    this.quickestWin = newQuickest;
+  }
   public void setProfilePic(Image profilePic) {
     this.profilePic = profilePic;
   }
