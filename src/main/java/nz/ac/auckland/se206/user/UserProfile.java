@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.user;
 
 import com.opencsv.exceptions.CsvValidationException;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,19 @@ public class UserProfile {
   private List<String> availableEasyWords = new ArrayList<>();
   private Image profilePic = null;
   private ImageView imageView = null;
+
+  public UserProfile() {
+    String userDataLocation = ".profiles/user" + currentUser + ".json";
+    File userData = new File(userDataLocation);
+
+    if (userData.exists()) {
+      try {
+        readUserData();
+      } catch (IOException | ParseException e) {
+        e.printStackTrace();
+      }
+    }
+  }
 
   public UserProfile(String name) {
     this.name = name;
@@ -139,7 +153,6 @@ public class UserProfile {
         this.availableEasyWords.get(
             randNumber); // pick random entry from the list of easy categories
 
-    setWord(pickedCategory); // Add to wordHistory
     this.availableEasyWords.remove(randNumber); // Remove from available Easy Words
 
     return pickedCategory;
