@@ -52,9 +52,16 @@ public class UserSelectionController {
   public void initialize() {
     users[0] = new UserProfile("Guest");
 
+    //Check whether use Profiles already exist
     for (int i = 1; i < 7; i++) {
       UserProfile.currentUser = i;
       users[i] = new UserProfile();
+      if(!users[i].getName().equals("")){
+        getProfileById("paneNewUser"+i);
+        users[i].setImageView(currentImageView);
+        displayProfilePic(i);
+        displayName(i);
+      }
     }
     // this is where we store user profiles
   }
@@ -153,6 +160,8 @@ public class UserSelectionController {
     users[UserProfile.currentUser].setName(name);
     users[UserProfile.currentUser].setImageView(currentImageView);
     saveProfilePic();
+    displayProfilePic(UserProfile.currentUser);
+    displayName(UserProfile.currentUser);
     users[UserProfile.currentUser].saveUserData();
     clearUserCreation();
   }
@@ -175,8 +184,7 @@ public class UserSelectionController {
         new Image(new FileInputStream(profilePicFile)); // gets image of the file of drawing
     users[UserProfile.currentUser].setProfilePic(
         profilePicImage); // stores image as an instance variable
-    displayProfilePic(UserProfile.currentUser);
-    displayName(UserProfile.currentUser);
+
   }
 
   private void displayProfilePic(int currentUser) {
