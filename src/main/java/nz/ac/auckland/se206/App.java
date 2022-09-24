@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.user.UserProfile;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
@@ -44,13 +46,15 @@ public class App extends Application {
         });
     SceneManager.addUi(SceneManager.AppUi.MAINMENU, loadFxml("mainmenu"));
     SceneManager.addUi(SceneManager.AppUi.USER_SELECTION, loadFxml("userselection"));
+    UserProfile.currentUser = 0;
     SceneManager.addUi(SceneManager.AppUi.CANVAS, loadFxml("canvas"));
-    SceneManager.addUi(SceneManager.AppUi.CANVAS_PLAYER1, loadFxml("canvas"));
-    SceneManager.addUi(SceneManager.AppUi.CANVAS_PLAYER2, loadFxml("canvas"));
-    SceneManager.addUi(SceneManager.AppUi.CANVAS_PLAYER3, loadFxml("canvas"));
-    SceneManager.addUi(SceneManager.AppUi.CANVAS_PLAYER4, loadFxml("canvas"));
-    SceneManager.addUi(SceneManager.AppUi.CANVAS_PLAYER5, loadFxml("canvas"));
-    SceneManager.addUi(SceneManager.AppUi.CANVAS_PLAYER6, loadFxml("canvas"));
+
+    for (int i = 1; i < 7; i++) {
+      UserProfile.currentUser = i;
+      AppUi sceneName = SceneManager.AppUi.getAppUiEnum(i);
+
+      SceneManager.addUi(sceneName, loadFxml("canvas"));
+    }
 
     final Scene mainMenuScene =
         new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU), 1280, 720);
