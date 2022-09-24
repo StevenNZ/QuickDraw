@@ -4,6 +4,7 @@ import com.opencsv.exceptions.CsvValidationException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.CategorySelector;
@@ -121,5 +122,21 @@ public class UserProfile {
     if (this.availableEasyWords.size() == 0) {
       availableEasyWords = easyWords;
     }
+  }
+
+  public String pickEasyCategory() {
+    Random random = new Random();
+    int randNumber;
+    String pickedCategory;
+
+    randNumber = random.nextInt(availableEasyWords.size());
+    pickedCategory =
+        this.availableEasyWords.get(
+            randNumber); // pick random entry from the list of easy categories
+
+    setWord(pickedCategory); // Add to wordHistory
+    this.availableEasyWords.remove(randNumber); // Remove from available Easy Words
+
+    return pickedCategory;
   }
 }
