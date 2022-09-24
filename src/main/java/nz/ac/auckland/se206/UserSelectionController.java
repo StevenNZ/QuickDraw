@@ -46,12 +46,17 @@ public class UserSelectionController {
   private ImageView currentImageView;
   private Text currentNameLabel;
   private GraphicsContext graphic;
-  private static final UserProfile[] users = new UserProfile[7];
+  public static final UserProfile[] users = new UserProfile[7];
 
   @FXML
   public void initialize() {
     users[0] = new UserProfile("Guest");
-    // this is where we show locally stored user profiles
+
+    for (int i = 1; i < 7; i++) {
+      UserProfile.currentUser = i;
+      users[i] = new UserProfile();
+    }
+    // this is where we store user profiles
   }
 
   @FXML
@@ -130,9 +135,13 @@ public class UserSelectionController {
   }
 
   private void saveProfilePic() throws IOException {
-    File profilePicFile =
-        new File(
-            "src/main/resources/images/userprofilepic/user" + UserProfile.currentUser + ".png");
+    File profileFolder = new File(".profiles");
+
+    if (!profileFolder.exists()) {
+      profileFolder.mkdir();
+    }
+
+    File profilePicFile = new File(".profiles/user" + UserProfile.currentUser + "image.png");
 
     try {
       ImageIO.write(getCurrentSnapshot(), "png", profilePicFile);
