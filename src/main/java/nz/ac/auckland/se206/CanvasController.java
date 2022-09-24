@@ -5,7 +5,7 @@ import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
 import ai.djl.ModelException;
 import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -58,20 +58,28 @@ public class CanvasController {
   @FXML private ImageView eraser;
   @FXML private Button btnSaveDrawing;
   @FXML private Button btnStartTimer;
-  @FXML private Button btnReturnMain;
   @FXML private Canvas canvas;
   @FXML private Label lblCategoryTxt;
   @FXML private Label lblClickStartTimer;
   @FXML private Label lblTimer;
   @FXML private Label lblTopTenGuesses;
   @FXML private Label lblWinOrLoss;
+  @FXML private Label lblWins;
+  @FXML private Label lblLosses;
+  @FXML private Label lblQuickestWin;
+  @FXML private Label lblWordHistory;
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
   @FXML private Button clearButton;
+  @FXML private Button btnStats;
+  @FXML private Button btnReturnCanvas;
   @FXML private Circle circleEraser;
   @FXML private Rectangle boxBlue;
   @FXML private Rectangle boxRed;
+  @FXML private Pane paneButtons;
+  @FXML private Pane paneCanvas;
+  @FXML private Pane paneStats;
   private GraphicsContext graphic;
   private DoodlePrediction model;
   protected HashMap<String, ArrayList<String>> categories = new HashMap<>();
@@ -158,8 +166,8 @@ public class CanvasController {
     btnStartTimer.setVisible(false);
     lblClickStartTimer.setVisible(false);
 
-    btnReturnMain.setVisible(false);
-    btnReturnMain.setDisable(true);
+    paneButtons.setVisible(false);
+    paneButtons.setDisable(true);
 
     currentUser.setWord(randomCategory); // Add to user word history
   }
@@ -191,6 +199,40 @@ public class CanvasController {
         onGameEnd(true);
       }
     }
+  }
+
+  @FXML
+  private void onViewStats() {
+    // Update Label for wins
+    lblWins.setText("0");
+    // update label for losses
+    lblLosses.setText("0");
+    // update label for quickest win
+    lblQuickestWin.setText("0");
+    // update label for word history
+    lblWordHistory.setText("0");
+
+    paneCanvas.setDisable(true);
+    paneCanvas.setVisible(false);
+    // hide the see stats button
+    btnStats.setDisable(true);
+    btnStats.setVisible(false);
+    btnReturnCanvas.setVisible(true);
+    btnReturnCanvas.setDisable(false);
+    paneStats.setDisable(false);
+    paneStats.setVisible(true);
+  }
+
+  @FXML
+  private void onBackToCanvas() {
+    btnStats.setDisable(false);
+    btnStats.setVisible(true);
+    btnReturnCanvas.setVisible(false);
+    btnReturnCanvas.setDisable(true);
+    paneStats.setDisable(true);
+    paneStats.setVisible(false);
+    paneCanvas.setDisable(false);
+    paneCanvas.setVisible(true);
   }
 
   @FXML
@@ -245,8 +287,8 @@ public class CanvasController {
     paneEditCanvas.setDisable(true);
     clearButton.setVisible(false);
 
-    btnReturnMain.setVisible(true);
-    btnReturnMain.setDisable(false);
+    paneButtons.setVisible(true);
+    paneButtons.setDisable(false);
 
     Platform.runLater(
         () -> {

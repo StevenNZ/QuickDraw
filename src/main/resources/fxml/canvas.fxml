@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -19,102 +20,169 @@
             <Image url="@../images/qd.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="171.0" layoutX="188.0" layoutY="52.0" stroke="#faa504" strokeWidth="5.0" width="711.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="170.0" layoutX="948.0" layoutY="53.0" stroke="#faa504" strokeWidth="5.0" width="285.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="389.0" layoutX="946.0" layoutY="248.0" stroke="#faa504" strokeWidth="5.0" width="290.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="605.0" layoutX="1507.0" layoutY="301.0" stroke="#faa504" strokeWidth="5.0" visible="false" width="325.0" />
-      <Label id="lblTimer" fx:id="lblTimer" alignment="CENTER" contentDisplay="RIGHT" layoutX="985.0" layoutY="71.0" prefHeight="88.0" prefWidth="211.0" text="01:00" textAlignment="CENTER">
-         <font>
-            <Font name="Consolas" size="60.0" />
-         </font>
-      </Label>
-      <Button id="btnStartTimer" fx:id="btnStartTimer" alignment="CENTER" defaultButton="true" layoutX="966.0" layoutY="159.0" mnemonicParsing="false" onAction="#onStartTimer" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #faa504;" text="Start Timer">
-         <font>
-            <Font size="22.0" />
-         </font></Button>
-      <Pane fx:id="paneEditCanvas" layoutX="16.0" layoutY="222.0" prefHeight="484.0" prefWidth="917.0">
+      <Pane fx:id="paneCanvas" layoutX="31.0" layoutY="54.0" prefHeight="660.0" prefWidth="1257.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="393.0" layoutX="174.0" layoutY="27.0" stroke="#faa504" strokeWidth="5.0" style="-fx-fill: FFFFFF;" width="716.0" />
-            <Canvas fx:id="canvas" disable="true" height="389.0" layoutX="177.0" layoutY="29.0" width="716.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Canvas>
-            <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="749.0" layoutY="431.0" mnemonicParsing="false" onAction="#onClear" prefHeight="45.0" prefWidth="144.0" style="-fx-background-color: #faa504;" styleClass="body" text="Clear" textAlignment="CENTER">
+            <Pane fx:id="paneEditCanvas" layoutX="39.0" layoutY="195.0" prefHeight="400.0" prefWidth="873.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="393.0" layoutX="136.0" layoutY="-2.0" stroke="#faa504" strokeWidth="5.0" style="-fx-fill: FFFFFF;" width="716.0" />
+                  <Canvas fx:id="canvas" disable="true" height="389.0" layoutX="138.0" width="716.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Canvas>
+                  <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="715.0" layoutY="399.0" mnemonicParsing="false" onAction="#onClear" prefHeight="45.0" prefWidth="144.0" style="-fx-background-color: #faa504;" styleClass="body" text="Clear" textAlignment="CENTER">
+                     <font>
+                        <Font name="Consolas" size="22.0" />
+                     </font>
+                  </Button>
+                  <Pane layoutX="14.0" prefHeight="361.0" prefWidth="108.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="599.0" layoutX="-3.0" layoutY="2.0" stroke="#faa504" strokeWidth="5.0" visible="false" width="131.0" />
+                        <Circle fx:id="circleBlackPen" fill="WHITE" layoutX="50.0" layoutY="38.0" onMouseClicked="#onBlackSelected" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
+                        <Rectangle fx:id="boxRed" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ff1100" height="58.0" layoutX="32.0" layoutY="99.0" onMouseClicked="#onRedSelected" stroke="BLACK" strokeType="INSIDE" visible="false" width="58.0" />
+                        <Rectangle fx:id="boxBlue" arcHeight="5.0" arcWidth="5.0" disable="true" fill="DODGERBLUE" height="58.0" layoutX="32.0" layoutY="176.0" onMouseClicked="#onBlueSelected" stroke="BLACK" strokeType="INSIDE" visible="false" width="58.0" />
+                        <ImageView fx:id="penBlack" fitHeight="45.0" fitWidth="49.0" layoutX="26.0" layoutY="16.0" onMouseClicked="#onBlackSelected">
+                           <image>
+                              <Image url="@../images/pen-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="circleEraser" fill="WHITE" layoutX="50.0" layoutY="128.0" onMouseClicked="#onEraserSelected" radius="36.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
+                        <ImageView fx:id="eraser" fitHeight="45.0" fitWidth="49.0" layoutX="26.0" layoutY="106.0" onMouseClicked="#onEraserSelected">
+                           <image>
+                              <Image url="@../images/eraser.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="184.0" layoutX="173.0" layoutY="-4.0" stroke="#faa504" strokeWidth="5.0" width="721.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="174.0" layoutX="929.0" layoutY="1.0" stroke="#faa504" strokeWidth="5.0" width="290.0" />
+            <Label id="lblTimer" fx:id="lblTimer" alignment="CENTER" contentDisplay="RIGHT" layoutX="972.0" layoutY="30.0" prefHeight="88.0" prefWidth="211.0" text="01:00" textAlignment="CENTER">
+               <font>
+                  <Font name="Consolas" size="60.0" />
+               </font>
+            </Label>
+            <Button id="btnStartTimer" fx:id="btnStartTimer" alignment="CENTER" defaultButton="true" layoutX="953.0" layoutY="109.0" mnemonicParsing="false" onAction="#onStartTimer" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #faa504;" text="Start Timer">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="389.0" layoutX="929.0" layoutY="199.0" stroke="#faa504" strokeWidth="5.0" width="290.0" />
+            <Label alignment="CENTER" layoutX="935.0" layoutY="199.0" prefHeight="45.0" prefWidth="284.0" styleClass="heading" text="Top 10 Guesses:" textAlignment="CENTER">
+               <font>
+                  <Font name="Ink Free" size="27.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTopTenGuesses" alignment="TOP_LEFT" layoutX="953.0" layoutY="244.0" prefHeight="321.0" prefWidth="249.0" styleClass="predictionsText" text="Your top 10 guesses to your drawing will appear here!" wrapText="true">
                <font>
                   <Font name="Consolas" size="22.0" />
-               </font></Button>
-            <Pane layoutX="49.0" layoutY="29.0" prefHeight="361.0" prefWidth="108.0">
+               </font>
+            </Label>
+            <Pane fx:id="paneGameEnd" disable="true" layoutX="177.0" layoutY="-1.0" prefHeight="204.0" prefWidth="711.0" visible="false">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="599.0" layoutX="-3.0" layoutY="2.0" stroke="#faa504" strokeWidth="5.0" visible="false" width="131.0" />
-                  <Circle fx:id="circleBlackPen" fill="WHITE" layoutX="50.0" layoutY="38.0" onMouseClicked="#onBlackSelected" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
-                  <Rectangle fx:id="boxRed" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ff1100" height="58.0" layoutX="32.0" layoutY="99.0" onMouseClicked="#onRedSelected" stroke="BLACK" strokeType="INSIDE" visible="false" width="58.0" />
-                  <Rectangle fx:id="boxBlue" arcHeight="5.0" arcWidth="5.0" disable="true" fill="DODGERBLUE" height="58.0" layoutX="32.0" layoutY="176.0" onMouseClicked="#onBlueSelected" stroke="BLACK" strokeType="INSIDE" visible="false" width="58.0" />
-                  <ImageView fx:id="penBlack" fitHeight="45.0" fitWidth="49.0" layoutX="26.0" layoutY="16.0" onMouseClicked="#onBlackSelected">
-                     <image>
-                        <Image url="@../images/pen-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <Circle fx:id="circleEraser" fill="WHITE" layoutX="50.0" layoutY="128.0" onMouseClicked="#onEraserSelected" radius="36.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
-                  <ImageView fx:id="eraser" fitHeight="45.0" fitWidth="49.0" layoutX="26.0" layoutY="106.0" onMouseClicked="#onEraserSelected">
-                     <image>
-                        <Image url="@../images/eraser.png" />
-                     </image>
-                  </ImageView>
+                  <Button fx:id="btnSaveDrawing" layoutX="418.0" layoutY="113.0" mnemonicParsing="false" onAction="#onSaveDrawing" prefHeight="46.0" prefWidth="211.0" style="-fx-background-color: #faa504;" text="Save Drawing">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="lblWinOrLoss" alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="14.0" prefHeight="98.0" prefWidth="690.0" styleClass="heading2" text="WIN OR LOSS?">
+                     <font>
+                        <Font name="Consolas" size="45.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnNewGame" layoutX="90.0" layoutY="113.0" mnemonicParsing="false" onAction="#onNewGameClicked" prefHeight="46.0" prefWidth="211.0" style="-fx-background-color: #faa504;" text="New Game">
+                     <font>
+                        <Font name="Consolas" size="22.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Pane fx:id="paneCategories" layoutX="175.0" layoutY="8.0" prefHeight="164.0" prefWidth="711.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="21.0" prefHeight="19.0" prefWidth="219.0" styleClass="heading" text="Your word is:" textAlignment="CENTER">
+                     <font>
+                        <Font name="Consolas" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblCategoryTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="21.0" prefHeight="98.0" prefWidth="697.0" styleClass="title" text="word" textAlignment="CENTER">
+                     <font>
+                        <Font name="Ink Free" size="60.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblClickStartTimer" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="107.0" prefHeight="36.0" prefWidth="690.0" styleClass="heading" text="Click 'Start Timer' to start!" textAlignment="CENTER">
+                     <font>
+                        <Font name="Consolas" size="25.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </children>
       </Pane>
-      <Label alignment="CENTER" layoutX="951.0" layoutY="253.0" prefHeight="45.0" prefWidth="284.0" styleClass="heading" text="Top 10 Guesses:" textAlignment="CENTER">
-         <font>
-            <Font name="Ink Free" size="27.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblTopTenGuesses" alignment="TOP_LEFT" layoutX="959.0" layoutY="299.0" prefHeight="321.0" prefWidth="264.0" styleClass="predictionsText" text="Your top 10 guesses to your drawing will appear here!" wrapText="true">
-         <font>
-            <Font name="Consolas" size="22.0" />
-         </font></Label>
-      <Pane fx:id="paneGameEnd" disable="true" layoutX="191.0" layoutY="51.0" prefHeight="204.0" prefWidth="711.0" visible="false">
+      <Pane fx:id="paneStats" disable="true" layoutX="199.0" layoutY="27.0" prefHeight="604.0" prefWidth="922.0" visible="false">
          <children>
-            <Button fx:id="btnSaveDrawing" layoutX="96.0" layoutY="107.0" mnemonicParsing="false" onAction="#onSaveDrawing" prefHeight="46.0" prefWidth="211.0" style="-fx-background-color: #faa504;" text="Save Drawing">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="106.0" layoutX="17.0" layoutY="3.0" stroke="#faa504" strokeWidth="5.0" width="893.0" />
+            <Label fx:id="lblStatsHeader" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="1.0" prefHeight="98.0" prefWidth="882.0" styleClass="heading2" text="View all your statistics!" textAlignment="CENTER">
                <font>
-                  <Font size="22.0" />
-               </font></Button>
-            <Button fx:id="btnNewGame" layoutX="387.0" layoutY="104.0" mnemonicParsing="false" onAction="#onNewGameClicked" prefHeight="52.0" prefWidth="211.0" style="-fx-background-color: #faa504;" text="New Game">
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="169.0" layoutX="17.0" layoutY="123.0" stroke="#faa504" strokeWidth="5.0" width="453.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="293.0" layoutX="17.0" layoutY="312.0" stroke="#faa504" strokeWidth="5.0" width="898.0" />
+            <Label fx:id="lblStatsHeader1" alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="128.0" prefHeight="58.0" prefWidth="448.0" styleClass="heading" text="Wins vs Losses" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Line endX="-32.0" endY="-59.0" layoutX="275.0" layoutY="254.0" startX="-32.0" startY="8.0" strokeWidth="5.0" styleClass="bgRect" />
+            <Label fx:id="lblWins" alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="186.0" prefHeight="88.0" prefWidth="169.0" styleClass="heading" text="0" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblLosses" alignment="CENTER" contentDisplay="CENTER" layoutX="267.0" layoutY="186.0" prefHeight="88.0" prefWidth="169.0" styleClass="heading" text="0" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="179.0" layoutX="594.0" layoutY="123.0" stroke="#faa504" strokeWidth="5.0" width="314.0" />
+            <Label fx:id="lblStatsHeader11" alignment="CENTER" contentDisplay="CENTER" layoutX="555.0" layoutY="126.0" prefHeight="58.0" prefWidth="391.0" styleClass="heading" text="Quickest Win" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblQuickestWin" alignment="CENTER" contentDisplay="CENTER" layoutX="666.0" layoutY="183.0" prefHeight="88.0" prefWidth="169.0" styleClass="heading" text="0" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblStatsHeader111" contentDisplay="CENTER" layoutX="37.0" layoutY="320.0" prefHeight="58.0" prefWidth="391.0" styleClass="heading" text="Word History">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblWordHistory" alignment="TOP_LEFT" layoutX="28.0" layoutY="370.0" prefHeight="214.0" prefWidth="867.0" styleClass="predictionsText" text="Looks like you haven't played any games yet!" wrapText="true">
                <font>
                   <Font name="Consolas" size="22.0" />
-               </font></Button>
-            <Label fx:id="lblWinOrLoss" alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="6.0" prefHeight="98.0" prefWidth="690.0" styleClass="title" text="WIN OR LOSS?">
-               <font>
-                  <Font name="Consolas" size="45.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="paneCategories" layoutX="191.0" layoutY="56.0" prefHeight="164.0" prefWidth="711.0">
+      <Pane fx:id="paneButtons" layoutX="31.0" layoutY="641.0" prefHeight="5.0" prefWidth="1223.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="21.0" prefHeight="19.0" prefWidth="219.0" styleClass="heading" text="Your word is:" textAlignment="CENTER">
+            <Button fx:id="btnStats" layoutX="998.0" layoutY="13.0" mnemonicParsing="false" onAction="#onViewStats" prefHeight="40.0" prefWidth="211.0" text="See Stats" />
+            <Button fx:id="btnReturnCanvas" disable="true" layoutX="998.0" layoutY="11.0" mnemonicParsing="false" onAction="#onBackToCanvas" prefHeight="40.0" prefWidth="211.0" text="Back To Canvas" visible="false">
                <font>
-                  <Font name="Consolas" size="25.0" />
+                  <Font name="Consolas" size="22.0" />
                </font>
-            </Label>
-            <Label fx:id="lblCategoryTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="21.0" prefHeight="98.0" prefWidth="697.0" styleClass="title" text="word" textAlignment="CENTER">
+            </Button>
+            <Button fx:id="btnReturnMain" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#onBack" prefHeight="40.0" prefWidth="243.0" text="Back To Main Menu">
                <font>
-                  <Font name="Ink Free" size="60.0" />
+                  <Font name="Consolas" size="22.0" />
                </font>
-            </Label>
-            <Label fx:id="lblClickStartTimer" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="107.0" prefHeight="36.0" prefWidth="690.0" styleClass="heading" text="Click 'Start Timer' to start!" textAlignment="CENTER">
-               <font>
-                  <Font name="Consolas" size="25.0" />
-               </font>
-            </Label>
+            </Button>
          </children>
       </Pane>
-      <Button fx:id="btnReturnMain" layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBack" prefHeight="39.0" prefWidth="119.0" style="-fx-background-color: #fff;" text="Back">
-         <font>
-            <Font name="Consolas" size="22.0" />
-         </font>
-      </Button>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
