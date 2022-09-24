@@ -63,8 +63,13 @@ public class UserFileHandler {
   public static Image readProfileImage(int userNumber) throws FileNotFoundException {
     String profileImageLocation = ".profiles/user" + userNumber + "image.png";
 
-    Image profileImage = new Image(new FileInputStream(profileImageLocation));
+    File imageFile = new File(profileImageLocation);
 
-    return profileImage;
+    if (imageFile.exists()) {
+      Image profileImage = new Image(new FileInputStream(profileImageLocation));
+      return profileImage;
+    } else {
+      return null;
+    }
   }
 }
