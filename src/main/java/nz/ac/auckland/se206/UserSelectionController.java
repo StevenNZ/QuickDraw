@@ -56,12 +56,15 @@ public class UserSelectionController {
 
   @FXML
   private void onStartCanvas(Event event) {
-    String id = ((Node) event.getSource()).getParent().getParent().getId();
+    String id =
+        ((Node) event.getSource()).getId().equals("btnGuest")
+            ? ((Node) event.getSource()).getParent().getId()
+            : ((Node) event.getSource()).getParent().getParent().getId();
+
     UserProfile.currentUser = getProfileById(id);
     Node node = (Node) event.getSource();
     Scene sceneOfNode = node.getScene();
     sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.CANVAS));
-    System.out.println(UserProfile.currentUser);
   }
 
   @FXML

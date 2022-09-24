@@ -85,7 +85,7 @@
                         <Pane fx:id="panePlayer1" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
-                              <ImageView fx:id="imageUser1" fitHeight="156.0" fitWidth="178.0" layoutX="64.0" layoutY="44.0" onMouseClicked="#onUserStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageUser1" fitHeight="156.0" fitWidth="178.0" layoutX="64.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
                               <Text fx:id="txtPlayer1" layoutX="40.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 1" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
@@ -99,7 +99,7 @@
                         <Pane fx:id="panePlayer2" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="36.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
-                              <ImageView fx:id="imageUser2" fitHeight="156.0" fitWidth="178.0" layoutX="65.0" layoutY="44.0" onMouseClicked="#onUserStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageUser2" fitHeight="156.0" fitWidth="178.0" layoutX="65.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
                               <Text fx:id="txtPlayer2" layoutX="41.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 2" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
@@ -113,7 +113,7 @@
                         <Pane fx:id="panePlayer3" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="39.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
-                              <ImageView fx:id="imageUser3" fitHeight="156.0" fitWidth="178.0" layoutX="68.0" layoutY="44.0" onMouseClicked="#onUserStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageUser3" fitHeight="156.0" fitWidth="178.0" layoutX="68.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
                               <Text fx:id="txtPlayer3" layoutX="45.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 3" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
@@ -127,7 +127,7 @@
                         <Pane fx:id="panePlayer4" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
-                              <ImageView fx:id="imageUser4" fitHeight="156.0" fitWidth="178.0" layoutX="63.0" layoutY="44.0" onMouseClicked="#onUserStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageUser4" fitHeight="156.0" fitWidth="178.0" layoutX="63.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
                               <Text fx:id="txtPlayer4" layoutX="40.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 4" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
@@ -141,7 +141,7 @@
                         <Pane fx:id="panePlayer5" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
-                              <ImageView fx:id="imageUser5" fitHeight="156.0" fitWidth="178.0" layoutX="65.0" layoutY="44.0" onMouseClicked="#onUserStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageUser5" fitHeight="156.0" fitWidth="178.0" layoutX="65.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
                               <Text fx:id="txtPlayer5" layoutX="40.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 5" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
@@ -155,7 +155,7 @@
                         <Pane fx:id="panePlayer6" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="39.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
-                              <ImageView fx:id="imageUser6" fitHeight="156.0" fitWidth="178.0" layoutX="68.0" layoutY="44.0" onMouseClicked="#onUserStartCanvas" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageUser6" fitHeight="156.0" fitWidth="178.0" layoutX="68.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
                               <Text fx:id="txtPlayer6" layoutX="45.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 6" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
@@ -163,7 +163,7 @@
                   </Pane>
                </children>
             </GridPane>
-            <Button layoutX="458.0" layoutY="443.0" mnemonicParsing="false" onAction="#onStartCanvas" prefHeight="68.0" prefWidth="280.0" text="Play as Guest" />
+            <Button fx:id="btnGuest" layoutX="458.0" layoutY="443.0" mnemonicParsing="false" onAction="#onStartCanvas" prefHeight="68.0" prefWidth="280.0" text="Play as Guest" />
             <Circle fx:id="circleBlackPen" fill="WHITE" layoutX="1161.0" layoutY="477.0" onMouseClicked="#onBlackSelected" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" visible="false" />
             <ImageView fx:id="penBlack" fitHeight="45.0" fitWidth="49.0" layoutX="1137.0" layoutY="455.0" onMouseClicked="#onBlackSelected" visible="false">
                <image>
