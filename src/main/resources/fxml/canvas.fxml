@@ -70,7 +70,7 @@
             <Font name="Ink Free" size="27.0" />
          </font>
       </Label>
-      <Label fx:id="lblTopTenGuesses" alignment="TOP_LEFT" layoutX="959.0" layoutY="299.0" prefHeight="321.0" prefWidth="264.0" styleClass="body" text="Your top 10 guesses to your drawing will appear here!" wrapText="true">
+      <Label fx:id="lblTopTenGuesses" alignment="TOP_LEFT" layoutX="959.0" layoutY="299.0" prefHeight="321.0" prefWidth="264.0" styleClass="predictionsText" text="Your top 10 guesses to your drawing will appear here!" wrapText="true">
          <font>
             <Font name="Consolas" size="22.0" />
          </font></Label>

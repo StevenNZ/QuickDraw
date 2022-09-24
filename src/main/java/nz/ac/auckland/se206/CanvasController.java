@@ -66,7 +66,7 @@ public class CanvasController {
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
-  @FXML private Circle circleBlackPen;
+  @FXML private Button clearButton;
   @FXML private Circle circleEraser;
   @FXML private Rectangle boxBlue;
   @FXML private Rectangle boxRed;
@@ -228,6 +228,7 @@ public class CanvasController {
     paneCategories.setVisible(false);
     // Disable changing the drawing
     paneEditCanvas.setDisable(true);
+    clearButton.setVisible(true);
     Platform.runLater(
         () -> {
           // Text to speak the loss or win
@@ -238,7 +239,6 @@ public class CanvasController {
   /** Reset the panes and timer */
   private void reset() {
     // Hide Game End Pane
-    paneGameEnd.setDisable(true);
     paneGameEnd.setVisible(false);
     // Clear the canvas
     onClear();
@@ -248,7 +248,6 @@ public class CanvasController {
     // Hide category display information
     paneCategories.setVisible(true);
     btnStartTimer.setVisible(true);
-    btnStartTimer.setDisable(false);
     lblClickStartTimer.setVisible(true);
     lblTopTenGuesses.setText("Your top 10 guesses to your drawing will appear here!");
 
