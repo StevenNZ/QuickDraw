@@ -63,6 +63,10 @@ public class UserProfile {
     return name;
   }
 
+  public void setName(String nameInput) {
+    this.name = nameInput;
+  }
+
   public int getTotalWins() {
     return totalWins;
   }

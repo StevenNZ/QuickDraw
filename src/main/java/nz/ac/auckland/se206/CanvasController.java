@@ -230,10 +230,12 @@ public class CanvasController {
     timeline.stop();
     if (isWin) {
       gameoverString = "Congratulations! You WON!";
+      currentUser.updateWin();
     } else {
       gameoverString = "Sorry, better luck next time.";
+      currentUser.updateLoss();
     }
-
+    currentUser.saveUserData();
     // Change labels to display win or loss
     lblWinOrLoss.setText(gameoverString);
     // Make buttons visible to save the drawing and reset appear.

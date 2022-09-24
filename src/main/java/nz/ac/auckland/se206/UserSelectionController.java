@@ -70,8 +70,6 @@ public class UserSelectionController {
     Node node = (Node) event.getSource();
     Scene sceneOfNode = node.getScene();
     sceneOfNode.setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
-
-
   }
 
   private SceneManager.AppUi getNewRoot(int id) {
@@ -152,10 +150,10 @@ public class UserSelectionController {
   @FXML
   private void onSaveProfile() throws IOException {
     String name = textFieldName.getText();
-    users[UserProfile.currentUser] = new UserProfile(name);
+    users[UserProfile.currentUser].setName(name);
     users[UserProfile.currentUser].setImageView(currentImageView);
     saveProfilePic();
-
+    users[UserProfile.currentUser].saveUserData();
     clearUserCreation();
   }
 
