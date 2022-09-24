@@ -24,6 +24,11 @@ public class UserProfile {
 
   public UserProfile(String name) {
     this.name = name;
+    try {
+      initializeAvailableWords();
+    } catch (CsvValidationException | IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public void updateWin() {
