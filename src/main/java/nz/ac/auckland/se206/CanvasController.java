@@ -38,6 +38,7 @@ import javafx.util.Duration;
 import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
+import nz.ac.auckland.se206.user.UserProfile;
 
 /**
  * This is the controller of the canvas. You are free to modify this class and the corresponding
@@ -76,6 +77,7 @@ public class CanvasController {
   private int secondsLeft;
   private String randomCategory;
   private Timeline timeline;
+  private UserProfile currentUser;
 
   /**
    * JavaFX calls this method once the GUI elements are loaded. In our case we create a listener for
@@ -86,8 +88,9 @@ public class CanvasController {
    */
   public void initialize() throws ModelException, IOException {
 
-    processDataFromFile();
-    generateRandomCategory();
+    currentUser = UserSelectionController.getUser();
+    randomCategory = currentUser.pickEasyCategory();
+
     this.timeline =
         new Timeline(
             new KeyFrame(
@@ -247,7 +250,7 @@ public class CanvasController {
     paneGameEnd.setVisible(false);
     // Clear the canvas
     onClear();
-    generateRandomCategory();
+    randomCategory = currentUser.pickEasyCategory();
     // Replace lblCategoryTxt on the canvas
     lblCategoryTxt.setText(this.randomCategory);
     // Hide category display information
