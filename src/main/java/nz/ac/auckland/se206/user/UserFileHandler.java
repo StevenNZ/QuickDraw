@@ -1,9 +1,12 @@
 package nz.ac.auckland.se206.user;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -55,5 +58,13 @@ public class UserFileHandler {
       System.out.println("File doesn't exist");
       return false;
     }
+  }
+
+  public static Image readProfileImage(int userNumber) throws FileNotFoundException {
+    String profileImageLocation = ".profiles/user" + userNumber + "image.png";
+
+    Image profileImage = new Image(new FileInputStream(profileImageLocation));
+
+    return profileImage;
   }
 }
