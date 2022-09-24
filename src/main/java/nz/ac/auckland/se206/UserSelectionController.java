@@ -201,4 +201,8 @@ public class UserSelectionController {
   private void onClear() {
     graphic.clearRect(0, 0, canvasUser.getWidth(), canvasUser.getHeight());
   }
+
+  public static UserProfile getUser() {
+    return users[UserProfile.currentUser];
+  }
 }
