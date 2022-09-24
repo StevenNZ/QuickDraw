@@ -126,10 +126,7 @@ public class UserSelectionController {
     users[UserProfile.currentUser].setImageView(currentImageView);
     saveProfilePic();
 
-    onClear(); // clear canvas
-    textFieldName.clear();
-    paneUserProfile.setVisible(true);
-    paneUserCreation.setVisible(false);
+    clearUserCreation();
   }
 
   private void saveProfilePic() throws IOException {
@@ -219,5 +216,17 @@ public class UserSelectionController {
   @FXML
   private void onClear() {
     graphic.clearRect(0, 0, canvasUser.getWidth(), canvasUser.getHeight());
+  }
+
+  @FXML
+  private void onBackUserCreation() {
+    clearUserCreation();
+  }
+
+  private void clearUserCreation() {
+    onClear(); // clear canvas
+    textFieldName.clear();
+    paneUserProfile.setVisible(true);
+    paneUserCreation.setVisible(false);
   }
 }
