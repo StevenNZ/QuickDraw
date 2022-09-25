@@ -24,6 +24,7 @@ import nz.ac.auckland.se206.user.UserProfile;
 
 public class UserSelectionController {
 
+  public static final UserProfile[] users = new UserProfile[7];
   @FXML private Pane paneUserProfile;
   @FXML private Pane paneUserCreation;
   @FXML private TextField textFieldName;
@@ -46,18 +47,17 @@ public class UserSelectionController {
   private ImageView currentImageView;
   private Text currentNameLabel;
   private GraphicsContext graphic;
-  public static final UserProfile[] users = new UserProfile[7];
 
   @FXML
   public void initialize() {
     users[0] = new UserProfile("Guest");
 
-    //Check whether use Profiles already exist
+    // Check whether use Profiles already exist
     for (int i = 1; i < 7; i++) {
       UserProfile.currentUser = i;
       users[i] = new UserProfile();
-      if(!users[i].getName().equals("")){
-        getProfileById("paneNewUser"+i);
+      if (!users[i].getName().equals("")) {
+        getProfileById("paneNewUser" + i);
         users[i].setImageView(currentImageView);
         displayProfilePic(i);
         displayName(i);
@@ -184,7 +184,6 @@ public class UserSelectionController {
         new Image(new FileInputStream(profilePicFile)); // gets image of the file of drawing
     users[UserProfile.currentUser].setProfilePic(
         profilePicImage); // stores image as an instance variable
-
   }
 
   private void displayProfilePic(int currentUser) {
