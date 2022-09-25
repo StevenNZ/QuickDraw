@@ -72,7 +72,7 @@ public class UserSelectionController {
         ((Node) event.getSource()).getId().equals("btnGuest")
             ? ((Node) event.getSource()).getParent().getId()
             : ((Node) event.getSource()).getParent().getParent().getId();
-
+    // checks for parent of event source
     UserProfile.currentUser = getProfileById(id);
     Node node = (Node) event.getSource();
     Scene sceneOfNode = node.getScene();
@@ -80,7 +80,7 @@ public class UserSelectionController {
   }
 
   private SceneManager.AppUi getNewRoot(int id) {
-    switch (id) {
+    switch (id) { // returns the canvas for corresponding ID
       case 1:
         return SceneManager.AppUi.CANVAS_PLAYER1;
       case 2:
@@ -124,7 +124,7 @@ public class UserSelectionController {
 
   private int getProfileById(String id) {
 
-    switch (id) {
+    switch (id) { // returns current user index as well as it's imageView and label
       case "paneNewUser1":
         currentImageView = imageUser1;
         currentNameLabel = txtPlayer1;
@@ -150,7 +150,7 @@ public class UserSelectionController {
         currentNameLabel = txtPlayer6;
         return 6;
       default:
-        return 0;
+        return 0; // defaults guest
     }
   }
 
@@ -162,7 +162,7 @@ public class UserSelectionController {
     saveProfilePic();
     displayProfilePic(UserProfile.currentUser);
     displayName(UserProfile.currentUser);
-    users[UserProfile.currentUser].saveUserData();
+    users[UserProfile.currentUser].saveUserData(); // save user created into local file
     clearUserCreation();
   }
 
