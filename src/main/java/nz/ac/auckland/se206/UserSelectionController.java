@@ -69,9 +69,9 @@ public class UserSelectionController {
   @FXML
   private void onStartCanvas(Event event) {
     String id =
-        ((Node) event.getSource()).getId() == null
-            ? ((Node) event.getSource()).getParent().getParent().getId()
-            : ((Node) event.getSource()).getParent().getId();
+        ((Node) event.getSource()).getId().equals("btnGuest")
+            ? ((Node) event.getSource()).getParent().getId()
+            : ((Node) event.getSource()).getParent().getParent().getId();
 
     UserProfile.currentUser = getProfileById(id);
     Node node = (Node) event.getSource();
