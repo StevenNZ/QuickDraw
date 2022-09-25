@@ -52,12 +52,12 @@ public class UserSelectionController {
   public void initialize() {
     users[0] = new UserProfile("Guest");
 
-    //Check whether use Profiles already exist
+    // Check whether use Profiles already exist
     for (int i = 1; i < 7; i++) {
       UserProfile.currentUser = i;
       users[i] = new UserProfile();
-      if(!users[i].getName().equals("")){
-        getProfileById("paneNewUser"+i);
+      if (!users[i].getName().equals("")) {
+        getProfileById("paneNewUser" + i);
         users[i].setImageView(currentImageView);
         displayProfilePic(i);
         displayName(i);
@@ -69,9 +69,9 @@ public class UserSelectionController {
   @FXML
   private void onStartCanvas(Event event) {
     String id =
-        ((Node) event.getSource()).getId().equals("btnGuest")
-            ? ((Node) event.getSource()).getParent().getId()
-            : ((Node) event.getSource()).getParent().getParent().getId();
+        ((Node) event.getSource()).getId() == null
+            ? ((Node) event.getSource()).getParent().getParent().getId()
+            : ((Node) event.getSource()).getParent().getId();
 
     UserProfile.currentUser = getProfileById(id);
     Node node = (Node) event.getSource();
@@ -184,7 +184,6 @@ public class UserSelectionController {
         new Image(new FileInputStream(profilePicFile)); // gets image of the file of drawing
     users[UserProfile.currentUser].setProfilePic(
         profilePicImage); // stores image as an instance variable
-
   }
 
   private void displayProfilePic(int currentUser) {
