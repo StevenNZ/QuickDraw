@@ -1,8 +1,20 @@
 package nz.ac.auckland.se206;
 
+import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
+
 import ai.djl.ModelException;
 import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -23,23 +35,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 import nz.ac.auckland.se206.user.UserProfile;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-
-import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
 
 /**
  * This is the controller of the canvas. You are free to modify this class and the corresponding
@@ -133,19 +132,7 @@ public class CanvasController {
 
     graphic = canvas.getGraphicsContext2D();
 
-    canvas.setOnMouseDragged(
-        e -> {
-          isStartPredictions = true;
-          // Brush size (you can change this, it should not be too small or too large).
-          final double size = 12.0;
-
-          final double x = e.getX() - size / 2;
-          final double y = e.getY() - size / 2;
-
-          // This is the colour of the brush.
-          graphic.setFill(Color.BLACK);
-          graphic.fillOval(x, y, size, size);
-        });
+    onBlackSelected();
 
     model = new DoodlePrediction();
   }
@@ -171,6 +158,8 @@ public class CanvasController {
     paneButtons.setDisable(true);
 
     currentUser.setWord(randomCategory); // Add to user word history
+
+    isStartPredictions = false;
   }
 
   /**
@@ -209,14 +198,14 @@ public class CanvasController {
     // update label for losses
     lblLosses.setText("" + currentUser.getTotalLoss());
     // update label for quickest win
-    if(currentUser.getQuickestWin() == 100){
+    if (currentUser.getQuickestWin() == 100) {
       lblQuickestWin.setText("N/A");
-    }else{
-      lblQuickestWin.setText(""+ currentUser.getQuickestWin() + "s");
+    } else {
+      lblQuickestWin.setText("" + currentUser.getQuickestWin() + "s");
     }
 
     // update label for word history
-    if(lblWordHistory != null){
+    if (lblWordHistory != null) {
       lblWordHistory.setText(currentUser.getWordHistory().toString());
     }
 
@@ -279,13 +268,13 @@ public class CanvasController {
     // Stop the timer
     timeline.stop();
 
-    //UpdateStats
+    // UpdateStats
 
     if (isWin) {
       gameoverString = "Congratulations! You WON!";
       currentUser.updateWin();
-      if((DEFAULT_SECONDS-secondsLeft) < currentUser.getQuickestWin()){
-        currentUser.setQuickestWin(DEFAULT_SECONDS-secondsLeft);
+      if ((DEFAULT_SECONDS - secondsLeft) < currentUser.getQuickestWin()) {
+        currentUser.setQuickestWin(DEFAULT_SECONDS - secondsLeft);
       }
     } else {
       gameoverString = "Sorry, better luck next time.";
@@ -505,6 +494,7 @@ public class CanvasController {
 
     canvas.setOnMouseDragged(
         e -> {
+          isStartPredictions = true;
           // Brush size (you can change this, it should not be too small or too large).
           final double size = 12.0;
 
