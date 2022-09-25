@@ -35,6 +35,14 @@
     -fx-stroke-width: 5px;
 }
 
+.toggleButtonCircle {
+    -fx-background-color: transparent;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+
+
+}
+
 .predictionsText {
     -fx-font-family: "Consolas";
     -fx-font-size: 20px;

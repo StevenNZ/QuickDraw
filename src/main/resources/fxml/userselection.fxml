@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -25,41 +28,53 @@
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="113.0" layoutX="212.0" layoutY="52.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="852.0" />
 
-      <Pane fx:id="paneUserCreation" layoutX="253.0" layoutY="193.0" prefHeight="469.0" prefWidth="770.0" visible="false">
+      <Pane fx:id="paneUserCreation" layoutX="32.0" layoutY="12.0" prefHeight="687.0" prefWidth="1215.0" visible="false">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="68.0" layoutX="14.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="124.0" />
-            <Text layoutX="35.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Name:" wrappingWidth="95.9814453125" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="68.0" layoutX="151.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="598.0" />
-            <TextField fx:id="textFieldName" layoutX="167.0" layoutY="27.0" prefHeight="45.0" prefWidth="565.0" styleClass="predictionsText" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="360.0" layoutX="13.0" layoutY="98.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="410.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="59.0" layoutX="437.0" layoutY="98.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="312.0" />
-            <Text layoutX="450.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Draw an icon that represents you!" wrappingWidth="292.0" />
-            <Button layoutX="441.0" layoutY="415.0" mnemonicParsing="false" onAction="#onSaveProfile" prefHeight="40.0" prefWidth="312.0" text="Save Profile" />
-            <Canvas fx:id="canvasUser" height="350.0" layoutX="17.0" layoutY="103.0" width="400.0" />
-            <Circle fx:id="circleBlackPen1" fill="WHITE" layoutX="478.0" layoutY="210.0" onMouseClicked="#onBlackSelected" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
-            <ImageView fx:id="penBlack1" fitHeight="45.0" fitWidth="49.0" layoutX="454.0" layoutY="188.0" onMouseClicked="#onBlackSelected">
-
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="68.0" layoutX="239.0" layoutY="180.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="124.0" />
+            <Circle fx:id="circlePen" fill="DODGERBLUE" layoutX="702.0" layoutY="376.0" radius="37.0" stroke="BLACK" strokeType="INSIDE" styleClass="iconCircle" />
+            <Circle fx:id="circleEraser" fill="DODGERBLUE" layoutX="792.0" layoutY="376.0" radius="37.0" stroke="BLACK" strokeType="INSIDE" styleClass="iconCircle" />
+            <Text layoutX="260.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Name:" wrappingWidth="95.9814453125" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="68.0" layoutX="376.0" layoutY="180.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="598.0" />
+            <TextField fx:id="textFieldName" layoutX="392.0" layoutY="191.0" prefHeight="45.0" prefWidth="565.0" styleClass="predictionsText" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="360.0" layoutX="238.0" layoutY="262.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="410.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="59.0" layoutX="662.0" layoutY="262.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="312.0" />
+            <Text layoutX="675.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Draw an icon that represents you!" wrappingWidth="292.0" />
+            <Button layoutX="666.0" layoutY="579.0" mnemonicParsing="false" onAction="#onSaveProfile" prefHeight="40.0" prefWidth="312.0" text="Save Profile" />
+            <Canvas fx:id="canvasUser" height="350.0" layoutX="242.0" layoutY="267.0" width="400.0" />
+            <Button layoutX="45.0" layoutY="30.0" mnemonicParsing="false" onAction="#onBackUserCreation" style="-fx-background-color: white;" text="Back">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="penBlack" fitHeight="45.0" fitWidth="49.0" layoutX="678.0" layoutY="352.0" pickOnBounds="true">
+      
                <image>
                   <Image url="@../images/pen-removebg-preview.png" />
                </image>
             </ImageView>
-
-            <Circle fx:id="circleEraser" fill="WHITE" layoutX="568.0" layoutY="210.0" onMouseClicked="#onEraserSelected" radius="36.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
-            <ImageView fx:id="eraser" fitHeight="45.0" fitWidth="49.0" layoutX="544.0" layoutY="188.0" onMouseClicked="#onEraserSelected">
+            <ImageView fx:id="eraser" fitHeight="45.0" fitWidth="49.0" layoutX="768.0" layoutY="353.0">
 
                <image>
                   <Image url="@../images/eraser.png" />
                </image>
             </ImageView>
-            <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="618.0" layoutY="188.0" mnemonicParsing="false" onAction="#onClear" prefHeight="45.0" prefWidth="124.0" style="-fx-background-color: #faa504;" styleClass="body" text="Clear" textAlignment="CENTER">
+            <ToggleButton fx:id="toggleEraser" layoutX="756.0" layoutY="339.0" mnemonicParsing="false" onAction="#onEraserSelected" prefHeight="72.0" prefWidth="72.0" styleClass="toggleButtonCircle">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <toggleGroup>
+                  <ToggleGroup fx:id="drawTools" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton fx:id="togglePen" contentDisplay="CENTER" layoutX="666.0" layoutY="340.0" mnemonicParsing="false" onAction="#onPenSelected" prefHeight="72.0" prefWidth="72.0" selected="true" styleClass="toggleButtonCircle" toggleGroup="$drawTools">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="843.0" layoutY="352.0" mnemonicParsing="false" onAction="#onClear" prefHeight="45.0" prefWidth="124.0" style="-fx-background-color: #faa504;" styleClass="body" text="Clear" textAlignment="CENTER">
 
                <font>
                   <Font name="Consolas" size="22.0" />
-               </font>
-            </Button>
-            <Button layoutX="45.0" layoutY="30.0" mnemonicParsing="false" onAction="#onBackUserCreation" style="-fx-background-color: white;" text="Back">
-               <font>
-                  <Font size="22.0" />
                </font>
             </Button>
          </children>
@@ -164,8 +179,8 @@
                </children>
             </GridPane>
             <Button fx:id="btnGuest" layoutX="458.0" layoutY="443.0" mnemonicParsing="false" onAction="#onStartCanvas" prefHeight="68.0" prefWidth="280.0" text="Play as Guest" />
-            <Circle fx:id="circleBlackPen" fill="WHITE" layoutX="1161.0" layoutY="477.0" onMouseClicked="#onBlackSelected" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" visible="false" />
-            <ImageView fx:id="penBlack" fitHeight="45.0" fitWidth="49.0" layoutX="1137.0" layoutY="455.0" onMouseClicked="#onBlackSelected" visible="false">
+            <Circle fx:id="circleBlackPen" fill="WHITE" layoutX="1161.0" layoutY="477.0" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" visible="false" />
+            <ImageView fx:id="penBlack" fitHeight="45.0" fitWidth="49.0" layoutX="1137.0" layoutY="455.0" visible="false">
                <image>
                   <Image url="@../images/pen-removebg-preview.png" />
                </image>
