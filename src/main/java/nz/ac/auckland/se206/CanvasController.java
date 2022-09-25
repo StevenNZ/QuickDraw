@@ -132,19 +132,7 @@ public class CanvasController {
 
     graphic = canvas.getGraphicsContext2D();
 
-    canvas.setOnMouseDragged(
-        e -> {
-          isStartPredictions = true;
-          // Brush size (you can change this, it should not be too small or too large).
-          final double size = 12.0;
-
-          final double x = e.getX() - size / 2;
-          final double y = e.getY() - size / 2;
-
-          // This is the colour of the brush.
-          graphic.setFill(Color.BLACK);
-          graphic.fillOval(x, y, size, size);
-        });
+    onBlackSelected();
 
     model = new DoodlePrediction();
   }
