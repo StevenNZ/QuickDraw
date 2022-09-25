@@ -1,6 +1,6 @@
 package nz.ac.auckland.se206;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
