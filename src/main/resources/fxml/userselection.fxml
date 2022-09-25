@@ -84,9 +84,9 @@
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
                         <Pane fx:id="panePlayer1" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <Rectangle fx:id="rectUser1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" onMouseClicked="#onStartCanvas" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
                               <ImageView fx:id="imageUser1" fitHeight="156.0" fitWidth="178.0" layoutX="64.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-                              <Text fx:id="txtPlayer1" layoutX="40.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 1" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                              <Text fx:id="txtPlayer1" layoutX="40.0" layoutY="36.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 1" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
                      </children>
@@ -98,9 +98,9 @@
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
                         <Pane fx:id="panePlayer2" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="36.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <Rectangle fx:id="rectUser2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="36.0" layoutY="-1.0" onMouseClicked="#onStartCanvas" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
                               <ImageView fx:id="imageUser2" fitHeight="156.0" fitWidth="178.0" layoutX="65.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-                              <Text fx:id="txtPlayer2" layoutX="41.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 2" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                              <Text fx:id="txtPlayer2" layoutX="41.0" layoutY="36.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 2" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
                      </children>
@@ -112,9 +112,9 @@
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
                         <Pane fx:id="panePlayer3" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="39.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <Rectangle fx:id="rectUser3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="39.0" layoutY="-1.0" onMouseClicked="#onStartCanvas" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
                               <ImageView fx:id="imageUser3" fitHeight="156.0" fitWidth="178.0" layoutX="68.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-                              <Text fx:id="txtPlayer3" layoutX="45.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 3" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                              <Text fx:id="txtPlayer3" layoutX="45.0" layoutY="36.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 3" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
                      </children>
@@ -126,9 +126,9 @@
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
                         <Pane fx:id="panePlayer4" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <Rectangle fx:id="rectUser4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" onMouseClicked="#onStartCanvas" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
                               <ImageView fx:id="imageUser4" fitHeight="156.0" fitWidth="178.0" layoutX="63.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-                              <Text fx:id="txtPlayer4" layoutX="40.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 4" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                              <Text fx:id="txtPlayer4" layoutX="40.0" layoutY="36.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 4" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
                      </children>
@@ -140,9 +140,9 @@
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="3.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
                         <Pane fx:id="panePlayer5" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <Rectangle fx:id="rectUser5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="35.0" layoutY="-1.0" onMouseClicked="#onStartCanvas" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
                               <ImageView fx:id="imageUser5" fitHeight="156.0" fitWidth="178.0" layoutX="65.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-                              <Text fx:id="txtPlayer5" layoutX="40.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 5" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                              <Text fx:id="txtPlayer5" layoutX="40.0" layoutY="36.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 5" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
                      </children>
@@ -154,9 +154,9 @@
                         <Line endX="193.0" endY="104.0" layoutX="-8.0" layoutY="2.0" onMouseClicked="#onCreateProfile" startX="126.0" startY="104.0" styleClass="iconCircle" />
                         <Pane fx:id="panePlayer6" prefHeight="214.0" prefWidth="307.0" visible="false">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="39.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+                              <Rectangle fx:id="rectUser6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="207.0" layoutX="39.0" layoutY="-1.0" onMouseClicked="#onStartCanvas" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
                               <ImageView fx:id="imageUser6" fitHeight="156.0" fitWidth="178.0" layoutX="68.0" layoutY="44.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-                              <Text fx:id="txtPlayer6" layoutX="45.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 6" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+                              <Text fx:id="txtPlayer6" layoutX="45.0" layoutY="36.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player 6" textAlignment="CENTER" wrappingWidth="224.9814453125" />
                            </children>
                         </Pane>
                      </children>
