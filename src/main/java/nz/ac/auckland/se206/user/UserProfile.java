@@ -1,17 +1,16 @@
 package nz.ac.auckland.se206.user;
 
 import com.opencsv.exceptions.CsvValidationException;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import nz.ac.auckland.se206.CategorySelector;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.CategorySelector;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 
 public class UserProfile {
   public static int currentUser = 0;
@@ -80,26 +79,26 @@ public class UserProfile {
     return profilePic;
   }
 
-  public int getQuickestWin(){
+  public int getQuickestWin() {
     return quickestWin;
   }
 
-
-  public StringBuilder getWordHistory(){
+  public StringBuilder getWordHistory() {
     StringBuilder sb = new StringBuilder();
     int i = 1;
     // Build a string with all the top 10 predictions from the ml api
     for (String word : wordHistory) {
-        sb.append(word + "  ");
+      sb.append(word + "  ");
 
-        i++;
-      }
+      i++;
+    }
     return sb;
   }
 
-  public void setQuickestWin(int newQuickest){
+  public void setQuickestWin(int newQuickest) {
     this.quickestWin = newQuickest;
   }
+
   public void setProfilePic(Image profilePic) {
     this.profilePic = profilePic;
   }
@@ -159,6 +158,7 @@ public class UserProfile {
     easyWords = CategorySelector.getEasyWords(); // All easy words
 
     for (String category : easyWords) { // For each easy word
+      Found = false;
       for (String playedCategory : this.wordHistory) {
         if (category.equals(playedCategory)) { // Check if already played
           Found = true;
