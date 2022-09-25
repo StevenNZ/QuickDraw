@@ -1,6 +1,6 @@
 package nz.ac.auckland.se206;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +24,7 @@ import nz.ac.auckland.se206.user.UserProfile;
 
 public class UserSelectionController {
 
+  public static final UserProfile[] users = new UserProfile[7];
   @FXML private Pane paneUserProfile;
   @FXML private Pane paneUserCreation;
   @FXML private TextField textFieldName;
@@ -46,18 +47,17 @@ public class UserSelectionController {
   private ImageView currentImageView;
   private Text currentNameLabel;
   private GraphicsContext graphic;
-  public static final UserProfile[] users = new UserProfile[7];
 
   @FXML
   public void initialize() {
     users[0] = new UserProfile("Guest");
 
-    //Check whether use Profiles already exist
+    // Check whether use Profiles already exist
     for (int i = 1; i < 7; i++) {
       UserProfile.currentUser = i;
       users[i] = new UserProfile();
-      if(!users[i].getName().equals("")){
-        getProfileById("paneNewUser"+i);
+      if (!users[i].getName().equals("")) {
+        getProfileById("paneNewUser" + i);
         users[i].setImageView(currentImageView);
         displayProfilePic(i);
         displayName(i);
@@ -72,7 +72,7 @@ public class UserSelectionController {
         ((Node) event.getSource()).getId().equals("btnGuest")
             ? ((Node) event.getSource()).getParent().getId()
             : ((Node) event.getSource()).getParent().getParent().getId();
-
+    // checks for parent of event source
     UserProfile.currentUser = getProfileById(id);
     Node node = (Node) event.getSource();
     Scene sceneOfNode = node.getScene();
@@ -80,7 +80,7 @@ public class UserSelectionController {
   }
 
   private SceneManager.AppUi getNewRoot(int id) {
-    switch (id) {
+    switch (id) { // returns the canvas for corresponding ID
       case 1:
         return SceneManager.AppUi.CANVAS_PLAYER1;
       case 2:
@@ -124,7 +124,7 @@ public class UserSelectionController {
 
   private int getProfileById(String id) {
 
-    switch (id) {
+    switch (id) { // returns current user index as well as it's imageView and label
       case "paneNewUser1":
         currentImageView = imageUser1;
         currentNameLabel = txtPlayer1;
@@ -150,7 +150,7 @@ public class UserSelectionController {
         currentNameLabel = txtPlayer6;
         return 6;
       default:
-        return 0;
+        return 0; // defaults guest
     }
   }
 
@@ -162,7 +162,7 @@ public class UserSelectionController {
     saveProfilePic();
     displayProfilePic(UserProfile.currentUser);
     displayName(UserProfile.currentUser);
-    users[UserProfile.currentUser].saveUserData();
+    users[UserProfile.currentUser].saveUserData(); // save user created into local file
     clearUserCreation();
   }
 
@@ -184,7 +184,6 @@ public class UserSelectionController {
         new Image(new FileInputStream(profilePicFile)); // gets image of the file of drawing
     users[UserProfile.currentUser].setProfilePic(
         profilePicImage); // stores image as an instance variable
-
   }
 
   private void displayProfilePic(int currentUser) {

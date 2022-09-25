@@ -66,8 +66,6 @@ public class DoodlePrediction {
 
       i++;
     }
-
-    //  System.out.println(sb);
   }
 
   private final ZooModel<Image, Classifications> model;

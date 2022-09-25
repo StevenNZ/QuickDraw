@@ -5,6 +5,7 @@ import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
 import ai.djl.ModelException;
 import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
+import java.awt.Graphics2D;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -464,8 +465,6 @@ public class CanvasController {
     boxBlue.setOpacity(0.5);
     // Set all other box strokes to black
     boxRed.setOpacity(1);
-    // boxBlack.setOpacity(1);
-    // boxEraser.setOpacity(1);
 
     canvas.setOnMouseDragged(
         e -> {
@@ -490,7 +489,6 @@ public class CanvasController {
     eraser.setOpacity(1.0);
     boxBlue.setOpacity(1);
     boxRed.setOpacity(1);
-    // circleEraser.setOpacity(1);
 
     canvas.setOnMouseDragged(
         e -> {
