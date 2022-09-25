@@ -158,6 +158,8 @@ public class CanvasController {
     paneButtons.setDisable(true);
 
     currentUser.setWord(randomCategory); // Add to user word history
+
+    isStartPredictions = false;
   }
 
   /**
