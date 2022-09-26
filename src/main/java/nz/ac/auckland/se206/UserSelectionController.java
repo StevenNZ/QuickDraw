@@ -13,11 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Text;
 import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.user.UserProfile;
@@ -30,7 +32,7 @@ public class UserSelectionController {
   @FXML private TextField textFieldName;
   @FXML private Canvas canvasUser;
   @FXML private Circle circleEraser;
-  @FXML private Circle circleBlackPen1;
+  @FXML private Circle circlePen;
   @FXML private ImageView imageUser1;
   @FXML private ImageView imageUser2;
   @FXML private ImageView imageUser3;
@@ -43,7 +45,8 @@ public class UserSelectionController {
   @FXML private Text txtPlayer4;
   @FXML private Text txtPlayer5;
   @FXML private Text txtPlayer6;
-
+  @FXML private ToggleButton togglePen;
+  @FXML private ToggleButton toggleEraser;
   private ImageView currentImageView;
   private Text currentNameLabel;
   private GraphicsContext graphic;
@@ -52,7 +55,8 @@ public class UserSelectionController {
   public void initialize() {
     users[0] = new UserProfile("Guest");
 
-    // Check whether use Profiles already exist
+    // Check whether user Profiles already exist
+
     for (int i = 1; i < 7; i++) {
       UserProfile.currentUser = i;
       users[i] = new UserProfile();
@@ -63,7 +67,49 @@ public class UserSelectionController {
         displayName(i);
       }
     }
-    // this is where we store user profiles
+
+    graphic = canvasUser.getGraphicsContext2D();
+    graphic.setLineWidth(8);
+    graphic.setLineCap(StrokeLineCap.ROUND);
+    circlePen.setOpacity(0.5);
+
+    canvasUser.setOnMousePressed(
+        e -> {
+          if (togglePen.isSelected()) {
+            graphic.setStroke(Color.BLACK);
+            graphic.beginPath();
+            graphic.lineTo(e.getX(), e.getY());
+
+          } else if (toggleEraser.isSelected()) {
+            double lineWidth = graphic.getLineWidth();
+            graphic.clearRect(
+                e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
+          }
+        });
+    canvasUser.setOnMouseDragged(
+        e -> {
+          if (togglePen.isSelected()) {
+            graphic.lineTo(e.getX(), e.getY());
+            graphic.stroke();
+          } else if (toggleEraser.isSelected()) {
+            double lineWidth = graphic.getLineWidth();
+            graphic.clearRect(
+                e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
+          }
+        });
+
+    canvasUser.setOnMouseReleased(
+        e -> {
+          if (togglePen.isSelected()) {
+            graphic.lineTo(e.getX(), e.getY());
+            graphic.stroke();
+            graphic.closePath();
+          } else if (toggleEraser.isSelected()) {
+            double lineWidth = graphic.getLineWidth();
+            graphic.clearRect(
+                e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
+          }
+        });
   }
 
   @FXML
@@ -103,20 +149,6 @@ public class UserSelectionController {
   private void onCreateProfile(Event event) {
     String id = ((Node) event.getSource()).getParent().getId();
     UserProfile.currentUser = getProfileById(id);
-    graphic = canvasUser.getGraphicsContext2D();
-
-    canvasUser.setOnMouseDragged(
-        e -> {
-          // Brush size (you can change this, it should not be too small or too large).
-          final double size = 12.0;
-
-          final double x = e.getX() - size / 2;
-          final double y = e.getY() - size / 2;
-
-          // This is the colour of the brush.
-          graphic.setFill(Color.BLACK);
-          graphic.fillOval(x, y, size, size);
-        });
 
     paneUserProfile.setVisible(false);
     paneUserCreation.setVisible(true);
@@ -216,43 +248,6 @@ public class UserSelectionController {
   }
 
   @FXML
-  private void onBlackSelected() {
-    circleEraser.setOpacity(1);
-    circleBlackPen1.setOpacity(0.5);
-
-    canvasUser.setOnMouseDragged(
-        e -> {
-          // Brush size (you can change this, it should not be too small or too large).
-          final double size = 12.0;
-
-          final double x = e.getX() - size / 2;
-          final double y = e.getY() - size / 2;
-
-          // This is the colour of the brush.
-          graphic.setFill(Color.BLACK);
-          graphic.fillOval(x, y, size, size);
-        });
-  }
-
-  @FXML
-  private void onEraserSelected() {
-    circleEraser.setOpacity(0.5);
-    circleBlackPen1.setOpacity(1);
-
-    canvasUser.setOnMouseDragged(
-        e -> {
-          // Brush size (you can change this, it should not be too small or too large).
-          final double size = 12.0;
-
-          final double x = e.getX() - size / 2;
-          final double y = e.getY() - size / 2;
-
-          // This is the colour of the brush.
-          graphic.clearRect(x, y, size, size);
-        });
-  }
-
-  @FXML
   private void onClear() {
     graphic.clearRect(0, 0, canvasUser.getWidth(), canvasUser.getHeight());
   }
@@ -260,6 +255,18 @@ public class UserSelectionController {
   @FXML
   private void onBackUserCreation() {
     clearUserCreation();
+  }
+
+  @FXML
+  private void onPenSelected() {
+    circleEraser.setOpacity(1);
+    circlePen.setOpacity(0.5);
+  }
+
+  @FXML
+  private void onEraserSelected() {
+    circlePen.setOpacity(1);
+    circleEraser.setOpacity(0.5);
   }
 
   private void clearUserCreation() {

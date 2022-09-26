@@ -5,7 +5,6 @@ import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
 import ai.djl.ModelException;
 import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
-import java.awt.*;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -28,12 +27,13 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -56,8 +56,6 @@ import nz.ac.auckland.se206.user.UserProfile;
  */
 public class CanvasController {
   private static final int DEFAULT_SECONDS = 60;
-  @FXML private ImageView penBlack;
-  @FXML private ImageView eraser;
   @FXML private Button btnSaveDrawing;
   @FXML private Button btnStartTimer;
   @FXML private Canvas canvas;
@@ -77,11 +75,14 @@ public class CanvasController {
   @FXML private Button btnStats;
   @FXML private Button btnReturnCanvas;
   @FXML private Circle circleEraser;
+  @FXML private Circle circlePen;
   @FXML private Rectangle boxBlue;
   @FXML private Rectangle boxRed;
   @FXML private Pane paneButtons;
   @FXML private Pane paneCanvas;
   @FXML private Pane paneStats;
+  @FXML private ToggleButton togglePen;
+  @FXML private ToggleButton toggleEraser;
   private GraphicsContext graphic;
   private DoodlePrediction model;
   protected HashMap<String, ArrayList<String>> categories = new HashMap<>();
@@ -134,8 +135,49 @@ public class CanvasController {
     lblCategoryTxt.setText(this.randomCategory);
 
     graphic = canvas.getGraphicsContext2D();
+    graphic.setLineWidth(8);
+    graphic.setLineCap(StrokeLineCap.ROUND);
+    circlePen.setOpacity(0.5);
 
-    onBlackSelected();
+
+    canvas.setOnMousePressed(
+        e -> {
+          isStartPredictions = true;
+          if (togglePen.isSelected()) {
+            graphic.setStroke(Color.BLACK);
+            graphic.beginPath();
+            graphic.lineTo(e.getX(), e.getY());
+
+          } else if (toggleEraser.isSelected()) {
+            double lineWidth = graphic.getLineWidth();
+            graphic.clearRect(
+                e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
+          }
+        });
+    canvas.setOnMouseDragged(
+        e -> {
+          if (togglePen.isSelected()) {
+            graphic.lineTo(e.getX(), e.getY());
+            graphic.stroke();
+          } else if (toggleEraser.isSelected()) {
+            double lineWidth = graphic.getLineWidth();
+            graphic.clearRect(
+                e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
+          }
+        });
+
+    canvas.setOnMouseReleased(
+        e -> {
+          if (togglePen.isSelected()) {
+            graphic.lineTo(e.getX(), e.getY());
+            graphic.stroke();
+            graphic.closePath();
+          } else if (toggleEraser.isSelected()) {
+            double lineWidth = graphic.getLineWidth();
+            graphic.clearRect(
+                e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
+          }
+        });
 
     model = new DoodlePrediction();
   }
@@ -387,160 +429,19 @@ public class CanvasController {
     return imageBinary;
   }
 
-  /**
-   * Save the current snapshot on a bitmap file.
-   *
-   * @return The file of the saved image.
-   * @throws IOException If the image cannot be saved.
-   */
-  private File saveCurrentSnapshotOnFile() throws IOException {
-    // You can change the location as you see fit.
-    final File tmpFolder = new File("tmp");
 
-    if (!tmpFolder.exists()) {
-      tmpFolder.mkdir();
-    }
-
-    // We save the image to a file in the tmp folder.
-    final File imageToClassify =
-        new File(tmpFolder.getName() + "/snapshot" + System.currentTimeMillis() + ".bmp");
-
-    // Save the image to a file.
-    ImageIO.write(getCurrentSnapshot(), "bmp", imageToClassify);
-
-    return imageToClassify;
-  }
-
-  /**
-   * Takes all categories from the "category_difficulty.csv" file and places them into ArrayLists in
-   * the hashmap depending on their perceived difficulty in the second column
-   *
-   * @throws IOException if file cannot be found
-   */
-  private void processDataFromFile() throws IOException {
-    String splitBy = ",";
-    String line;
-    String[] splitColumns;
-    BufferedReader bufferedReader =
-        new BufferedReader(new FileReader("./src/main/resources/category_difficulty.csv"));
-    while ((line = bufferedReader.readLine()) != null) {
-      // Split the columns
-      splitColumns = line.split(splitBy);
-      categories.computeIfAbsent(splitColumns[1], k -> new ArrayList<>()).add(splitColumns[0]);
-    }
-  }
-
-  /** Randomly choose a category based on level difficulty */
-  private void generateRandomCategory() {
-    // Initialise random
-    Random rand = new Random();
-    String category;
-    int randomIndex;
-    // LEVEL EASY
-
-    // Get number of easy categories
-    randomIndex = rand.nextInt(categories.get("E").size());
-    category = categories.get("E").get(randomIndex);
-
-    this.randomCategory = category;
-  }
-  // TODO: tidy this up so that there are subclasses for selecting paint colours.
-  // Currently the colours are not in use as they are not needed until Zen mode.
-  // Ideas:
-  // Could use reflector to chose rectangles.
-  /** This method is called when the Red block is clicked and changes the pen colour to red */
-  @FXML
-  private void onRedSelected() {
-    // Set colour selected to gray
-    boxRed.setOpacity(0.5);
-    // Set all other box strokes to black
-    boxBlue.setOpacity(1);
-    // Black box removed
-    circleEraser.setOpacity(1);
-    // Change brush colour
-    canvas.setOnMouseDragged(
-        e -> {
-          // Brush size (you can change this, it should not be too small or too large).
-          final double size = 12.0;
-
-          final double x = e.getX() - size / 2;
-          final double y = e.getY() - size / 2;
-
-          // This is the colour of the brush.
-          graphic.setFill(Color.RED);
-          graphic.fillOval(x, y, size, size);
-        });
-  }
-  /** This method is called when the blue block is clicked and changes the pen colour to blue */
-  @FXML
-  private void onBlueSelected() {
-
-    // Set colour selected to gray
-    boxBlue.setOpacity(0.5);
-    // Set all other box strokes to black
-    boxRed.setOpacity(1);
-
-    canvas.setOnMouseDragged(
-        e -> {
-          // Brush size (you can change this, it should not be too small or too large).
-          final double size = 12.0;
-
-          final double x = e.getX() - size / 2;
-          final double y = e.getY() - size / 2;
-
-          // This is the colour of the brush.
-          graphic.setFill(Color.BLUE);
-          graphic.fillOval(x, y, size, size);
-        });
-  }
   /** This method is called when the black block is clicked and changes the pen colour to black */
   @FXML
-  private void onBlackSelected() {
-
-    // Set colour selected to half opacity
-    penBlack.setOpacity(0.5);
-    // Set all other box strokes to black
-    eraser.setOpacity(1.0);
-    boxBlue.setOpacity(1);
-    boxRed.setOpacity(1);
-
-    canvas.setOnMouseDragged(
-        e -> {
-          isStartPredictions = true;
-          // Brush size (you can change this, it should not be too small or too large).
-          final double size = 12.0;
-
-          final double x = e.getX() - size / 2;
-          final double y = e.getY() - size / 2;
-
-          // This is the colour of the brush.
-          graphic.setFill(Color.BLACK);
-          graphic.fillOval(x, y, size, size);
-        });
+  private void onPenSelected() {
+    circleEraser.setOpacity(1);
+    circlePen.setOpacity(0.5);
   }
 
   /** This method is called when the black block is clicked and changes the pen colour to black */
   @FXML
   private void onEraserSelected() {
-    // Set colour selected to gray
-    eraser.setOpacity(0.5);
-
-    // Set all other box strokes to black
-    boxBlue.setOpacity(1);
-    boxRed.setOpacity(1);
-    penBlack.setOpacity(1.0);
-
-    canvas.setOnMouseDragged(
-        e -> {
-          // Brush size (you can change this, it should not be too small or too large).
-          final double size = 12.0;
-
-          final double x = e.getX() - size / 2;
-          final double y = e.getY() - size / 2;
-
-          // This is the colour of the brush.
-          graphic.clearRect(x, y, size, size);
-        });
+    circlePen.setOpacity(1);
+    circleEraser.setOpacity(0.5);
   }
 
   /** This method is called when the back button is called and changes scene to main menu */
