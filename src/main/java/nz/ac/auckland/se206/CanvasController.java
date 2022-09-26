@@ -1,7 +1,5 @@
 package nz.ac.auckland.se206;
 
-import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
-
 import ai.djl.ModelException;
 import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
@@ -24,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -41,7 +40,7 @@ import nz.ac.auckland.se206.user.UserProfile;
  * FXML file as you see fit. For example, you might no longer need the "Predict" button because the
  * DL model should be automatically queried in the background every second.
  *
- * <p>!! IMPORTANT !!
+ * <p>IMPORTANT
  *
  * <p>Although we added the scale of the image, you need to be careful when changing the size of the
  * drawable canvas and the brush size. If you make the brush too big or too small with respect to
@@ -126,7 +125,7 @@ public class CanvasController {
     lblCategoryTxt.setText(this.randomCategory);
 
     graphic = canvas.getGraphicsContext2D();
-    graphic.setLineWidth(8);
+    graphic.setLineWidth(10);
     graphic.setLineCap(StrokeLineCap.ROUND);
     circlePen.setOpacity(0.5);
 
@@ -137,10 +136,8 @@ public class CanvasController {
             graphic.setStroke(Color.BLACK);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
-          } else if (toggleEraser.isSelected()) { // eraser settings
-            final double lineWidth = graphic.getLineWidth();
-            graphic.clearRect(
-                e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
+          } else if (toggleEraser.isSelected()) {
+            erasing(e);
           }
         });
     canvas.setOnMouseDragged(
@@ -150,9 +147,7 @@ public class CanvasController {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
           } else if (toggleEraser.isSelected() && isStartPredictions) {
-            final double lineWidth = graphic.getLineWidth();
-            graphic.clearRect(
-                e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
+            erasing(e);
           }
         });
 
@@ -163,9 +158,7 @@ public class CanvasController {
             graphic.stroke();
             graphic.closePath();
           } else if (toggleEraser.isSelected() && isStartPredictions) {
-            final double lineWidth = graphic.getLineWidth();
-            graphic.clearRect(
-                e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
+            erasing(e);
           }
         });
 
@@ -198,19 +191,14 @@ public class CanvasController {
   }
 
   /**
-   * This method executes when the user clicks the "Predict" button. It gets the current drawing,
-   * queries the DL model and prints on the console the top 5 predictions of the DL model and the
-   * elapsed time of the prediction in milliseconds.
+   * This method executes gets the current drawing, queries the DL model and prints on the console
+   * the top 5 predictions of the DL model and the elapsed time of the prediction in milliseconds.
    *
    * @throws TranslateException If there is an error in reading the input/output of the DL model.
    */
-  @FXML
   private void onPredict() throws TranslateException {
     List<Classifications.Classification> predictions =
         model.getPredictions(getCurrentSnapshot(), 10);
-    // final long start = System.currentTimeMillis();
-
-    printPredictions(predictions);
 
     lblTopTenGuesses.setText(getStringOfPredictions(predictions).toString());
 
@@ -258,10 +246,13 @@ public class CanvasController {
 
   @FXML
   private void onBackToCanvas() {
-    btnStats.setDisable(false); // adjusting node properties via disable and visible
+    // Shows the View Statistics
+    btnStats.setDisable(false);
     btnStats.setVisible(true);
+    // Hides the Back to Canvas button
     btnReturnCanvas.setVisible(false);
     btnReturnCanvas.setDisable(true);
+    // Toggles the statistics panes
     paneStats.setDisable(true);
     paneStats.setVisible(false);
     paneCanvas.setDisable(false);
@@ -291,12 +282,15 @@ public class CanvasController {
     reset();
   }
 
+  /**
+   * When the game ends, true or false is passed - Reads a congrats or loss message in text to
+   * speech - Updates statistics - Stop the timer - Switch panes
+   */
   private void onGameEnd(boolean isWin) {
     // Stop the timer
     timeline.stop();
 
     // UpdateStats
-
     if (isWin) {
       gameoverString = "Congratulations! You WON!";
       currentUser.updateWin();
@@ -323,6 +317,16 @@ public class CanvasController {
     paneButtons.setDisable(false);
 
     callTextToSpeech();
+  }
+
+  /**
+   * When in eraser mode, clear rectangles based on the where the mouse is on the canvas
+   *
+   * @param e - MouseEvent (where the mouse has clicked)
+   */
+  private void erasing(MouseEvent e) {
+    final double size = graphic.getLineWidth() * 1.2;
+    graphic.clearRect(e.getX() - size / 2, e.getY() - size / 2, size, size);
   }
 
   private void callTextToSpeech() {
@@ -415,14 +419,20 @@ public class CanvasController {
     return imageBinary;
   }
 
-  /** This method is called when the black block is clicked and changes the pen colour to black */
+  /**
+   * Indicates to the user that the pen has been selected This method is called when the eraser
+   * toggle button is pressed and makes the pen's circle at half opacity
+   */
   @FXML
   private void onPenSelected() {
     circleEraser.setOpacity(1);
     circlePen.setOpacity(0.5);
   }
 
-  /** This method is called when the black block is clicked and changes the pen colour to black */
+  /**
+   * Indicates to the user that the eraser has been selected This method is called when the eraser
+   * toggle button is pressed and makes the eraser's circle at half opacity
+   */
   @FXML
   private void onEraserSelected() {
     circlePen.setOpacity(1);
