@@ -7,14 +7,9 @@ import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -32,7 +27,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -136,7 +130,6 @@ public class CanvasController {
     graphic.setLineCap(StrokeLineCap.ROUND);
     circlePen.setOpacity(0.5);
 
-
     canvas.setOnMousePressed(
         e -> {
           if (togglePen.isSelected()) {
@@ -144,8 +137,7 @@ public class CanvasController {
             graphic.setStroke(Color.BLACK);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
-          }
-          else if (toggleEraser.isSelected()) {
+          } else if (toggleEraser.isSelected()) {
             final double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
@@ -156,8 +148,7 @@ public class CanvasController {
           if (togglePen.isSelected() && isStartPredictions) {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
-          }
-          else if (toggleEraser.isSelected() && isStartPredictions) {
+          } else if (toggleEraser.isSelected() && isStartPredictions) {
             final double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
@@ -170,8 +161,7 @@ public class CanvasController {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
             graphic.closePath();
-          }
-          else if (toggleEraser.isSelected()&& isStartPredictions) {
+          } else if (toggleEraser.isSelected() && isStartPredictions) {
             final double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
@@ -217,7 +207,7 @@ public class CanvasController {
   private void onPredict() throws TranslateException {
     List<Classifications.Classification> predictions =
         model.getPredictions(getCurrentSnapshot(), 10);
-    //final long start = System.currentTimeMillis();
+    // final long start = System.currentTimeMillis();
 
     printPredictions(predictions);
 
@@ -231,9 +221,7 @@ public class CanvasController {
       if (randomCategory.equals(predictionClassName)) {
         // This is the win condition.
         isStartPredictions = false;
-        Platform.runLater(
-                () ->  onGameEnd(true));
-
+        Platform.runLater(() -> onGameEnd(true));
       }
     }
   }
@@ -344,10 +332,10 @@ public class CanvasController {
             TextToSpeech speech = new TextToSpeech();
             Stage stage = (Stage) canvas.getScene().getWindow();
             stage.setOnCloseRequest(
-                    e -> {
-                      Platform.exit();
-                      speech.terminate();
-                    });
+                e -> {
+                  Platform.exit();
+                  speech.terminate();
+                });
             speech.speak(gameoverString);
 
             return null;
@@ -427,7 +415,6 @@ public class CanvasController {
 
     return imageBinary;
   }
-
 
   /** This method is called when the black block is clicked and changes the pen colour to black */
   @FXML
