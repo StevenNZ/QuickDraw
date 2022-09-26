@@ -39,7 +39,6 @@
                   </Button>
                   <Pane layoutX="14.0" prefHeight="361.0" prefWidth="108.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="599.0" layoutX="-3.0" layoutY="2.0" stroke="#faa504" strokeWidth="5.0" visible="false" width="131.0" />
                         <Circle fx:id="circlePen" fill="WHITE" layoutX="50.0" layoutY="38.0" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <ImageView fx:id="penBlack" fitHeight="45.0" fitWidth="49.0" layoutX="26.0" layoutY="16.0">
                            <image>
@@ -57,16 +56,13 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                            <toggleGroup>
-                              <ToggleGroup fx:id="drawTools" />
+                              <ToggleGroup fx:id="canvasTools" />
                            </toggleGroup>
                         </ToggleButton>
-                        <ToggleButton fx:id="togglePen" contentDisplay="CENTER" layoutX="11.0" layoutY="-1.0" mnemonicParsing="false" onAction="#onPenSelected" prefHeight="79.0" prefWidth="79.0" selected="true" styleClass="toggleButtonCircle">
+                        <ToggleButton fx:id="togglePen" contentDisplay="CENTER" layoutX="11.0" layoutY="-1.0" mnemonicParsing="false" onAction="#onPenSelected" prefHeight="79.0" prefWidth="79.0" selected="true" styleClass="toggleButtonCircle" toggleGroup="$canvasTools">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="drawTools" />
-                           </toggleGroup>
                         </ToggleButton>
                      </children>
                   </Pane>
