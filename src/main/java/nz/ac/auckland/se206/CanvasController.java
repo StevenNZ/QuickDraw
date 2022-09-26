@@ -269,13 +269,13 @@ public class CanvasController {
 
   @FXML
   private void onSaveDrawing() throws IOException {
-    // get the current stage
-    Stage stage = (Stage) btnSaveDrawing.getScene().getWindow();
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Save Drawing");
     fileChooser.setInitialFileName(
         randomCategory.replaceAll(" ", "_")); // initially meaningful name
     fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("BMP", "*.bmp"));
+    // get the current stage
+    Stage stage = (Stage) btnSaveDrawing.getScene().getWindow();
     File file = fileChooser.showSaveDialog(stage);
     if (file != null) {
       fileChooser.setInitialDirectory(file.getParentFile()); // save the
