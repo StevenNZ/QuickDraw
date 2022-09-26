@@ -85,12 +85,9 @@ public class UserProfile {
 
   public StringBuilder getWordHistory() {
     StringBuilder sb = new StringBuilder();
-    int i = 1;
     // Build a string with all the top 10 predictions from the ml api
     for (String word : wordHistory) {
       sb.append(word + "  ");
-
-      i++;
     }
     return sb;
   }
@@ -153,12 +150,11 @@ public class UserProfile {
 
   public void initializeAvailableWords() throws CsvValidationException, IOException {
     List<String> easyWords;
-    boolean found = false;
 
     easyWords = CategorySelector.getEasyWords(); // All easy words
 
     for (String category : easyWords) { // For each easy word
-      found = false;
+      boolean found = false;
       for (String playedCategory : this.wordHistory) {
         if (category.equals(playedCategory)) { // Check if already played
           found = true;

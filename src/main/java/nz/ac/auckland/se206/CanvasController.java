@@ -7,14 +7,9 @@ import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -32,7 +27,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -118,7 +112,7 @@ public class CanvasController {
                   Platform.runLater(
                       () -> {
                         try {
-                          if (isStartPredictions) {
+                          if (isStartPredictions) { // condition for when user starts drawing
                             onPredict();
                           }
                         } catch (TranslateException ex) {
@@ -136,16 +130,14 @@ public class CanvasController {
     graphic.setLineCap(StrokeLineCap.ROUND);
     circlePen.setOpacity(0.5);
 
-
     canvas.setOnMousePressed(
         e -> {
-          if (togglePen.isSelected()) {
-            isStartPredictions = true;
+          if (togglePen.isSelected()) { // pen settings
+            isStartPredictions = true; // prediction sets to true when user draws (mouse pressed)
             graphic.setStroke(Color.BLACK);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
-          }
-          else if (toggleEraser.isSelected()) {
+          } else if (toggleEraser.isSelected()) { // eraser settings
             final double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
@@ -153,11 +145,11 @@ public class CanvasController {
         });
     canvas.setOnMouseDragged(
         e -> {
-          if (togglePen.isSelected() && isStartPredictions) {
+          if (togglePen.isSelected()
+              && isStartPredictions) { // condition to stop canvas when game ends
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
-          }
-          else if (toggleEraser.isSelected() && isStartPredictions) {
+          } else if (toggleEraser.isSelected() && isStartPredictions) {
             final double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
@@ -170,8 +162,7 @@ public class CanvasController {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
             graphic.closePath();
-          }
-          else if (toggleEraser.isSelected()&& isStartPredictions) {
+          } else if (toggleEraser.isSelected() && isStartPredictions) {
             final double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
@@ -217,7 +208,7 @@ public class CanvasController {
   private void onPredict() throws TranslateException {
     List<Classifications.Classification> predictions =
         model.getPredictions(getCurrentSnapshot(), 10);
-    //final long start = System.currentTimeMillis();
+    // final long start = System.currentTimeMillis();
 
     printPredictions(predictions);
 
@@ -231,9 +222,7 @@ public class CanvasController {
       if (randomCategory.equals(predictionClassName)) {
         // This is the win condition.
         isStartPredictions = false;
-        Platform.runLater(
-                () ->  onGameEnd(true));
-
+        Platform.runLater(() -> onGameEnd(true));
       }
     }
   }
@@ -269,7 +258,7 @@ public class CanvasController {
 
   @FXML
   private void onBackToCanvas() {
-    btnStats.setDisable(false);
+    btnStats.setDisable(false); // adjusting node properties via disable and visible
     btnStats.setVisible(true);
     btnReturnCanvas.setVisible(false);
     btnReturnCanvas.setDisable(true);
@@ -281,13 +270,13 @@ public class CanvasController {
 
   @FXML
   private void onSaveDrawing() throws IOException {
-    // get the current stage
-    Stage stage = (Stage) btnSaveDrawing.getScene().getWindow();
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Save Drawing");
     fileChooser.setInitialFileName(
         randomCategory.replaceAll(" ", "_")); // initially meaningful name
     fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("BMP", "*.bmp"));
+    // get the current stage
+    Stage stage = (Stage) btnSaveDrawing.getScene().getWindow();
     File file = fileChooser.showSaveDialog(stage);
     if (file != null) {
       fileChooser.setInitialDirectory(file.getParentFile()); // save the
@@ -337,24 +326,22 @@ public class CanvasController {
   }
 
   private void callTextToSpeech() {
-    Task<Void> textToSpeechTask =
-        new Task<Void>() {
+    Task<Void> textToSpeechTask = new Task<Void>() { // task run by a background thread
           @Override
           protected Void call() throws Exception {
             TextToSpeech speech = new TextToSpeech();
             Stage stage = (Stage) canvas.getScene().getWindow();
-            stage.setOnCloseRequest(
-                    e -> {
-                      Platform.exit();
-                      speech.terminate();
-                    });
+            stage.setOnCloseRequest( // text to speech closes upon closing GUI
+                e -> {
+                  Platform.exit();
+                  speech.terminate();
+                });
             speech.speak(gameoverString);
-
             return null;
           }
         };
     Thread textToSpeechThread =
-        new Thread(textToSpeechTask); // creating new thread for text to speech
+        new Thread(textToSpeechTask); // creating new thread for text to speech task
     textToSpeechThread.start();
   }
 
@@ -427,7 +414,6 @@ public class CanvasController {
 
     return imageBinary;
   }
-
 
   /** This method is called when the black block is clicked and changes the pen colour to black */
   @FXML

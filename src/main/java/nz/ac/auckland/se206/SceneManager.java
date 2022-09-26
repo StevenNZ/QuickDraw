@@ -15,12 +15,6 @@ public class SceneManager {
     CANVAS_PLAYER5(5),
     CANVAS_PLAYER6(6);
 
-    int appOrdinal;
-
-    AppUi(int ord) {
-      this.appOrdinal = ord;
-    }
-
     public static AppUi getAppUiEnum(int ord) {
       for (AppUi scene : AppUi.values()) {
         if (scene.appOrdinal == ord) {
@@ -28,6 +22,12 @@ public class SceneManager {
         }
       }
       return null;
+    }
+
+    private int appOrdinal;
+
+    AppUi(int ord) {
+      this.appOrdinal = ord;
     }
   }
 
