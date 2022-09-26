@@ -5,8 +5,8 @@ import static nz.ac.auckland.se206.ml.DoodlePrediction.printPredictions;
 import ai.djl.ModelException;
 import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
-import java.awt.Graphics2D;
 import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,6 +19,7 @@ import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -89,6 +90,7 @@ public class CanvasController {
   private Timeline timeline;
   private boolean isStartPredictions = false;
   private UserProfile currentUser;
+  private String gameoverString;
 
   /**
    * JavaFX calls this method once the GUI elements are loaded. In our case we create a listener for
@@ -257,15 +259,6 @@ public class CanvasController {
   }
 
   private void onGameEnd(boolean isWin) {
-    TextToSpeech textToSpeech = new TextToSpeech();
-
-    Stage stage = (Stage) canvas.getScene().getWindow();
-    stage.setOnCloseRequest(
-        e -> {
-          Platform.exit();
-          textToSpeech.terminate();
-        });
-    String gameoverString;
     // Stop the timer
     timeline.stop();
 
@@ -296,11 +289,32 @@ public class CanvasController {
     paneButtons.setVisible(true);
     paneButtons.setDisable(false);
 
-    Platform.runLater(
-        () -> {
-          // Text to speak the loss or win
-          textToSpeech.speak(gameoverString);
-        });
+    callTextToSpeech();
+  }
+
+  private void callTextToSpeech() {
+    Task<Void> textToSpeechTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            TextToSpeech speech = new TextToSpeech();
+            speech.speak(gameoverString);
+
+            Platform.runLater(
+                () -> {
+                  Stage stage = (Stage) canvas.getScene().getWindow();
+                  stage.setOnCloseRequest(
+                      e -> {
+                        Platform.exit();
+                        speech.terminate();
+                      });
+                });
+            return null;
+          }
+        };
+    Thread textToSpeechThread =
+        new Thread(textToSpeechTask); // creating new thread for text to speech
+    textToSpeechThread.start();
   }
 
   /** Reset the panes and timer */
