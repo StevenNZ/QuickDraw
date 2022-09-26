@@ -76,8 +76,6 @@ public class CanvasController {
   @FXML private Button btnReturnCanvas;
   @FXML private Circle circleEraser;
   @FXML private Circle circlePen;
-  @FXML private Rectangle boxBlue;
-  @FXML private Rectangle boxRed;
   @FXML private Pane paneButtons;
   @FXML private Pane paneCanvas;
   @FXML private Pane paneStats;
@@ -85,7 +83,6 @@ public class CanvasController {
   @FXML private ToggleButton toggleEraser;
   private GraphicsContext graphic;
   private DoodlePrediction model;
-  protected HashMap<String, ArrayList<String>> categories = new HashMap<>();
   private int secondsLeft;
   private String randomCategory;
   private Timeline timeline;
@@ -147,9 +144,9 @@ public class CanvasController {
             graphic.setStroke(Color.BLACK);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
-
-          } else if (toggleEraser.isSelected()) {
-            double lineWidth = graphic.getLineWidth();
+          }
+          else if (toggleEraser.isSelected()) {
+            final double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
           }
@@ -159,8 +156,9 @@ public class CanvasController {
           if (togglePen.isSelected()) {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
-          } else if (toggleEraser.isSelected()) {
-            double lineWidth = graphic.getLineWidth();
+          }
+          else if (toggleEraser.isSelected()) {
+            final double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
           }
@@ -172,8 +170,9 @@ public class CanvasController {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
             graphic.closePath();
-          } else if (toggleEraser.isSelected()) {
-            double lineWidth = graphic.getLineWidth();
+          }
+          else if (toggleEraser.isSelected()) {
+            final double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
           }
@@ -218,7 +217,7 @@ public class CanvasController {
   private void onPredict() throws TranslateException {
     List<Classifications.Classification> predictions =
         model.getPredictions(getCurrentSnapshot(), 10);
-    final long start = System.currentTimeMillis();
+    //final long start = System.currentTimeMillis();
 
     printPredictions(predictions);
 
@@ -231,7 +230,10 @@ public class CanvasController {
       predictionClassName = predictionClassName.replaceAll("_", " ");
       if (randomCategory.equals(predictionClassName)) {
         // This is the win condition.
-        onGameEnd(true);
+
+        Platform.runLater(
+                () ->  onGameEnd(true));
+
       }
     }
   }
@@ -340,17 +342,14 @@ public class CanvasController {
           @Override
           protected Void call() throws Exception {
             TextToSpeech speech = new TextToSpeech();
+            Stage stage = (Stage) canvas.getScene().getWindow();
+            stage.setOnCloseRequest(
+                    e -> {
+                      Platform.exit();
+                      speech.terminate();
+                    });
             speech.speak(gameoverString);
 
-            Platform.runLater(
-                () -> {
-                  Stage stage = (Stage) canvas.getScene().getWindow();
-                  stage.setOnCloseRequest(
-                      e -> {
-                        Platform.exit();
-                        speech.terminate();
-                      });
-                });
             return null;
           }
         };
