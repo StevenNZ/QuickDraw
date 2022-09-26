@@ -49,7 +49,7 @@ public class App extends Application {
     UserProfile.currentUser = 0;
     SceneManager.addUi(SceneManager.AppUi.CANVAS, loadFxml("canvas"));
 
-    for (int i = 1; i < 7; i++) {
+    for (int i = 1; i < 7; i++) { // initialises canvas for each user profile
       UserProfile.currentUser = i;
       AppUi sceneName = SceneManager.AppUi.getAppUiEnum(i);
 

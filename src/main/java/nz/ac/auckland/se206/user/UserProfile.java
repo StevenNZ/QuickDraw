@@ -29,7 +29,7 @@ public class UserProfile {
 
     if (userData.exists()) {
       try {
-        readUserData();
+        readUserData(); // read user data from existing file
       } catch (IOException | ParseException e) {
         e.printStackTrace();
       }
@@ -131,7 +131,7 @@ public class UserProfile {
     userData.put("wordHistory", this.wordHistory);
 
     try {
-      UserFileHandler.saveUserData(userData, currentUser);
+      UserFileHandler.saveUserData(userData, currentUser); // save user data into local file
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -140,7 +140,7 @@ public class UserProfile {
   public void readUserData() throws IOException, ParseException {
     JSONObject userData;
 
-    userData = UserFileHandler.readUserData(currentUser);
+    userData = UserFileHandler.readUserData(currentUser); // read user data from local file
 
     this.name = (String) userData.get("name");
     this.totalWins = (int) (long) userData.get("totalWins");
@@ -153,18 +153,19 @@ public class UserProfile {
 
   public void initializeAvailableWords() throws CsvValidationException, IOException {
     List<String> easyWords;
-    boolean Found = false;
+    boolean found = false;
 
     easyWords = CategorySelector.getEasyWords(); // All easy words
 
     for (String category : easyWords) { // For each easy word
+      found = false;
       for (String playedCategory : this.wordHistory) {
         if (category.equals(playedCategory)) { // Check if already played
-          Found = true;
+          found = true;
           break;
         }
       }
-      if (!Found) {
+      if (!found) {
         this.availableEasyWords.add(category);
       }
     }

@@ -7,11 +7,14 @@ import ai.djl.modality.Classifications;
 import ai.djl.translate.TranslateException;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -134,6 +137,7 @@ public class CanvasController {
     graphic.setLineCap(StrokeLineCap.ROUND);
     circlePen.setOpacity(0.5);
 
+
     canvas.setOnMousePressed(
         e -> {
           isStartPredictions = true;
@@ -197,6 +201,8 @@ public class CanvasController {
     paneButtons.setDisable(true);
 
     currentUser.setWord(randomCategory); // Add to user word history
+
+    isStartPredictions = false;
   }
 
   /**
@@ -408,6 +414,7 @@ public class CanvasController {
 
     return imageBinary;
   }
+
 
   /** This method is called when the black block is clicked and changes the pen colour to black */
   @FXML
