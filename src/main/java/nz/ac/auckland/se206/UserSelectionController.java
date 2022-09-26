@@ -53,14 +53,14 @@ public class UserSelectionController {
 
   @FXML
   public void initialize() {
-    users[0] = new UserProfile("Guest");
+    users[0] = new UserProfile("Guest"); // creates an initial instance of user guest
 
     // Check whether user Profiles already exist
 
-    for (int i = 1; i < 7; i++) {
+    for (int i = 1; i < 7; i++) { // loops through the 6 preexisting user profile panes
       UserProfile.currentUser = i;
       users[i] = new UserProfile();
-      if (!users[i].getName().equals("")) {
+      if (!users[i].getName().equals("")) { // initially displays preexisting user data
         getProfileById("paneNewUser" + i);
         users[i].setImageView(currentImageView);
         displayProfilePic(i);
@@ -73,20 +73,20 @@ public class UserSelectionController {
     graphic.setLineCap(StrokeLineCap.ROUND);
     circlePen.setOpacity(0.5);
 
-    canvasUser.setOnMousePressed(
+    canvasUser.setOnMousePressed( // canvas implementation for user profile pic drawing
         e -> {
-          if (togglePen.isSelected()) {
+          if (togglePen.isSelected()) { // pen implementation
             graphic.setStroke(Color.BLACK);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
 
-          } else if (toggleEraser.isSelected()) {
+          } else if (toggleEraser.isSelected()) { // eraser implementation
             double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
           }
         });
-    canvasUser.setOnMouseDragged(
+    canvasUser.setOnMouseDragged( // event listener of mouse drag for smoother pen
         e -> {
           if (togglePen.isSelected()) {
             graphic.lineTo(e.getX(), e.getY());
@@ -122,7 +122,9 @@ public class UserSelectionController {
     UserProfile.currentUser = getProfileById(id);
     Node node = (Node) event.getSource();
     Scene sceneOfNode = node.getScene();
-    sceneOfNode.setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
+    sceneOfNode.setRoot(
+        SceneManager.getUiRoot(
+            getNewRoot(UserProfile.currentUser))); // switch to currentUser's canvas
   }
 
   private SceneManager.AppUi getNewRoot(int id) {
@@ -141,7 +143,7 @@ public class UserSelectionController {
         return SceneManager.AppUi.CANVAS_PLAYER6;
 
       default:
-        return SceneManager.AppUi.CANVAS;
+        return SceneManager.AppUi.CANVAS; // defaults to guest canvas
     }
   }
 
@@ -157,10 +159,10 @@ public class UserSelectionController {
   private int getProfileById(String id) {
 
     switch (id) { // returns current user index as well as it's imageView and label
-      case "paneNewUser1":
-        currentImageView = imageUser1;
-        currentNameLabel = txtPlayer1;
-        return 1;
+      case "paneNewUser1": // ID of the parent pane
+        currentImageView = imageUser1; // sets current image view of current player 1
+        currentNameLabel = txtPlayer1; // sets current text label of current player 1
+        return 1; // current user index 1 returned
       case "paneNewUser2":
         currentImageView = imageUser2;
         currentNameLabel = txtPlayer2;

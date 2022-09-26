@@ -66,8 +66,8 @@ public class UserFileHandler {
     File imageFile = new File(profileImageLocation);
 
     if (imageFile.exists()) {
-      Image profileImage = new Image(new FileInputStream(profileImageLocation));
-      return profileImage;
+      return new Image(
+          new FileInputStream(profileImageLocation)); // returns image stored in local file
     } else {
       return null;
     }

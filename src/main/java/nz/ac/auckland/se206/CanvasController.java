@@ -112,7 +112,7 @@ public class CanvasController {
                   Platform.runLater(
                       () -> {
                         try {
-                          if (isStartPredictions) {
+                          if (isStartPredictions) { // condition for when user starts drawing
                             onPredict();
                           }
                         } catch (TranslateException ex) {
@@ -132,12 +132,12 @@ public class CanvasController {
 
     canvas.setOnMousePressed(
         e -> {
-          if (togglePen.isSelected()) {
-            isStartPredictions = true;
+          if (togglePen.isSelected()) { // pen settings
+            isStartPredictions = true; // prediction sets to true when user draws (mouse pressed)
             graphic.setStroke(Color.BLACK);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
-          } else if (toggleEraser.isSelected()) {
+          } else if (toggleEraser.isSelected()) { // eraser settings
             final double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
@@ -145,7 +145,8 @@ public class CanvasController {
         });
     canvas.setOnMouseDragged(
         e -> {
-          if (togglePen.isSelected() && isStartPredictions) {
+          if (togglePen.isSelected()
+              && isStartPredictions) { // condition to stop canvas when game ends
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
           } else if (toggleEraser.isSelected() && isStartPredictions) {
@@ -257,7 +258,7 @@ public class CanvasController {
 
   @FXML
   private void onBackToCanvas() {
-    btnStats.setDisable(false);
+    btnStats.setDisable(false); // adjusting node properties via disable and visible
     btnStats.setVisible(true);
     btnReturnCanvas.setVisible(false);
     btnReturnCanvas.setDisable(true);
@@ -325,24 +326,22 @@ public class CanvasController {
   }
 
   private void callTextToSpeech() {
-    Task<Void> textToSpeechTask =
-        new Task<Void>() {
+    Task<Void> textToSpeechTask = new Task<Void>() { // task run by a background thread
           @Override
           protected Void call() throws Exception {
             TextToSpeech speech = new TextToSpeech();
             Stage stage = (Stage) canvas.getScene().getWindow();
-            stage.setOnCloseRequest(
+            stage.setOnCloseRequest( // text to speech closes upon closing GUI
                 e -> {
                   Platform.exit();
                   speech.terminate();
                 });
             speech.speak(gameoverString);
-
             return null;
           }
         };
     Thread textToSpeechThread =
-        new Thread(textToSpeechTask); // creating new thread for text to speech
+        new Thread(textToSpeechTask); // creating new thread for text to speech task
     textToSpeechThread.start();
   }
 
