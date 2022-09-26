@@ -139,13 +139,13 @@ public class CanvasController {
 
     canvas.setOnMousePressed(
         e -> {
-          isStartPredictions = true;
-          if (togglePen.isSelected() && isStartPredictions) {
+          if (togglePen.isSelected()) {
+            isStartPredictions = true;
             graphic.setStroke(Color.BLACK);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
           }
-          else if (toggleEraser.isSelected() && isStartPredictions) {
+          else if (toggleEraser.isSelected()) {
             final double lineWidth = graphic.getLineWidth();
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
