@@ -40,7 +40,7 @@ import nz.ac.auckland.se206.user.UserProfile;
  * FXML file as you see fit. For example, you might no longer need the "Predict" button because the
  * DL model should be automatically queried in the background every second.
  *
- * <p>!! IMPORTANT !!
+ * <p>IMPORTANT
  *
  * <p>Although we added the scale of the image, you need to be careful when changing the size of the
  * drawable canvas and the brush size. If you make the brush too big or too small with respect to
@@ -136,10 +136,8 @@ public class CanvasController {
             graphic.setStroke(Color.BLACK);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
-          }
-          else if (toggleEraser.isSelected()) {
+          } else if (toggleEraser.isSelected()) {
             erasing(e);
-
           }
         });
     canvas.setOnMouseDragged(
@@ -148,10 +146,8 @@ public class CanvasController {
               && isStartPredictions) { // condition to stop canvas when game ends
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
-          }
-          else if (toggleEraser.isSelected() && isStartPredictions) {
+          } else if (toggleEraser.isSelected() && isStartPredictions) {
             erasing(e);
-
           }
         });
 
@@ -161,16 +157,13 @@ public class CanvasController {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
             graphic.closePath();
-          }
-          else if (toggleEraser.isSelected() && isStartPredictions) {
+          } else if (toggleEraser.isSelected() && isStartPredictions) {
             erasing(e);
-
           }
         });
 
     model = new DoodlePrediction();
   }
-
 
   /** This method is called when the "Clear" button is pressed. */
   @FXML
@@ -253,13 +246,13 @@ public class CanvasController {
 
   @FXML
   private void onBackToCanvas() {
-    //Shows the View Statistics
+    // Shows the View Statistics
     btnStats.setDisable(false);
     btnStats.setVisible(true);
-    //Hides the Back to Canvas button
+    // Hides the Back to Canvas button
     btnReturnCanvas.setVisible(false);
     btnReturnCanvas.setDisable(true);
-    //Toggles the statistics panes
+    // Toggles the statistics panes
     paneStats.setDisable(true);
     paneStats.setVisible(false);
     paneCanvas.setDisable(false);
@@ -290,11 +283,8 @@ public class CanvasController {
   }
 
   /**
-   * When the game ends, true or false is passed
-   * - Reads a congrats or loss message in text to speech
-   * - Updates statistics
-   * - Stop the timer
-   * - Switch panes
+   * When the game ends, true or false is passed - Reads a congrats or loss message in text to
+   * speech - Updates statistics - Stop the timer - Switch panes
    */
   private void onGameEnd(boolean isWin) {
     // Stop the timer
@@ -331,13 +321,14 @@ public class CanvasController {
 
   /**
    * When in eraser mode, clear rectangles based on the where the mouse is on the canvas
+   *
    * @param e - MouseEvent (where the mouse has clicked)
    */
-  private void erasing(MouseEvent e){
-    final double size = graphic.getLineWidth()*1.2;
-    graphic.clearRect(
-            e.getX() - size / 2, e.getY() - size / 2, size, size);
+  private void erasing(MouseEvent e) {
+    final double size = graphic.getLineWidth() * 1.2;
+    graphic.clearRect(e.getX() - size / 2, e.getY() - size / 2, size, size);
   }
+
   private void callTextToSpeech() {
     Task<Void> textToSpeechTask = new Task<Void>() { // task run by a background thread
           @Override
@@ -428,14 +419,20 @@ public class CanvasController {
     return imageBinary;
   }
 
-  /** This method is called when the black block is clicked and changes the pen colour to black */
+  /**
+   * Indicates to the user that the pen has been selected This method is called when the eraser
+   * toggle button is pressed and makes the pen's circle at half opacity
+   */
   @FXML
   private void onPenSelected() {
     circleEraser.setOpacity(1);
     circlePen.setOpacity(0.5);
   }
 
-  /** This method is called when the black block is clicked and changes the pen colour to black */
+  /**
+   * Indicates to the user that the eraser has been selected This method is called when the eraser
+   * toggle button is pressed and makes the eraser's circle at half opacity
+   */
   @FXML
   private void onEraserSelected() {
     circlePen.setOpacity(1);
