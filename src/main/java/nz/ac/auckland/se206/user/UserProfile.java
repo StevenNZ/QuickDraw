@@ -21,6 +21,7 @@ public class UserProfile {
   private List<String> availableWords = new ArrayList<>();
   private Image profilePic = null;
   private ImageView imageView = null;
+  private String wordDifficulty = null;
 
   public UserProfile() {
     String userDataLocation = ".profiles/user" + currentUser + ".json";
@@ -178,26 +179,6 @@ public class UserProfile {
     }
   }
 
-  public String pickEasyDifCategory() {
-    initializeAvailableWords("Easy");
-    return pickCategory();
-  }
-
-  public String pickMedDifCategory() {
-    initializeAvailableWords("Medium");
-    return pickCategory();
-  }
-
-  public String pickHardDifCategory() {
-    initializeAvailableWords("Hard");
-    return pickCategory();
-  }
-
-  public String pickMasterDifCategory() {
-    initializeAvailableWords("Master");
-    return pickCategory();
-  }
-
   private String pickCategory() {
     String pickedCategory;
     int randNumber = getRandomCategoryIndex();
@@ -213,5 +194,13 @@ public class UserProfile {
   private int getRandomCategoryIndex() {
     Random random = new Random();
     return random.nextInt(availableWords.size()); // pick random entry from the list of categories
+  }
+
+  public void setWordDifficulty(String dif) {
+    this.wordDifficulty = dif;
+  }
+
+  public String getWordDifficulty() {
+    return this.wordDifficulty;
   }
 }
