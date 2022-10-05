@@ -32,4 +32,31 @@ public class CategorySelector {
     }
     return categories;
   }
+
+  public static ArrayList<String> getEasyDifWords() {
+    return getWords("E");
+  }
+
+  public static ArrayList<String> getMediumDifWords() {
+    ArrayList<String> returnCategories = new ArrayList<String>();
+
+    returnCategories.addAll(getWords("E"));
+    returnCategories.addAll(getWords("M"));
+
+    return returnCategories;
+  }
+
+  public static ArrayList<String> getHardDifWords() {
+    ArrayList<String> returnCategories = new ArrayList<String>();
+
+    returnCategories.addAll(getWords("E"));
+    returnCategories.addAll(getWords("M"));
+    returnCategories.addAll(getWords("H"));
+
+    return returnCategories;
+  }
+
+  public static ArrayList<String> getMasterDifWords() {
+    return getWords("H");
+  }
 }
