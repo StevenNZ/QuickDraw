@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -191,13 +192,21 @@ public class UserSelectionController {
   @FXML
   private void onSaveProfile() throws IOException {
     String name = textFieldName.getText();
-    users[UserProfile.currentUser].setName(name);
-    users[UserProfile.currentUser].setImageView(currentImageView);
-    saveProfilePic();
-    displayProfilePic(UserProfile.currentUser);
-    displayName(UserProfile.currentUser);
-    users[UserProfile.currentUser].saveUserData(); // save user created into local file
-    clearUserCreation();
+    if (name.strip().equals("") || name.length() > 14) {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setTitle("Username Error");
+      alert.setContentText("Please have a username that is max 14 characters");
+      alert.show();
+      textFieldName.setStyle("-fx-border-color: red");
+    } else {
+      users[UserProfile.currentUser].setName(name);
+      users[UserProfile.currentUser].setImageView(currentImageView);
+      saveProfilePic();
+      displayProfilePic(UserProfile.currentUser);
+      displayName(UserProfile.currentUser);
+      users[UserProfile.currentUser].saveUserData(); // save user created into local file
+      clearUserCreation();
+    }
   }
 
   private void saveProfilePic() throws IOException {
