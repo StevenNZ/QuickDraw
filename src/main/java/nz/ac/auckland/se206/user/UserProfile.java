@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.user;
 
-import com.opencsv.exceptions.CsvValidationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class UserProfile {
   private int totalLoss = 0;
   private int quickestWin = 100;
   private List<String> wordHistory = new ArrayList<>();
-  private List<String> availableEasyWords = new ArrayList<>();
+  private List<String> availableWords = new ArrayList<>();
   private Image profilePic = null;
   private ImageView imageView = null;
 
@@ -34,21 +33,10 @@ public class UserProfile {
         e.printStackTrace();
       }
     }
-
-    try {
-      initializeAvailableWords();
-    } catch (CsvValidationException | IOException e) {
-      e.printStackTrace();
-    }
   }
 
   public UserProfile(String name) {
     this.name = name;
-    try {
-      initializeAvailableWords();
-    } catch (CsvValidationException | IOException e) {
-      e.printStackTrace();
-    }
   }
 
   public void updateWin() {
@@ -148,12 +136,30 @@ public class UserProfile {
     this.profilePic = UserFileHandler.readProfileImage(currentUser);
   }
 
-  public void initializeAvailableWords() throws CsvValidationException, IOException {
-    List<String> easyWords;
+  private void initializeAvailableWords(String difficulty) {
+    List<String> allReleventWords;
 
-    easyWords = CategorySelector.getEasyWords(); // All easy words
+    this.availableWords.clear();
 
-    for (String category : easyWords) { // For each easy word
+    // Get words for the difficulty selected
+    switch (difficulty) {
+      case "Easy":
+        allReleventWords = CategorySelector.getEasyDifWords();
+        break;
+      case "Medium":
+        allReleventWords = CategorySelector.getMediumDifWords();
+        break;
+      case "Hard":
+        allReleventWords = CategorySelector.getHardDifWords();
+        break;
+      case "Master":
+        allReleventWords = CategorySelector.getMasterDifWords();
+        break;
+      default:
+        throw new RuntimeException("Not a recognised word difficulty");
+    }
+
+    for (String category : allReleventWords) { // For each word
       boolean found = false;
       for (String playedCategory : this.wordHistory) {
         if (category.equals(playedCategory)) { // Check if already played
@@ -162,28 +168,50 @@ public class UserProfile {
         }
       }
       if (!found) {
-        this.availableEasyWords.add(category);
+        this.availableWords.add(category);
       }
     }
 
     // If played all easy words, they are all available to be played
-    if (this.availableEasyWords.size() == 0) {
-      availableEasyWords = easyWords;
+    if (this.availableWords.size() == 0) {
+      availableWords = allReleventWords;
     }
   }
 
-  public String pickEasyCategory() {
-    Random random = new Random();
-    int randNumber;
+  public String pickEasyDifCategory() {
+    initializeAvailableWords("Easy");
+    return pickCategory();
+  }
+
+  public String pickMedDifCategory() {
+    initializeAvailableWords("Medium");
+    return pickCategory();
+  }
+
+  public String pickHardDifCategory() {
+    initializeAvailableWords("Hard");
+    return pickCategory();
+  }
+
+  public String pickMasterDifCategory() {
+    initializeAvailableWords("Master");
+    return pickCategory();
+  }
+
+  private String pickCategory() {
     String pickedCategory;
+    int randNumber = getRandomCategoryIndex();
 
-    randNumber = random.nextInt(availableEasyWords.size());
     pickedCategory =
-        this.availableEasyWords.get(
-            randNumber); // pick random entry from the list of easy categories
+        this.availableWords.get(randNumber); // pick random entry from the list of categories
 
-    this.availableEasyWords.remove(randNumber); // Remove from available Easy Words
+    this.availableWords.remove(randNumber); // Remove from available words
 
     return pickedCategory;
+  }
+
+  private int getRandomCategoryIndex() {
+    Random random = new Random();
+    return random.nextInt(availableWords.size()); // pick random entry from the list of categories
   }
 }
