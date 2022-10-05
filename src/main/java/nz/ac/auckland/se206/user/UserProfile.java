@@ -137,13 +137,13 @@ public class UserProfile {
     this.profilePic = UserFileHandler.readProfileImage(currentUser);
   }
 
-  private void initializeAvailableWords(String difficulty) {
+  private void initializeAvailableWords() {
     List<String> allReleventWords;
 
     this.availableWords.clear();
 
     // Get words for the difficulty selected
-    switch (difficulty) {
+    switch (this.wordDifficulty) {
       case "Easy":
         allReleventWords = CategorySelector.getEasyDifWords();
         break;
@@ -173,7 +173,7 @@ public class UserProfile {
       }
     }
 
-    // If played all easy words, they are all available to be played
+    // If played all possible words, they are all available to be played
     if (this.availableWords.size() == 0) {
       availableWords = allReleventWords;
     }
@@ -198,6 +198,7 @@ public class UserProfile {
 
   public void setWordDifficulty(String dif) {
     this.wordDifficulty = dif;
+    initializeAvailableWords();
   }
 
   public String getWordDifficulty() {
