@@ -118,6 +118,10 @@ public class UserProfile {
     userData.put("totalLoss", this.totalLoss);
     userData.put("quickestWin", this.quickestWin);
     userData.put("wordHistory", this.wordHistory);
+    userData.put("wordDifficulty", this.wordDifficulty);
+    userData.put("accuracyDifficulty", this.accuracyDifficulty);
+    userData.put("timeDifficulty", this.timeDifficulty);
+    userData.put("confidenceDifficulty", this.confidenceDifficulty);
 
     try {
       UserFileHandler.saveUserData(userData, currentUser); // save user data into local file
@@ -136,6 +140,10 @@ public class UserProfile {
     this.totalLoss = (int) (long) userData.get("totalLoss");
     this.quickestWin = (int) (long) userData.get("quickestWin");
     this.wordHistory = (List<String>) userData.get("wordHistory");
+    this.wordDifficulty = (String) userData.get("wordDifficulty");
+    this.accuracyDifficulty = (String) userData.get("accuracyDifficulty");
+    this.timeDifficulty = (String) userData.get("timeDifficulty");
+    this.confidenceDifficulty = (String) userData.get("confidenceDifficulty");
 
     this.profilePic = UserFileHandler.readProfileImage(currentUser);
   }
