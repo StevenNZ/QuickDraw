@@ -21,10 +21,18 @@ public class UserProfile {
   private List<String> availableWords = new ArrayList<>();
   private Image profilePic = null;
   private ImageView imageView = null;
-  private String wordDifficulty = null;
-  private String accuracyDifficulty = null;
-  private String timeDifficulty = null;
-  private String confidenceDifficulty = null;
+  private Difficulty wordDifficulty = Difficulty.NOTSET;
+  private Difficulty accuracyDifficulty = Difficulty.NOTSET;
+  private Difficulty timeDifficulty = Difficulty.NOTSET;
+  private Difficulty confidenceDifficulty = Difficulty.NOTSET;
+
+  private enum Difficulty {
+    NOTSET,
+    EASY,
+    MEDIUM,
+    HARD,
+    MASTER
+  }
 
   public UserProfile() {
     String userDataLocation = ".profiles/user" + currentUser + ".json";
@@ -140,10 +148,10 @@ public class UserProfile {
     this.totalLoss = (int) (long) userData.get("totalLoss");
     this.quickestWin = (int) (long) userData.get("quickestWin");
     this.wordHistory = (List<String>) userData.get("wordHistory");
-    this.wordDifficulty = (String) userData.get("wordDifficulty");
-    this.accuracyDifficulty = (String) userData.get("accuracyDifficulty");
-    this.timeDifficulty = (String) userData.get("timeDifficulty");
-    this.confidenceDifficulty = (String) userData.get("confidenceDifficulty");
+    this.wordDifficulty = (Difficulty) userData.get("wordDifficulty");
+    this.accuracyDifficulty = (Difficulty) userData.get("accuracyDifficulty");
+    this.timeDifficulty = (Difficulty) userData.get("timeDifficulty");
+    this.confidenceDifficulty = (Difficulty) userData.get("confidenceDifficulty");
 
     this.profilePic = UserFileHandler.readProfileImage(currentUser);
   }
@@ -155,16 +163,16 @@ public class UserProfile {
 
     // Get words for the difficulty selected
     switch (this.wordDifficulty) {
-      case "Easy":
+      case EASY:
         allReleventWords = CategorySelector.getEasyDifWords();
         break;
-      case "Medium":
+      case MEDIUM:
         allReleventWords = CategorySelector.getMediumDifWords();
         break;
-      case "Hard":
+      case HARD:
         allReleventWords = CategorySelector.getHardDifWords();
         break;
-      case "Master":
+      case MASTER:
         allReleventWords = CategorySelector.getMasterDifWords();
         break;
       default:
@@ -211,36 +219,36 @@ public class UserProfile {
     return random.nextInt(availableWords.size()); // pick random entry from the list of categories
   }
 
-  public void setWordDifficulty(String dif) {
+  public void setWordDifficulty(Difficulty dif) {
     this.wordDifficulty = dif;
     initializeAvailableWords();
   }
 
-  public String getWordDifficulty() {
+  public Difficulty getWordDifficulty() {
     return this.wordDifficulty;
   }
 
-  public void setAccuracyDifficulty(String dif) {
+  public void setAccuracyDifficulty(Difficulty dif) {
     this.accuracyDifficulty = dif;
   }
 
-  public String getAccuracyDifficulty() {
+  public Difficulty getAccuracyDifficulty() {
     return this.accuracyDifficulty;
   }
 
-  public void setTimeDifficulty(String dif) {
+  public void setTimeDifficulty(Difficulty dif) {
     this.timeDifficulty = dif;
   }
 
-  public String getTimeDifficulty() {
+  public Difficulty getTimeDifficulty() {
     return this.timeDifficulty;
   }
 
-  public void setConfidenceDifficulty(String dif) {
+  public void setConfidenceDifficulty(Difficulty dif) {
     this.confidenceDifficulty = dif;
   }
 
-  public String getConfidenceDifficulty() {
+  public Difficulty getConfidenceDifficulty() {
     return this.confidenceDifficulty;
   }
 }
