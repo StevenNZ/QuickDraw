@@ -195,7 +195,7 @@ public class UserSelectionController {
     if (name.strip().equals("") || name.length() > 14) {
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setTitle("Username Error");
-      alert.setContentText("Please have a username that is max 14 characters");
+      alert.setContentText("Please have a username with max 14 characters");
       alert.show();
       textFieldName.setStyle("-fx-border-color: red");
     } else {
