@@ -22,6 +22,9 @@ public class UserProfile {
   private Image profilePic = null;
   private ImageView imageView = null;
   private String wordDifficulty = null;
+  private String accuracyDifficulty = null;
+  private String timeDifficulty = null;
+  private String confidenceDifficulty = null;
 
   public UserProfile() {
     String userDataLocation = ".profiles/user" + currentUser + ".json";
@@ -207,5 +210,29 @@ public class UserProfile {
 
   public String getWordDifficulty() {
     return this.wordDifficulty;
+  }
+
+  public void setAccuracyDifficulty(String dif) {
+    this.accuracyDifficulty = dif;
+  }
+
+  public String getAccuracyDifficulty() {
+    return this.accuracyDifficulty;
+  }
+
+  public void setTimeDifficulty(String dif) {
+    this.timeDifficulty = dif;
+  }
+
+  public String getTimeDifficulty() {
+    return this.timeDifficulty;
+  }
+
+  public void setConfidenceDifficulty(String dif) {
+    this.confidenceDifficulty = dif;
+  }
+
+  public String getConfidenceDifficulty() {
+    return this.confidenceDifficulty;
   }
 }
