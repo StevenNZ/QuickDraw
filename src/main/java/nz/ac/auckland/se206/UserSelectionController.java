@@ -285,5 +285,6 @@ public class UserSelectionController {
     textFieldName.clear();
     paneUserProfile.setVisible(true);
     paneUserCreation.setVisible(false);
+    textFieldName.setStyle("-fx-border-color: transparent");
   }
 }
