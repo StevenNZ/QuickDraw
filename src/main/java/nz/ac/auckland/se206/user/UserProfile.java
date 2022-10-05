@@ -188,6 +188,10 @@ public class UserProfile {
 
     this.availableWords.remove(randNumber); // Remove from available words
 
+    if (this.availableWords.size() == 0) {
+      initializeAvailableWords();
+    }
+
     return pickedCategory;
   }
 
