@@ -193,10 +193,11 @@ public class UserSelectionController {
   private void onSaveProfile() throws IOException {
     String name = textFieldName.getText();
     if (name.strip().equals("") || name.length() > 14) {
-      Alert alert = new Alert(Alert.AlertType.WARNING);
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Username Error");
-      alert.setContentText("Please have a username with max 14 characters");
-      alert.show();
+      alert.setGraphic(new ImageView(new Image("./images/errorImage.png")));
+      alert.setHeaderText(" ");
+      alert.showAndWait();
       textFieldName.setStyle("-fx-border-color: red");
     } else {
       users[UserProfile.currentUser].setName(name);
