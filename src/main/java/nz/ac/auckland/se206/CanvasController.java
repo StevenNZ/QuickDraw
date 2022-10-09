@@ -8,6 +8,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
@@ -83,6 +87,63 @@ public class CanvasController {
   private Image snapshot;
   private boolean isWin = false;
 
+  private Task<Void> backgroundTask =
+      new Task<Void>() { // run by background thread to not cause GUI freezing
+
+        @Override
+        protected Void call() throws Exception {
+
+          return null;
+        }
+      };
+
+  private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+  private ScheduledFuture future;
+
+  Runnable backgroundThreadTask =
+      () -> {
+        canvasTimer--;
+        Platform.runLater(
+            () -> {
+              snapshot = canvas.snapshot(null, null); // app thread takes snapshot of canvas
+            });
+
+        Platform.runLater(
+            () -> {
+              lblTimer.setText(
+                  String.format("%02d:%02d", canvasTimer / 60, canvasTimer % 60)); // updates timer
+            });
+
+        if (isStartPredictions && snapshot != null) {
+          if (isStartPredictions) {
+            try {
+              outputPredictions = onPredict();
+            } catch (TranslateException ex) {
+              throw new RuntimeException(ex);
+            }
+
+            Platform.runLater(
+                () -> {
+                  lblTopTenGuesses.setText(outputPredictions);
+                });
+          }
+        }
+
+        if (isWin == true) {
+          Platform.runLater(
+              () -> {
+                onGameEnd(true);
+              });
+        }
+
+        if (canvasTimer == 0) {
+          Platform.runLater(
+              () -> {
+                onGameEnd(false);
+              });
+        }
+      };
+
   /**
    * JavaFX calls this method once the GUI elements are loaded. In our case we create a listener for
    * the drawing, and we load the ML model.
@@ -149,6 +210,7 @@ public class CanvasController {
   private void onStartTimer() {
     this.canvasTimer =
         DEFAULT_SECONDS; // timer to be displayed and condition for the TimerTask ending
+    future = executor.scheduleAtFixedRate(backgroundThreadTask, 1, 1, TimeUnit.SECONDS);
 
     // Enable being able to edit the canvas and change pen colours
     paneEditCanvas.setDisable(false);
@@ -261,6 +323,9 @@ public class CanvasController {
    * speech - Updates statistics - Stop the timer - Switch panes
    */
   private void onGameEnd(boolean isWinner) {
+
+    // Stops the background thread jobs
+    future.cancel(true);
 
     // UpdateStats
     if (isWinner) {
