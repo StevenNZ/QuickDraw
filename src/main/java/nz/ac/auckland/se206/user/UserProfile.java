@@ -214,7 +214,7 @@ public class UserProfile {
     }
   }
 
-  private String pickCategory() {
+  public String pickCategory() {
     String pickedCategory;
     int randNumber = getRandomCategoryIndex();
 
