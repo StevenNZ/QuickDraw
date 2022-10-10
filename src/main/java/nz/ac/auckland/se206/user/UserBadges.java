@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.user;
 
+import com.google.gson.Gson;
+
 public class UserBadges {
   private boolean twentySecondWin = false;
   private boolean tenSecondWin = false;
@@ -15,4 +17,12 @@ public class UserBadges {
   private boolean thirtyHiddenWins = false;
 
   public UserBadges() {}
+
+  public void saveBadges() {
+    Gson gson = new Gson();
+
+    String badgesData = gson.toJson(this);
+
+    UserFileHandler.saveUserBadges(badgesData);
+  }
 }
