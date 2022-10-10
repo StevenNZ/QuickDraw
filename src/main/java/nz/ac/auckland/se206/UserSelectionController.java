@@ -195,7 +195,7 @@ public class UserSelectionController {
     if (name.strip().equals("") || name.length() > 14) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Username Error");
-      alert.setGraphic(new ImageView(new Image("./images/errorImage.png")));
+      alert.setGraphic(new ImageView(new Image("./images/usernameError.png")));
       alert.setHeaderText(" ");
       alert.showAndWait();
       textFieldName.setStyle("-fx-border-color: red");
