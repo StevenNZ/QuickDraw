@@ -157,10 +157,11 @@ public class UserProfile {
     this.totalLoss = (int) (long) userData.get("totalLoss");
     this.quickestWin = (int) (long) userData.get("quickestWin");
     this.wordHistory = (List<String>) userData.get("wordHistory");
-    this.wordDifficulty = (Difficulty) userData.get("wordDifficulty");
-    this.accuracyDifficulty = (Difficulty) userData.get("accuracyDifficulty");
-    this.timeDifficulty = (Difficulty) userData.get("timeDifficulty");
-    this.confidenceDifficulty = (Difficulty) userData.get("confidenceDifficulty");
+    this.wordDifficulty = Difficulty.toDifficulty((String) userData.get("wordDifficulty"));
+    this.accuracyDifficulty = Difficulty.toDifficulty((String) userData.get("accuracyDifficulty"));
+    this.timeDifficulty = Difficulty.toDifficulty((String) userData.get("timeDifficulty"));
+    this.confidenceDifficulty =
+        Difficulty.toDifficulty((String) userData.get("confidenceDifficulty"));
 
     this.profilePic = UserFileHandler.readProfileImage(currentUser);
   }
