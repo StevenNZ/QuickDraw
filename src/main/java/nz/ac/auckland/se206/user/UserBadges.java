@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.user;
 
 import com.google.gson.Gson;
+import org.json.simple.JSONObject;
 
 public class UserBadges {
   private boolean twentySecondWin = false;
@@ -15,6 +16,7 @@ public class UserBadges {
   private boolean fiveHiddenWins = false;
   private boolean fifteenHiddenWins = false;
   private boolean thirtyHiddenWins = false;
+  private transient JSONObject badgesMap;
 
   public UserBadges() {}
 
@@ -24,5 +26,10 @@ public class UserBadges {
     String badgesData = gson.toJson(this);
 
     UserFileHandler.saveUserBadges(badgesData);
+  }
+
+  public void mapBadges() {
+    Gson gson = new Gson();
+    badgesMap = gson.fromJson(gson.toJson(this), JSONObject.class);
   }
 }
