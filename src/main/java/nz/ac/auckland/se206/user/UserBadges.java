@@ -32,4 +32,8 @@ public class UserBadges {
     Gson gson = new Gson();
     badgesMap = gson.fromJson(gson.toJson(this), JSONObject.class);
   }
+
+  public JSONObject getBadgesMap() {
+    return badgesMap;
+  }
 }
