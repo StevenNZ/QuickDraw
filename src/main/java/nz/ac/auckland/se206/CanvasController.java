@@ -93,7 +93,7 @@ public class CanvasController {
   public void initialize() throws ModelException, IOException {
 
     currentUser = UserSelectionController.users[UserProfile.currentUser];
-    randomCategory = currentUser.pickEasyCategory();
+    randomCategory = currentUser.pickCategory();
 
     this.timeline =
         new Timeline(
@@ -355,7 +355,7 @@ public class CanvasController {
     paneGameEnd.setVisible(false);
     // Clear the canvas
     onClear();
-    randomCategory = currentUser.pickEasyCategory();
+    randomCategory = currentUser.pickCategory();
     // Replace lblCategoryTxt on the canvas
     lblCategoryTxt.setText(this.randomCategory);
     // Hide category display information
