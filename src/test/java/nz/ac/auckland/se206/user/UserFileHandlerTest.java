@@ -43,4 +43,12 @@ public class UserFileHandlerTest {
     System.out.println("Delete user20: " + UserFileHandler.deleteUserData(20));
     System.out.println();
   }
+
+  @Test
+  void saveUserBadgesTest() {
+    UserProfile.currentUser = 10;
+    UserBadges badges = new UserBadges();
+
+    badges.saveBadges();
+  }
 }
