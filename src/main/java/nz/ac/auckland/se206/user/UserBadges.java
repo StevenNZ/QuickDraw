@@ -36,4 +36,8 @@ public class UserBadges {
   public JSONObject getBadgesMap() {
     return badgesMap;
   }
+
+  public void addBadge(String badgeName) {
+    badgesMap.replace(badgeName, true);
+  }
 }
