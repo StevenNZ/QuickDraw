@@ -365,6 +365,7 @@ public class CanvasController {
             Stage stage = (Stage) canvas.getScene().getWindow();
             stage.setOnCloseRequest( // text to speech closes upon closing GUI
                 e -> {
+                  executor.shutdown();
                   Platform.exit();
                   speech.terminate();
                 });
