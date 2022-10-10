@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.user;
 
+import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -135,17 +136,9 @@ public class UserProfile {
   }
 
   public void saveUserData() {
-    JSONObject userData = new JSONObject();
+    Gson gson = new Gson();
 
-    userData.put("name", this.name);
-    userData.put("totalWins", this.totalWins);
-    userData.put("totalLoss", this.totalLoss);
-    userData.put("quickestWin", this.quickestWin);
-    userData.put("wordHistory", this.wordHistory);
-    userData.put("wordDifficulty", this.wordDifficulty);
-    userData.put("accuracyDifficulty", this.accuracyDifficulty);
-    userData.put("timeDifficulty", this.timeDifficulty);
-    userData.put("confidenceDifficulty", this.confidenceDifficulty);
+    String userData = gson.toJson(this);
 
     try {
       UserFileHandler.saveUserData(userData, currentUser); // save user data into local file
