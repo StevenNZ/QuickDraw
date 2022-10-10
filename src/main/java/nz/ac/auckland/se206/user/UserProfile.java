@@ -26,12 +26,28 @@ public class UserProfile {
   private Difficulty timeDifficulty = Difficulty.NOTSET;
   private Difficulty confidenceDifficulty = Difficulty.NOTSET;
 
-  private enum Difficulty {
+  public enum Difficulty {
     NOTSET,
     EASY,
     MEDIUM,
     HARD,
-    MASTER
+    MASTER;
+
+    public static Difficulty toDifficulty(String word) {
+      switch (word) {
+        case "NOTSET":
+          return NOTSET;
+        case "EASY":
+          return EASY;
+        case "MEDIUM":
+          return MEDIUM;
+        case "HARD":
+          return HARD;
+        case "MASTER":
+          return MASTER;
+      }
+      throw new RuntimeException("Not a difficulty");
+    }
   }
 
   public UserProfile() {
