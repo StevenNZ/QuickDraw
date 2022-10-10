@@ -8,8 +8,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
@@ -29,7 +31,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -76,12 +77,72 @@ public class CanvasController {
   @FXML private ToggleButton toggleEraser;
   private GraphicsContext graphic;
   private DoodlePrediction model;
-  private int secondsLeft;
   private String randomCategory;
-  private Timeline timeline;
   private boolean isStartPredictions = false;
   private UserProfile currentUser;
   private String gameoverString;
+
+  private String outputPredictions;
+  private int canvasTimer;
+  private Image snapshot;
+  private boolean isWin = false;
+
+  private Task<Void> backgroundTask =
+      new Task<Void>() { // run by background thread to not cause GUI freezing
+
+        @Override
+        protected Void call() throws Exception {
+
+          return null;
+        }
+      };
+
+  private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+  private ScheduledFuture future;
+
+  Runnable backgroundThreadTask =
+      () -> {
+        canvasTimer--;
+        Platform.runLater(
+            () -> {
+              snapshot = canvas.snapshot(null, null); // app thread takes snapshot of canvas
+            });
+
+        Platform.runLater(
+            () -> {
+              lblTimer.setText(
+                  String.format("%02d:%02d", canvasTimer / 60, canvasTimer % 60)); // updates timer
+            });
+
+        if (isStartPredictions && snapshot != null) {
+          if (isStartPredictions) {
+            try {
+              outputPredictions = onPredict();
+            } catch (TranslateException ex) {
+              throw new RuntimeException(ex);
+            }
+
+            Platform.runLater(
+                () -> {
+                  lblTopTenGuesses.setText(outputPredictions);
+                });
+          }
+        }
+
+        if (isWin == true) {
+          Platform.runLater(
+              () -> {
+                onGameEnd(true);
+              });
+        }
+
+        if (canvasTimer == 0) {
+          Platform.runLater(
+              () -> {
+                onGameEnd(false);
+              });
+        }
+      };
 
   /**
    * JavaFX calls this method once the GUI elements are loaded. In our case we create a listener for
@@ -94,32 +155,6 @@ public class CanvasController {
 
     currentUser = UserSelectionController.users[UserProfile.currentUser];
     randomCategory = currentUser.pickEasyCategory();
-
-    this.timeline =
-        new Timeline(
-            new KeyFrame(
-                Duration.seconds(1.0),
-                e -> {
-                  secondsLeft--;
-                  // Update the Timer label with how many seconds left
-                  lblTimer.setText(String.format("%02d:%02d", secondsLeft / 60, secondsLeft % 60));
-                  // Trigger Lose conditions if they run out of time
-                  if (secondsLeft == 0) {
-                    onGameEnd(false);
-                  }
-                  // Run ML predictions in the background
-                  Platform.runLater(
-                      () -> {
-                        try {
-                          if (isStartPredictions) { // condition for when user starts drawing
-                            onPredict();
-                          }
-                        } catch (TranslateException ex) {
-                          throw new RuntimeException(ex);
-                        }
-                      });
-                }));
-    timeline.setCycleCount(Timeline.INDEFINITE);
 
     // Replace lblCategoryTxt on the canvas
     lblCategoryTxt.setText(this.randomCategory);
@@ -173,8 +208,10 @@ public class CanvasController {
 
   @FXML
   private void onStartTimer() {
-    this.secondsLeft = DEFAULT_SECONDS;
-    timeline.play();
+    this.canvasTimer =
+        DEFAULT_SECONDS; // timer to be displayed and condition for the TimerTask ending
+    future = executor.scheduleAtFixedRate(backgroundThreadTask, 1, 1, TimeUnit.SECONDS);
+
     // Enable being able to edit the canvas and change pen colours
     paneEditCanvas.setDisable(false);
     canvas.setDisable(false);
@@ -196,11 +233,10 @@ public class CanvasController {
    *
    * @throws TranslateException If there is an error in reading the input/output of the DL model.
    */
-  private void onPredict() throws TranslateException {
+  private String onPredict() throws TranslateException {
     List<Classifications.Classification> predictions =
-        model.getPredictions(getCurrentSnapshot(), 10);
-
-    lblTopTenGuesses.setText(getStringOfPredictions(predictions).toString());
+        model.getPredictions(getBinaryImage(snapshot), 10);
+    final long start = System.currentTimeMillis();
 
     // Check the top 3 predictions whether they are what the word is.
     for (int i = 0; i < 3; i++) {
@@ -210,9 +246,11 @@ public class CanvasController {
       if (randomCategory.equals(predictionClassName)) {
         // This is the win condition.
         isStartPredictions = false;
-        Platform.runLater(() -> onGameEnd(true));
+        isWin = true;
       }
     }
+
+    return getStringOfPredictions(predictions).toString();
   }
 
   @FXML
@@ -270,11 +308,9 @@ public class CanvasController {
     Stage stage = (Stage) btnSaveDrawing.getScene().getWindow();
     File file = fileChooser.showSaveDialog(stage);
     if (file != null) {
-      fileChooser.setInitialDirectory(file.getParentFile()); // save the
+      fileChooser.setInitialDirectory(file.getParentFile()); // save the image to a file.
       ImageIO.write(getCurrentSnapshot(), "bmp", file);
     }
-    // Save the image to a file.
-
   }
 
   @FXML
@@ -286,16 +322,17 @@ public class CanvasController {
    * When the game ends, true or false is passed - Reads a congrats or loss message in text to
    * speech - Updates statistics - Stop the timer - Switch panes
    */
-  private void onGameEnd(boolean isWin) {
-    // Stop the timer
-    timeline.stop();
+  private void onGameEnd(boolean isWinner) {
+
+    // Stops the background thread jobs
+    future.cancel(true);
 
     // UpdateStats
-    if (isWin) {
+    if (isWinner) {
       gameoverString = "Congratulations! You WON!";
       currentUser.updateWin();
-      if ((DEFAULT_SECONDS - secondsLeft) < currentUser.getQuickestWin()) {
-        currentUser.setQuickestWin(DEFAULT_SECONDS - secondsLeft);
+      if ((DEFAULT_SECONDS - canvasTimer) < currentUser.getQuickestWin()) {
+        currentUser.setQuickestWin(DEFAULT_SECONDS - canvasTimer);
       }
     } else {
       gameoverString = "Sorry, better luck next time.";
@@ -367,8 +404,10 @@ public class CanvasController {
     lblTopTenGuesses.setText("Your top 10 guesses to your drawing will appear here!");
 
     // Reset the timer
-    this.secondsLeft = DEFAULT_SECONDS;
-    lblTimer.setText(String.format("%02d:%02d", secondsLeft / 60, secondsLeft % 60));
+    this.canvasTimer = DEFAULT_SECONDS;
+    lblTimer.setText(String.format("%02d:%02d", canvasTimer / 60, canvasTimer % 60));
+
+    isWin = false;
   }
 
   /**
@@ -445,5 +484,22 @@ public class CanvasController {
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU));
+  }
+
+  private BufferedImage getBinaryImage(Image snapshot) {
+    final BufferedImage image = SwingFXUtils.fromFXImage(snapshot, null);
+
+    // Convert into a binary image.
+    final BufferedImage imageBinary =
+        new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+
+    final Graphics2D graphics = imageBinary.createGraphics();
+
+    graphics.drawImage(image, 0, 0, null);
+
+    // To release memory we dispose.
+    graphics.dispose();
+
+    return imageBinary;
   }
 }
