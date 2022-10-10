@@ -192,7 +192,7 @@ public class UserSelectionController {
   @FXML
   private void onSaveProfile() throws IOException {
     String name = textFieldName.getText();
-    if (name.strip().equals("") || name.length() > 14) {
+    if (name.strip().equals("")) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Username Error");
       alert.setGraphic(new ImageView(new Image("./images/usernameError.png")));
