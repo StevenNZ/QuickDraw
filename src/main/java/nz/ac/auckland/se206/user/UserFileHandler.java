@@ -72,4 +72,29 @@ public class UserFileHandler {
       return null;
     }
   }
+
+  public static void saveUserBadges(String badges) {
+
+    File profileFolder = new File(".profiles");
+    String fileLocation = ".profiles/user" + UserProfile.currentUser + "Badges.json";
+
+    // Creates the profiles folder
+    if (!profileFolder.exists()) {
+      profileFolder.mkdir();
+    }
+
+    File userFile = new File(fileLocation);
+
+    try {
+
+      // This writes the badge data to the json file
+      FileWriter userFileWriter = new FileWriter(userFile, false);
+
+      userFileWriter.write(badges);
+      userFileWriter.flush(); // Clears the data in the file writer
+      userFileWriter.close(); // Closes the data stream
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 }
