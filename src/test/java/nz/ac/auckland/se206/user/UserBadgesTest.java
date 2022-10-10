@@ -12,4 +12,15 @@ public class UserBadgesTest {
     badges.mapBadges();
     System.out.println(badges.getBadgesMap());
   }
+
+  @Test
+  void addBadgeTest() {
+    UserProfile.currentUser = 10;
+    UserBadges badges = new UserBadges();
+
+    badges.mapBadges();
+    badges.addBadge("twentySecondWin");
+    System.out.println();
+    System.out.println(badges.getBadgesMap());
+  }
 }
