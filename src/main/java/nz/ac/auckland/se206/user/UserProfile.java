@@ -20,8 +20,8 @@ public class UserProfile {
   private int quickestWin = 100;
   private List<String> wordHistory = new ArrayList<>();
   private List<String> availableWords = new ArrayList<>();
-  private Image profilePic = null;
-  private ImageView imageView = null;
+  private transient Image profilePic = null;
+  private transient ImageView imageView = null;
   private Difficulty wordDifficulty = Difficulty.NOTSET;
   private Difficulty accuracyDifficulty = Difficulty.NOTSET;
   private Difficulty timeDifficulty = Difficulty.NOTSET;
