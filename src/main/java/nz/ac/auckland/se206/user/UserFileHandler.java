@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.user;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -95,6 +97,24 @@ public class UserFileHandler {
       userFileWriter.close(); // Closes the data stream
     } catch (IOException e) {
       e.printStackTrace();
+    }
+  }
+
+  public static UserBadges readUserBadges() {
+    String fileLocation = ".profiles/user" + UserProfile.currentUser + "Badges.json";
+    JSONParser jsonParser = new JSONParser();
+    UserBadges returnBadges;
+
+    try {
+      FileReader userFileReader = new FileReader(fileLocation);
+      returnBadges =
+          new Gson().fromJson(jsonParser.parse(userFileReader).toString(), UserBadges.class);
+      userFileReader.close(); // Closes the data stream
+      return returnBadges;
+    } catch (JsonSyntaxException | IOException | ParseException e) {
+      System.out.println("Badges File doesn't exist");
+      e.printStackTrace();
+      return null;
     }
   }
 }
