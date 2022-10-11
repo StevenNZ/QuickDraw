@@ -91,7 +91,6 @@ public class UserFileHandler {
 
       // This writes the badge data to the json file
       FileWriter userFileWriter = new FileWriter(userFile, false);
-
       userFileWriter.write(badges);
       userFileWriter.flush(); // Clears the data in the file writer
       userFileWriter.close(); // Closes the data stream
@@ -110,6 +109,7 @@ public class UserFileHandler {
       returnBadges =
           new Gson().fromJson(jsonParser.parse(userFileReader).toString(), UserBadges.class);
       userFileReader.close(); // Closes the data stream
+      returnBadges.mapBadges();
       return returnBadges;
     } catch (JsonSyntaxException | IOException | ParseException e) {
       System.out.println("Badges File doesn't exist");
