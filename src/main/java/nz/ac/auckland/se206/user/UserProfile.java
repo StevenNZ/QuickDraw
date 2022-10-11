@@ -26,7 +26,7 @@ public class UserProfile {
   private Difficulty accuracyDifficulty = Difficulty.NOTSET;
   private Difficulty timeDifficulty = Difficulty.NOTSET;
   private Difficulty confidenceDifficulty = Difficulty.NOTSET;
-  private UserBadges badges;
+  private transient UserBadges badges = new UserBadges();
 
   public enum Difficulty {
     NOTSET,
@@ -141,7 +141,7 @@ public class UserProfile {
     Gson gson = new Gson();
 
     String userData = gson.toJson(this);
-    String badgesData = gson.toJson(this.badges);
+    String badgesData = gson.toJson(this.badges.getBadgesMap());
 
     try {
       UserFileHandler.saveUserData(userData, currentUser); // save user data into local file
