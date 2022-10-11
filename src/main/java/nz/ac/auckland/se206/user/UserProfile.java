@@ -268,4 +268,8 @@ public class UserProfile {
   public Difficulty getConfidenceDifficulty() {
     return this.confidenceDifficulty;
   }
+
+  public UserBadges getBadges() {
+    return this.badges;
+  }
 }
