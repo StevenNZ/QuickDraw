@@ -18,7 +18,9 @@ public class UserBadges {
   private boolean thirtyHiddenWins = false;
   private transient JSONObject badgesMap;
 
-  public UserBadges() {}
+  public UserBadges() {
+    this.mapBadges();
+  }
 
   public void saveBadges() {
     Gson gson = new Gson();
