@@ -22,9 +22,7 @@ public class UserBadges {
 
   public void saveBadges() {
     Gson gson = new Gson();
-
     String badgesData = gson.toJson(this);
-
     UserFileHandler.saveUserBadges(badgesData);
   }
 
