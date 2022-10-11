@@ -18,7 +18,6 @@ public class UserBadgesTest {
     UserProfile.currentUser = 12;
     UserBadges badges = new UserBadges();
 
-    badges.mapBadges();
     badges.addBadge("twentySecondWin");
     System.out.println();
     System.out.println(badges.getBadgesMap());
