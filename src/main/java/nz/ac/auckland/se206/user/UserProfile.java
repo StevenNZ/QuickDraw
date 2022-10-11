@@ -26,6 +26,7 @@ public class UserProfile {
   private Difficulty accuracyDifficulty = Difficulty.NOTSET;
   private Difficulty timeDifficulty = Difficulty.NOTSET;
   private Difficulty confidenceDifficulty = Difficulty.NOTSET;
+  private UserBadges badges;
 
   public enum Difficulty {
     NOTSET,
@@ -66,6 +67,7 @@ public class UserProfile {
 
   public UserProfile(String name) {
     this.name = name;
+    this.badges = new UserBadges();
   }
 
   public void updateWin() {
@@ -139,12 +141,15 @@ public class UserProfile {
     Gson gson = new Gson();
 
     String userData = gson.toJson(this);
+    String badgesData = gson.toJson(this.badges);
 
     try {
       UserFileHandler.saveUserData(userData, currentUser); // save user data into local file
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    UserFileHandler.saveUserBadges(badgesData);
   }
 
   public void readUserData() throws IOException, ParseException {
@@ -164,6 +169,8 @@ public class UserProfile {
         Difficulty.toDifficulty((String) userData.get("confidenceDifficulty"));
 
     this.profilePic = UserFileHandler.readProfileImage(currentUser);
+
+    this.badges = UserFileHandler.readUserBadges();
   }
 
   private void initializeAvailableWords() {
