@@ -6,7 +6,7 @@ public class UserBadgesTest {
 
   @Test
   void mapBadgesTest() {
-    UserProfile.currentUser = 10;
+    UserProfile.currentUser = 12;
     UserBadges badges = new UserBadges();
 
     badges.mapBadges();
@@ -15,7 +15,7 @@ public class UserBadgesTest {
 
   @Test
   void addBadgeTest() {
-    UserProfile.currentUser = 10;
+    UserProfile.currentUser = 12;
     UserBadges badges = new UserBadges();
 
     badges.mapBadges();
