@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="backgroundPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.CanvasController">
+   <children>
+      <ImageView fitHeight="752.0" fitWidth="1280.0" layoutY="-28.0">
+         <image>
+            <Image url="@../images/qd.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnReturnMain" layoutX="45.0" layoutY="27.0" mnemonicParsing="false" onAction="#onBack" prefHeight="72.0" prefWidth="75.0" styleClass="toggleButtonCircleEmpty" text="&lt;-">
+         <font>
+            <Font name="Consolas" size="22.0" />
+         </font>
+      </Button>
+      <TabPane layoutX="150.0" layoutY="45.0" prefHeight="635.0" prefWidth="1103.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Statistics">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="628.0" prefWidth="1115.0">
+                     <children>
+                        <Pane fx:id="paneStats" layoutX="64.0" layoutY="4.0" prefHeight="604.0" prefWidth="922.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="174.0" layoutX="15.0" layoutY="121.0" stroke="#faa504" strokeWidth="5.0" width="391.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="293.0" layoutX="17.0" layoutY="312.0" stroke="#faa504" strokeWidth="5.0" width="898.0" />
+                              <Label fx:id="lblStatsHeader1" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="126.0" prefHeight="58.0" prefWidth="391.0" styleClass="heading" text="Wins vs Losses" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="-32.0" endY="-59.0" layoutX="243.0" layoutY="252.0" startX="-32.0" startY="8.0" strokeWidth="5.0" styleClass="bgRect" />
+                              <Label fx:id="lblWins" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="183.0" prefHeight="88.0" prefWidth="169.0" styleClass="heading" text="0" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblLosses" alignment="CENTER" contentDisplay="CENTER" layoutX="230.0" layoutY="183.0" prefHeight="88.0" prefWidth="169.0" styleClass="heading" text="0" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="179.0" layoutX="594.0" layoutY="123.0" stroke="#faa504" strokeWidth="5.0" width="314.0" />
+                              <Label fx:id="lblStatsHeader11" alignment="CENTER" contentDisplay="CENTER" layoutX="555.0" layoutY="126.0" prefHeight="58.0" prefWidth="391.0" styleClass="heading" text="Quickest Win" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblQuickestWin" alignment="CENTER" contentDisplay="CENTER" layoutX="666.0" layoutY="183.0" prefHeight="88.0" prefWidth="169.0" styleClass="heading" text="0" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblStatsHeader111" contentDisplay="CENTER" layoutX="34.0" layoutY="327.0" prefHeight="58.0" prefWidth="391.0" styleClass="heading" text="Word History">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblWordHistory" alignment="TOP_LEFT" layoutX="28.0" layoutY="385.0" prefHeight="199.0" prefWidth="867.0" styleClass="predictionsText" text="Looks like you haven't played any games yet!" wrapText="true">
+                                 <font>
+                                    <Font name="Consolas" size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Badges">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab text="Word History">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</Pane>

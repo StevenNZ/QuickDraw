@@ -93,7 +93,7 @@
             </Label>
             <Pane fx:id="paneGameEnd" disable="true" layoutX="177.0" layoutY="-1.0" prefHeight="204.0" prefWidth="711.0" visible="false">
                <children>
-                  <Button fx:id="btnSaveDrawing" layoutX="418.0" layoutY="113.0" mnemonicParsing="false" onAction="#onSaveDrawing" prefHeight="46.0" prefWidth="211.0" style="-fx-background-color: #faa504;" text="Save Drawing">
+                  <Button fx:id="btnSaveDrawing" layoutX="418.0" layoutY="113.0" mnemonicParsing="false" onAction="#onSaveDrawing" prefHeight="50.0" prefWidth="284.0" style="-fx-background-color: #faa504;" text="Save Drawing">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -188,7 +188,7 @@
                   <Font name="Consolas" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="btnReturnMain" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#onBack" prefHeight="40.0" prefWidth="243.0" text="Back To Main Menu">
+            <Button fx:id="btnReturnMain" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="89.0" text="&lt;-">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
