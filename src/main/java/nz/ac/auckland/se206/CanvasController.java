@@ -93,7 +93,6 @@ public class CanvasController {
   public void initialize() throws ModelException, IOException {
 
     currentUser = UserSelectionController.users[UserProfile.currentUser];
-    randomCategory = currentUser.pickCategory();
 
     this.timeline =
         new Timeline(
