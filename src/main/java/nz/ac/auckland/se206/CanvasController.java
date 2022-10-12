@@ -145,7 +145,6 @@ public class CanvasController {
   public void initialize() throws ModelException, IOException {
 
     currentUser = UserSelectionController.users[UserProfile.currentUser];
-    randomCategory = currentUser.pickCategory();
 
     // Replace lblCategoryTxt on the canvas
     lblCategoryTxt.setText(this.randomCategory);
