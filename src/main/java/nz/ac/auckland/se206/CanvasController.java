@@ -87,19 +87,10 @@ public class CanvasController {
   private Image snapshot;
   private boolean isWin = false;
 
-  private Task<Void> backgroundTask =
-      new Task<Void>() { // run by background thread to not cause GUI freezing
-
-        @Override
-        protected Void call() throws Exception {
-
-          return null;
-        }
-      };
-
   private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
   private ScheduledFuture future;
 
+  // run by background thread to not cause GUI freezing
   Runnable backgroundThreadTask =
       () -> {
         canvasTimer--;
@@ -374,6 +365,7 @@ public class CanvasController {
             Stage stage = (Stage) canvas.getScene().getWindow();
             stage.setOnCloseRequest( // text to speech closes upon closing GUI
                 e -> {
+                  executor.shutdown();
                   Platform.exit();
                   speech.terminate();
                 });
