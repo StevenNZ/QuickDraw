@@ -32,6 +32,9 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 import nz.ac.auckland.se206.user.UserProfile;
@@ -360,6 +363,13 @@ public class CanvasController {
     Task<Void> textToSpeechTask = new Task<Void>() { // task run by a background thread
           @Override
           protected Void call() throws Exception {
+            String file = isWin ? "/sounds/win.wav" : "/sounds/lose.wav";
+            AudioInputStream audioInputStream =
+                AudioSystem.getAudioInputStream(this.getClass().getResource(file));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+
             TextToSpeech speech = new TextToSpeech();
             Stage stage = (Stage) canvas.getScene().getWindow();
             stage.setOnCloseRequest( // text to speech closes upon closing GUI
