@@ -1,6 +1,6 @@
 package nz.ac.auckland.se206.user;
 
-import com.opencsv.exceptions.CsvValidationException;
+import com.google.gson.Gson;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,9 +19,37 @@ public class UserProfile {
   private int totalLoss = 0;
   private int quickestWin = 100;
   private List<String> wordHistory = new ArrayList<>();
-  private List<String> availableEasyWords = new ArrayList<>();
-  private Image profilePic = null;
-  private ImageView imageView = null;
+  private List<String> availableWords = new ArrayList<>();
+  private transient Image profilePic = null;
+  private transient ImageView imageView = null;
+  private Difficulty wordDifficulty = Difficulty.NOTSET;
+  private Difficulty accuracyDifficulty = Difficulty.NOTSET;
+  private Difficulty timeDifficulty = Difficulty.NOTSET;
+  private Difficulty confidenceDifficulty = Difficulty.NOTSET;
+
+  public enum Difficulty {
+    NOTSET,
+    EASY,
+    MEDIUM,
+    HARD,
+    MASTER;
+
+    public static Difficulty toDifficulty(String word) {
+      switch (word) {
+        case "NOTSET":
+          return NOTSET;
+        case "EASY":
+          return EASY;
+        case "MEDIUM":
+          return MEDIUM;
+        case "HARD":
+          return HARD;
+        case "MASTER":
+          return MASTER;
+      }
+      throw new RuntimeException("Not a difficulty");
+    }
+  }
 
   public UserProfile() {
     String userDataLocation = ".profiles/user" + currentUser + ".json";
@@ -34,21 +62,10 @@ public class UserProfile {
         e.printStackTrace();
       }
     }
-
-    try {
-      initializeAvailableWords();
-    } catch (CsvValidationException | IOException e) {
-      e.printStackTrace();
-    }
   }
 
   public UserProfile(String name) {
     this.name = name;
-    try {
-      initializeAvailableWords();
-    } catch (CsvValidationException | IOException e) {
-      e.printStackTrace();
-    }
   }
 
   public void updateWin() {
@@ -119,13 +136,9 @@ public class UserProfile {
   }
 
   public void saveUserData() {
-    JSONObject userData = new JSONObject();
+    Gson gson = new Gson();
 
-    userData.put("name", this.name);
-    userData.put("totalWins", this.totalWins);
-    userData.put("totalLoss", this.totalLoss);
-    userData.put("quickestWin", this.quickestWin);
-    userData.put("wordHistory", this.wordHistory);
+    String userData = gson.toJson(this);
 
     try {
       UserFileHandler.saveUserData(userData, currentUser); // save user data into local file
@@ -144,16 +157,39 @@ public class UserProfile {
     this.totalLoss = (int) (long) userData.get("totalLoss");
     this.quickestWin = (int) (long) userData.get("quickestWin");
     this.wordHistory = (List<String>) userData.get("wordHistory");
+    this.wordDifficulty = Difficulty.toDifficulty((String) userData.get("wordDifficulty"));
+    this.accuracyDifficulty = Difficulty.toDifficulty((String) userData.get("accuracyDifficulty"));
+    this.timeDifficulty = Difficulty.toDifficulty((String) userData.get("timeDifficulty"));
+    this.confidenceDifficulty =
+        Difficulty.toDifficulty((String) userData.get("confidenceDifficulty"));
 
     this.profilePic = UserFileHandler.readProfileImage(currentUser);
   }
 
-  public void initializeAvailableWords() throws CsvValidationException, IOException {
-    List<String> easyWords;
+  private void initializeAvailableWords() {
+    List<String> allReleventWords;
 
-    easyWords = CategorySelector.getEasyWords(); // All easy words
+    this.availableWords.clear();
 
-    for (String category : easyWords) { // For each easy word
+    // Get words for the difficulty selected
+    switch (this.wordDifficulty) {
+      case EASY:
+        allReleventWords = CategorySelector.getEasyDifWords();
+        break;
+      case MEDIUM:
+        allReleventWords = CategorySelector.getMediumDifWords();
+        break;
+      case HARD:
+        allReleventWords = CategorySelector.getHardDifWords();
+        break;
+      case MASTER:
+        allReleventWords = CategorySelector.getMasterDifWords();
+        break;
+      default:
+        throw new RuntimeException("Not a recognised word difficulty");
+    }
+
+    for (String category : allReleventWords) { // For each word
       boolean found = false;
       for (String playedCategory : this.wordHistory) {
         if (category.equals(playedCategory)) { // Check if already played
@@ -162,28 +198,67 @@ public class UserProfile {
         }
       }
       if (!found) {
-        this.availableEasyWords.add(category);
+        this.availableWords.add(category);
       }
     }
 
-    // If played all easy words, they are all available to be played
-    if (this.availableEasyWords.size() == 0) {
-      availableEasyWords = easyWords;
+    // If played all possible words, they are all available to be played
+    if (this.availableWords.size() == 0) {
+      availableWords = allReleventWords;
     }
   }
 
-  public String pickEasyCategory() {
-    Random random = new Random();
-    int randNumber;
+  public String pickCategory() {
     String pickedCategory;
+    int randNumber = getRandomCategoryIndex();
 
-    randNumber = random.nextInt(availableEasyWords.size());
     pickedCategory =
-        this.availableEasyWords.get(
-            randNumber); // pick random entry from the list of easy categories
+        this.availableWords.get(randNumber); // pick random entry from the list of categories
 
-    this.availableEasyWords.remove(randNumber); // Remove from available Easy Words
+    this.availableWords.remove(randNumber); // Remove from available words
+
+    if (this.availableWords.size() == 0) {
+      initializeAvailableWords();
+    }
 
     return pickedCategory;
+  }
+
+  private int getRandomCategoryIndex() {
+    Random random = new Random();
+    return random.nextInt(availableWords.size()); // pick random entry from the list of categories
+  }
+
+  public void setWordDifficulty(Difficulty dif) {
+    this.wordDifficulty = dif;
+    initializeAvailableWords();
+  }
+
+  public Difficulty getWordDifficulty() {
+    return this.wordDifficulty;
+  }
+
+  public void setAccuracyDifficulty(Difficulty dif) {
+    this.accuracyDifficulty = dif;
+  }
+
+  public Difficulty getAccuracyDifficulty() {
+    return this.accuracyDifficulty;
+  }
+
+  public void setTimeDifficulty(Difficulty dif) {
+    this.timeDifficulty = dif;
+  }
+
+  public Difficulty getTimeDifficulty() {
+    return this.timeDifficulty;
+  }
+
+  public void setConfidenceDifficulty(Difficulty dif) {
+    this.confidenceDifficulty = dif;
+  }
+
+  public Difficulty getConfidenceDifficulty() {
+    return this.confidenceDifficulty;
   }
 }

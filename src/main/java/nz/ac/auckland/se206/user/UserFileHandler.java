@@ -13,7 +13,7 @@ import org.json.simple.parser.ParseException;
 
 public class UserFileHandler {
 
-  public static void saveUserData(JSONObject user, int userNumber) throws IOException {
+  public static void saveUserData(String userData, int userNumber) throws IOException {
 
     File profileFolder = new File(".profiles");
     String fileLocation = ".profiles/user" + userNumber + ".json";
@@ -28,7 +28,7 @@ public class UserFileHandler {
     // This writes the data to the json file
     FileWriter userFileWriter = new FileWriter(userFile, false);
 
-    userFileWriter.write(user.toJSONString());
+    userFileWriter.write(userData);
     userFileWriter.flush(); // Clears the data in the file writer
     userFileWriter.close(); // Closes the data stream
   }

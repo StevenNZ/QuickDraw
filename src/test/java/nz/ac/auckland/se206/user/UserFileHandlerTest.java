@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.user;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -16,7 +17,10 @@ public class UserFileHandlerTest {
     testUser.put("totalWins", 7);
     testUser.put("totalLoss", 3);
 
-    UserFileHandler.saveUserData(testUser, 10);
+    Gson gson = new Gson();
+    String userData = gson.toJson(testUser);
+
+    UserFileHandler.saveUserData(userData, 10);
   }
 
   @Test
