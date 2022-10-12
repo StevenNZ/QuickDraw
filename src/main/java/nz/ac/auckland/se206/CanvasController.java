@@ -202,6 +202,12 @@ public class CanvasController {
     this.canvasTimer =
         DEFAULT_SECONDS; // timer to be displayed and condition for the TimerTask ending
     future = executor.scheduleAtFixedRate(backgroundThreadTask, 1, 1, TimeUnit.SECONDS);
+    Stage stage = (Stage) canvas.getScene().getWindow();
+    stage.setOnCloseRequest( // text to speech closes upon closing GUI
+        e -> {
+          executor.shutdown();
+          Platform.exit();
+        });
 
     // Enable being able to edit the canvas and change pen colours
     paneEditCanvas.setDisable(false);
