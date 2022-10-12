@@ -1,52 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <Pane fx:id="backgroundPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.CanvasController">
    <children>
-      <Pane layoutX="25.0" layoutY="21.0" prefHeight="613.0" prefWidth="1237.0" />
       <ImageView fitHeight="752.0" fitWidth="1280.0" layoutY="-28.0">
          <image>
             <Image url="@../images/qd.png" />
          </image>
       </ImageView>
-      <Pane fx:id="paneButtons" layoutX="31.0" layoutY="641.0" prefHeight="5.0" prefWidth="1223.0">
-         <children>
-            <Button fx:id="btnReturnCanvas" disable="true" layoutX="998.0" layoutY="11.0" mnemonicParsing="false" onAction="#onBackToCanvas" prefHeight="40.0" prefWidth="211.0" text="Back To Canvas" visible="false">
-               <font>
-                  <Font name="Consolas" size="22.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnReturnMain" layoutX="22.0" layoutY="13.0" mnemonicParsing="false" onAction="#onBack" prefHeight="40.0" prefWidth="243.0" text="Back To Main Menu">
-               <font>
-                  <Font name="Consolas" size="22.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="288.0" layoutX="83.0" layoutY="307.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="528.0" layoutX="357.0" layoutY="64.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="804.0" />
-      <Rectangle fx:id="rectUser2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="230.0" layoutX="83.0" layoutY="64.0" onMouseClicked="#onStartCanvas" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
-      <ImageView fx:id="imageUser2" fitHeight="156.0" fitWidth="178.0" layoutX="112.0" layoutY="87.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="txtPlayer2" layoutX="88.0" layoutY="270.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player" textAlignment="CENTER" wrappingWidth="224.9814453125" />
-      <Button fx:id="btnReturnMain1" layoutX="100.0" layoutY="536.0" mnemonicParsing="false" onAction="#onBack" prefHeight="40.0" prefWidth="200.0" text="See Stats">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="300.0" layoutX="101.0" layoutY="339.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="540.0" layoutX="376.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="804.0" />
+      <Rectangle fx:id="rectUser2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="230.0" layoutX="101.0" layoutY="96.0" onMouseClicked="#onStartCanvas" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+      <ImageView fx:id="imageUser2" fitHeight="156.0" fitWidth="178.0" layoutX="130.0" layoutY="119.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="txtPlayer2" layoutX="106.0" layoutY="302.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+      <Button fx:id="btnReturnMain1" layoutX="118.0" layoutY="568.0" mnemonicParsing="false" onAction="#onBack" prefHeight="40.0" prefWidth="200.0" text="See Stats">
          <font>
             <Font name="Consolas" size="22.0" />
          </font>
       </Button>
-      <ImageView fx:id="imageUser21" fitHeight="156.0" fitWidth="178.0" layoutX="135.0" layoutY="360.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageUser21" fitHeight="156.0" fitWidth="178.0" layoutX="153.0" layoutY="392.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fire.png" />
          </image>
       </ImageView>
-      <Text fx:id="txtPlayer21" layoutX="88.0" layoutY="340.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Your Current Streak!" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+      <Text fx:id="txtPlayer21" layoutX="106.0" layoutY="372.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Your Current Streak!" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="386.0" layoutY="111.0" prefHeight="86.0" prefWidth="783.0" styleClass="title" stylesheets="@../css/application.css" text="Game Modes" textAlignment="CENTER">
+         <font>
+            <Font name="Ink Free" size="87.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="750.0" layoutY="236.0" prefHeight="263.0" prefWidth="252.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="75.0" minHeight="30.0" prefHeight="59.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="72.0" minHeight="9.0" prefHeight="49.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="61.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" selected="true" styleClass="toggleButtonCircleEmpty">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <toggleGroup>
+                  <ToggleGroup fx:id="accuracyGroup" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$accuracyGroup" GridPane.columnIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$accuracyGroup" GridPane.columnIndex="2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$accuracyGroup" GridPane.columnIndex="3">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" selected="true" styleClass="toggleButtonCircleEmpty" GridPane.rowIndex="3">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <toggleGroup>
+                  <ToggleGroup fx:id="confidenceGroup" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$confidenceGroup" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <toggleGroup>
+                  <ToggleGroup fx:id="timeGroup" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$timeGroup" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" selected="true" styleClass="toggleButtonCircleEmpty" toggleGroup="$timeGroup" GridPane.rowIndex="2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" selected="true" styleClass="toggleButtonCircleEmpty" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <toggleGroup>
+                  <ToggleGroup fx:id="wordsGroup" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$wordsGroup" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$wordsGroup" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$wordsGroup" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$confidenceGroup" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$timeGroup" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+            <ToggleButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$confidenceGroup" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToggleButton>
+         </children>
+      </GridPane>
+      <Text fx:id="txtPlayer22" layoutX="475.0" layoutY="287.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Accuracy" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+      <Text fx:id="txtPlayer221" layoutX="468.0" layoutY="354.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Words" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+      <Text fx:id="txtPlayer2211" layoutX="468.0" layoutY="417.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Time" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+      <Text fx:id="txtPlayer22111" layoutX="468.0" layoutY="474.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Confidence" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+      <Button fx:id="btnReturnMain11" layoutX="420.0" layoutY="568.0" mnemonicParsing="false" onAction="#onBack" prefHeight="40.0" prefWidth="200.0" text="Normal">
+         <font>
+            <Font name="Consolas" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnReturnMain111" layoutX="660.0" layoutY="568.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Hidden Word">
+         <font>
+            <Font name="Consolas" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnReturnMain1111" layoutX="929.0" layoutY="568.0" mnemonicParsing="false" onAction="#onBack" prefHeight="40.0" prefWidth="200.0" text="Zen">
+         <font>
+            <Font name="Consolas" size="22.0" />
+         </font>
+      </Button>
+      <Text fx:id="txtPlayer23" layoutX="106.0" layoutY="525.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="1" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+      <Button fx:id="btnReturnMain" layoutX="25.0" layoutY="17.0" mnemonicParsing="false" onAction="#onBack" prefHeight="65.0" prefWidth="63.0" styleClass="toggleButtonCircleEmpty" text="&lt;-">
+         <font>
+            <Font name="Consolas" size="22.0" />
+         </font>
+      </Button>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
