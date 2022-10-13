@@ -22,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import nz.ac.auckland.se206.user.UserProfile;
 
@@ -115,37 +116,19 @@ public class UserSelectionController {
 
   @FXML
   private void onStartCanvas(Event event) {
+    Node node = (Node) event.getSource();
+    Stage stage = (Stage) node.getScene().getWindow();
     String id =
-        ((Node) event.getSource()).getId().equals("btnGuest")
-            ? ((Node) event.getSource()).getParent().getId()
-            : ((Node) event.getSource()).getParent().getParent().getId();
+        node.getId().equals("btnGuest")
+            ? node.getParent().getId()
+            : node.getParent().getParent().getId();
     // checks for parent of event source
     UserProfile.currentUser = getProfileById(id);
-    Node node = (Node) event.getSource();
+    stage.setUserData(users[UserProfile.currentUser]);
     Scene sceneOfNode = node.getScene();
     sceneOfNode.setRoot(
         SceneManager.getUiRoot(
-            getNewRoot(UserProfile.currentUser))); // switch to currentUser's canvas
-  }
-
-  private SceneManager.AppUi getNewRoot(int id) {
-    switch (id) { // returns the canvas for corresponding ID
-      case 1:
-        return SceneManager.AppUi.CANVAS_PLAYER1;
-      case 2:
-        return SceneManager.AppUi.CANVAS_PLAYER2;
-      case 3:
-        return SceneManager.AppUi.CANVAS_PLAYER3;
-      case 4:
-        return SceneManager.AppUi.CANVAS_PLAYER4;
-      case 5:
-        return SceneManager.AppUi.CANVAS_PLAYER5;
-      case 6:
-        return SceneManager.AppUi.CANVAS_PLAYER6;
-
-      default:
-        return SceneManager.AppUi.CANVAS; // defaults to guest canvas
-    }
+            SceneManager.AppUi.GAME_SELECTION)); // switch to currentUser's canvas
   }
 
   @FXML

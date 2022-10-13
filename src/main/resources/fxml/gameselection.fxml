@@ -33,7 +33,7 @@
             <Font name="Consolas" size="22.0" />
          </font>
       </Button>
-      <ImageView fitHeight="156.0" fitWidth="178.0" layoutX="153.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="fire" fitHeight="156.0" fitWidth="178.0" layoutX="153.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fire.png" />
          </image>
@@ -50,9 +50,9 @@
             <Font name="Consolas" size="22.0" />
          </font>
       </Button>
-      <Pane layoutX="423.0" layoutY="199.0" prefHeight="386.0" prefWidth="676.0">
+      <Pane fx:id="paneModes" layoutX="423.0" layoutY="199.0" prefHeight="386.0" prefWidth="676.0">
          <children>
-            <Button layoutX="221.0" layoutY="83.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Normal">
+            <Button fx:id="btnNormal" layoutX="221.0" layoutY="83.0" mnemonicParsing="false" onAction="#onNormal" prefHeight="50.0" prefWidth="235.0" text="Normal">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
@@ -187,7 +187,7 @@
             <Text layoutX="286.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Medium" textAlignment="CENTER" wrappingWidth="150.9814453125" />
             <Text layoutX="374.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Hard" textAlignment="CENTER" wrappingWidth="150.9814453125" />
             <Text layoutX="462.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Master" textAlignment="CENTER" wrappingWidth="150.9814453125" />
-            <Button layoutX="232.0" layoutY="321.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Start Game">
+            <Button fx:id="btnStartGame" layoutX="232.0" layoutY="321.0" mnemonicParsing="false" onAction="#onStartGame" prefHeight="50.0" prefWidth="235.0" text="Start Game">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
