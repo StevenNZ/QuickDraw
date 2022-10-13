@@ -89,6 +89,7 @@ public class CanvasController {
   private int canvasTimer;
   private Image snapshot;
   private boolean isWin = false;
+  private int categoryIndex = 340;
 
   private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
   private ScheduledFuture future;
@@ -150,7 +151,8 @@ public class CanvasController {
     currentUser = UserSelectionController.users[UserProfile.currentUser];
 
     // Replace lblCategoryTxt on the canvas
-    // lblCategoryTxt.setText(this.randomCategory);
+    //    randomCategory = "circle";
+    lblCategoryTxt.setText(this.randomCategory);
 
     graphic = canvas.getGraphicsContext2D();
     graphic.setLineWidth(10);
@@ -238,12 +240,13 @@ public class CanvasController {
    */
   private String onPredict() throws TranslateException {
     List<Classifications.Classification> predictions =
-        model.getPredictions(getBinaryImage(snapshot), 10);
-    final long start = System.currentTimeMillis();
+        model.getPredictions(getBinaryImage(snapshot), 340);
+    List<Classifications.Classification> predictionsTen = predictions.subList(0, 10);
+    trackCategory(predictions);
 
     // Check the top 3 predictions whether they are what the word is.
     for (int i = 0; i < 3; i++) {
-      String predictionClassName = predictions.get(i).getClassName();
+      String predictionClassName = predictionsTen.get(i).getClassName();
       // issue arose that underscores replaced spaces so need to replace them again for both types
       predictionClassName = predictionClassName.replaceAll("_", " ");
       if (randomCategory.equals(predictionClassName)) {
@@ -253,7 +256,16 @@ public class CanvasController {
       }
     }
 
-    return getStringOfPredictions(predictions).toString();
+    return getStringOfPredictions(predictionsTen).toString();
+  }
+
+  private void trackCategory(List<Classifications.Classification> predictions) {
+    for (int i = 0; i < predictions.size(); i++) {
+      if (predictions.get(i).getClassName().equals(randomCategory)) {
+        categoryIndex = i;
+        break;
+      }
+    }
   }
 
   /**
