@@ -28,6 +28,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -65,6 +67,7 @@ public class CanvasController {
   @FXML private Label lblLosses;
   @FXML private Label lblQuickestWin;
   @FXML private Label lblWordHistory;
+  @FXML private Label lblCategoryIndex;
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
@@ -78,6 +81,9 @@ public class CanvasController {
   @FXML private Pane paneStats;
   @FXML private ToggleButton togglePen;
   @FXML private ToggleButton toggleEraser;
+  @FXML private Polygon greenPolygon;
+  @FXML private Polygon redPolygon;
+  @FXML private Rectangle neutralRectangle;
   private GraphicsContext graphic;
   private DoodlePrediction model;
   private String randomCategory;
@@ -261,8 +267,26 @@ public class CanvasController {
 
   private void trackCategory(List<Classifications.Classification> predictions) {
     for (int i = 0; i < predictions.size(); i++) {
-      if (predictions.get(i).getClassName().equals(randomCategory)) {
-        categoryIndex = i;
+      if (predictions.get(i).getClassName().replaceAll("_", " ").equals(randomCategory)) {
+        int finalI = i;
+        Platform.runLater(
+            () -> {
+              if (finalI < categoryIndex) {
+                greenPolygon.setVisible(true);
+                redPolygon.setVisible(false);
+                neutralRectangle.setVisible(false);
+              } else if (finalI > categoryIndex) {
+                redPolygon.setVisible(true);
+                greenPolygon.setVisible(false);
+                neutralRectangle.setVisible(false);
+              } else {
+                neutralRectangle.setVisible(true);
+                redPolygon.setVisible(false);
+                greenPolygon.setVisible(false);
+              }
+              lblCategoryIndex.setText(String.valueOf(finalI + 1));
+              categoryIndex = finalI;
+            });
         break;
       }
     }
