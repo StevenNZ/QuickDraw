@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="backgroundPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.CanvasController">
+<Pane fx:id="backgroundPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.GameSelectionController">
    <children>
       <ImageView fitHeight="752.0" fitWidth="1280.0" layoutY="-28.0">
          <image>
@@ -25,44 +25,44 @@
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="300.0" layoutX="101.0" layoutY="339.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="540.0" layoutX="376.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="804.0" />
-      <Rectangle fx:id="rectUser2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="230.0" layoutX="101.0" layoutY="96.0" onMouseClicked="#onStartCanvas" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
-      <ImageView fx:id="imageUser2" fitHeight="156.0" fitWidth="178.0" layoutX="130.0" layoutY="119.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="txtPlayer2" layoutX="106.0" layoutY="302.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player" textAlignment="CENTER" wrappingWidth="224.9814453125" />
-      <Button fx:id="btnReturnMain1" layoutX="118.0" layoutY="568.0" mnemonicParsing="false" onAction="#onBack" prefHeight="40.0" prefWidth="200.0" text="See Stats">
+      <Rectangle fx:id="rectUser2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="230.0" layoutX="101.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
+      <ImageView fx:id="imageProfile" fitHeight="156.0" fitWidth="178.0" layoutX="130.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="txtName" layoutX="106.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+      <Button layoutX="118.0" layoutY="568.0" mnemonicParsing="false" onAction="#onBack" prefHeight="40.0" prefWidth="200.0" text="See Stats">
          <font>
             <Font name="Consolas" size="22.0" />
          </font>
       </Button>
-      <ImageView fx:id="imageUser21" fitHeight="156.0" fitWidth="178.0" layoutX="153.0" layoutY="392.0" onMouseClicked="#onStartCanvas" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="fire" fitHeight="156.0" fitWidth="178.0" layoutX="153.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fire.png" />
          </image>
       </ImageView>
-      <Text fx:id="txtPlayer21" layoutX="106.0" layoutY="372.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Your Current Streak!" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+      <Text layoutX="106.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Your Current Streak!" textAlignment="CENTER" wrappingWidth="224.9814453125" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="386.0" layoutY="111.0" prefHeight="86.0" prefWidth="783.0" styleClass="title" stylesheets="@../css/application.css" text="Game Modes" textAlignment="CENTER">
          <font>
             <Font name="Ink Free" size="87.0" />
          </font>
       </Label>
-      <Text fx:id="txtPlayer23" layoutX="106.0" layoutY="525.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="1" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+      <Text fx:id="txtStreak" layoutX="106.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="1" textAlignment="CENTER" wrappingWidth="224.9814453125" />
       <Button fx:id="btnReturnMain" layoutX="25.0" layoutY="17.0" mnemonicParsing="false" onAction="#onBack" prefHeight="65.0" prefWidth="63.0" styleClass="toggleButtonCircleEmpty" text="&lt;-">
          <font>
             <Font name="Consolas" size="22.0" />
          </font>
       </Button>
-      <Pane layoutX="423.0" layoutY="199.0" prefHeight="386.0" prefWidth="676.0">
+      <Pane fx:id="paneModes" layoutX="423.0" layoutY="199.0" prefHeight="386.0" prefWidth="676.0">
          <children>
-            <Button fx:id="btnReturnMain11" layoutX="221.0" layoutY="83.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Normal">
+            <Button fx:id="btnNormal" layoutX="221.0" layoutY="83.0" mnemonicParsing="false" onAction="#onNormal" prefHeight="50.0" prefWidth="235.0" text="Normal">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="btnReturnMain111" layoutX="221.0" layoutY="178.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Hidden Word">
+            <Button layoutX="221.0" layoutY="178.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Hidden Word">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="btnReturnMain1111" layoutX="221.0" layoutY="270.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Zen">
+            <Button layoutX="221.0" layoutY="270.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Zen">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
@@ -179,15 +179,15 @@
                   </ToggleButton>
                </children>
             </GridPane>
-            <Text fx:id="txtPlayer22" layoutX="14.0" layoutY="97.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Accuracy" textAlignment="CENTER" wrappingWidth="224.9814453125" />
-            <Text fx:id="txtPlayer221" layoutY="166.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Words" textAlignment="CENTER" wrappingWidth="224.9814453125" />
-            <Text fx:id="txtPlayer2211" layoutY="229.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Time" textAlignment="CENTER" wrappingWidth="224.9814453125" />
-            <Text fx:id="txtPlayer22111" layoutX="14.0" layoutY="294.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Confidence" textAlignment="CENTER" wrappingWidth="224.9814453125" />
-            <Text fx:id="txtPlayer222" layoutX="199.0" layoutY="43.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Easy" textAlignment="CENTER" wrappingWidth="150.9814453125" />
-            <Text fx:id="txtPlayer2221" layoutX="286.0" layoutY="45.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Medium" textAlignment="CENTER" wrappingWidth="150.9814453125" />
-            <Text fx:id="txtPlayer22211" layoutX="374.0" layoutY="45.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Hard" textAlignment="CENTER" wrappingWidth="150.9814453125" />
-            <Text fx:id="txtPlayer222111" layoutX="462.0" layoutY="45.0" onMouseClicked="#onStartCanvas" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Master" textAlignment="CENTER" wrappingWidth="150.9814453125" />
-            <Button fx:id="btnReturnMain112" layoutX="232.0" layoutY="321.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Start Game">
+            <Text layoutX="14.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Accuracy" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+            <Text layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Words" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+            <Text layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Time" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+            <Text layoutX="14.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Confidence" textAlignment="CENTER" wrappingWidth="224.9814453125" />
+            <Text layoutX="199.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Easy" textAlignment="CENTER" wrappingWidth="150.9814453125" />
+            <Text layoutX="286.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Medium" textAlignment="CENTER" wrappingWidth="150.9814453125" />
+            <Text layoutX="374.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Hard" textAlignment="CENTER" wrappingWidth="150.9814453125" />
+            <Text layoutX="462.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Master" textAlignment="CENTER" wrappingWidth="150.9814453125" />
+            <Button fx:id="btnStartGame" layoutX="232.0" layoutY="321.0" mnemonicParsing="false" onAction="#onStartGame" prefHeight="50.0" prefWidth="235.0" text="Start Game">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>

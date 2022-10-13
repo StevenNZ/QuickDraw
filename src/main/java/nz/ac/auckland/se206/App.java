@@ -45,7 +45,9 @@ public class App extends Application {
           Platform.exit();
         });
     SceneManager.addUi(SceneManager.AppUi.MAINMENU, loadFxml("mainmenu"));
+
     SceneManager.addUi(SceneManager.AppUi.USER_SELECTION, loadFxml("userselection"));
+
     UserProfile.currentUser = 0;
     SceneManager.addUi(SceneManager.AppUi.CANVAS, loadFxml("canvas"));
 
@@ -55,6 +57,8 @@ public class App extends Application {
 
       SceneManager.addUi(sceneName, loadFxml("canvas"));
     }
+
+    SceneManager.addUi(SceneManager.AppUi.GAME_SELECTION, loadFxml("gameselection"));
 
     final Scene mainMenuScene =
         new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU), 1280, 720);
