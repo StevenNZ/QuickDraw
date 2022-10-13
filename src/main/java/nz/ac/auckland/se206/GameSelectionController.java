@@ -20,6 +20,7 @@ public class GameSelectionController {
 
   public void initialize() {
     currentUser = UserSelectionController.users[UserProfile.currentUser];
+    System.out.println(UserProfile.currentUser);
   }
 
   @FXML
@@ -44,10 +45,11 @@ public class GameSelectionController {
     Node node = (Node) event.getSource();
     Stage stage = (Stage) node.getScene().getWindow();
     UserProfile user = (UserProfile) stage.getUserData();
-    // user.setAccuracyDifficulty();
-    // user.setConfidenceDifficulty();
-    // user.setTimeDifficulty();
-    // user.setWordDifficulty();
+    // TODO: CHANGE THIS
+    user.setAccuracyDifficulty(UserProfile.Difficulty.EASY);
+    user.setConfidenceDifficulty(UserProfile.Difficulty.EASY);
+    user.setTimeDifficulty(UserProfile.Difficulty.EASY);
+    user.setWordDifficulty(UserProfile.Difficulty.EASY);
     // Initialise words
 
     // Go to player canvas

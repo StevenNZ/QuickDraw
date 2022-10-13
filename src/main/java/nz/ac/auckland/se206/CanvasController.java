@@ -199,6 +199,10 @@ public class CanvasController {
     graphic.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
   }
 
+  /**
+   * On start timer starts the timer and also the ability to play the game while hidign the ability
+   * to go back to the main menu
+   */
   @FXML
   private void onStartTimer() {
     this.canvasTimer =
@@ -252,6 +256,10 @@ public class CanvasController {
     return getStringOfPredictions(predictions).toString();
   }
 
+  /**
+   * This will be deprecated soon but shows stat page and hides canvas page. Updates the stats
+   * labels
+   */
   @FXML
   private void onViewStats() {
     // Update Label for wins
@@ -281,6 +289,7 @@ public class CanvasController {
     paneStats.setVisible(true);
   }
 
+  /** This will be deprecated soon but not before the check hides stat page and shows canvas page */
   @FXML
   private void onBackToCanvas() {
     // Shows the View Statistics
@@ -296,6 +305,11 @@ public class CanvasController {
     paneCanvas.setVisible(true);
   }
 
+  /**
+   * When called, onSaveDrawing brings up a file chooser to decide where to save the drawing
+   *
+   * @throws IOException
+   */
   @FXML
   private void onSaveDrawing() throws IOException {
     FileChooser fileChooser = new FileChooser();
@@ -312,6 +326,7 @@ public class CanvasController {
     }
   }
 
+  /** When a new game is clicked, the board is reset to play a new game. */
   @FXML
   private void onNewGameClicked() {
     reset();
@@ -365,6 +380,9 @@ public class CanvasController {
     graphic.clearRect(e.getX() - size / 2, e.getY() - size / 2, size, size);
   }
 
+  /**
+   * Creates a Text-To-Speech class on win and loss. Also ensures the app gets closed down correctly
+   */
   private void callTextToSpeech() {
     Task<Void> textToSpeechTask = new Task<Void>() { // task run by a background thread
           @Override
@@ -393,7 +411,9 @@ public class CanvasController {
     textToSpeechThread.start();
   }
 
-  /** Reset the panes and timer */
+  /**
+   * Reset the panes and timer It has no parameters and makes the start timer button visible again
+   */
   private void reset() {
     // Hide Game End Pane
     paneGameEnd.setVisible(false);
@@ -492,7 +512,12 @@ public class CanvasController {
     Scene sceneOfButton = button.getScene();
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU));
   }
-
+  /**
+   * This method retreives a binary image of the canvas and returns a binary version of the image
+   *
+   * @param snapshot snapshot of the canvas
+   * @return imageBinary - a binary version of the snapshot
+   */
   private BufferedImage getBinaryImage(Image snapshot) {
     final BufferedImage image = SwingFXUtils.fromFXImage(snapshot, null);
 
