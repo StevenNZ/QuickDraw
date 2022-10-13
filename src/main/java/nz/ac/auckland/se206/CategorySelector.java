@@ -6,8 +6,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/** This class helps select the next category for the user depending on their difficulty choices */
 public class CategorySelector {
 
+  /**
+   * Get words retrieves all the words from the CSV file reader and adds them to the categories
+   *
+   * @param category
+   * @return
+   */
   private static ArrayList<String> getWords(String category) {
 
     ArrayList<String> categories = new ArrayList<String>();
@@ -33,10 +40,19 @@ public class CategorySelector {
     return categories;
   }
 
+  /**
+   * Retrieves the list of all of the Easy words from the CSV file
+   *
+   * @return and arraylist of easy words
+   */
   public static ArrayList<String> getEasyDifWords() {
     return getWords("E");
   }
-
+  /**
+   * Retrieves the list of all of the Easy and Medium words from the CSV file
+   *
+   * @return an array list
+   */
   public static ArrayList<String> getMediumDifWords() {
     ArrayList<String> returnCategories = new ArrayList<String>();
 
@@ -46,6 +62,11 @@ public class CategorySelector {
     return returnCategories;
   }
 
+  /**
+   * Retrieves the list of all of the Easy Medium and hard words from the CSV file
+   *
+   * @return an array list
+   */
   public static ArrayList<String> getHardDifWords() {
     ArrayList<String> returnCategories = new ArrayList<String>();
 
@@ -55,7 +76,11 @@ public class CategorySelector {
 
     return returnCategories;
   }
-
+  /**
+   * Retrieves the list of all of the Hard words from the CSV file
+   *
+   * @return an array list of hard words
+   */
   public static ArrayList<String> getMasterDifWords() {
     return getWords("H");
   }
