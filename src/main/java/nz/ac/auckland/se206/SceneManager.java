@@ -5,8 +5,9 @@ import javafx.scene.Parent;
 
 public class SceneManager {
   public enum AppUi {
-    MAINMENU(-2),
-    CANVAS(-1),
+    MAINMENU(-3),
+    CANVAS(-2),
+    GAME_SELECTION(-1),
     USER_SELECTION(0),
     CANVAS_PLAYER1(1),
     CANVAS_PLAYER2(2),
