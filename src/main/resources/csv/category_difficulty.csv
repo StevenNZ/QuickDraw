@@ -1,4 +1,3 @@
-aircraft carrier,H
 airplane,E
 alarm clock,M
 ambulance,M
@@ -161,14 +160,12 @@ kangaroo,M
 key,E
 keyboard,E
 knee,M
-knife,E
 ladder,E
 lantern,E
 laptop,H
 leaf,E
 leg,M
 light bulb,E
-lighter,M
 lighthouse,M
 lightning,E
 line,E
@@ -241,7 +238,6 @@ rainbow,E
 rake,M
 remote control,M
 rhinoceros,M
-rifle,M
 river,M
 roller coaster,M
 rollerskates,M
@@ -298,7 +294,6 @@ swan,E
 sweater,H
 swing set,H
 sword,E
-syringe,E
 table,E
 teapot,E
 teddy-bear,E
