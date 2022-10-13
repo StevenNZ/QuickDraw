@@ -20,6 +20,7 @@ public class GameSelectionController {
 
   public void initialize() {
     currentUser = UserSelectionController.users[UserProfile.currentUser];
+    System.out.println(UserProfile.currentUser);
   }
 
   @FXML
