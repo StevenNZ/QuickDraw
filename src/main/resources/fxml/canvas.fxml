@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -86,7 +87,7 @@
                   <Font name="Ink Free" size="27.0" />
                </font>
             </Label>
-            <Label fx:id="lblTopTenGuesses" alignment="TOP_LEFT" layoutX="953.0" layoutY="244.0" prefHeight="321.0" prefWidth="249.0" styleClass="predictionsText" text="Your top 10 guesses to your drawing will appear here!" wrapText="true">
+            <Label fx:id="lblTopTenGuesses" alignment="TOP_LEFT" layoutX="953.0" layoutY="288.0" prefHeight="277.0" prefWidth="249.0" styleClass="predictionsText" text="Your top 10 guesses to your drawing will appear here!" wrapText="true">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
@@ -129,6 +130,14 @@
                   </Label>
                </children>
             </Pane>
+            <Polygon fx:id="greenPolygon" fill="#29e125" layoutX="1020.0" layoutY="265.0" points="-21.0, 15.0, 14.0, 15.0, -3.0, -18.0" stroke="#34a13b" strokeType="INSIDE" />
+            <Label fx:id="lblCategoryIndex" alignment="CENTER" contentDisplay="CENTER" layoutX="1047.0" layoutY="244.0" prefHeight="40.0" prefWidth="70.0" text="000">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="neutralPolygon" arcHeight="5.0" arcWidth="5.0" fill="#c3c3c3" height="11.0" layoutX="999.0" layoutY="259.0" stroke="#a4a4a4" strokeType="INSIDE" width="35.0" />
+            <Polygon fx:id="redPolygon" fill="#ff5d5d" layoutX="1030.0" layoutY="243.0" points="-13.0, 39.0, 5.0, 5.0, -31.0, 5.0" stroke="#c93b3b" strokeType="INSIDE" />
          </children>
       </Pane>
       <Pane fx:id="paneStats" disable="true" layoutX="199.0" layoutY="27.0" prefHeight="604.0" prefWidth="922.0" visible="false">
