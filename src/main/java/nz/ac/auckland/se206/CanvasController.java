@@ -150,7 +150,7 @@ public class CanvasController {
     currentUser = UserSelectionController.users[UserProfile.currentUser];
 
     // Replace lblCategoryTxt on the canvas
-    lblCategoryTxt.setText(this.randomCategory);
+    // lblCategoryTxt.setText(this.randomCategory);
 
     graphic = canvas.getGraphicsContext2D();
     graphic.setLineWidth(10);

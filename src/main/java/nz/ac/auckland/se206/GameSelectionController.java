@@ -7,15 +7,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.user.UserProfile;
 
 public class GameSelectionController {
-  @FXML private ImageView fire;
+  @FXML private ImageView imageProfile;
   @FXML private Pane paneModes;
   @FXML private Pane normalModeSelection;
+  @FXML private Text txtName;
+  private UserProfile currentUser;
 
-  private void initialize() {}
+  public void initialize() {
+    currentUser = UserSelectionController.users[UserProfile.currentUser];
+  }
 
   @FXML
   private void onBack(Event event) {
