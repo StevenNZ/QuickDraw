@@ -54,7 +54,6 @@ public class GameSelectionController {
     // Initialise words
 
     // Go to player canvas
-    App.canvasInstances.get(UserProfile.currentUser).enableHiddenWord();
     node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
   }
 
@@ -76,6 +75,13 @@ public class GameSelectionController {
       default:
         return SceneManager.AppUi.CANVAS; // defaults to guest canvas
     }
+  }
+
+  @FXML
+  private void onZenMode(Event event) {
+    gameMode = "hidden";
+    App.canvasInstances.get(UserProfile.currentUser).enableHiddenWord();
+    onStartGame(event);
   }
 
   //  private void receiveData(){

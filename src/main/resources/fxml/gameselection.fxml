@@ -57,7 +57,7 @@
                   <Font name="Consolas" size="22.0" />
                </font>
             </Button>
-            <Button layoutX="221.0" layoutY="178.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Hidden Word">
+            <Button layoutX="221.0" layoutY="178.0" mnemonicParsing="false" onAction="#onZenMode" prefHeight="50.0" prefWidth="235.0" text="Hidden Word">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>

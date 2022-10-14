@@ -59,6 +59,9 @@ import nz.ac.auckland.se206.user.UserProfile;
  */
 public class CanvasController {
   private static final int DEFAULT_SECONDS = 60;
+  protected static String randomCategory;
+  private static String definition;
+
   @FXML private Button btnSaveDrawing;
   @FXML private Button btnStartTimer;
   @FXML private Canvas canvas;
@@ -94,7 +97,6 @@ public class CanvasController {
   @FXML private TextFlow txtFlow;
   private GraphicsContext graphic;
   private DoodlePrediction model;
-  private String randomCategory;
   private boolean isStartPredictions = false;
   private UserProfile currentUser;
   private String gameoverString;
@@ -394,6 +396,11 @@ public class CanvasController {
       currentUser.updateLoss();
     }
     currentUser.saveUserData();
+    randomCategory = currentUser.pickCategory();
+    // get new definition
+    if (GameSelectionController.gameMode.equals("hidden")) {
+      searchDefinition();
+    }
     // Change labels to display win or loss
     lblWinOrLoss.setText(gameoverString);
     // Make buttons visible to save the drawing and reset appear.
@@ -461,16 +468,24 @@ public class CanvasController {
     paneGameEnd.setVisible(false);
     // Clear the canvas
     onClear();
-    randomCategory = currentUser.pickCategory();
     // Replace lblCategoryTxt on the canvas
-    lblCategoryTxt.setText(this.randomCategory);
+    lblCategoryTxt.setText(randomCategory);
     // Hide category display information
-    paneCategories.setVisible(true);
+    if (GameSelectionController.gameMode.equals("hidden")) {
+      lblDefinition.setText(definition);
+      paneDefinition.setVisible(true);
+    } else {
+      paneCategories.setVisible(true);
+    }
     btnStartTimer.setVisible(true);
     btnStartTimer.setDisable(false);
     clearButton.setVisible(true);
     lblClickStartTimer.setVisible(true);
-    lblTopTenGuesses.setText("Your top 10 guesses to your drawing will appear here!");
+    txtFlow.getChildren().setAll(new Text("Your top 10 guesses to your drawing will appear here!"));
+    greenPolygon.setVisible(false);
+    redPolygon.setVisible(false);
+    neutralRectangle.setVisible(true);
+    lblCategoryIndex.setText("000");
 
     // Reset the timer
     this.canvasTimer = DEFAULT_SECONDS;
@@ -579,40 +594,35 @@ public class CanvasController {
   }
 
   protected void enableHiddenWord() {
+
     paneDefinition.setVisible(true);
     paneCategories.setVisible(false);
+    lblDefinition.setText(definition);
+  }
 
+  protected void searchDefinition() {
     Task<Void> definitionTask = new Task<Void>() { // task run by a background thread
           @Override
           protected Void call() throws Exception {
-            String definition = searchDefinition();
-            System.out.println(definition);
-            Platform.runLater(
-                () -> {
-                  lblDefinition.setText(definition);
-                });
+            String definition = "none";
+
+            while (definition.equals("none")) {
+              try {
+                definition = Dictionary.searchWordInfo(randomCategory);
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+              if (definition.equals("none")) {
+                randomCategory = "giraffe";
+                // TODO: get new random category
+              }
+            }
+            CanvasController.definition = definition;
             return null;
           }
         };
     Thread definitionThread =
         new Thread(definitionTask); // creating new thread for text to speech task
     definitionThread.start();
-  }
-
-  private String searchDefinition() {
-    String definition = "none";
-
-    while (definition.equals("none")) {
-      try {
-        definition = Dictionary.searchWordInfo(randomCategory);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-      if (definition.equals("none")) {
-        randomCategory = "giraffe";
-        // TODO: get new random category
-      }
-    }
-    return definition;
   }
 }

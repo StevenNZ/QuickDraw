@@ -127,6 +127,7 @@ public class UserSelectionController {
     System.out.println(UserProfile.currentUser);
     stage.setUserData(users[UserProfile.currentUser]);
     Scene sceneOfNode = node.getScene();
+    App.canvasInstances.get(UserProfile.currentUser).searchDefinition();
     sceneOfNode.setRoot(
         SceneManager.getUiRoot(
             SceneManager.AppUi.GAME_SELECTION)); // switch to currentUser's canvas
