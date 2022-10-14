@@ -72,9 +72,11 @@ public class CanvasController {
   @FXML private Label lblQuickestWin;
   @FXML private Label lblWordHistory;
   @FXML private Label lblCategoryIndex;
+  @FXML private Label lblDefinition;
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
+  @FXML private Pane paneDefinition;
   @FXML private Button clearButton;
   @FXML private Button btnStats;
   @FXML private Button btnReturnCanvas;
