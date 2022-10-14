@@ -101,6 +101,7 @@ public class CanvasController {
   private boolean isWin = false;
   private int categoryIndex = 340;
   private int accuracyLevel;
+  private double confidenceLevel;
 
   private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
   private ScheduledFuture future;
@@ -251,13 +252,16 @@ public class CanvasController {
 
     // Check the top predictions if they are what the word is.
     for (int i = 0; i < accuracyLevel; i++) {
+      System.out.println(predictionsTen.get(i));
       String predictionClassName = predictionsTen.get(i).getClassName();
       // issue arose that underscores replaced spaces so need to replace them again for both types
       predictionClassName = predictionClassName.replaceAll("_", " ");
       if (randomCategory.equals(predictionClassName)) {
-        // This is the win condition.
-        isStartPredictions = false;
-        isWin = true;
+        if (predictionsTen.get(i).getProbability() >= confidenceLevel) {
+          // This is the win condition.
+          isStartPredictions = false;
+          isWin = true;
+        }
       }
     }
 
@@ -579,6 +583,7 @@ public class CanvasController {
     lblCategoryTxt.setText(this.randomCategory);
     setTimer();
     setAccuracy();
+    setConfidence();
   }
 
   private void setTimer() {
@@ -601,6 +606,18 @@ public class CanvasController {
       accuracyLevel = 2;
     } else if (currentUser.getAccuracyDifficulty() == Difficulty.HARD) {
       accuracyLevel = 1;
+    }
+  }
+
+  private void setConfidence() {
+    if (currentUser.getConfidenceDifficulty() == Difficulty.EASY) {
+      confidenceLevel = 0.01;
+    } else if (currentUser.getConfidenceDifficulty() == Difficulty.MEDIUM) {
+      confidenceLevel = 0.08;
+    } else if (currentUser.getConfidenceDifficulty() == Difficulty.HARD) {
+      confidenceLevel = 0.15;
+    } else if (currentUser.getConfidenceDifficulty() == Difficulty.MASTER) {
+      confidenceLevel = 0.25;
     }
   }
 }
