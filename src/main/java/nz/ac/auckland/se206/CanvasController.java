@@ -486,8 +486,6 @@ public class CanvasController {
       String className = classification.getClassName().replaceAll("_", " ");
       sb.append(i)
           .append(". ")
-          // Include the confidence percentage
-          .append(String.format("[%.0f%%] ", 100 * classification.getProbability()))
           .append(className.substring(0, 1).toUpperCase() + className.substring(1))
 
           // Add new line
