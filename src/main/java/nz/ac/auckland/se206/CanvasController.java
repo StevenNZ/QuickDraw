@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -84,6 +85,7 @@ public class CanvasController {
   @FXML private Button clearButton;
   @FXML private Button btnStats;
   @FXML private Button btnReturnCanvas;
+  @FXML private Button btnNewGame;
   @FXML private Circle circleEraser;
   @FXML private Circle circlePen;
   @FXML private Pane paneButtons;
@@ -146,6 +148,22 @@ public class CanvasController {
           Platform.runLater(
               () -> {
                 onGameEnd(false);
+              });
+        }
+
+        String hidden = lblHiddenWord.getText();
+        int hiddenLength = hidden.replaceAll("_ ", "").length();
+        if (canvasTimer % 10 == 0
+            && randomCategory.length() - hiddenLength / 2 > hiddenLength / 2
+            && GameSelectionController.gameMode.equals("hidden")) {
+          Random random = new Random();
+          int index = random.nextInt(randomCategory.length()) * 2;
+          Platform.runLater(
+              () -> {
+                lblHiddenWord.setText(
+                    hidden.substring(0, index)
+                        + randomCategory.charAt(index / 2)
+                        + hidden.substring(index + 1));
               });
         }
       };
@@ -243,6 +261,7 @@ public class CanvasController {
     currentUser.setWord(randomCategory); // Add to user word history
 
     isStartPredictions = false;
+    System.out.println(randomCategory);
   }
 
   /**
@@ -291,7 +310,9 @@ public class CanvasController {
                 redPolygon.setVisible(false);
                 greenPolygon.setVisible(false);
               }
-              lblCategoryIndex.setText(String.valueOf(finalI + 1));
+              if (!GameSelectionController.gameMode.equals("hidden")) {
+                lblCategoryIndex.setText(String.valueOf(finalI + 1));
+              }
               categoryIndex = finalI;
             });
         break;
@@ -392,7 +413,10 @@ public class CanvasController {
         currentUser.setQuickestWin(DEFAULT_SECONDS - canvasTimer);
       }
     } else {
-      gameoverString = "Sorry, better luck next time.";
+      gameoverString =
+          GameSelectionController.gameMode.equals("hidden")
+              ? "Sorry, the hidden word was " + randomCategory
+              : "Sorry, better luck next time.";
       currentUser.updateLoss();
     }
     currentUser.saveUserData();
@@ -400,6 +424,7 @@ public class CanvasController {
     // get new definition
     if (GameSelectionController.gameMode.equals("hidden")) {
       searchDefinition();
+      btnNewGame.setVisible(false);
     }
     // Change labels to display win or loss
     lblWinOrLoss.setText(gameoverString);
@@ -618,6 +643,13 @@ public class CanvasController {
               }
             }
             CanvasController.definition = definition;
+            String hidden = "_ ".repeat(randomCategory.length());
+
+            Platform.runLater(
+                () -> {
+                  lblHiddenWord.setText(hidden);
+                  btnNewGame.setVisible(true);
+                });
             return null;
           }
         };

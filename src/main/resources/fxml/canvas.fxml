@@ -139,12 +139,12 @@
                         <Font name="Chalkboard SE Light" size="16.0" />
                      </font>
                   </Label>
-                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="-4.0" prefHeight="37.0" prefWidth="265.0" styleClass="heading" text="Your hidden word" textAlignment="CENTER">
+                  <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="-4.0" prefHeight="37.0" prefWidth="265.0" styleClass="heading" text="Your hidden word" textAlignment="CENTER">
                      <font>
                         <Font name="Consolas" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblHiddenWord" contentDisplay="CENTER" layoutX="342.0" layoutY="-5.0" prefHeight="37.0" prefWidth="245.0" styleClass="heading3" textAlignment="CENTER">
+                  <Label fx:id="lblHiddenWord" contentDisplay="CENTER" layoutX="304.0" layoutY="-4.0" prefHeight="37.0" prefWidth="376.0" styleClass="heading3" textAlignment="CENTER">
                      <font>
                         <Font name="Consolas" size="25.0" />
                      </font>
