@@ -22,7 +22,6 @@ public class GameSelectionController {
   @FXML private ToggleButton accuracyEasyToggle;
   @FXML private ToggleButton accuracyMedToggle;
   @FXML private ToggleButton accuracyHardToggle;
-  @FXML private ToggleButton accuracyMasterToggle;
   @FXML private ToggleButton wordEasyToggle;
   @FXML private ToggleButton wordMedToggle;
   @FXML private ToggleButton wordHardToggle;
@@ -78,8 +77,6 @@ public class GameSelectionController {
       currentUserProfile.setAccuracyDifficulty(Difficulty.MEDIUM);
     } else if (accuracyHardToggle.isSelected()) {
       currentUserProfile.setAccuracyDifficulty(Difficulty.HARD);
-    } else if (accuracyMasterToggle.isSelected()) {
-      currentUserProfile.setAccuracyDifficulty(Difficulty.MASTER);
     } else {
       currentUserProfile.setAccuracyDifficulty(Difficulty.EASY);
     }

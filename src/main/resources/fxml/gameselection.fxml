@@ -103,11 +103,6 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ToggleButton>
-                  <ToggleButton fx:id="accuracyMasterToggle" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="toggleButtonCircleEmpty" toggleGroup="$accuracyGroup" GridPane.columnIndex="3">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ToggleButton>
                   <ToggleButton fx:id="wordEasyToggle" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" selected="true" styleClass="toggleButtonCircleEmpty" GridPane.rowIndex="1">
                      <cursor>
                         <Cursor fx:constant="HAND" />
