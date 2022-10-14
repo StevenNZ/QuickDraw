@@ -28,7 +28,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -65,6 +71,7 @@ public class CanvasController {
   @FXML private Label lblLosses;
   @FXML private Label lblQuickestWin;
   @FXML private Label lblWordHistory;
+  @FXML private Label lblCategoryIndex;
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
@@ -78,6 +85,10 @@ public class CanvasController {
   @FXML private Pane paneStats;
   @FXML private ToggleButton togglePen;
   @FXML private ToggleButton toggleEraser;
+  @FXML private Polygon greenPolygon;
+  @FXML private Polygon redPolygon;
+  @FXML private Rectangle neutralRectangle;
+  @FXML private TextFlow txtFlow;
   private GraphicsContext graphic;
   private DoodlePrediction model;
   private String randomCategory;
@@ -89,6 +100,7 @@ public class CanvasController {
   private int canvasTimer;
   private Image snapshot;
   private boolean isWin = false;
+  private int categoryIndex = 340;
 
   private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
   private ScheduledFuture future;
@@ -111,15 +123,10 @@ public class CanvasController {
         if (isStartPredictions && snapshot != null) {
           if (isStartPredictions) {
             try {
-              outputPredictions = onPredict();
+              onPredict();
             } catch (TranslateException ex) {
               throw new RuntimeException(ex);
             }
-
-            Platform.runLater(
-                () -> {
-                  lblTopTenGuesses.setText(outputPredictions);
-                });
           }
         }
 
@@ -150,7 +157,8 @@ public class CanvasController {
     currentUser = UserSelectionController.users[UserProfile.currentUser];
 
     // Replace lblCategoryTxt on the canvas
-    // lblCategoryTxt.setText(this.randomCategory);
+    //    randomCategory = "circle";
+    lblCategoryTxt.setText(this.randomCategory);
 
     graphic = canvas.getGraphicsContext2D();
     graphic.setLineWidth(10);
@@ -191,6 +199,8 @@ public class CanvasController {
         });
 
     model = new DoodlePrediction();
+
+    txtFlow.getChildren().setAll(new Text("Your top 10 guesses to your drawing will appear here!"));
   }
 
   /** This method is called when the "Clear" button is pressed. */
@@ -236,14 +246,15 @@ public class CanvasController {
    *
    * @throws TranslateException If there is an error in reading the input/output of the DL model.
    */
-  private String onPredict() throws TranslateException {
+  private void onPredict() throws TranslateException {
     List<Classifications.Classification> predictions =
-        model.getPredictions(getBinaryImage(snapshot), 10);
-    final long start = System.currentTimeMillis();
+        model.getPredictions(getBinaryImage(snapshot), 340);
+    List<Classifications.Classification> predictionsTen = predictions.subList(0, 10);
+    trackCategory(predictions);
 
     // Check the top 3 predictions whether they are what the word is.
     for (int i = 0; i < 3; i++) {
-      String predictionClassName = predictions.get(i).getClassName();
+      String predictionClassName = predictionsTen.get(i).getClassName();
       // issue arose that underscores replaced spaces so need to replace them again for both types
       predictionClassName = predictionClassName.replaceAll("_", " ");
       if (randomCategory.equals(predictionClassName)) {
@@ -253,7 +264,34 @@ public class CanvasController {
       }
     }
 
-    return getStringOfPredictions(predictions).toString();
+    getStringOfPredictions(predictionsTen);
+  }
+
+  private void trackCategory(List<Classifications.Classification> predictions) {
+    for (int i = 0; i < predictions.size(); i++) {
+      if (predictions.get(i).getClassName().replaceAll("_", " ").equals(randomCategory)) {
+        int finalI = i;
+        Platform.runLater(
+            () -> {
+              if (finalI < categoryIndex) {
+                greenPolygon.setVisible(true);
+                redPolygon.setVisible(false);
+                neutralRectangle.setVisible(false);
+              } else if (finalI > categoryIndex) {
+                redPolygon.setVisible(true);
+                greenPolygon.setVisible(false);
+                neutralRectangle.setVisible(false);
+              } else {
+                neutralRectangle.setVisible(true);
+                redPolygon.setVisible(false);
+                greenPolygon.setVisible(false);
+              }
+              lblCategoryIndex.setText(String.valueOf(finalI + 1));
+              categoryIndex = finalI;
+            });
+        break;
+      }
+    }
   }
 
   /**
@@ -442,24 +480,25 @@ public class CanvasController {
    * DoodlePredictions.java, but I didn't want to mess with the class as it could potentially break
    * things.
    */
-  private StringBuilder getStringOfPredictions(List<Classifications.Classification> predictions) {
-    StringBuilder sb = new StringBuilder();
+  private void getStringOfPredictions(List<Classifications.Classification> predictionsTen) {
+    TextFlow temp = new TextFlow();
     int i = 1;
-    // Build a string with all the top 10 predictions from the ml api
-    for (Classifications.Classification classification : predictions) {
-      String className = classification.getClassName().replaceAll("_", " ");
-      sb.append(i)
-          .append(". ")
-          // Include the confidence percentage
-          .append(String.format("[%.0f%%] ", 100 * classification.getProbability()))
-          .append(className.substring(0, 1).toUpperCase() + className.substring(1))
-
-          // Add new line
-          .append(System.lineSeparator());
-
+    for (Classifications.Classification classification : predictionsTen) {
+      String category = classification.getClassName().replaceAll("_", " ");
+      Text text =
+          new Text((i + ".  " + category.substring(0, 1).toUpperCase() + category.substring(1)));
+      if (category.equals(randomCategory)) {
+        text.setFill(Color.GREEN);
+        text.setFont(Font.font("Consolas", FontWeight.EXTRA_BOLD, 20));
+      }
+      temp.getChildren().add(text);
+      temp.getChildren().add(new Text(System.lineSeparator()));
       i++;
     }
-    return sb;
+    Platform.runLater(
+        () -> {
+          txtFlow.getChildren().setAll(temp);
+        });
   }
 
   /**
