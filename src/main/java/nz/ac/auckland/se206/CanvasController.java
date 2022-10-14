@@ -100,6 +100,7 @@ public class CanvasController {
   private Image snapshot;
   private boolean isWin = false;
   private int categoryIndex = 340;
+  private int accuracyLevel;
 
   private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
   private ScheduledFuture future;
@@ -248,8 +249,8 @@ public class CanvasController {
     List<Classifications.Classification> predictionsTen = predictions.subList(0, 10);
     trackCategory(predictions);
 
-    // Check the top 3 predictions whether they are what the word is.
-    for (int i = 0; i < 3; i++) {
+    // Check the top predictions if they are what the word is.
+    for (int i = 0; i < accuracyLevel; i++) {
       String predictionClassName = predictionsTen.get(i).getClassName();
       // issue arose that underscores replaced spaces so need to replace them again for both types
       predictionClassName = predictionClassName.replaceAll("_", " ");
@@ -577,6 +578,7 @@ public class CanvasController {
     // Replace lblCategoryTxt on the canvas
     lblCategoryTxt.setText(this.randomCategory);
     setTimer();
+    setAccuracy();
   }
 
   private void setTimer() {
@@ -590,5 +592,15 @@ public class CanvasController {
       timerMax = 15;
     }
     lblTimer.setText(String.format("%02d:%02d", timerMax / 60, timerMax % 60)); // updates timer
+  }
+
+  private void setAccuracy() {
+    if (currentUser.getAccuracyDifficulty() == Difficulty.EASY) {
+      accuracyLevel = 3;
+    } else if (currentUser.getAccuracyDifficulty() == Difficulty.MEDIUM) {
+      accuracyLevel = 2;
+    } else if (currentUser.getAccuracyDifficulty() == Difficulty.HARD) {
+      accuracyLevel = 1;
+    }
   }
 }
