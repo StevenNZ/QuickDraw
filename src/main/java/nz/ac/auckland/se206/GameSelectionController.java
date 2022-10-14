@@ -85,6 +85,13 @@ public class GameSelectionController {
     } else {
       confidenceEasyToggle.setSelected(true);
     }
+
+    setProfileDetails();
+  }
+
+  private void setProfileDetails() {
+    imageProfile.setImage(currentUserProfile.getProfilePic());
+    txtName.setText(currentUserProfile.getName());
   }
 
   @FXML
