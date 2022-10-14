@@ -36,10 +36,7 @@ public class GameSelectionController {
   @FXML private ToggleButton confidenceHardToggle;
   @FXML private ToggleButton confidenceMasterToggle;
 
-  public void initialize() {
-    currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
-    System.out.println(UserProfile.currentUser);
-  }
+  public void initialize() {}
 
   @FXML
   private void onBack(Event event) {
@@ -59,9 +56,11 @@ public class GameSelectionController {
 
   @FXML
   private void onStartGame(Event event) {
-    // Save difficulty settings
+    currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
+
     Node node = (Node) event.getSource();
 
+    // Set difficulty settings
     setAccuracyDif();
     setWordDif();
     setTimeDif();
