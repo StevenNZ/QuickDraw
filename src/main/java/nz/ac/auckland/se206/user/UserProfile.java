@@ -168,7 +168,7 @@ public class UserProfile {
     this.timeDifficulty = Difficulty.toDifficulty((String) userData.get("timeDifficulty"));
     this.confidenceDifficulty =
         Difficulty.toDifficulty((String) userData.get("confidenceDifficulty"));
-    this.winStreak = (int) userData.get("winStreak");
+    this.winStreak = (int) (long) userData.get("winStreak");
 
     this.profilePic = UserFileHandler.readProfileImage(currentUser);
 
