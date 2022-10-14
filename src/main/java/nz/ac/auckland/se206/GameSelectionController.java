@@ -53,6 +53,10 @@ public class GameSelectionController {
     user.setWordDifficulty(UserProfile.Difficulty.EASY);
     // Initialise words
 
+    if (gameMode.equals("hidden")) {
+      App.canvasInstances.get(UserProfile.currentUser).enableHiddenWord();
+    }
+
     // Go to player canvas
     node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
   }
@@ -78,10 +82,9 @@ public class GameSelectionController {
   }
 
   @FXML
-  private void onZenMode(Event event) {
+  private void onZenMode() {
     gameMode = "hidden";
-    App.canvasInstances.get(UserProfile.currentUser).enableHiddenWord();
-    onStartGame(event);
+    onNormal();
   }
 
   //  private void receiveData(){

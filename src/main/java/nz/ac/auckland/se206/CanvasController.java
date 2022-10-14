@@ -162,7 +162,7 @@ public class CanvasController {
     currentUser = UserSelectionController.users[UserProfile.currentUser];
 
     // Replace lblCategoryTxt on the canvas
-    randomCategory = "circle";
+    randomCategory = "shoe";
     lblCategoryTxt.setText(this.randomCategory);
 
     graphic = canvas.getGraphicsContext2D();
@@ -506,7 +506,7 @@ public class CanvasController {
       String category = classification.getClassName().replaceAll("_", " ");
       Text text =
           new Text((i + ".  " + category.substring(0, 1).toUpperCase() + category.substring(1)));
-      if (category.equals(randomCategory)) {
+      if (category.equals(randomCategory) && !GameSelectionController.gameMode.equals("hidden")) {
         text.setFill(Color.GREEN);
         text.setFont(Font.font("Consolas", FontWeight.EXTRA_BOLD, 20));
       }
