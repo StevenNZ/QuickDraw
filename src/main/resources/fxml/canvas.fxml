@@ -113,7 +113,7 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="paneCategories" layoutX="175.0" layoutY="8.0" prefHeight="164.0" prefWidth="711.0" visible="false">
+            <Pane fx:id="paneCategories" layoutX="175.0" layoutY="8.0" prefHeight="164.0" prefWidth="711.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="251.0" layoutY="21.0" prefHeight="19.0" prefWidth="219.0" styleClass="heading" text="Your word is:" textAlignment="CENTER">
                      <font>
@@ -132,7 +132,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="paneDefinition" layoutX="185.0" layoutY="18.0" prefHeight="164.0" prefWidth="711.0">
+            <Pane fx:id="paneDefinition" layoutX="185.0" layoutY="18.0" prefHeight="164.0" prefWidth="711.0" visible="false">
                <children>
                   <Label fx:id="lblDefinition" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="44.0" prefHeight="105.0" prefWidth="637.0" styleClass="heading" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                      <font>
