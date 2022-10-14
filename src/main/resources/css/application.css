@@ -17,6 +17,10 @@
     -fx-font-family: "Ink Free";
     -fx-font-size: 40px;
 }
+.heading3 {
+    -fx-font-family: "Ink Free";
+    -fx-font-size: 30px;
+}
 
 .button {
     -fx-background-color: "#faa504";

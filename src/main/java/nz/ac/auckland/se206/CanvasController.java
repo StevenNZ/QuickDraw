@@ -73,6 +73,7 @@ public class CanvasController {
   @FXML private Label lblWordHistory;
   @FXML private Label lblCategoryIndex;
   @FXML private Label lblDefinition;
+  @FXML private Label lblHiddenWord;
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
@@ -159,7 +160,7 @@ public class CanvasController {
     currentUser = UserSelectionController.users[UserProfile.currentUser];
 
     // Replace lblCategoryTxt on the canvas
-    //    randomCategory = "circle";
+    randomCategory = "circle";
     lblCategoryTxt.setText(this.randomCategory);
 
     graphic = canvas.getGraphicsContext2D();
@@ -400,6 +401,7 @@ public class CanvasController {
     paneGameEnd.setVisible(true);
     // Hide category display information
     paneCategories.setVisible(false);
+    paneDefinition.setVisible(false);
     // Disable changing the drawing
     paneEditCanvas.setDisable(true);
     clearButton.setVisible(false);
@@ -574,5 +576,43 @@ public class CanvasController {
     graphics.dispose();
 
     return imageBinary;
+  }
+
+  protected void enableHiddenWord() {
+    paneDefinition.setVisible(true);
+    paneCategories.setVisible(false);
+
+    Task<Void> definitionTask = new Task<Void>() { // task run by a background thread
+          @Override
+          protected Void call() throws Exception {
+            String definition = searchDefinition();
+            System.out.println(definition);
+            Platform.runLater(
+                () -> {
+                  lblDefinition.setText(definition);
+                });
+            return null;
+          }
+        };
+    Thread definitionThread =
+        new Thread(definitionTask); // creating new thread for text to speech task
+    definitionThread.start();
+  }
+
+  private String searchDefinition() {
+    String definition = "none";
+
+    while (definition.equals("none")) {
+      try {
+        definition = Dictionary.searchWordInfo(randomCategory);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      if (definition.equals("none")) {
+        randomCategory = "giraffe";
+        // TODO: get new random category
+      }
+    }
+    return definition;
   }
 }

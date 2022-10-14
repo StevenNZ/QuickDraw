@@ -24,7 +24,7 @@ public class Dictionary {
     String jsonString = responseBody.string();
 
     if (jsonString.contains("title\":\"No Definitions Found")) {
-      return null;
+      return "none";
     }
 
     JSONArray jArray = (JSONArray) new JSONTokener(jsonString).nextValue();

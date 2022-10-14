@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import nz.ac.auckland.se206.user.UserProfile;
 
 public class GameSelectionController {
+  protected static String gameMode = "normal";
   @FXML private ImageView imageProfile;
   @FXML private Pane paneModes;
   @FXML private Pane normalModeSelection;
@@ -53,6 +54,7 @@ public class GameSelectionController {
     // Initialise words
 
     // Go to player canvas
+    App.canvasInstances.get(UserProfile.currentUser).enableHiddenWord();
     node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
   }
 
