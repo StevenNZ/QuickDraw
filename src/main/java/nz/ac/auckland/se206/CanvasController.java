@@ -44,6 +44,7 @@ import javax.sound.sampled.Clip;
 import nz.ac.auckland.se206.ml.DoodlePrediction;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 import nz.ac.auckland.se206.user.UserProfile;
+import nz.ac.auckland.se206.user.UserProfile.Difficulty;
 
 /**
  * This is the controller of the canvas. You are free to modify this class and the corresponding
@@ -58,7 +59,7 @@ import nz.ac.auckland.se206.user.UserProfile;
  * the canvas and brush sizes, make sure that the prediction works fine.
  */
 public class CanvasController {
-  private static final int DEFAULT_SECONDS = 60;
+  private int timerMax;
   @FXML private Button btnSaveDrawing;
   @FXML private Button btnStartTimer;
   @FXML private Canvas canvas;
@@ -95,12 +96,12 @@ public class CanvasController {
   private boolean isStartPredictions = false;
   private UserProfile currentUser;
   private String gameoverString;
-
-  private String outputPredictions;
   private int canvasTimer;
   private Image snapshot;
   private boolean isWin = false;
   private int categoryIndex = 340;
+  private int accuracyLevel;
+  private double confidenceLevel;
 
   private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
   private ScheduledFuture future;
@@ -153,8 +154,6 @@ public class CanvasController {
    * @throws IOException If the model cannot be found on the file system.
    */
   public void initialize() throws ModelException, IOException {
-
-    currentUser = UserSelectionController.users[UserProfile.currentUser];
 
     // Replace lblCategoryTxt on the canvas
     //    randomCategory = "circle";
@@ -215,8 +214,7 @@ public class CanvasController {
    */
   @FXML
   private void onStartTimer() {
-    this.canvasTimer =
-        DEFAULT_SECONDS; // timer to be displayed and condition for the TimerTask ending
+    this.canvasTimer = timerMax; // timer to be displayed and condition for the TimerTask ending
     future = executor.scheduleAtFixedRate(backgroundThreadTask, 1, 1, TimeUnit.SECONDS);
     Stage stage = (Stage) canvas.getScene().getWindow();
     stage.setOnCloseRequest( // text to speech closes upon closing GUI
@@ -252,15 +250,18 @@ public class CanvasController {
     List<Classifications.Classification> predictionsTen = predictions.subList(0, 10);
     trackCategory(predictions);
 
-    // Check the top 3 predictions whether they are what the word is.
-    for (int i = 0; i < 3; i++) {
+    // Check the top predictions if they are what the word is.
+    for (int i = 0; i < accuracyLevel; i++) {
+      System.out.println(predictionsTen.get(i));
       String predictionClassName = predictionsTen.get(i).getClassName();
       // issue arose that underscores replaced spaces so need to replace them again for both types
       predictionClassName = predictionClassName.replaceAll("_", " ");
       if (randomCategory.equals(predictionClassName)) {
-        // This is the win condition.
-        isStartPredictions = false;
-        isWin = true;
+        if (predictionsTen.get(i).getProbability() >= confidenceLevel) {
+          // This is the win condition.
+          isStartPredictions = false;
+          isWin = true;
+        }
       }
     }
 
@@ -383,8 +384,8 @@ public class CanvasController {
     if (isWinner) {
       gameoverString = "Congratulations! You WON!";
       currentUser.updateWin();
-      if ((DEFAULT_SECONDS - canvasTimer) < currentUser.getQuickestWin()) {
-        currentUser.setQuickestWin(DEFAULT_SECONDS - canvasTimer);
+      if ((timerMax - canvasTimer) < currentUser.getQuickestWin()) {
+        currentUser.setQuickestWin(timerMax - canvasTimer);
       }
     } else {
       gameoverString = "Sorry, better luck next time.";
@@ -469,7 +470,7 @@ public class CanvasController {
     lblTopTenGuesses.setText("Your top 10 guesses to your drawing will appear here!");
 
     // Reset the timer
-    this.canvasTimer = DEFAULT_SECONDS;
+    this.canvasTimer = timerMax;
     lblTimer.setText(String.format("%02d:%02d", canvasTimer / 60, canvasTimer % 60));
 
     isWin = false;
@@ -572,5 +573,56 @@ public class CanvasController {
     graphics.dispose();
 
     return imageBinary;
+  }
+
+  public void setGameDif(UserProfile user) {
+    UserSelectionController.users[UserProfile.currentUser] = user;
+    currentUser = user;
+
+    setCategory();
+    setTimer();
+    setAccuracy();
+    setConfidence();
+  }
+
+  private void setCategory() {
+    randomCategory = currentUser.pickCategory();
+    // Replace lblCategoryTxt on the canvas
+    lblCategoryTxt.setText(this.randomCategory);
+  }
+
+  private void setTimer() {
+    if (currentUser.getTimeDifficulty() == Difficulty.EASY) {
+      timerMax = 60;
+    } else if (currentUser.getTimeDifficulty() == Difficulty.MEDIUM) {
+      timerMax = 45;
+    } else if (currentUser.getTimeDifficulty() == Difficulty.HARD) {
+      timerMax = 30;
+    } else if (currentUser.getTimeDifficulty() == Difficulty.MASTER) {
+      timerMax = 15;
+    }
+    lblTimer.setText(String.format("%02d:%02d", timerMax / 60, timerMax % 60)); // updates timer
+  }
+
+  private void setAccuracy() {
+    if (currentUser.getAccuracyDifficulty() == Difficulty.EASY) {
+      accuracyLevel = 3;
+    } else if (currentUser.getAccuracyDifficulty() == Difficulty.MEDIUM) {
+      accuracyLevel = 2;
+    } else if (currentUser.getAccuracyDifficulty() == Difficulty.HARD) {
+      accuracyLevel = 1;
+    }
+  }
+
+  private void setConfidence() {
+    if (currentUser.getConfidenceDifficulty() == Difficulty.EASY) {
+      confidenceLevel = 0.01;
+    } else if (currentUser.getConfidenceDifficulty() == Difficulty.MEDIUM) {
+      confidenceLevel = 0.08;
+    } else if (currentUser.getConfidenceDifficulty() == Difficulty.HARD) {
+      confidenceLevel = 0.15;
+    } else if (currentUser.getConfidenceDifficulty() == Difficulty.MASTER) {
+      confidenceLevel = 0.25;
+    }
   }
 }
