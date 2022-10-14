@@ -154,8 +154,6 @@ public class CanvasController {
    */
   public void initialize() throws ModelException, IOException {
 
-    currentUser = UserSelectionController.users[UserProfile.currentUser];
-
     // Replace lblCategoryTxt on the canvas
     //    randomCategory = "circle";
     lblCategoryTxt.setText(this.randomCategory);
@@ -572,5 +570,13 @@ public class CanvasController {
     graphics.dispose();
 
     return imageBinary;
+  }
+
+  public void setCategory(UserProfile user) {
+    UserSelectionController.users[UserProfile.currentUser] = user;
+    currentUser = user;
+    randomCategory = currentUser.pickCategory();
+    // Replace lblCategoryTxt on the canvas
+    lblCategoryTxt.setText(this.randomCategory);
   }
 }
