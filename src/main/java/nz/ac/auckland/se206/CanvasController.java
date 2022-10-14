@@ -391,6 +391,7 @@ public class CanvasController {
     } else {
       gameoverString = "Sorry, better luck next time.";
       currentUser.updateLoss();
+      currentUser.resetWinStreak();
     }
     currentUser.saveUserData();
     // Change labels to display win or loss
