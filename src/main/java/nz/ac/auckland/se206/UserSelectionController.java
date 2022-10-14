@@ -127,7 +127,6 @@ public class UserSelectionController {
 
     App.gameSelectionInstance.setDifToggles();
 
-    System.out.println(UserProfile.currentUser);
     stage.setUserData(users[UserProfile.currentUser]);
     Scene sceneOfNode = node.getScene();
     sceneOfNode.setRoot(
