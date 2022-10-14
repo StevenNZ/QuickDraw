@@ -27,6 +27,7 @@ public class UserProfile {
   private Difficulty timeDifficulty = Difficulty.NOTSET;
   private Difficulty confidenceDifficulty = Difficulty.NOTSET;
   private transient UserBadges badges = new UserBadges();
+  private int winStreak = 0;
 
   public enum Difficulty {
     NOTSET,
@@ -167,6 +168,7 @@ public class UserProfile {
     this.timeDifficulty = Difficulty.toDifficulty((String) userData.get("timeDifficulty"));
     this.confidenceDifficulty =
         Difficulty.toDifficulty((String) userData.get("confidenceDifficulty"));
+    this.winStreak = (int) userData.get("winStreak");
 
     this.profilePic = UserFileHandler.readProfileImage(currentUser);
 
@@ -271,5 +273,13 @@ public class UserProfile {
 
   public UserBadges getBadges() {
     return this.badges;
+  }
+
+  public int getWinStreak() {
+    return this.winStreak;
+  }
+
+  public void incrementWinStreak() {
+    this.winStreak++;
   }
 }
