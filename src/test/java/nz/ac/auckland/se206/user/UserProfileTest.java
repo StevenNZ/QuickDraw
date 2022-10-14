@@ -31,6 +31,10 @@ public class UserProfileTest {
     testSubject.setTimeDifficulty(Difficulty.HARD);
     testSubject.setWordDifficulty(Difficulty.MASTER);
 
+    testSubject.getBadges().addBadge("twentySecondWin");
+    testSubject.getBadges().addBadge("tenSecondWin");
+    testSubject.getBadges().addBadge("fiveSecondWin");
+
     testSubject.saveUserData();
   }
 
@@ -54,5 +58,6 @@ public class UserProfileTest {
             + testSubject.getTimeDifficulty()
             + ",  "
             + testSubject.getWordDifficulty());
+    System.out.println("Badges:" + testSubject.getBadges().getBadgesMap());
   }
 }

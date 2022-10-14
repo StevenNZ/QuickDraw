@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.user;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -69,6 +71,49 @@ public class UserFileHandler {
       return new Image(
           new FileInputStream(profileImageLocation)); // returns image stored in local file
     } else {
+      return null;
+    }
+  }
+
+  public static void saveUserBadges(String badges) {
+
+    File profileFolder = new File(".profiles");
+    String fileLocation = ".profiles/user" + UserProfile.currentUser + "Badges.json";
+
+    // Creates the profiles folder
+    if (!profileFolder.exists()) {
+      profileFolder.mkdir();
+    }
+
+    File userFile = new File(fileLocation);
+
+    try {
+
+      // This writes the badge data to the json file
+      FileWriter userFileWriter = new FileWriter(userFile, false);
+      userFileWriter.write(badges);
+      userFileWriter.flush(); // Clears the data in the file writer
+      userFileWriter.close(); // Closes the data stream
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static UserBadges readUserBadges() {
+    String fileLocation = ".profiles/user" + UserProfile.currentUser + "Badges.json";
+    JSONParser jsonParser = new JSONParser();
+    UserBadges returnBadges;
+
+    try {
+      FileReader userFileReader = new FileReader(fileLocation);
+      returnBadges =
+          new Gson().fromJson(jsonParser.parse(userFileReader).toString(), UserBadges.class);
+      userFileReader.close(); // Closes the data stream
+      returnBadges.mapBadges();
+      return returnBadges;
+    } catch (JsonSyntaxException | IOException | ParseException e) {
+      System.out.println("Badges File doesn't exist");
+      e.printStackTrace();
       return null;
     }
   }
