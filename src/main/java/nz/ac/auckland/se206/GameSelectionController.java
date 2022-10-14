@@ -65,7 +65,7 @@ public class GameSelectionController {
     setWordDif();
     setTimeDif();
     setConfidenceDif();
-    App.canvasInstances.get(UserProfile.currentUser).setCategory(currentUserProfile);
+    App.canvasInstances.get(UserProfile.currentUser).setGameDif(currentUserProfile);
 
     // Go to player canvas
     node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));

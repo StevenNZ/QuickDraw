@@ -575,15 +575,20 @@ public class CanvasController {
     return imageBinary;
   }
 
-  public void setCategory(UserProfile user) {
+  public void setGameDif(UserProfile user) {
     UserSelectionController.users[UserProfile.currentUser] = user;
     currentUser = user;
-    randomCategory = currentUser.pickCategory();
-    // Replace lblCategoryTxt on the canvas
-    lblCategoryTxt.setText(this.randomCategory);
+
+    setCategory();
     setTimer();
     setAccuracy();
     setConfidence();
+  }
+
+  private void setCategory() {
+    randomCategory = currentUser.pickCategory();
+    // Replace lblCategoryTxt on the canvas
+    lblCategoryTxt.setText(this.randomCategory);
   }
 
   private void setTimer() {
