@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,8 @@ import nz.ac.auckland.se206.user.UserProfile;
  * remain as the class that runs the JavaFX application.
  */
 public class App extends Application {
+  public static List<CanvasController> canvasInstances = new ArrayList<>();
+
   public static void main(final String[] args) {
     launch();
   }
@@ -28,7 +32,12 @@ public class App extends Application {
    * @throws IOException If the file is not found.
    */
   private static Parent loadFxml(final String fxml) throws IOException {
-    return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
+    FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
+    Parent parent = loader.load();
+    if (fxml.equals("canvas")) {
+      canvasInstances.add(loader.getController());
+    }
+    return parent;
   }
 
   /**
