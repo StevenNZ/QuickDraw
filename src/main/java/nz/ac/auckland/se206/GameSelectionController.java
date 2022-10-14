@@ -9,7 +9,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import nz.ac.auckland.se206.user.UserProfile;
 import nz.ac.auckland.se206.user.UserProfile.Difficulty;
 
@@ -18,7 +17,7 @@ public class GameSelectionController {
   @FXML private Pane paneModes;
   @FXML private Pane normalModeSelection;
   @FXML private Text txtName;
-  private UserProfile currentUser;
+  private UserProfile currentUserProfile;
 
   @FXML private ToggleButton accuracyEasyToggle;
   @FXML private ToggleButton accuracyMedToggle;
@@ -38,7 +37,7 @@ public class GameSelectionController {
   @FXML private ToggleButton confidenceMasterToggle;
 
   public void initialize() {
-    currentUser = UserSelectionController.users[UserProfile.currentUser];
+    currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
     System.out.println(UserProfile.currentUser);
   }
 
@@ -62,13 +61,12 @@ public class GameSelectionController {
   private void onStartGame(Event event) {
     // Save difficulty settings
     Node node = (Node) event.getSource();
-    Stage stage = (Stage) node.getScene().getWindow();
-    UserProfile user = (UserProfile) stage.getUserData();
 
     setAccuracyDif();
     setWordDif();
     setTimeDif();
     setConfidenceDif();
+    App.canvasInstances.get(UserProfile.currentUser).setCategory(currentUserProfile);
 
     // Go to player canvas
     node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
@@ -76,57 +74,57 @@ public class GameSelectionController {
 
   private void setAccuracyDif() {
     if (accuracyEasyToggle.isSelected()) {
-      currentUser.setAccuracyDifficulty(Difficulty.EASY);
+      currentUserProfile.setAccuracyDifficulty(Difficulty.EASY);
     } else if (accuracyMedToggle.isSelected()) {
-      currentUser.setAccuracyDifficulty(Difficulty.MEDIUM);
+      currentUserProfile.setAccuracyDifficulty(Difficulty.MEDIUM);
     } else if (accuracyHardToggle.isSelected()) {
-      currentUser.setAccuracyDifficulty(Difficulty.HARD);
+      currentUserProfile.setAccuracyDifficulty(Difficulty.HARD);
     } else if (accuracyMasterToggle.isSelected()) {
-      currentUser.setAccuracyDifficulty(Difficulty.MASTER);
+      currentUserProfile.setAccuracyDifficulty(Difficulty.MASTER);
     } else {
-      currentUser.setAccuracyDifficulty(Difficulty.EASY);
+      currentUserProfile.setAccuracyDifficulty(Difficulty.EASY);
     }
   }
 
   private void setWordDif() {
     if (wordEasyToggle.isSelected()) {
-      currentUser.setWordDifficulty(Difficulty.EASY);
+      currentUserProfile.setWordDifficulty(Difficulty.EASY);
     } else if (wordMedToggle.isSelected()) {
-      currentUser.setWordDifficulty(Difficulty.MEDIUM);
+      currentUserProfile.setWordDifficulty(Difficulty.MEDIUM);
     } else if (wordHardToggle.isSelected()) {
-      currentUser.setWordDifficulty(Difficulty.HARD);
+      currentUserProfile.setWordDifficulty(Difficulty.HARD);
     } else if (wordMasterToggle.isSelected()) {
-      currentUser.setWordDifficulty(Difficulty.MASTER);
+      currentUserProfile.setWordDifficulty(Difficulty.MASTER);
     } else {
-      currentUser.setWordDifficulty(Difficulty.EASY);
+      currentUserProfile.setWordDifficulty(Difficulty.EASY);
     }
   }
 
   private void setTimeDif() {
     if (timeEasyToggle.isSelected()) {
-      currentUser.setTimeDifficulty(Difficulty.EASY);
+      currentUserProfile.setTimeDifficulty(Difficulty.EASY);
     } else if (timeMedToggle.isSelected()) {
-      currentUser.setTimeDifficulty(Difficulty.MEDIUM);
+      currentUserProfile.setTimeDifficulty(Difficulty.MEDIUM);
     } else if (timeHardToggle.isSelected()) {
-      currentUser.setTimeDifficulty(Difficulty.HARD);
+      currentUserProfile.setTimeDifficulty(Difficulty.HARD);
     } else if (timeMasterToggle.isSelected()) {
-      currentUser.setTimeDifficulty(Difficulty.MASTER);
+      currentUserProfile.setTimeDifficulty(Difficulty.MASTER);
     } else {
-      currentUser.setTimeDifficulty(Difficulty.EASY);
+      currentUserProfile.setTimeDifficulty(Difficulty.EASY);
     }
   }
 
   private void setConfidenceDif() {
     if (confidenceEasyToggle.isSelected()) {
-      currentUser.setConfidenceDifficulty(Difficulty.EASY);
+      currentUserProfile.setConfidenceDifficulty(Difficulty.EASY);
     } else if (confidenceMedToggle.isSelected()) {
-      currentUser.setConfidenceDifficulty(Difficulty.MEDIUM);
+      currentUserProfile.setConfidenceDifficulty(Difficulty.MEDIUM);
     } else if (confidenceHardToggle.isSelected()) {
-      currentUser.setConfidenceDifficulty(Difficulty.HARD);
+      currentUserProfile.setConfidenceDifficulty(Difficulty.HARD);
     } else if (confidenceMasterToggle.isSelected()) {
-      currentUser.setConfidenceDifficulty(Difficulty.MASTER);
+      currentUserProfile.setConfidenceDifficulty(Difficulty.MASTER);
     } else {
-      currentUser.setConfidenceDifficulty(Difficulty.EASY);
+      currentUserProfile.setConfidenceDifficulty(Difficulty.EASY);
     }
   }
 
