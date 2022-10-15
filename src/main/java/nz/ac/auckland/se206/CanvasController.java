@@ -384,6 +384,7 @@ public class CanvasController {
     if (isWinner) {
       gameoverString = "Congratulations! You WON!";
       currentUser.updateWin();
+      currentUser.incrementWinStreak();
       if ((timerMax - canvasTimer) < currentUser.getQuickestWin()) {
         currentUser.setQuickestWin(timerMax - canvasTimer);
       }

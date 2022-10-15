@@ -17,6 +17,7 @@ public class GameSelectionController {
   @FXML private Pane paneModes;
   @FXML private Pane normalModeSelection;
   @FXML private Text txtName;
+  @FXML private Text txtStreak;
   private UserProfile currentUserProfile;
 
   @FXML private ToggleButton accuracyEasyToggle;
@@ -85,6 +86,14 @@ public class GameSelectionController {
     } else {
       confidenceEasyToggle.setSelected(true);
     }
+
+    setProfileDetails();
+  }
+
+  private void setProfileDetails() {
+    imageProfile.setImage(currentUserProfile.getProfilePic());
+    txtName.setText(currentUserProfile.getName());
+    txtStreak.setText(String.valueOf(currentUserProfile.getWinStreak()));
   }
 
   @FXML
