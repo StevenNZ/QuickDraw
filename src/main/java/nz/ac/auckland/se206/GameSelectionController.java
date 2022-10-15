@@ -37,6 +37,56 @@ public class GameSelectionController {
 
   public void initialize() {}
 
+  public void setDifToggles() {
+    currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
+
+    if (currentUserProfile.getAccuracyDifficulty() == Difficulty.EASY) {
+      accuracyEasyToggle.setSelected(true);
+    } else if (currentUserProfile.getAccuracyDifficulty() == Difficulty.MEDIUM) {
+      accuracyMedToggle.setSelected(true);
+    } else if (currentUserProfile.getAccuracyDifficulty() == Difficulty.HARD) {
+      accuracyHardToggle.setSelected(true);
+    } else {
+      accuracyEasyToggle.setSelected(true);
+    }
+
+    if (currentUserProfile.getWordDifficulty() == Difficulty.EASY) {
+      wordEasyToggle.setSelected(true);
+    } else if (currentUserProfile.getWordDifficulty() == Difficulty.MEDIUM) {
+      wordMedToggle.setSelected(true);
+    } else if (currentUserProfile.getWordDifficulty() == Difficulty.HARD) {
+      wordHardToggle.setSelected(true);
+    } else if (currentUserProfile.getWordDifficulty() == Difficulty.MASTER) {
+      wordMasterToggle.setSelected(true);
+    } else {
+      wordEasyToggle.setSelected(true);
+    }
+
+    if (currentUserProfile.getTimeDifficulty() == Difficulty.EASY) {
+      timeEasyToggle.setSelected(true);
+    } else if (currentUserProfile.getTimeDifficulty() == Difficulty.MEDIUM) {
+      timeMedToggle.setSelected(true);
+    } else if (currentUserProfile.getTimeDifficulty() == Difficulty.HARD) {
+      timeHardToggle.setSelected(true);
+    } else if (currentUserProfile.getTimeDifficulty() == Difficulty.MASTER) {
+      timeMasterToggle.setSelected(true);
+    } else {
+      timeEasyToggle.setSelected(true);
+    }
+
+    if (currentUserProfile.getConfidenceDifficulty() == Difficulty.EASY) {
+      confidenceEasyToggle.setSelected(true);
+    } else if (currentUserProfile.getConfidenceDifficulty() == Difficulty.MEDIUM) {
+      confidenceMedToggle.setSelected(true);
+    } else if (currentUserProfile.getConfidenceDifficulty() == Difficulty.HARD) {
+      confidenceHardToggle.setSelected(true);
+    } else if (currentUserProfile.getConfidenceDifficulty() == Difficulty.MASTER) {
+      confidenceMasterToggle.setSelected(true);
+    } else {
+      confidenceEasyToggle.setSelected(true);
+    }
+  }
+
   @FXML
   private void onBack(Event event) {
     Button button = (Button) event.getSource();
@@ -55,8 +105,6 @@ public class GameSelectionController {
 
   @FXML
   private void onStartGame(Event event) {
-    currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
-
     Node node = (Node) event.getSource();
 
     // Set difficulty settings
