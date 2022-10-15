@@ -650,8 +650,7 @@ public class CanvasController {
                 e.printStackTrace();
               }
               if (definition.equals("none")) {
-                randomCategory = "giraffe";
-                // TODO: get new random category
+                getNewCategory(currentUser);
               }
             }
             CanvasController.definition = definition;
