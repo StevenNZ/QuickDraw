@@ -179,10 +179,6 @@ public class CanvasController {
    */
   public void initialize() throws ModelException, IOException {
 
-    // Replace lblCategoryTxt on the canvas
-    randomCategory = "shoe";
-    lblCategoryTxt.setText(this.randomCategory);
-
     graphic = canvas.getGraphicsContext2D();
     graphic.setLineWidth(10);
     graphic.setLineCap(StrokeLineCap.ROUND);
@@ -424,7 +420,7 @@ public class CanvasController {
       currentUser.resetWinStreak();
     }
     currentUser.saveUserData();
-    randomCategory = currentUser.pickCategory();
+    getNewCategory(currentUser);
     // get new definition
     if (GameSelectionController.gameMode.equals("hidden")) {
       searchDefinition();
@@ -446,6 +442,10 @@ public class CanvasController {
     paneButtons.setDisable(false);
 
     callTextToSpeech();
+  }
+
+  protected void getNewCategory(UserProfile user) {
+    randomCategory = user.pickCategory();
   }
 
   /**
@@ -497,15 +497,10 @@ public class CanvasController {
     paneGameEnd.setVisible(false);
     // Clear the canvas
     onClear();
-    // Replace lblCategoryTxt on the canvas
-    lblCategoryTxt.setText(randomCategory);
+
     // Hide category display information
-    if (GameSelectionController.gameMode.equals("hidden")) {
-      lblDefinition.setText(definition);
-      paneDefinition.setVisible(true);
-    } else {
-      paneCategories.setVisible(true);
-    }
+    resetMode();
+
     btnStartTimer.setVisible(true);
     btnStartTimer.setDisable(false);
     clearButton.setVisible(true);
@@ -521,6 +516,18 @@ public class CanvasController {
     lblTimer.setText(String.format("%02d:%02d", canvasTimer / 60, canvasTimer % 60));
 
     isWin = false;
+  }
+
+  protected void resetMode() {
+    if (GameSelectionController.gameMode.equals("hidden")) {
+      paneDefinition.setVisible(true);
+      paneCategories.setVisible(false);
+      lblDefinition.setText(definition);
+    } else {
+      paneCategories.setVisible(true);
+      paneDefinition.setVisible(false);
+      lblCategoryTxt.setText(randomCategory);
+    }
   }
 
   /**
@@ -595,6 +602,7 @@ public class CanvasController {
   /** This method is called when the back button is called and changes scene to main menu */
   @FXML
   private void onBack(ActionEvent event) {
+    reset();
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU));
@@ -673,9 +681,11 @@ public class CanvasController {
   }
 
   private void setCategory() {
-    randomCategory = currentUser.pickCategory();
-    // Replace lblCategoryTxt on the canvas
-    lblCategoryTxt.setText(this.randomCategory);
+    if (!GameSelectionController.gameMode.equals("hidden")) {
+      getNewCategory(currentUser);
+      // Replace lblCategoryTxt on the canvas
+      lblCategoryTxt.setText(this.randomCategory);
+    }
   }
 
   private void setTimer() {

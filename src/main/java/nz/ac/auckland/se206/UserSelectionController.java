@@ -56,6 +56,7 @@ public class UserSelectionController {
   @FXML
   public void initialize() {
     users[0] = new UserProfile("Guest"); // creates an initial instance of user guest
+    users[0].setWordDifficulty(UserProfile.Difficulty.EASY);
 
     // Check whether user Profiles already exist
 
@@ -129,7 +130,10 @@ public class UserSelectionController {
 
     stage.setUserData(users[UserProfile.currentUser]);
     Scene sceneOfNode = node.getScene();
+
+    App.canvasInstances.get(UserProfile.currentUser).getNewCategory(users[UserProfile.currentUser]);
     App.canvasInstances.get(UserProfile.currentUser).searchDefinition();
+
     sceneOfNode.setRoot(
         SceneManager.getUiRoot(
             SceneManager.AppUi.GAME_SELECTION)); // switch to currentUser's canvas

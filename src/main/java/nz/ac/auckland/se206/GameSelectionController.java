@@ -108,6 +108,17 @@ public class GameSelectionController {
 
   @FXML
   private void onNormal() {
+    gameMode = "normal";
+    enablePaneDifficulties();
+  }
+
+  @FXML
+  private void onZenMode() {
+    gameMode = "hidden";
+    enablePaneDifficulties();
+  }
+
+  private void enablePaneDifficulties() {
     paneModes.setVisible(false);
     paneModes.setDisable(true);
 
@@ -133,9 +144,7 @@ public class GameSelectionController {
     setConfidenceDif();
     App.canvasInstances.get(UserProfile.currentUser).setGameDif(currentUserProfile);
 
-    if (gameMode.equals("hidden")) {
-      App.canvasInstances.get(UserProfile.currentUser).enableHiddenWord();
-    }
+    App.canvasInstances.get(UserProfile.currentUser).resetMode();
 
     // Go to player canvas
     node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
@@ -215,12 +224,6 @@ public class GameSelectionController {
       default:
         return SceneManager.AppUi.CANVAS; // defaults to guest canvas
     }
-  }
-
-  @FXML
-  private void onZenMode() {
-    gameMode = "hidden";
-    onNormal();
   }
 
   //  private void receiveData(){
