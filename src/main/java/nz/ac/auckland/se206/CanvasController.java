@@ -155,7 +155,7 @@ public class CanvasController {
 
         String hidden = lblHiddenWord.getText();
         int hiddenLength = hidden.replaceAll("_ ", "").length();
-        if (canvasTimer % 10 == 0
+        if (canvasTimer % 10 == 1
             && randomCategory.length() - hiddenLength / 2 > hiddenLength / 2
             && GameSelectionController.gameMode.equals("hidden")) {
           Random random = new Random();
@@ -403,6 +403,9 @@ public class CanvasController {
     // Stops the background thread jobs
     future.cancel(true);
 
+    paneEditCanvas.setDisable(true);
+    clearButton.setVisible(false);
+
     // UpdateStats
     if (isWinner) {
       gameoverString = "Congratulations! You WON!";
@@ -414,7 +417,7 @@ public class CanvasController {
     } else {
       gameoverString =
           GameSelectionController.gameMode.equals("hidden")
-              ? "Sorry, the hidden word was " + randomCategory
+              ? "Sorry, hidden word was " + randomCategory
               : "Sorry, better luck next time.";
       currentUser.updateLoss();
       currentUser.resetWinStreak();
@@ -435,8 +438,6 @@ public class CanvasController {
     paneCategories.setVisible(false);
     paneDefinition.setVisible(false);
     // Disable changing the drawing
-    paneEditCanvas.setDisable(true);
-    clearButton.setVisible(false);
 
     paneButtons.setVisible(true);
     paneButtons.setDisable(false);
