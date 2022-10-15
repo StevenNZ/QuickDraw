@@ -41,6 +41,11 @@
 
 }
 
+.iconCircleColour {
+    -fx-stroke: "#faa504";
+    -fx-stroke-width: 5px;
+}
+
 .toggleButtonCircle {
     -fx-background-color: transparent;
     -fx-border-radius: 50px;
