@@ -124,7 +124,9 @@ public class UserSelectionController {
             : node.getParent().getParent().getId();
     // checks for parent of event source
     UserProfile.currentUser = getProfileById(id);
-    System.out.println(UserProfile.currentUser);
+
+    App.gameSelectionInstance.setDifToggles();
+
     stage.setUserData(users[UserProfile.currentUser]);
     Scene sceneOfNode = node.getScene();
     App.canvasInstances.get(UserProfile.currentUser).searchDefinition();
