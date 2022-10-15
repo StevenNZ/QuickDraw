@@ -98,6 +98,8 @@ public class GameSelectionController {
 
   @FXML
   private void onBack(Event event) {
+    resetView();
+
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU));
@@ -110,6 +112,13 @@ public class GameSelectionController {
 
     normalModeSelection.setDisable(false);
     normalModeSelection.setVisible(true);
+  }
+
+  private void resetView() {
+    paneModes.setDisable(false);
+    paneModes.setVisible(true);
+    normalModeSelection.setDisable(true);
+    normalModeSelection.setVisible(false);
   }
 
   @FXML
@@ -125,6 +134,8 @@ public class GameSelectionController {
 
     // Go to player canvas
     node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
+
+    resetView();
   }
 
   private void setAccuracyDif() {
