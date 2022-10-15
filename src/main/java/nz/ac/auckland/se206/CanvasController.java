@@ -630,13 +630,6 @@ public class CanvasController {
     return imageBinary;
   }
 
-  protected void enableHiddenWord() {
-
-    paneDefinition.setVisible(true);
-    paneCategories.setVisible(false);
-    lblDefinition.setText(definition);
-  }
-
   protected void searchDefinition() {
     Task<Void> definitionTask = new Task<Void>() { // task run by a background thread
           @Override
