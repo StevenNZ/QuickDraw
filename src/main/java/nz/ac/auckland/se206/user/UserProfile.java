@@ -282,4 +282,8 @@ public class UserProfile {
   public void incrementWinStreak() {
     this.winStreak++;
   }
+
+  public void resetWinStreak() {
+    this.winStreak = 0;
+  }
 }
