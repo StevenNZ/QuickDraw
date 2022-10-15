@@ -245,7 +245,7 @@ public class UserSelectionController {
 
     // Convert into a binary image.
     final BufferedImage imageBinary =
-        new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+        new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
 
     final Graphics2D graphics = imageBinary.createGraphics();
 
