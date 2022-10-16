@@ -86,7 +86,6 @@ public class CanvasController {
   @FXML private Pane paneGameEnd;
   @FXML private Pane paneDefinition;
   @FXML private Pane paneTimer;
-  @FXML private Button clearButton;
   @FXML private Button btnStats;
   @FXML private Button btnReturnCanvas;
   @FXML private Button btnNewGame;
@@ -96,8 +95,12 @@ public class CanvasController {
   @FXML private Pane paneCanvas;
   @FXML private Pane paneStats;
   @FXML private Pane paneZen;
+  @FXML private Pane panePaint;
   @FXML private ToggleButton togglePen;
   @FXML private ToggleButton toggleEraser;
+  @FXML private ToggleButton clearButton;
+  @FXML private ToggleButton paintButton;
+
   @FXML private Polygon greenPolygon;
   @FXML private Polygon redPolygon;
   @FXML private Rectangle neutralRectangle;
@@ -615,6 +618,7 @@ public class CanvasController {
   private void onBack(ActionEvent event) {
     if (GameSelectionController.gameMode.equals("zen")) {
       future.cancel(true);
+      paneEditCanvas.setDisable(true);
     }
     reset();
     Button button = (Button) event.getSource();
@@ -751,4 +755,7 @@ public class CanvasController {
     randomCategory = CategorySelector.getHardDifWords().get(new Random().nextInt(340));
     lblZenTxt.setText(randomCategory);
   }
+
+  @FXML
+  private void onPaintSelected() {}
 }

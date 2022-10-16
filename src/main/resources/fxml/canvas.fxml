@@ -111,14 +111,14 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="paneZen" layoutX="54.0" layoutY="8.0" prefHeight="447.0" prefWidth="832.0" visible="false">
+            <Pane fx:id="paneZen" layoutX="182.0" layoutY="8.0" prefHeight="158.0" prefWidth="704.0" visible="false">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="372.0" layoutY="21.0" prefHeight="19.0" prefWidth="219.0" styleClass="heading" text="Your word is:" textAlignment="CENTER">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="244.0" layoutY="21.0" prefHeight="19.0" prefWidth="219.0" styleClass="heading" text="Your word is:" textAlignment="CENTER">
                      <font>
                         <Font name="Consolas" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblZenTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="32.0" prefHeight="98.0" prefWidth="697.0" styleClass="title" text="zen" textAlignment="CENTER">
+                  <Label fx:id="lblZenTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="32.0" prefHeight="98.0" prefWidth="697.0" styleClass="title" text="zen" textAlignment="CENTER">
                      <font>
                         <Font name="Ink Free" size="60.0" />
                      </font>
@@ -146,12 +146,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Canvas>
-                  <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="715.0" layoutY="399.0" mnemonicParsing="false" onAction="#onClear" prefHeight="45.0" prefWidth="144.0" style="-fx-background-color: #faa504;" styleClass="body" text="Clear" textAlignment="CENTER">
-                     <font>
-                        <Font name="Consolas" size="22.0" />
-                     </font>
-                  </Button>
-                  <Pane layoutX="14.0" prefHeight="361.0" prefWidth="108.0">
+                  <Pane layoutX="14.0" layoutY="8.0" prefHeight="361.0" prefWidth="108.0">
                      <children>
                         <Circle fx:id="circlePen" fill="WHITE" layoutX="50.0" layoutY="38.0" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
                         <ImageView fx:id="penBlack" fitHeight="45.0" fitWidth="49.0" layoutX="26.0" layoutY="16.0">
@@ -178,6 +173,32 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ToggleButton>
+                        <Circle fx:id="circlePen2" fill="WHITE" layoutX="50.0" layoutY="307.0" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
+                        <ImageView fx:id="penBlack2" fitHeight="45.0" fitWidth="49.0" layoutX="26.0" layoutY="285.0">
+                           <image>
+                              <Image url="@../images/clear.png" />
+                           </image>
+                        </ImageView>
+                        <ToggleButton fx:id="clearButton" contentDisplay="CENTER" layoutX="11.0" layoutY="268.0" mnemonicParsing="false" onAction="#onClear" prefHeight="79.0" prefWidth="79.0" styleClass="toggleButtonCircle">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ToggleButton>
+                        <Pane fx:id="panePaint" layoutX="5.0" layoutY="173.0" prefHeight="88.0" prefWidth="89.0" visible="false">
+                           <children>
+                              <Circle fx:id="circlePen1" fill="WHITE" layoutX="44.0" layoutY="44.0" radius="37.0" stroke="#faa504" strokeWidth="5.0" styleClass="iconCircle" />
+                              <ImageView fx:id="penBlack1" fitHeight="45.0" fitWidth="49.0" layoutX="20.0" layoutY="22.0">
+                                 <image>
+                                    <Image url="@../images/paint.png" />
+                                 </image>
+                              </ImageView>
+                              <ToggleButton fx:id="paintButton" contentDisplay="CENTER" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" onAction="#onPaintSelected" prefHeight="79.0" prefWidth="79.0" styleClass="toggleButtonCircle">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                           </children>
+                        </Pane>
                      </children>
                   </Pane>
                </children>
