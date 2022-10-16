@@ -69,7 +69,6 @@ public class CanvasController {
   private static String definition;
 
   private int timerMax;
-  @FXML private Button btnSaveDrawing;
   @FXML private Button btnStartTimer;
   @FXML private Canvas canvas;
   @FXML private Label lblCategoryTxt;
@@ -90,6 +89,7 @@ public class CanvasController {
   @FXML private Pane paneGameEnd;
   @FXML private Pane paneDefinition;
   @FXML private Pane paneTimer;
+  @FXML private Pane paneSaveDrawing;
   @FXML private Button btnStats;
   @FXML private Button btnReturnCanvas;
   @FXML private Button btnNewGame;
@@ -397,7 +397,7 @@ public class CanvasController {
         randomCategory.replaceAll(" ", "_")); // initially meaningful name
     fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("BMP", "*.bmp"));
     // get the current stage
-    Stage stage = (Stage) btnSaveDrawing.getScene().getWindow();
+    Stage stage = (Stage) paneSaveDrawing.getScene().getWindow();
     File file = fileChooser.showSaveDialog(stage);
     if (file != null) {
       fileChooser.setInitialDirectory(file.getParentFile()); // save the image to a file.
@@ -451,6 +451,7 @@ public class CanvasController {
     // Make buttons visible to save the drawing and reset appear.
     paneGameEnd.setDisable(false);
     paneGameEnd.setVisible(true);
+    paneSaveDrawing.setVisible(true);
     // Hide category display information
     paneCategories.setVisible(false);
     paneDefinition.setVisible(false);
@@ -513,6 +514,7 @@ public class CanvasController {
   private void reset() {
     // Hide Game End Pane
     paneGameEnd.setVisible(false);
+    paneSaveDrawing.setVisible(false);
     // Clear the canvas
     onClear();
 
@@ -748,6 +750,7 @@ public class CanvasController {
     panePaint.setVisible(true);
     paneCategories.setVisible(false);
     paneDefinition.setVisible(false);
+    paneSaveDrawing.setVisible(true);
     paneZen.setVisible(true);
     timerMax = 60 * 60;
     displayNewCategory();

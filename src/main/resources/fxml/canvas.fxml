@@ -31,12 +31,12 @@
             <Pane fx:id="paneTimer" layoutX="923.0" layoutY="-14.0" prefHeight="204.0" prefWidth="302.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="184.0" layoutX="3.0" layoutY="10.0" stroke="#faa504" strokeWidth="5.0" width="295.0" />
-                  <Label id="lblTimer" fx:id="lblTimer" alignment="CENTER" contentDisplay="RIGHT" layoutX="46.0" layoutY="25.0" prefHeight="88.0" prefWidth="211.0" text="01:00" textAlignment="CENTER">
+                  <Label id="lblTimer" fx:id="lblTimer" alignment="CENTER" contentDisplay="RIGHT" layoutX="45.0" layoutY="28.0" prefHeight="88.0" prefWidth="211.0" text="01:00" textAlignment="CENTER">
                      <font>
                         <Font name="Consolas" size="60.0" />
                      </font>
                   </Label>
-                  <Button id="btnStartTimer" fx:id="btnStartTimer" alignment="CENTER" defaultButton="true" layoutX="27.0" layoutY="119.0" mnemonicParsing="false" onAction="#onStartTimer" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #faa504;" text="Start Timer">
+                  <Button id="btnStartTimer" fx:id="btnStartTimer" alignment="CENTER" defaultButton="true" layoutX="26.0" layoutY="125.0" mnemonicParsing="false" onAction="#onStartTimer" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #faa504;" text="Start Timer">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -57,17 +57,12 @@
             </Label>
             <Pane fx:id="paneGameEnd" disable="true" layoutX="177.0" layoutY="-1.0" prefHeight="204.0" prefWidth="711.0" visible="false">
                <children>
-                  <Button fx:id="btnSaveDrawing" layoutX="418.0" layoutY="113.0" mnemonicParsing="false" onAction="#onSaveDrawing" prefHeight="50.0" prefWidth="284.0" style="-fx-background-color: #faa504;" text="Save Drawing">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
                   <Label fx:id="lblWinOrLoss" alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="14.0" prefHeight="98.0" prefWidth="690.0" styleClass="heading2" text="WIN OR LOSS?">
                      <font>
                         <Font name="Consolas" size="45.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnNewGame" layoutX="90.0" layoutY="113.0" mnemonicParsing="false" onAction="#onNewGameClicked" prefHeight="46.0" prefWidth="211.0" style="-fx-background-color: #faa504;" text="New Game">
+                  <Button fx:id="btnNewGame" layoutX="251.0" layoutY="113.0" mnemonicParsing="false" onAction="#onNewGameClicked" prefHeight="46.0" prefWidth="211.0" style="-fx-background-color: #faa504;" text="New Game">
                      <font>
                         <Font name="Consolas" size="22.0" />
                      </font>
@@ -249,6 +244,16 @@
                   <Font name="Consolas" size="22.0" />
                </font>
             </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="paneSaveDrawing" layoutX="210.0" layoutY="156.0" prefHeight="72.0" prefWidth="70.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="53.0" layoutX="9.0" layoutY="11.0" onMouseClicked="#onSaveDrawing" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="56.0" />
+            <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="19.0" layoutY="20.0" onMouseClicked="#onSaveDrawing" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/savedrawing.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="paneButtons" layoutX="31.0" layoutY="641.0" prefHeight="5.0" prefWidth="1223.0">
