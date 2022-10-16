@@ -85,7 +85,7 @@ public class UserSelectionController {
 
     canvasUser.setOnMousePressed( // canvas implementation for user profile pic drawing
         e -> {
-          if (togglePen.isSelected()) { // pen implementation
+          if (!toggleEraser.isSelected()) { // pen implementation
             graphic.setStroke(penColour);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
@@ -98,7 +98,7 @@ public class UserSelectionController {
         });
     canvasUser.setOnMouseDragged( // event listener of mouse drag for smoother pen
         e -> {
-          if (togglePen.isSelected()) {
+          if (!toggleEraser.isSelected()) {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
           } else if (toggleEraser.isSelected()) {
@@ -110,7 +110,7 @@ public class UserSelectionController {
 
     canvasUser.setOnMouseReleased(
         e -> {
-          if (togglePen.isSelected()) {
+          if (!toggleEraser.isSelected()) {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
             graphic.closePath();
