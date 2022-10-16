@@ -391,10 +391,13 @@ public class CanvasController {
    */
   @FXML
   private void onSaveDrawing() throws IOException {
+    String category =
+        GameSelectionController.gameMode.equals("zen")
+            ? lblZenTxt.getText()
+            : lblCategoryTxt.getText();
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Save Drawing");
-    fileChooser.setInitialFileName(
-        randomCategory.replaceAll(" ", "_")); // initially meaningful name
+    fileChooser.setInitialFileName(category.replaceAll(" ", "_")); // initially meaningful name
     fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("BMP", "*.bmp"));
     // get the current stage
     Stage stage = (Stage) paneSaveDrawing.getScene().getWindow();
@@ -548,8 +551,8 @@ public class CanvasController {
       paneDefinition.setVisible(false);
       paneZen.setVisible(false);
       paneTimer.setVisible(true);
-      lblCategoryTxt.setText(randomCategory);
     }
+    lblCategoryTxt.setText(randomCategory);
   }
 
   /**
