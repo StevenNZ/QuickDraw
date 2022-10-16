@@ -36,6 +36,7 @@ public class GameSelectionController {
   @FXML private ToggleButton confidenceMedToggle;
   @FXML private ToggleButton confidenceHardToggle;
   @FXML private ToggleButton confidenceMasterToggle;
+  @FXML private Button btnStartGame;
 
   public void initialize() {}
 
@@ -109,6 +110,7 @@ public class GameSelectionController {
   @FXML
   private void onNormal() {
     gameMode = "normal";
+    btnStartGame.setDisable(false);
     enablePaneDifficulties();
   }
 
@@ -224,6 +226,10 @@ public class GameSelectionController {
       default:
         return SceneManager.AppUi.CANVAS; // defaults to guest canvas
     }
+  }
+
+  protected void setDisableBtnStartGame(boolean isDisabled) {
+    btnStartGame.setDisable(isDisabled);
   }
 
   //  private void receiveData(){
