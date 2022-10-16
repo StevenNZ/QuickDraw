@@ -123,8 +123,8 @@ public class GameSelectionController {
   @FXML
   private void onZenMode(Event event) {
     gameMode = "zen";
-    App.canvasInstances.get(UserProfile.currentUser).enableZenMode();
     switchToCanvas(event);
+    App.canvasInstances.get(UserProfile.currentUser).enableZenMode();
   }
 
   private void enablePaneDifficulties() {
@@ -156,13 +156,12 @@ public class GameSelectionController {
 
     // Go to player canvas
     switchToCanvas(event);
-
-    resetView();
   }
 
   private void switchToCanvas(Event event) {
     Node node = (Node) event.getSource();
     node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
+    resetView();
   }
 
   private void setAccuracyDif() {

@@ -242,6 +242,7 @@ public class CanvasController {
     Stage stage = (Stage) canvas.getScene().getWindow();
     stage.setOnCloseRequest( // text to speech closes upon closing GUI
         e -> {
+          future.cancel(true);
           executor.shutdown();
           Platform.exit();
         });
@@ -249,14 +250,17 @@ public class CanvasController {
     // Enable being able to edit the canvas and change pen colours
     paneEditCanvas.setDisable(false);
     canvas.setDisable(false);
-    btnStartTimer.setDisable(true);
-    btnStartTimer.setVisible(false);
-    lblClickStartTimer.setVisible(false);
 
-    paneButtons.setVisible(false);
-    paneButtons.setDisable(true);
+    if (!GameSelectionController.gameMode.equals("zen")) {
+      btnStartTimer.setDisable(true);
+      btnStartTimer.setVisible(false);
+      lblClickStartTimer.setVisible(false);
 
-    currentUser.setWord(randomCategory); // Add to user word history
+      paneButtons.setVisible(false);
+      paneButtons.setDisable(true);
+
+      currentUser.setWord(randomCategory); // Add to user word history
+    }
 
     isStartPredictions = false;
     System.out.println(randomCategory);
@@ -276,11 +280,12 @@ public class CanvasController {
 
     // Check the top predictions if they are what the word is.
     for (int i = 0; i < accuracyLevel; i++) {
-      System.out.println(predictionsTen.get(i));
+      //      System.out.println(predictionsTen.get(i));
       String predictionClassName = predictionsTen.get(i).getClassName();
       // issue arose that underscores replaced spaces so need to replace them again for both types
       predictionClassName = predictionClassName.replaceAll("_", " ");
-      if (randomCategory.equals(predictionClassName)) {
+      if (randomCategory.equals(predictionClassName)
+          && !GameSelectionController.gameMode.equals("zen")) {
         if (predictionsTen.get(i).getProbability() >= confidenceLevel) {
           // This is the win condition.
           isStartPredictions = false;
@@ -530,6 +535,8 @@ public class CanvasController {
     } else {
       paneCategories.setVisible(true);
       paneDefinition.setVisible(false);
+      paneZen.setVisible(false);
+      paneTimer.setVisible(true);
       lblCategoryTxt.setText(randomCategory);
     }
   }
@@ -606,6 +613,9 @@ public class CanvasController {
   /** This method is called when the back button is called and changes scene to main menu */
   @FXML
   private void onBack(ActionEvent event) {
+    if (GameSelectionController.gameMode.equals("zen")) {
+      future.cancel(true);
+    }
     reset();
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();
@@ -726,5 +736,19 @@ public class CanvasController {
     paneCategories.setVisible(false);
     paneDefinition.setVisible(false);
     paneZen.setVisible(true);
+    timerMax = 60 * 60;
+    displayNewCategory();
+    onStartTimer();
+  }
+
+  @FXML
+  private void onZenNextWord() {
+    onClear();
+    displayNewCategory();
+  }
+
+  private void displayNewCategory() {
+    randomCategory = CategorySelector.getHardDifWords().get(new Random().nextInt(340));
+    lblZenTxt.setText(randomCategory);
   }
 }
