@@ -120,6 +120,12 @@ public class GameSelectionController {
     enablePaneDifficulties();
   }
 
+  @FXML
+  private void onZenMode(Event event) {
+    gameMode = "zen";
+    switchToCanvas(event);
+  }
+
   private void enablePaneDifficulties() {
     paneModes.setVisible(false);
     paneModes.setDisable(true);
@@ -137,7 +143,6 @@ public class GameSelectionController {
 
   @FXML
   private void onStartGame(Event event) {
-    Node node = (Node) event.getSource();
 
     // Set difficulty settings
     setAccuracyDif();
@@ -149,9 +154,14 @@ public class GameSelectionController {
     App.canvasInstances.get(UserProfile.currentUser).resetMode();
 
     // Go to player canvas
-    node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
+    switchToCanvas(event);
 
     resetView();
+  }
+
+  private void switchToCanvas(Event event) {
+    Node node = (Node) event.getSource();
+    node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
   }
 
   private void setAccuracyDif() {
