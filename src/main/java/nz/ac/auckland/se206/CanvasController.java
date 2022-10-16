@@ -79,11 +79,13 @@ public class CanvasController {
   @FXML private Label lblWordHistory;
   @FXML private Label lblCategoryIndex;
   @FXML private Label lblDefinition;
+  @FXML private Label lblZenTxt;
   @FXML private Label lblHiddenWord;
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
   @FXML private Pane paneDefinition;
+  @FXML private Pane paneTimer;
   @FXML private Button clearButton;
   @FXML private Button btnStats;
   @FXML private Button btnReturnCanvas;
@@ -93,6 +95,7 @@ public class CanvasController {
   @FXML private Pane paneButtons;
   @FXML private Pane paneCanvas;
   @FXML private Pane paneStats;
+  @FXML private Pane paneZen;
   @FXML private ToggleButton togglePen;
   @FXML private ToggleButton toggleEraser;
   @FXML private Polygon greenPolygon;
@@ -716,5 +719,12 @@ public class CanvasController {
     } else if (currentUser.getConfidenceDifficulty() == Difficulty.MASTER) {
       confidenceLevel = 0.25;
     }
+  }
+
+  protected void enableZenMode() {
+    paneTimer.setVisible(false);
+    paneCategories.setVisible(false);
+    paneDefinition.setVisible(false);
+    paneZen.setVisible(true);
   }
 }

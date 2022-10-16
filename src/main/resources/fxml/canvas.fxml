@@ -71,17 +71,21 @@
                </children>
             </Pane>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="184.0" layoutX="173.0" layoutY="-4.0" stroke="#faa504" strokeWidth="5.0" width="721.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="174.0" layoutX="929.0" layoutY="1.0" stroke="#faa504" strokeWidth="5.0" width="290.0" />
-            <Label id="lblTimer" fx:id="lblTimer" alignment="CENTER" contentDisplay="RIGHT" layoutX="972.0" layoutY="30.0" prefHeight="88.0" prefWidth="211.0" text="01:00" textAlignment="CENTER">
-               <font>
-                  <Font name="Consolas" size="60.0" />
-               </font>
-            </Label>
-            <Button id="btnStartTimer" fx:id="btnStartTimer" alignment="CENTER" defaultButton="true" layoutX="953.0" layoutY="109.0" mnemonicParsing="false" onAction="#onStartTimer" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #faa504;" text="Start Timer">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Button>
+            <Pane fx:id="paneTimer" layoutX="923.0" layoutY="-14.0" prefHeight="204.0" prefWidth="302.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="184.0" layoutX="3.0" layoutY="10.0" stroke="#faa504" strokeWidth="5.0" width="295.0" />
+                  <Label id="lblTimer" fx:id="lblTimer" alignment="CENTER" contentDisplay="RIGHT" layoutX="46.0" layoutY="25.0" prefHeight="88.0" prefWidth="211.0" text="01:00" textAlignment="CENTER">
+                     <font>
+                        <Font name="Consolas" size="60.0" />
+                     </font>
+                  </Label>
+                  <Button id="btnStartTimer" fx:id="btnStartTimer" alignment="CENTER" defaultButton="true" layoutX="27.0" layoutY="119.0" mnemonicParsing="false" onAction="#onStartTimer" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #faa504;" text="Start Timer">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="389.0" layoutX="929.0" layoutY="199.0" stroke="#faa504" strokeWidth="5.0" width="290.0" />
             <Label alignment="CENTER" layoutX="935.0" layoutY="199.0" prefHeight="45.0" prefWidth="284.0" styleClass="heading" text="Top 10 Guesses:" textAlignment="CENTER">
                <font>
@@ -159,6 +163,20 @@
             </Label>
             <Rectangle fx:id="neutralRectangle" arcHeight="5.0" arcWidth="5.0" fill="#c3c3c3" height="11.0" layoutX="999.0" layoutY="259.0" stroke="#a4a4a4" strokeType="INSIDE" width="35.0" />
             <Polygon fx:id="redPolygon" fill="#ff5d5d" layoutX="1030.0" layoutY="243.0" points="-13.0, 39.0, 5.0, 5.0, -31.0, 5.0" stroke="#c93b3b" strokeType="INSIDE" visible="false" />
+            <Pane fx:id="paneZen" layoutX="54.0" layoutY="8.0" prefHeight="447.0" prefWidth="832.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="372.0" layoutY="21.0" prefHeight="19.0" prefWidth="219.0" styleClass="heading" text="Your word is:" textAlignment="CENTER">
+                     <font>
+                        <Font name="Consolas" size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblZenTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="133.0" layoutY="32.0" prefHeight="98.0" prefWidth="697.0" styleClass="title" text="zen" textAlignment="CENTER">
+                     <font>
+                        <Font name="Ink Free" size="60.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
       <Pane fx:id="paneStats" disable="true" layoutX="199.0" layoutY="27.0" prefHeight="604.0" prefWidth="922.0" visible="false">

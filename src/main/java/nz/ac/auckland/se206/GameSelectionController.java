@@ -123,6 +123,7 @@ public class GameSelectionController {
   @FXML
   private void onZenMode(Event event) {
     gameMode = "zen";
+    App.canvasInstances.get(UserProfile.currentUser).enableZenMode();
     switchToCanvas(event);
   }
 
