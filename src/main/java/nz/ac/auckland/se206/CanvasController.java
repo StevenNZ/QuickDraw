@@ -22,12 +22,16 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -91,6 +95,7 @@ public class CanvasController {
   @FXML private Button btnNewGame;
   @FXML private Circle circleEraser;
   @FXML private Circle circlePen;
+  @FXML private Circle circlePaint;
   @FXML private Pane paneButtons;
   @FXML private Pane paneCanvas;
   @FXML private Pane paneStats;
@@ -99,7 +104,7 @@ public class CanvasController {
   @FXML private ToggleButton togglePen;
   @FXML private ToggleButton toggleEraser;
   @FXML private ToggleButton clearButton;
-  @FXML private ToggleButton paintButton;
+  @FXML private ColorPicker paintButton;
 
   @FXML private Polygon greenPolygon;
   @FXML private Polygon redPolygon;
@@ -116,6 +121,7 @@ public class CanvasController {
   private int categoryIndex = 340;
   private int accuracyLevel;
   private double confidenceLevel;
+  private Color paintColour = Color.BLACK;
 
   private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
   private ScheduledFuture future;
@@ -194,7 +200,7 @@ public class CanvasController {
         e -> {
           if (togglePen.isSelected()) { // pen settings
             isStartPredictions = true; // prediction sets to true when user draws (mouse pressed)
-            graphic.setStroke(Color.BLACK);
+            graphic.setStroke(paintColour);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
           } else if (toggleEraser.isSelected()) {
@@ -619,6 +625,8 @@ public class CanvasController {
     if (GameSelectionController.gameMode.equals("zen")) {
       future.cancel(true);
       paneEditCanvas.setDisable(true);
+      panePaint.setVisible(false);
+      paintColour = Color.BLACK;
     }
     reset();
     Button button = (Button) event.getSource();
@@ -737,6 +745,7 @@ public class CanvasController {
 
   protected void enableZenMode() {
     paneTimer.setVisible(false);
+    panePaint.setVisible(true);
     paneCategories.setVisible(false);
     paneDefinition.setVisible(false);
     paneZen.setVisible(true);
@@ -757,5 +766,18 @@ public class CanvasController {
   }
 
   @FXML
-  private void onPaintSelected() {}
+  private void onPaintSelected() {
+    paintColour = paintButton.getValue();
+    LinearGradient paint =
+        new LinearGradient(
+            0.0,
+            1.0,
+            1.0,
+            0.0,
+            true,
+            CycleMethod.NO_CYCLE,
+            new Stop(0.0, Color.WHITE),
+            new Stop(0.9362, paintColour));
+    circlePaint.setFill(paint);
+  }
 }
