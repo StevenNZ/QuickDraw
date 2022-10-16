@@ -115,7 +115,7 @@ public class GameSelectionController {
   }
 
   @FXML
-  private void onZenMode() {
+  private void onHiddenMode() {
     gameMode = "hidden";
     enablePaneDifficulties();
   }
