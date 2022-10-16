@@ -632,6 +632,7 @@ public class CanvasController {
   }
 
   protected void searchDefinition() {
+    App.gameSelectionInstance.setDisableBtnStartGame(true);
     Task<Void> definitionTask = new Task<Void>() { // task run by a background thread
           @Override
           protected Void call() throws Exception {
@@ -654,6 +655,7 @@ public class CanvasController {
                 () -> {
                   lblHiddenWord.setText(hidden);
                   btnNewGame.setVisible(true);
+                  App.gameSelectionInstance.setDisableBtnStartGame(false);
                 });
             return null;
           }
