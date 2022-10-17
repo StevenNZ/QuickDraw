@@ -437,7 +437,7 @@ public class CanvasController {
     } else {
       gameoverString =
           GameSelectionController.gameMode.equals("hidden")
-              ? "Sorry, hidden word was " + randomCategory
+              ? "Sorry, hidden word was " + lblCategoryTxt.getText()
               : "Sorry, better luck next time.";
       currentUser.updateLoss();
       currentUser.resetWinStreak();
