@@ -139,14 +139,6 @@ public class UserSelectionController {
     stage.setUserData(user);
     Scene sceneOfNode = node.getScene();
 
-    UserProfile.Difficulty difficulty = user.getWordDifficulty();
-    currentDifficulty =
-        difficulty == UserProfile.Difficulty.NOTSET ? UserProfile.Difficulty.EASY : difficulty;
-    user.setWordDifficulty(currentDifficulty);
-
-    App.canvasInstances.get(UserProfile.currentUser).getNewCategory(user);
-    App.canvasInstances.get(UserProfile.currentUser).searchDefinition();
-
     sceneOfNode.setRoot(
         SceneManager.getUiRoot(
             SceneManager.AppUi.GAME_SELECTION)); // switch to currentUser's canvas

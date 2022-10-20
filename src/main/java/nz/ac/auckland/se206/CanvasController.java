@@ -66,7 +66,6 @@ import nz.ac.auckland.se206.user.UserProfile.Difficulty;
 public class CanvasController {
   private static final int DEFAULT_SECONDS = 60;
   protected static String randomCategory;
-  private static String definition;
 
   private int timerMax;
   @FXML private Button btnStartTimer;
@@ -521,7 +520,7 @@ public class CanvasController {
     // Clear the canvas
     onClear();
 
-    // Hide category display information
+    // resets pane to the right game mode
     resetMode();
 
     btnStartTimer.setVisible(true);
@@ -533,6 +532,7 @@ public class CanvasController {
     redPolygon.setVisible(false);
     neutralRectangle.setVisible(true);
     lblCategoryIndex.setText("000");
+    //    lblHiddenWord.setText("");
 
     // Reset the timer
     this.canvasTimer = timerMax;
@@ -545,7 +545,6 @@ public class CanvasController {
     if (GameSelectionController.gameMode.equals("hidden")) {
       paneDefinition.setVisible(true);
       paneCategories.setVisible(false);
-      lblDefinition.setText(definition);
     } else {
       paneCategories.setVisible(true);
       paneDefinition.setVisible(false);
@@ -662,7 +661,6 @@ public class CanvasController {
   }
 
   protected void searchDefinition() {
-    App.gameSelectionInstance.setDisableBtnStartGame(true);
     Task<Void> definitionTask = new Task<Void>() { // task run by a background thread
           @Override
           protected Void call() throws Exception {
@@ -678,14 +676,15 @@ public class CanvasController {
                 getNewCategory(currentUser);
               }
             }
-            CanvasController.definition = definition;
+            //            CanvasController.definition = definition;
             String hidden = "_ ".repeat(randomCategory.length());
 
+            String finalDefinition = definition;
             Platform.runLater(
                 () -> {
                   lblHiddenWord.setText(hidden);
+                  lblDefinition.setText(finalDefinition);
                   btnNewGame.setVisible(true);
-                  App.gameSelectionInstance.setDisableBtnStartGame(false);
                 });
             return null;
           }
@@ -706,10 +705,11 @@ public class CanvasController {
   }
 
   private void setCategory() {
-    if (!GameSelectionController.gameMode.equals("hidden")) {
-      getNewCategory(currentUser);
-      // Replace lblCategoryTxt on the canvas
-      lblCategoryTxt.setText(this.randomCategory);
+    getNewCategory(currentUser);
+    // Replace lblCategoryTxt on the canvas
+    lblCategoryTxt.setText(this.randomCategory);
+    if (GameSelectionController.gameMode.equals("hidden")) {
+      searchDefinition();
     }
   }
 
