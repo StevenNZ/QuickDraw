@@ -26,6 +26,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -109,6 +110,7 @@ public class CanvasController {
   @FXML private Polygon redPolygon;
   @FXML private Rectangle neutralRectangle;
   @FXML private TextFlow txtFlow;
+  @FXML private ImageView imageLoad;
   private GraphicsContext graphic;
   private DoodlePrediction model;
   private boolean isStartPredictions = false;
@@ -532,7 +534,6 @@ public class CanvasController {
     redPolygon.setVisible(false);
     neutralRectangle.setVisible(true);
     lblCategoryIndex.setText("000");
-    //    lblHiddenWord.setText("");
 
     // Reset the timer
     this.canvasTimer = timerMax;
@@ -685,6 +686,7 @@ public class CanvasController {
                   lblHiddenWord.setText(hidden);
                   lblDefinition.setText(finalDefinition);
                   btnNewGame.setVisible(true);
+                  imageLoad.setVisible(false);
                 });
             return null;
           }
@@ -709,6 +711,9 @@ public class CanvasController {
     // Replace lblCategoryTxt on the canvas
     lblCategoryTxt.setText(this.randomCategory);
     if (GameSelectionController.gameMode.equals("hidden")) {
+      lblDefinition.setText("");
+      lblHiddenWord.setText("");
+      imageLoad.setVisible(true);
       searchDefinition();
     }
   }
