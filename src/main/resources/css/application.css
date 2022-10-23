@@ -72,7 +72,7 @@
     -fx-font-size: 20px;
 }
 
-.statsTab {
+.statsTabBar {
     -fx-background-color: transparent;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .subStatsBox {
-    -fx-fill: "#ffd9a4";
+    -fx-fill: "#e8e6e3";
     -fx-arc-height: 125;
     -fx-arc-width: 125;
 }
@@ -106,4 +106,16 @@
 .subStatsText {
     -fx-font-size: 26;
     -fx-font-family: Noteworthy;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.statsTab {
+    -fx-background-color: "#ffecd2";
+    -fx-background-radius: 15;
+    -fx-font-family: Noteworthy;
+    -fx-font-size: 30;
+    -fx-padding: 0 35 0 35;
 }
