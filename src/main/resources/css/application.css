@@ -71,3 +71,21 @@
     -fx-font-family: "Consolas";
     -fx-font-size: 20px;
 }
+
+.statsTab {
+    -fx-background-color: transparent;
+}
+
+.mainStatsHeading {
+    -fx-font-size: 70;
+    -fx-font-family: Noteworthy;
+}
+
+.mainStatsText {
+    -fx-font-size: 30;
+    -fx-font-family: Noteworthy;
+}
+
+.mainStatsBox {
+    -fx-fill: "#ffeed4";
+}
