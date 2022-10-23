@@ -88,8 +88,8 @@
 
 .mainStatsBox {
     -fx-fill: "#ff9400";
-    -fx-arc-height: 175;
-    -fx-arc-width: 175;
+    -fx-arc-height: 110;
+    -fx-arc-width: 110;
 }
 
 .subStatsBox {
