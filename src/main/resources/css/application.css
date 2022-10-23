@@ -119,3 +119,22 @@
     -fx-font-size: 30;
     -fx-padding: 0 35 0 35;
 }
+
+.textArea {
+    -fx-border-color: "#ff9400";
+    -fx-border-width: 4;
+    -fx-font-size: 28;
+    -fx-font-family: Noteworthy;
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width: 27;
+}
+
+.scroll-bar .decrement-arrow {
+    -fx-padding:5;
+}
+
+.scroll-bar .increment-arrow {
+    -fx-padding:5;
+}
