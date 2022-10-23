@@ -19,12 +19,12 @@
             <Image url="@../images/qd.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnReturnMain" layoutX="20.0" layoutY="19.0" mnemonicParsing="false" onAction="#onBack" prefHeight="72.0" prefWidth="75.0" styleClass="toggleButtonCircleEmpty" text="&lt;-">
+      <Button fx:id="btnReturnMain" layoutX="12.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBack" prefHeight="72.0" prefWidth="75.0" styleClass="toggleButtonCircleEmpty" text="&lt;-">
          <font>
             <Font name="Consolas" size="22.0" />
          </font>
       </Button>
-      <TabPane layoutX="118.0" layoutY="45.0" prefHeight="635.0" prefWidth="1072.0" styleClass="statsTab" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="106.0" layoutY="45.0" prefHeight="635.0" prefWidth="1068.0" styleClass="statsTab" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Statistics">
             <content>
@@ -32,7 +32,7 @@
                      <children>
                         <Pane layoutX="17.0" layoutY="31.0">
                            <children>
-                              <Rectangle arcHeight="175.0" arcWidth="175.0" fill="#ffeed4" height="179.0" stroke="#faa107" strokeLineCap="ROUND" strokeWidth="0.0" styleClass="mainStatsBox" width="314.0" />
+                              <Rectangle arcHeight="175.0" arcWidth="175.0" fill="#ff9400" height="179.0" stroke="#faa107" strokeLineCap="ROUND" strokeWidth="0.0" styleClass="mainStatsBox" width="314.0" />
                               <Label fx:id="lblStatsHeader11" alignment="CENTER" contentDisplay="CENTER" layoutX="5.5" layoutY="117.5" prefHeight="58.0" prefWidth="309.0" styleClass="mainStatsText" text="Win Rate" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
@@ -75,15 +75,90 @@
                               </Label>
                            </children>
                         </Pane>
-                        <Pane layoutX="10.0" layoutY="244.0">
+                        <Pane layoutX="17.0" layoutY="290.0">
                            <children>
-                              <Rectangle arcHeight="175.0" arcWidth="175.0" fill="#ffeed4" height="179.0" stroke="#faa504" strokeWidth="0.0" styleClass="subTextBox" width="314.0" />
-                              <Label fx:id="lblStatsHeader1121" alignment="CENTER" contentDisplay="CENTER" layoutX="5.5" layoutY="117.5" prefHeight="58.0" prefWidth="309.0" styleClass="mainStatsText" text="Total Games" textAlignment="CENTER">
+                              <Rectangle arcHeight="125.0" arcWidth="125.0" fill="#ffd9a4" height="121.0" stroke="#faa504" strokeWidth="0.0" styleClass="subTextBox" width="314.0" />
+                              <Label fx:id="lblStatsHeader1121" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="70.0" prefHeight="46.0" prefWidth="309.0" styleClass="subStatsText" text="Normal Win" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblQuickestWin21" alignment="CENTER" contentDisplay="CENTER" layoutX="74.5" layoutY="13.0" prefHeight="88.0" prefWidth="169.0" styleClass="mainStatsHeading" text="0" textAlignment="CENTER">
+                              <Label fx:id="lblQuickestWin21" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="1.0" prefHeight="65.0" prefWidth="163.0" styleClass="subStatsHeading" text="--" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="377.0" layoutY="290.0">
+                           <children>
+                              <Rectangle arcHeight="125.0" arcWidth="125.0" fill="#ffd9a4" height="121.0" stroke="#faa504" strokeWidth="0.0" styleClass="subTextBox" width="314.0" />
+                              <Label fx:id="lblStatsHeader11211" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="70.0" prefHeight="46.0" prefWidth="309.0" styleClass="subStatsText" text="Normal Losses" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblQuickestWin211" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="1.0" prefHeight="65.0" prefWidth="163.0" styleClass="subStatsHeading" text="--" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="737.0" layoutY="290.0">
+                           <children>
+                              <Rectangle arcHeight="125.0" arcWidth="125.0" fill="#ffd9a4" height="121.0" stroke="#faa504" strokeWidth="0.0" styleClass="subTextBox" width="314.0" />
+                              <Label fx:id="lblStatsHeader11212" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="70.0" prefHeight="46.0" prefWidth="309.0" styleClass="subStatsText" text="Normal Quickest" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblQuickestWin212" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="1.0" prefHeight="65.0" prefWidth="163.0" styleClass="subStatsHeading" text="--" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="17.0" layoutY="459.0">
+                           <children>
+                              <Rectangle arcHeight="125.0" arcWidth="125.0" fill="#ffd9a4" height="121.0" stroke="#faa504" strokeWidth="0.0" styleClass="subTextBox" width="314.0" />
+                              <Label fx:id="lblStatsHeader11213" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="70.0" prefHeight="46.0" prefWidth="309.0" styleClass="subStatsText" text="Hidden Wins" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblQuickestWin213" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="1.0" prefHeight="65.0" prefWidth="163.0" styleClass="subStatsHeading" text="--" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="377.0" layoutY="459.0">
+                           <children>
+                              <Rectangle arcHeight="125.0" arcWidth="125.0" fill="#ffd9a4" height="121.0" stroke="#faa504" strokeWidth="0.0" styleClass="subTextBox" width="314.0" />
+                              <Label fx:id="lblStatsHeader11214" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="70.0" prefHeight="46.0" prefWidth="309.0" styleClass="subStatsText" text="Hidden Losses" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblQuickestWin214" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="1.0" prefHeight="65.0" prefWidth="163.0" styleClass="subStatsHeading" text="--" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="737.0" layoutY="459.0">
+                           <children>
+                              <Rectangle arcHeight="125.0" arcWidth="125.0" fill="#ffd9a4" height="121.0" stroke="#faa504" strokeWidth="0.0" styleClass="subTextBox" width="314.0" />
+                              <Label fx:id="lblStatsHeader11215" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="70.0" prefHeight="46.0" prefWidth="309.0" styleClass="subStatsText" text="Hidden Quickest" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblQuickestWin215" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="1.0" prefHeight="65.0" prefWidth="163.0" styleClass="subStatsHeading" text="--" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>

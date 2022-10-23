@@ -82,10 +82,28 @@
 }
 
 .mainStatsText {
-    -fx-font-size: 30;
+    -fx-font-size: 33;
     -fx-font-family: Noteworthy;
 }
 
 .mainStatsBox {
-    -fx-fill: "#ffeed4";
+    -fx-fill: "#ff9400";
+    -fx-arc-height: 175;
+    -fx-arc-width: 175;
+}
+
+.subStatsBox {
+    -fx-fill: "#ffd9a4";
+    -fx-arc-height: 125;
+    -fx-arc-width: 125;
+}
+
+.subStatsHeading {
+    -fx-font-size: 50;
+    -fx-font-family: Noteworthy;
+}
+
+.subStatsText {
+    -fx-font-size: 26;
+    -fx-font-family: Noteworthy;
 }
