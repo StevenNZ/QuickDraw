@@ -184,7 +184,35 @@
                               </ImageView>
                               <Label prefHeight="163.0" prefWidth="137.0">
                                  <tooltip>
-                                    <Tooltip text="Empty Tooltip" />
+                                    <Tooltip styleClass="mainStatsText" text="Win in 20 seconds" />
+                                 </tooltip>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="32.0" layoutY="239.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip styleClass="mainStatsText" text="Win in 10 seconds" />
+                                 </tooltip>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="32.0" layoutY="443.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip styleClass="mainStatsText" text="Win in 5 seconds" />
                                  </tooltip>
                               </Label>
                            </children>
@@ -196,33 +224,11 @@
                                     <Image url="@../images/fire.png" />
                                  </image>
                               </ImageView>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="632.0" layoutY="29.0">
-                           <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/fire.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="932.0" layoutY="29.0">
-                           <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/fire.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="32.0" layoutY="239.0">
-                           <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/fire.png" />
-                                 </image>
-                              </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip styleClass="mainStatsText" text="Get a 3 win streak" />
+                                 </tooltip>
+                              </Label>
                            </children>
                         </Pane>
                         <Pane layoutX="332.0" layoutY="239.0">
@@ -232,33 +238,11 @@
                                     <Image url="@../images/fire.png" />
                                  </image>
                               </ImageView>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="632.0" layoutY="239.0">
-                           <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/fire.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="932.0" layoutY="239.0">
-                           <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/fire.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="32.0" layoutY="443.0">
-                           <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/fire.png" />
-                                 </image>
-                              </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip styleClass="mainStatsText" text="Get a 6 win streak" />
+                                 </tooltip>
+                              </Label>
                            </children>
                         </Pane>
                         <Pane layoutX="332.0" layoutY="443.0">
@@ -268,6 +252,39 @@
                                     <Image url="@../images/fire.png" />
                                  </image>
                               </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip styleClass="mainStatsText" text="Get a 10 win streak" />
+                                 </tooltip>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="632.0" layoutY="29.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip styleClass="mainStatsText" text="Get 5 master wins" />
+                                 </tooltip>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="632.0" layoutY="239.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip styleClass="mainStatsText" text="Get 15 master wins" />
+                                 </tooltip>
+                              </Label>
                            </children>
                         </Pane>
                         <Pane layoutX="632.0" layoutY="443.0">
@@ -277,6 +294,39 @@
                                     <Image url="@../images/fire.png" />
                                  </image>
                               </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip styleClass="mainStatsText" text="Get 30 master wins" />
+                                 </tooltip>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="932.0" layoutY="29.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip styleClass="mainStatsText" text="Get 5 hidden wins" />
+                                 </tooltip>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="932.0" layoutY="239.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip styleClass="mainStatsText" text="Get 15 hidden wins" />
+                                 </tooltip>
+                              </Label>
                            </children>
                         </Pane>
                         <Pane layoutX="932.0" layoutY="443.0">
@@ -286,6 +336,11 @@
                                     <Image url="@../images/fire.png" />
                                  </image>
                               </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip styleClass="mainStatsText" text="Get 30 hidden wins" />
+                                 </tooltip>
+                              </Label>
                            </children>
                         </Pane>
                      </children></AnchorPane>
