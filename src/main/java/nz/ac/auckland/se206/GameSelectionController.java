@@ -13,6 +13,7 @@ import nz.ac.auckland.se206.user.UserProfile;
 import nz.ac.auckland.se206.user.UserProfile.Difficulty;
 
 public class GameSelectionController {
+  protected static String gameMode = "normal";
   @FXML private ImageView imageProfile;
   @FXML private Pane paneModes;
   @FXML private Pane normalModeSelection;
@@ -35,6 +36,7 @@ public class GameSelectionController {
   @FXML private ToggleButton confidenceMedToggle;
   @FXML private ToggleButton confidenceHardToggle;
   @FXML private ToggleButton confidenceMasterToggle;
+  @FXML private Button btnStartGame;
 
   public void initialize() {}
 
@@ -107,6 +109,25 @@ public class GameSelectionController {
 
   @FXML
   private void onNormal() {
+    gameMode = "normal";
+    btnStartGame.setDisable(false);
+    enablePaneDifficulties();
+  }
+
+  @FXML
+  private void onHiddenMode() {
+    gameMode = "hidden";
+    enablePaneDifficulties();
+  }
+
+  @FXML
+  private void onZenMode(Event event) {
+    gameMode = "zen";
+    switchToCanvas(event);
+    App.canvasInstances.get(UserProfile.currentUser).enableZenMode();
+  }
+
+  private void enablePaneDifficulties() {
     paneModes.setVisible(false);
     paneModes.setDisable(true);
 
@@ -123,7 +144,6 @@ public class GameSelectionController {
 
   @FXML
   private void onStartGame(Event event) {
-    Node node = (Node) event.getSource();
 
     // Set difficulty settings
     setAccuracyDif();
@@ -132,9 +152,15 @@ public class GameSelectionController {
     setConfidenceDif();
     App.canvasInstances.get(UserProfile.currentUser).setGameDif(currentUserProfile);
 
-    // Go to player canvas
-    node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
+    App.canvasInstances.get(UserProfile.currentUser).resetMode();
 
+    // Go to player canvas
+    switchToCanvas(event);
+  }
+
+  private void switchToCanvas(Event event) {
+    Node node = (Node) event.getSource();
+    node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
     resetView();
   }
 
@@ -210,6 +236,15 @@ public class GameSelectionController {
       default:
         return SceneManager.AppUi.CANVAS; // defaults to guest canvas
     }
+  }
+
+  @FXML
+  private void onStats(Event event) {
+    resetView();
+
+    Button button = (Button) event.getSource();
+    Scene sceneOfButton = button.getScene();
+    sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.STATISTICS));
   }
 
   //  private void receiveData(){
