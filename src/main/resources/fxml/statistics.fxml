@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -172,14 +173,129 @@
           </Tab>
           <Tab styleClass="statsTab" text="Badges">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="32.0" layoutY="29.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                              <Label prefHeight="163.0" prefWidth="137.0">
+                                 <tooltip>
+                                    <Tooltip text="Empty Tooltip" />
+                                 </tooltip>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="332.0" layoutY="29.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="632.0" layoutY="29.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="932.0" layoutY="29.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="32.0" layoutY="239.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="332.0" layoutY="239.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="632.0" layoutY="239.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="932.0" layoutY="239.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="32.0" layoutY="443.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="332.0" layoutY="443.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="632.0" layoutY="443.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="932.0" layoutY="443.0">
+                           <children>
+                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fire.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
             </content>
           </Tab>
             <Tab styleClass="statsTab" text="Word History">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea layoutY="103.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" text="asdasd&#10;asdasd&#10;asd&#10;asd&#10;asd&#10;as&#10;d&#10;asd&#10;sad&#10;as&#10;das&#10;d&#10;asd&#10;&#10;asd&#10;as&#10;dsa&#10;d&#10;asd&#10;as&#10;das&#10;d&#10;asdasdasd" />
+                        <TextArea layoutY="103.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" />
                         <Label layoutX="114.0" layoutY="13.0" styleClass="subStatsHeading" text="Easy" />
                         <TextArea editable="false" layoutX="390.0" layoutY="102.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" />
                         <Label layoutX="480.0" layoutY="12.0" styleClass="subStatsHeading" text="Medium" />
