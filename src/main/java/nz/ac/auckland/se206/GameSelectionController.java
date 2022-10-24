@@ -238,8 +238,13 @@ public class GameSelectionController {
     }
   }
 
-  protected void setDisableBtnStartGame(boolean isDisabled) {
-    btnStartGame.setDisable(isDisabled);
+  @FXML
+  private void onStats(Event event) {
+    resetView();
+
+    Button button = (Button) event.getSource();
+    Scene sceneOfButton = button.getScene();
+    sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.STATISTICS));
   }
 
   //  private void receiveData(){

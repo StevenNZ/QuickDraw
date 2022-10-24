@@ -295,7 +295,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea layoutY="103.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" />
+                        <TextArea editable="false" layoutY="103.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" />
                         <Label layoutX="114.0" layoutY="13.0" styleClass="subStatsHeading" text="Easy" />
                         <TextArea editable="false" layoutX="390.0" layoutY="102.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" />
                         <Label layoutX="480.0" layoutY="12.0" styleClass="subStatsHeading" text="Medium" />
