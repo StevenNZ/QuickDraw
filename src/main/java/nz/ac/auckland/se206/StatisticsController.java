@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206;
 
-
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -42,6 +41,28 @@ public class StatisticsController {
 
     lblText = String.valueOf(currentUserProfile.getTotalLoss() + currentUserProfile.getTotalWins());
     lblTotalGames.setText(lblText);
+
+    lblText = String.valueOf(currentUserProfile.getNormalWins());
+    lblNormalWins.setText(lblText);
+
+    lblText = String.valueOf(currentUserProfile.getNormalLosses());
+    lblNormalLosses.setText(lblText);
+
+    if (currentUserProfile.getNormalQuickest() != 100) {
+      lblText = String.valueOf(currentUserProfile.getNormalQuickest() + "s");
+      lblNormalQuickest.setText(lblText);
+    }
+
+    lblText = String.valueOf(currentUserProfile.getHiddenWins());
+    lblHiddenWins.setText(lblText);
+
+    lblText = String.valueOf(currentUserProfile.getHiddenLosses());
+    lblHiddenLosses.setText(lblText);
+
+    if (currentUserProfile.getHiddenQuickest() != 100) {
+      lblText = String.valueOf(currentUserProfile.getHiddenQuickest() + "s");
+      lblHiddenQuickest.setText(lblText);
+    }
   }
 
   @FXML
