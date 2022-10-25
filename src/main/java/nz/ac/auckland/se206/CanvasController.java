@@ -21,10 +21,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -111,6 +108,7 @@ public class CanvasController {
   @FXML private Rectangle neutralRectangle;
   @FXML private TextFlow txtFlow;
   @FXML private ImageView imageLoad;
+  @FXML private Slider sliderThick;
   private GraphicsContext graphic;
   private DoodlePrediction model;
   private boolean isStartPredictions = false;
@@ -123,7 +121,7 @@ public class CanvasController {
   private int accuracyLevel;
   private double confidenceLevel;
   private Color paintColour = Color.BLACK;
-
+  private double thickness;
   private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
   private ScheduledFuture future;
 
@@ -199,6 +197,7 @@ public class CanvasController {
 
     canvas.setOnMousePressed(
         e -> {
+          graphic.setLineWidth(thickness);
           if (!toggleEraser.isSelected()) { // pen settings
             isStartPredictions = true; // prediction sets to true when user draws (mouse pressed)
             graphic.setStroke(paintColour);
@@ -534,6 +533,7 @@ public class CanvasController {
     redPolygon.setVisible(false);
     neutralRectangle.setVisible(true);
     lblCategoryIndex.setText("000");
+    onPenSelected();
 
     // Reset the timer
     this.canvasTimer = timerMax;
@@ -644,7 +644,11 @@ public class CanvasController {
       future.cancel(true);
       paneEditCanvas.setDisable(true);
       panePaint.setVisible(false);
+      sliderThick.setVisible(false);
       paintColour = Color.BLACK;
+      thickness = 10;
+      sliderThick.setValue(10);
+      circlePaint.setFill(Color.WHITE);
     }
     reset();
     Button button = (Button) event.getSource();
@@ -772,6 +776,7 @@ public class CanvasController {
     paneDefinition.setVisible(false);
     paneSaveDrawing.setVisible(true);
     paneZen.setVisible(true);
+    sliderThick.setVisible(true);
     timerMax = 60 * 60;
     displayNewCategory();
     onStartTimer();
@@ -803,5 +808,10 @@ public class CanvasController {
             new Stop(0.9362, paintColour));
     circlePaint.setFill(paint);
     onPenSelected();
+  }
+
+  @FXML
+  private void onSliderReleased() {
+    thickness = sliderThick.getValue();
   }
 }
