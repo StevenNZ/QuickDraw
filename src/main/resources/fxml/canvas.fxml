@@ -263,13 +263,13 @@
       </Pane>
       <Pane fx:id="paneButtons" layoutX="31.0" layoutY="641.0" prefHeight="5.0" prefWidth="1223.0">
          <children>
-            <Button fx:id="btnStats" layoutX="998.0" layoutY="13.0" mnemonicParsing="false" onAction="#onViewStats" prefHeight="40.0" prefWidth="211.0" text="See Stats" />
+            <Button fx:id="btnStats" layoutX="682.0" layoutY="13.0" mnemonicParsing="false" onAction="#onUserSelection" prefHeight="40.0" prefWidth="211.0" text="Switch User" />
             <Button fx:id="btnReturnCanvas" disable="true" layoutX="998.0" layoutY="11.0" mnemonicParsing="false" onAction="#onBackToCanvas" prefHeight="40.0" prefWidth="211.0" text="Back To Canvas" visible="false">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
             </Button>
-            <Button fx:id="btnReturnMain" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="89.0" text="&lt;-">
+            <Button fx:id="btnReturnMain" layoutX="174.0" layoutY="13.0" mnemonicParsing="false" onAction="#onUserProfile" prefHeight="53.0" prefWidth="199.0" text="User Profile">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>

@@ -624,9 +624,20 @@ public class CanvasController {
     circleEraser.setOpacity(0.5);
   }
 
-  /** This method is called when the back button is called and changes scene to main menu */
+  /** This method is called when the back button is called and changes scene to user selection */
   @FXML
-  private void onBack(ActionEvent event) {
+  private void onUserSelection(ActionEvent event) {
+    Scene sceneOfButton = onBackReset(event);
+    sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
+  }
+
+  @FXML
+  private void onUserProfile(ActionEvent event) {
+    Scene sceneOfButton = onBackReset(event);
+    sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.GAME_SELECTION));
+  }
+
+  private Scene onBackReset(ActionEvent event) {
     if (GameSelectionController.gameMode.equals("zen")) {
       future.cancel(true);
       paneEditCanvas.setDisable(true);
@@ -635,8 +646,7 @@ public class CanvasController {
     }
     reset();
     Button button = (Button) event.getSource();
-    Scene sceneOfButton = button.getScene();
-    sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU));
+    return button.getScene();
   }
   /**
    * This method retreives a binary image of the canvas and returns a binary version of the image
