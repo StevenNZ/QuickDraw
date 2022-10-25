@@ -19,8 +19,10 @@ public class UserProfile {
   private int totalLoss = 0;
   private int quickestWin = 100;
   private int normalWins = 0;
+  private int normalLosses = 0;
   private int normalQuickest = 100;
   private int hiddenWins = 0;
+  private int hiddenLosses = 0;
   private int hiddenQuickest = 100;
   private List<String> wordHistory = new ArrayList<>();
   private List<String> availableWords = new ArrayList<>();
@@ -167,8 +169,10 @@ public class UserProfile {
     this.totalLoss = (int) (long) userData.get("totalLoss");
     this.quickestWin = (int) (long) userData.get("quickestWin");
     this.normalWins = (int) (long) userData.get("normalWins");
+    this.normalLosses = (int) (long) userData.get("normalLosses");
     this.normalQuickest = (int) (long) userData.get("normalQuickest");
     this.hiddenWins = (int) (long) userData.get("hiddenWins");
+    this.hiddenLosses = (int) (long) userData.get("hiddenLosses");
     this.hiddenQuickest = (int) (long) userData.get("hiddenQuickest");
     this.wordHistory = (List<String>) userData.get("wordHistory");
     this.wordDifficulty = Difficulty.toDifficulty((String) userData.get("wordDifficulty"));
