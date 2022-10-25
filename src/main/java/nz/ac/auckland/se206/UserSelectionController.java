@@ -135,6 +135,7 @@ public class UserSelectionController {
     UserProfile user = users[UserProfile.currentUser];
 
     App.gameSelectionInstance.setDifToggles();
+    App.gameSelectionInstance.setEditMode(UserProfile.currentUser);
 
     stage.setUserData(user);
     Scene sceneOfNode = node.getScene();

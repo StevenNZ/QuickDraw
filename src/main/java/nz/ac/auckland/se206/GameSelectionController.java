@@ -17,6 +17,7 @@ public class GameSelectionController {
   @FXML private ImageView imageProfile;
   @FXML private Pane paneModes;
   @FXML private Pane normalModeSelection;
+  @FXML private Pane paneEdit;
   @FXML private Text txtName;
   @FXML private Text txtStreak;
   private UserProfile currentUserProfile;
@@ -255,6 +256,10 @@ public class GameSelectionController {
     Scene sceneOfNode = node.getScene();
     sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
     App.userSelectionInstance.onEditMode();
+  }
+
+  protected void setEditMode(int user) {
+    paneEdit.setVisible(user != 0);
   }
 
   //  private void receiveData(){
