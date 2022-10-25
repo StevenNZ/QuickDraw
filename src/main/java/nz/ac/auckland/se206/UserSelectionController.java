@@ -282,12 +282,14 @@ public class UserSelectionController {
   private void onPenSelected() {
     circleEraser.setOpacity(1);
     circlePen.setOpacity(0.5);
+    togglePen.setSelected(true);
   }
 
   @FXML
   private void onEraserSelected() {
     circlePen.setOpacity(1);
     circleEraser.setOpacity(0.5);
+    toggleEraser.setSelected(true);
   }
 
   private void clearUserCreation() {
@@ -297,7 +299,6 @@ public class UserSelectionController {
     paneUserCreation.setVisible(false);
     textFieldName.setStyle("-fx-border-color: transparent");
     circlePaint.setFill(Color.WHITE);
-    togglePen.setSelected(true);
     onPenSelected();
     thickness = 8;
     sliderThick.setValue(8);
@@ -319,6 +320,7 @@ public class UserSelectionController {
             new Stop(0.255, colour),
             new Stop(1.0, new Color(1.0, 1.0, 1.0, 1.0)));
     circlePaint.setFill(paint);
+    onPenSelected();
   }
 
   @FXML
