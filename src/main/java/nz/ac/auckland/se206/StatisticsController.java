@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import java.text.DecimalFormat;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -21,16 +22,25 @@ public class StatisticsController {
   private UserProfile currentUserProfile;
   private String lblText;
 
+  private DecimalFormat df = new DecimalFormat("#.00");
+
   public void initialize() {
     currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
 
     if (currentUserProfile.getTotalWins() != 0 || currentUserProfile.getTotalLoss() != 0) {
       lblText =
           String.valueOf(
-              (double) currentUserProfile.getTotalWins()
-                  / ((double) currentUserProfile.getTotalWins()
-                      + currentUserProfile.getTotalLoss()));
-      lblText = lblText.substring(2, 4) + "%";
+              String.format(
+                  "%.2f",
+                  (double) currentUserProfile.getTotalWins()
+                      / ((double) currentUserProfile.getTotalWins()
+                          + currentUserProfile.getTotalLoss())));
+      if (lblText.equals("1.00")) {
+        lblText = "100";
+      } else {
+        lblText = lblText.substring(2, 4);
+      }
+      lblText += "%";
       lblWinRate.setText(lblText);
     }
 
