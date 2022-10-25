@@ -199,7 +199,7 @@ public class CanvasController {
 
     canvas.setOnMousePressed(
         e -> {
-          if (togglePen.isSelected()) { // pen settings
+          if (!toggleEraser.isSelected()) { // pen settings
             isStartPredictions = true; // prediction sets to true when user draws (mouse pressed)
             graphic.setStroke(paintColour);
             graphic.beginPath();
@@ -210,7 +210,7 @@ public class CanvasController {
         });
     canvas.setOnMouseDragged(
         e -> {
-          if (togglePen.isSelected()
+          if (!toggleEraser.isSelected()
               && isStartPredictions) { // condition to stop canvas when game ends
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
@@ -221,7 +221,7 @@ public class CanvasController {
 
     canvas.setOnMouseReleased(
         e -> {
-          if (togglePen.isSelected() && isStartPredictions) {
+          if (!toggleEraser.isSelected() && isStartPredictions) {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
             graphic.closePath();
@@ -612,6 +612,7 @@ public class CanvasController {
   private void onPenSelected() {
     circleEraser.setOpacity(1);
     circlePen.setOpacity(0.5);
+    togglePen.setSelected(true);
   }
 
   /**
@@ -622,6 +623,7 @@ public class CanvasController {
   private void onEraserSelected() {
     circlePen.setOpacity(1);
     circleEraser.setOpacity(0.5);
+    toggleEraser.setSelected(true);
   }
 
   /** This method is called when the back button is called and changes scene to user selection */
@@ -800,5 +802,6 @@ public class CanvasController {
             new Stop(0.0, Color.WHITE),
             new Stop(0.9362, paintColour));
     circlePaint.setFill(paint);
+    onPenSelected();
   }
 }
