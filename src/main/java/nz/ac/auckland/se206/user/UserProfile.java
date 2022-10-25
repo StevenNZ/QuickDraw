@@ -330,4 +330,20 @@ public class UserProfile {
   public int getHiddenQuickest() {
     return this.hiddenQuickest;
   }
+
+  public void incrementNormalLosses() {
+    this.normalLosses++;
+  }
+
+  public int getNormalLosses() {
+    return this.normalLosses;
+  }
+
+  public void incrementHiddenLosses() {
+    this.hiddenLosses++;
+  }
+
+  public int getHiddenLosses() {
+    return this.hiddenLosses;
+  }
 }
