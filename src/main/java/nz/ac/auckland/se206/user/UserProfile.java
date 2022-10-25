@@ -18,6 +18,10 @@ public class UserProfile {
   private int totalWins = 0;
   private int totalLoss = 0;
   private int quickestWin = 100;
+  private int normalWins = 0;
+  private int normalQuickest = 100;
+  private int hiddenWins = 0;
+  private int hiddenQuickest = 100;
   private List<String> wordHistory = new ArrayList<>();
   private List<String> availableWords = new ArrayList<>();
   private transient Image profilePic = null;
@@ -162,6 +166,10 @@ public class UserProfile {
     this.totalWins = (int) (long) userData.get("totalWins");
     this.totalLoss = (int) (long) userData.get("totalLoss");
     this.quickestWin = (int) (long) userData.get("quickestWin");
+    this.normalWins = (int) (long) userData.get("normalWins");
+    this.normalQuickest = (int) (long) userData.get("normalQuickest");
+    this.hiddenWins = (int) (long) userData.get("hiddenWins");
+    this.hiddenQuickest = (int) (long) userData.get("hiddenQuickest");
     this.wordHistory = (List<String>) userData.get("wordHistory");
     this.wordDifficulty = Difficulty.toDifficulty((String) userData.get("wordDifficulty"));
     this.accuracyDifficulty = Difficulty.toDifficulty((String) userData.get("accuracyDifficulty"));
