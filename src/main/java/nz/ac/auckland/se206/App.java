@@ -72,12 +72,14 @@ public class App extends Application {
 
     SceneManager.addUi(SceneManager.AppUi.GAME_SELECTION, loadFxml("gameselection"));
 
-    SceneManager.addUi(SceneManager.AppUi.STATISTICS, loadFxml("statistics"));
-
     final Scene mainMenuScene =
         new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU), 1280, 720);
 
     stage.setScene(mainMenuScene);
     stage.show();
+  }
+
+  public static Parent addNode(String fxml) throws IOException {
+    return loadFxml(fxml);
   }
 }
