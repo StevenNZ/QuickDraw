@@ -260,9 +260,10 @@ public class CanvasController {
     paneEditCanvas.setDisable(false);
     canvas.setDisable(false);
 
+    btnStartTimer.setDisable(true);
+    btnStartTimer.setVisible(false);
+
     if (!GameSelectionController.gameMode.equals("zen")) {
-      btnStartTimer.setDisable(true);
-      btnStartTimer.setVisible(false);
       lblClickStartTimer.setVisible(false);
 
       paneButtons.setVisible(false);
@@ -551,6 +552,7 @@ public class CanvasController {
       paneDefinition.setVisible(false);
       paneZen.setVisible(false);
       paneTimer.setVisible(true);
+      btnStartTimer.setVisible(true);
     }
     lblCategoryTxt.setText(randomCategory);
   }

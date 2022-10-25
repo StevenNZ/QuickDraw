@@ -37,11 +37,6 @@
                         <Font name="Consolas" size="60.0" />
                      </font>
                   </Label>
-                  <Button id="btnStartTimer" fx:id="btnStartTimer" alignment="CENTER" defaultButton="true" layoutX="26.0" layoutY="125.0" mnemonicParsing="false" onAction="#onStartTimer" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #faa504;" text="Start Timer">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Button>
                </children>
             </Pane>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="389.0" layoutX="929.0" layoutY="199.0" stroke="#faa504" strokeWidth="5.0" width="290.0" />
@@ -278,6 +273,11 @@
             </Button>
          </children>
       </Pane>
+      <Button id="btnStartTimer" fx:id="btnStartTimer" alignment="CENTER" defaultButton="true" layoutX="444.0" layoutY="404.0" mnemonicParsing="false" onAction="#onStartTimer" prefHeight="46.0" prefWidth="249.0" style="-fx-background-color: #faa504;" text="Start Game">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
