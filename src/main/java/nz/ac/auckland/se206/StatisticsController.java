@@ -37,6 +37,8 @@ public class StatisticsController {
                           + currentUserProfile.getTotalLoss())));
       if (lblText.equals("1.00")) {
         lblText = "100";
+      } else if (lblText.substring(2, 3).equals("0")) {
+        lblText = lblText.substring(3, 4);
       } else {
         lblText = lblText.substring(2, 4);
       }
