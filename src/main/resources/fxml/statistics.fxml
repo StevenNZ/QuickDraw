@@ -40,7 +40,7 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblWinRate" alignment="CENTER" contentDisplay="CENTER" layoutX="74.5" layoutY="13.0" prefHeight="88.0" prefWidth="169.0" styleClass="mainStatsHeading" text="--" textAlignment="CENTER">
+                              <Label fx:id="lblWinRate" alignment="CENTER" contentDisplay="CENTER" layoutX="57.0" layoutY="14.0" prefHeight="103.0" prefWidth="200.0" styleClass="mainStatsHeading" text="--" textAlignment="CENTER">
                                  <font>
                                     <Font name="Noteworthy Light" size="55.0" />
                                  </font>
@@ -55,7 +55,7 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblQuickestWin" alignment="CENTER" contentDisplay="CENTER" layoutX="74.5" layoutY="13.0" prefHeight="88.0" prefWidth="169.0" styleClass="mainStatsHeading" text="--" textAlignment="CENTER">
+                              <Label fx:id="lblQuickestWin" alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="14.0" prefHeight="88.0" prefWidth="169.0" styleClass="mainStatsHeading" text="--" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
