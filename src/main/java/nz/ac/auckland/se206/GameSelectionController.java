@@ -247,6 +247,16 @@ public class GameSelectionController {
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.STATISTICS));
   }
 
+  @FXML
+  private void onEdit(Event event) {
+    resetView();
+
+    Node node = (Node) event.getSource();
+    Scene sceneOfNode = node.getScene();
+    sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
+    App.userSelectionInstance.onEditMode();
+  }
+
   //  private void receiveData(){
   //    Node node = (Node) fire.getSource();
   //    UserProfile user = (UserProfile) stage.getUserData();

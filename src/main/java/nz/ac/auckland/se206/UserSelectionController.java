@@ -149,8 +149,21 @@ public class UserSelectionController {
     String id = ((Node) event.getSource()).getParent().getId();
     UserProfile.currentUser = getProfileById(id);
 
+    changeToUserCreation();
+  }
+
+  private void changeToUserCreation() {
     paneUserProfile.setVisible(false);
     paneUserCreation.setVisible(true);
+  }
+
+  protected void onEditMode() {
+    changeToUserCreation();
+
+    textFieldName.setText(users[UserProfile.currentUser].getName());
+    canvasUser
+        .getGraphicsContext2D()
+        .drawImage(users[UserProfile.currentUser].getImageView().getImage(), 0, 0);
   }
 
   private int getProfileById(String id) {
