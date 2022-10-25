@@ -294,4 +294,36 @@ public class UserProfile {
   public void resetWinStreak() {
     this.winStreak = 0;
   }
+
+  public void incrementNormalWins() {
+    this.normalWins++;
+  }
+
+  public int getNormalWins() {
+    return this.normalWins;
+  }
+
+  public void incrementHiddenWins() {
+    this.hiddenWins++;
+  }
+
+  public int getHiddenWins() {
+    return this.hiddenWins;
+  }
+
+  public void setNormalQuickest(int time) {
+    this.normalQuickest = time;
+  }
+
+  public int getNormalQuickest() {
+    return this.normalQuickest;
+  }
+
+  public void setHiddenQuickest(int time) {
+    this.hiddenQuickest = time;
+  }
+
+  public int getHiddenQuickest() {
+    return this.hiddenQuickest;
+  }
 }
