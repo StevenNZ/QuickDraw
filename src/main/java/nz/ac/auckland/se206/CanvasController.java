@@ -435,6 +435,18 @@ public class CanvasController {
       if ((timerMax - canvasTimer) < currentUser.getQuickestWin()) {
         currentUser.setQuickestWin(timerMax - canvasTimer);
       }
+
+      if (GameSelectionController.gameMode.equals("hidden")) {
+        currentUser.incrementHiddenWins();
+        if ((timerMax - canvasTimer) < currentUser.getHiddenQuickest()) {
+          currentUser.setHiddenQuickest(timerMax - canvasTimer);
+        }
+      } else if (GameSelectionController.gameMode.equals("normal")) {
+        currentUser.incrementNormalWins();
+        if ((timerMax - canvasTimer) < currentUser.getNormalQuickest()) {
+          currentUser.setNormalQuickest(timerMax - canvasTimer);
+        }
+      }
     } else {
       gameoverString =
           GameSelectionController.gameMode.equals("hidden")
@@ -442,6 +454,12 @@ public class CanvasController {
               : "Sorry, better luck next time.";
       currentUser.updateLoss();
       currentUser.resetWinStreak();
+
+      if (GameSelectionController.gameMode.equals("hidden")) {
+        currentUser.incrementHiddenLosses();
+      } else if (GameSelectionController.gameMode.equals("normal")) {
+        currentUser.incrementNormalLosses();
+      }
     }
     currentUser.saveUserData();
     getNewCategory(currentUser);
