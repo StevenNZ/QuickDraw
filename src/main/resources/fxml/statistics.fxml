@@ -177,7 +177,7 @@
                      <children>
                         <Pane layoutX="32.0" layoutY="29.0">
                            <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="twentySecondWin" fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../images/fire.png" />
                                  </image>
@@ -191,7 +191,7 @@
                         </Pane>
                         <Pane layoutX="32.0" layoutY="239.0">
                            <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="tenSecondWin" fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../images/fire.png" />
                                  </image>
@@ -205,7 +205,7 @@
                         </Pane>
                         <Pane layoutX="32.0" layoutY="443.0">
                            <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="fiveSecondWin" fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../images/fire.png" />
                                  </image>
@@ -219,7 +219,7 @@
                         </Pane>
                         <Pane layoutX="332.0" layoutY="29.0">
                            <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="threeWinStreak" fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../images/fire.png" />
                                  </image>
@@ -233,7 +233,7 @@
                         </Pane>
                         <Pane layoutX="332.0" layoutY="239.0">
                            <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="sixWinStreak" fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../images/fire.png" />
                                  </image>
@@ -247,7 +247,7 @@
                         </Pane>
                         <Pane layoutX="332.0" layoutY="443.0">
                            <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="tenWinStreak" fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../images/fire.png" />
                                  </image>
@@ -261,7 +261,7 @@
                         </Pane>
                         <Pane layoutX="632.0" layoutY="29.0">
                            <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="fiveHiddenWins" fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../images/fire.png" />
                                  </image>
@@ -275,7 +275,7 @@
                         </Pane>
                         <Pane layoutX="632.0" layoutY="239.0">
                            <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="fifteenHiddenWins" fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../images/fire.png" />
                                  </image>
@@ -289,7 +289,7 @@
                         </Pane>
                         <Pane layoutX="632.0" layoutY="443.0">
                            <children>
-                              <ImageView fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="thirtyHiddenWins" fitHeight="163.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../images/fire.png" />
                                  </image>
