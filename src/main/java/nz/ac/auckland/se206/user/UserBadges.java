@@ -40,4 +40,46 @@ public class UserBadges {
   public void addBadge(String badgeName) {
     badgesMap.replace(badgeName, true);
   }
+
+  public void checkBadges(UserProfile user) {
+
+    // Quickest win badges
+    if (user.getQuickestWin() <= 20) {
+      addBadge("twentySecondWin");
+    }
+
+    if (user.getQuickestWin() <= 10) {
+      addBadge("tenSecondWin");
+    }
+
+    if (user.getQuickestWin() <= 5) {
+      addBadge("fiveSecondWin");
+    }
+
+    // Winstreak badges
+    if (user.getWinStreak() >= 3) {
+      addBadge("threeWinstreak");
+    }
+
+    if (user.getWinStreak() >= 3) {
+      addBadge("sixWinstreak");
+    }
+
+    if (user.getWinStreak() >= 3) {
+      addBadge("tenWinstreak");
+    }
+
+    // Hidden mode win badges
+    if (user.getHiddenWins() >= 5) {
+      addBadge("fiveHiddenWins");
+    }
+
+    if (user.getHiddenWins() >= 15) {
+      addBadge("fifteenHiddenWins");
+    }
+
+    if (user.getHiddenWins() >= 30) {
+      addBadge("thirtyHiddenWins");
+    }
+  }
 }
