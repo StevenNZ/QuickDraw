@@ -1,12 +1,13 @@
 package nz.ac.auckland.se206;
 
-import java.text.DecimalFormat;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.user.UserProfile;
+import org.json.simple.JSONObject;
 
 public class StatisticsController {
 
@@ -19,10 +20,19 @@ public class StatisticsController {
   @FXML Label lblHiddenWins;
   @FXML Label lblHiddenLosses;
   @FXML Label lblHiddenQuickest;
+
+  @FXML ImageView twentySecondWin;
+  @FXML ImageView tenSecondWin;
+  @FXML ImageView fiveSecondWin;
+  @FXML ImageView threeWinStreak;
+  @FXML ImageView sixWinStreak;
+  @FXML ImageView tenWinStreak;
+  @FXML ImageView fiveHiddenWins;
+  @FXML ImageView fifteenHiddenWins;
+  @FXML ImageView thirtyHiddenWins;
+
   private UserProfile currentUserProfile;
   private String lblText;
-
-  private DecimalFormat df = new DecimalFormat("#.00");
 
   public void initialize() {
     currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
@@ -74,6 +84,48 @@ public class StatisticsController {
     if (currentUserProfile.getHiddenQuickest() != 100) {
       lblText = String.valueOf(currentUserProfile.getHiddenQuickest() + "s");
       lblHiddenQuickest.setText(lblText);
+    }
+
+    // Badges initialization
+    JSONObject badges = currentUserProfile.getBadges().getBadgesMap();
+
+    // Quickest win badges
+    if ((boolean) badges.get("twentySecondWin") == true) {
+      twentySecondWin.setVisible(true);
+    }
+
+    if ((boolean) badges.get("tenSecondWin") == true) {
+      tenSecondWin.setVisible(true);
+    }
+
+    if ((boolean) badges.get("fiveSecondWin") == true) {
+      fiveSecondWin.setVisible(true);
+    }
+
+    // Winstreak badges
+    if ((boolean) badges.get("threeWinstreak") == true) {
+      threeWinStreak.setVisible(true);
+    }
+
+    if ((boolean) badges.get("sixWinstreak") == true) {
+      sixWinStreak.setVisible(true);
+    }
+
+    if ((boolean) badges.get("tenWinstreak") == true) {
+      tenWinStreak.setVisible(true);
+    }
+
+    // Hidden wins badges
+    if ((boolean) badges.get("fiveHiddenWins") == true) {
+      fiveHiddenWins.setVisible(true);
+    }
+
+    if ((boolean) badges.get("fifteenHiddenWins") == true) {
+      fifteenHiddenWins.setVisible(true);
+    }
+
+    if ((boolean) badges.get("thirtyHiddenWins") == true) {
+      thirtyHiddenWins.setVisible(true);
     }
   }
 
