@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.user;
 
 import com.google.gson.Gson;
+import nz.ac.auckland.se206.UserSelectionController;
 import org.json.simple.JSONObject;
 
 public class UserBadges {
@@ -41,7 +42,9 @@ public class UserBadges {
     badgesMap.replace(badgeName, true);
   }
 
-  public void checkBadges(UserProfile user) {
+  public void checkBadges() {
+
+    UserProfile user = UserSelectionController.users[UserProfile.currentUser];
 
     // Quickest win badges
     if (user.getQuickestWin() <= 20) {
