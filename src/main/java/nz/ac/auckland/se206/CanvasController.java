@@ -461,6 +461,9 @@ public class CanvasController {
         currentUser.incrementNormalLosses();
       }
     }
+    // Check if badges won
+    currentUser.getBadges().checkBadges();
+
     currentUser.saveUserData();
     getNewCategory(currentUser);
     // get new definition
