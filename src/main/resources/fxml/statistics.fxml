@@ -197,7 +197,7 @@
                                           <Image url="@../images/badges/quickest_win_20.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt20SecondWin" disable="true" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Win in 20 seconds" />
                                        </tooltip>
@@ -211,7 +211,7 @@
                                           <Image url="@../images/badges/quickest_win_10.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt10SecondWin" disable="true" layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Win in 10 seconds" />
                                        </tooltip>
@@ -225,7 +225,7 @@
                                           <Image url="@../images/badges/quickest_win_5.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt5SecondWin" disable="true" layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Win in 5 seconds" />
                                        </tooltip>
@@ -239,7 +239,7 @@
                                           <Image url="@../images/badges/win_streak_3.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt3WinStreak" disable="true" layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get a 3 win streak" />
                                        </tooltip>
@@ -253,7 +253,7 @@
                                           <Image url="@../images/badges/win_streak_6.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt6WinStreak" disable="true" layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get a 6 win streak" />
                                        </tooltip>
@@ -267,7 +267,7 @@
                                           <Image url="@../images/badges/win_streak_10.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt10WinStreak" disable="true" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get a 10 win streak" />
                                        </tooltip>
@@ -281,7 +281,7 @@
                                           <Image url="@../images/badges/hidden_wins_5.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt5HiddenWins" disable="true" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get 5 hidden wins" />
                                        </tooltip>
@@ -295,7 +295,7 @@
                                           <Image url="@../images/badges/hidden_wins_15.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt15HiddenWins" disable="true" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get 15 hidden wins" />
                                        </tooltip>
@@ -309,7 +309,7 @@
                                           <Image url="@../images/badges/hidden_wins_30.png" />
                                        </image>
                                     </ImageView>
-                                    <Label layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt30HiddenWins" disable="true" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get 30 hidden wins" />
                                        </tooltip>
