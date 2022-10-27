@@ -31,6 +31,16 @@ public class StatisticsController {
   @FXML ImageView fifteenHiddenWins;
   @FXML ImageView thirtyHiddenWins;
 
+  @FXML Label tt20SecondWin;
+  @FXML Label tt10SecondWin;
+  @FXML Label tt5SecondWin;
+  @FXML Label tt3WinStreak;
+  @FXML Label tt6WinStreak;
+  @FXML Label tt10WinStreak;
+  @FXML Label tt5HiddenWins;
+  @FXML Label tt15HiddenWins;
+  @FXML Label tt30HiddenWins;
+
   private UserProfile currentUserProfile;
   private String lblText;
 
@@ -92,40 +102,49 @@ public class StatisticsController {
     // Quickest win badges
     if ((boolean) badges.get("twentySecondWin") == true) {
       twentySecondWin.setVisible(true);
+      tt20SecondWin.setDisable(false);
     }
 
     if ((boolean) badges.get("tenSecondWin") == true) {
       tenSecondWin.setVisible(true);
+      tt10SecondWin.setDisable(false);
     }
 
     if ((boolean) badges.get("fiveSecondWin") == true) {
       fiveSecondWin.setVisible(true);
+      tt5SecondWin.setDisable(false);
     }
 
     // Winstreak badges
     if ((boolean) badges.get("threeWinstreak") == true) {
       threeWinStreak.setVisible(true);
+      tt3WinStreak.setDisable(false);
     }
 
     if ((boolean) badges.get("sixWinstreak") == true) {
       sixWinStreak.setVisible(true);
+      tt6WinStreak.setDisable(false);
     }
 
     if ((boolean) badges.get("tenWinstreak") == true) {
       tenWinStreak.setVisible(true);
+      tt10WinStreak.setDisable(false);
     }
 
     // Hidden wins badges
     if ((boolean) badges.get("fiveHiddenWins") == true) {
       fiveHiddenWins.setVisible(true);
+      tt5HiddenWins.setDisable(false);
     }
 
     if ((boolean) badges.get("fifteenHiddenWins") == true) {
       fifteenHiddenWins.setVisible(true);
+      tt15HiddenWins.setDisable(false);
     }
 
     if ((boolean) badges.get("thirtyHiddenWins") == true) {
       thirtyHiddenWins.setVisible(true);
+      tt30HiddenWins.setDisable(false);
     }
   }
 
