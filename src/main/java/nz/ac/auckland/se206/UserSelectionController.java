@@ -12,10 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -55,11 +52,12 @@ public class UserSelectionController {
   @FXML private ToggleButton togglePen;
   @FXML private ToggleButton toggleEraser;
   @FXML private ColorPicker colourPick;
+  @FXML private Slider sliderThick;
   private ImageView currentImageView;
   private Text currentNameLabel;
   private GraphicsContext graphic;
   private Color penColour = Color.BLACK;
-  private UserProfile.Difficulty currentDifficulty;
+  private double thickness;
 
   @FXML
   public void initialize() {
@@ -85,6 +83,7 @@ public class UserSelectionController {
 
     canvasUser.setOnMousePressed( // canvas implementation for user profile pic drawing
         e -> {
+          graphic.setLineWidth(thickness);
           if (!toggleEraser.isSelected()) { // pen implementation
             graphic.setStroke(penColour);
             graphic.beginPath();
@@ -135,6 +134,7 @@ public class UserSelectionController {
     UserProfile user = users[UserProfile.currentUser];
 
     App.gameSelectionInstance.setDifToggles();
+    App.gameSelectionInstance.setEditMode(UserProfile.currentUser);
 
     stage.setUserData(user);
     Scene sceneOfNode = node.getScene();
@@ -149,8 +149,21 @@ public class UserSelectionController {
     String id = ((Node) event.getSource()).getParent().getId();
     UserProfile.currentUser = getProfileById(id);
 
+    changeToUserCreation();
+  }
+
+  private void changeToUserCreation() {
     paneUserProfile.setVisible(false);
     paneUserCreation.setVisible(true);
+  }
+
+  protected void onEditMode() {
+    changeToUserCreation();
+
+    textFieldName.setText(users[UserProfile.currentUser].getName());
+    canvasUser
+        .getGraphicsContext2D()
+        .drawImage(users[UserProfile.currentUser].getImageView().getImage(), 0, 0);
   }
 
   private int getProfileById(String id) {
@@ -269,12 +282,14 @@ public class UserSelectionController {
   private void onPenSelected() {
     circleEraser.setOpacity(1);
     circlePen.setOpacity(0.5);
+    togglePen.setSelected(true);
   }
 
   @FXML
   private void onEraserSelected() {
     circlePen.setOpacity(1);
     circleEraser.setOpacity(0.5);
+    toggleEraser.setSelected(true);
   }
 
   private void clearUserCreation() {
@@ -284,6 +299,10 @@ public class UserSelectionController {
     paneUserCreation.setVisible(false);
     textFieldName.setStyle("-fx-border-color: transparent");
     circlePaint.setFill(Color.WHITE);
+    onPenSelected();
+    thickness = 8;
+    sliderThick.setValue(8);
+    penColour = Color.BLACK;
   }
 
   @FXML
@@ -301,5 +320,11 @@ public class UserSelectionController {
             new Stop(0.255, colour),
             new Stop(1.0, new Color(1.0, 1.0, 1.0, 1.0)));
     circlePaint.setFill(paint);
+    onPenSelected();
+  }
+
+  @FXML
+  private void onSliderReleased() {
+    thickness = sliderThick.getValue();
   }
 }

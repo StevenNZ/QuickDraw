@@ -17,6 +17,7 @@ public class GameSelectionController {
   @FXML private ImageView imageProfile;
   @FXML private Pane paneModes;
   @FXML private Pane normalModeSelection;
+  @FXML private Pane paneEdit;
   @FXML private Text txtName;
   @FXML private Text txtStreak;
   private UserProfile currentUserProfile;
@@ -100,7 +101,7 @@ public class GameSelectionController {
 
   @FXML
   private void onBack(Event event) {
-    resetView();
+    onResetView();
 
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();
@@ -135,7 +136,8 @@ public class GameSelectionController {
     normalModeSelection.setVisible(true);
   }
 
-  private void resetView() {
+  @FXML
+  private void onResetView() {
     paneModes.setDisable(false);
     paneModes.setVisible(true);
     normalModeSelection.setDisable(true);
@@ -161,7 +163,7 @@ public class GameSelectionController {
   private void switchToCanvas(Event event) {
     Node node = (Node) event.getSource();
     node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
-    resetView();
+    onResetView();
   }
 
   private void setAccuracyDif() {
@@ -240,11 +242,25 @@ public class GameSelectionController {
 
   @FXML
   private void onStats(Event event) {
-    resetView();
+    onResetView();
 
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.STATISTICS));
+  }
+
+  @FXML
+  private void onEdit(Event event) {
+    onResetView();
+
+    Node node = (Node) event.getSource();
+    Scene sceneOfNode = node.getScene();
+    sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
+    App.userSelectionInstance.onEditMode();
+  }
+
+  protected void setEditMode(int user) {
+    paneEdit.setVisible(user != 0);
   }
 
   //  private void receiveData(){

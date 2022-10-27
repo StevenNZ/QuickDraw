@@ -19,6 +19,7 @@ import nz.ac.auckland.se206.user.UserProfile;
 public class App extends Application {
   public static List<CanvasController> canvasInstances = new ArrayList<>();
   public static GameSelectionController gameSelectionInstance = new GameSelectionController();
+  public static UserSelectionController userSelectionInstance = new UserSelectionController();
 
   public static void main(final String[] args) {
     launch();
@@ -39,6 +40,8 @@ public class App extends Application {
       canvasInstances.add(loader.getController());
     } else if (fxml.equals("gameselection")) {
       gameSelectionInstance = loader.getController();
+    } else if (fxml.equals("userselection")) {
+      userSelectionInstance = loader.getController();
     }
     return parent;
   }
