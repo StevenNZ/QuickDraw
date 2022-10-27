@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -22,17 +21,12 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -65,10 +59,8 @@ import nz.ac.auckland.se206.user.UserProfile.Difficulty;
  * the canvas and brush sizes, make sure that the prediction works fine.
  */
 public class CanvasController {
-  private static final int DEFAULT_SECONDS = 60;
-  protected static String randomCategory;
-
   private int timerMax;
+  @FXML private Button btnSaveDrawing;
   @FXML private Button btnStartTimer;
   @FXML private Canvas canvas;
   @FXML private Label lblCategoryTxt;
@@ -81,38 +73,26 @@ public class CanvasController {
   @FXML private Label lblQuickestWin;
   @FXML private Label lblWordHistory;
   @FXML private Label lblCategoryIndex;
-  @FXML private Label lblDefinition;
-  @FXML private Label lblZenTxt;
-  @FXML private Label lblHiddenWord;
   @FXML private Pane paneCategories;
   @FXML private Pane paneEditCanvas;
   @FXML private Pane paneGameEnd;
-  @FXML private Pane paneDefinition;
-  @FXML private Pane paneTimer;
-  @FXML private Pane paneSaveDrawing;
+  @FXML private Button clearButton;
   @FXML private Button btnStats;
   @FXML private Button btnReturnCanvas;
-  @FXML private Button btnNewGame;
   @FXML private Circle circleEraser;
   @FXML private Circle circlePen;
-  @FXML private Circle circlePaint;
   @FXML private Pane paneButtons;
   @FXML private Pane paneCanvas;
   @FXML private Pane paneStats;
-  @FXML private Pane paneZen;
-  @FXML private Pane panePaint;
   @FXML private ToggleButton togglePen;
   @FXML private ToggleButton toggleEraser;
-  @FXML private ToggleButton clearButton;
-  @FXML private ColorPicker paintButton;
-
   @FXML private Polygon greenPolygon;
   @FXML private Polygon redPolygon;
   @FXML private Rectangle neutralRectangle;
   @FXML private TextFlow txtFlow;
-  @FXML private ImageView imageLoad;
   private GraphicsContext graphic;
   private DoodlePrediction model;
+  private String randomCategory;
   private boolean isStartPredictions = false;
   private UserProfile currentUser;
   private String gameoverString;
@@ -122,7 +102,6 @@ public class CanvasController {
   private int categoryIndex = 340;
   private int accuracyLevel;
   private double confidenceLevel;
-  private Color paintColour = Color.BLACK;
 
   private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
   private ScheduledFuture future;
@@ -165,22 +144,6 @@ public class CanvasController {
                 onGameEnd(false);
               });
         }
-
-        String hidden = lblHiddenWord.getText();
-        int hiddenLength = hidden.replaceAll("_ ", "").length();
-        if (canvasTimer % 10 == 1
-            && randomCategory.length() - hiddenLength / 2 > hiddenLength / 2
-            && GameSelectionController.gameMode.equals("hidden")) {
-          Random random = new Random();
-          int index = random.nextInt(randomCategory.length()) * 2;
-          Platform.runLater(
-              () -> {
-                lblHiddenWord.setText(
-                    hidden.substring(0, index)
-                        + randomCategory.charAt(index / 2)
-                        + hidden.substring(index + 1));
-              });
-        }
       };
 
   /**
@@ -192,6 +155,10 @@ public class CanvasController {
    */
   public void initialize() throws ModelException, IOException {
 
+    // Replace lblCategoryTxt on the canvas
+    //    randomCategory = "circle";
+    lblCategoryTxt.setText(this.randomCategory);
+
     graphic = canvas.getGraphicsContext2D();
     graphic.setLineWidth(10);
     graphic.setLineCap(StrokeLineCap.ROUND);
@@ -201,7 +168,7 @@ public class CanvasController {
         e -> {
           if (togglePen.isSelected()) { // pen settings
             isStartPredictions = true; // prediction sets to true when user draws (mouse pressed)
-            graphic.setStroke(paintColour);
+            graphic.setStroke(Color.BLACK);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
           } else if (toggleEraser.isSelected()) {
@@ -252,7 +219,6 @@ public class CanvasController {
     Stage stage = (Stage) canvas.getScene().getWindow();
     stage.setOnCloseRequest( // text to speech closes upon closing GUI
         e -> {
-          future.cancel(true);
           executor.shutdown();
           Platform.exit();
         });
@@ -260,20 +226,16 @@ public class CanvasController {
     // Enable being able to edit the canvas and change pen colours
     paneEditCanvas.setDisable(false);
     canvas.setDisable(false);
+    btnStartTimer.setDisable(true);
+    btnStartTimer.setVisible(false);
+    lblClickStartTimer.setVisible(false);
 
-    if (!GameSelectionController.gameMode.equals("zen")) {
-      btnStartTimer.setDisable(true);
-      btnStartTimer.setVisible(false);
-      lblClickStartTimer.setVisible(false);
+    paneButtons.setVisible(false);
+    paneButtons.setDisable(true);
 
-      paneButtons.setVisible(false);
-      paneButtons.setDisable(true);
-
-      currentUser.setWord(randomCategory); // Add to user word history
-    }
+    currentUser.setWord(randomCategory); // Add to user word history
 
     isStartPredictions = false;
-    System.out.println(randomCategory);
   }
 
   /**
@@ -290,12 +252,11 @@ public class CanvasController {
 
     // Check the top predictions if they are what the word is.
     for (int i = 0; i < accuracyLevel; i++) {
-      //      System.out.println(predictionsTen.get(i));
+      System.out.println(predictionsTen.get(i));
       String predictionClassName = predictionsTen.get(i).getClassName();
       // issue arose that underscores replaced spaces so need to replace them again for both types
       predictionClassName = predictionClassName.replaceAll("_", " ");
-      if (randomCategory.equals(predictionClassName)
-          && !GameSelectionController.gameMode.equals("zen")) {
+      if (randomCategory.equals(predictionClassName)) {
         if (predictionsTen.get(i).getProbability() >= confidenceLevel) {
           // This is the win condition.
           isStartPredictions = false;
@@ -326,9 +287,7 @@ public class CanvasController {
                 redPolygon.setVisible(false);
                 greenPolygon.setVisible(false);
               }
-              if (!GameSelectionController.gameMode.equals("hidden")) {
-                lblCategoryIndex.setText(String.valueOf(finalI + 1));
-              }
+              lblCategoryIndex.setText(String.valueOf(finalI + 1));
               categoryIndex = finalI;
             });
         break;
@@ -392,16 +351,13 @@ public class CanvasController {
    */
   @FXML
   private void onSaveDrawing() throws IOException {
-    String category =
-        GameSelectionController.gameMode.equals("zen")
-            ? lblZenTxt.getText()
-            : lblCategoryTxt.getText();
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Save Drawing");
-    fileChooser.setInitialFileName(category.replaceAll(" ", "_")); // initially meaningful name
+    fileChooser.setInitialFileName(
+        randomCategory.replaceAll(" ", "_")); // initially meaningful name
     fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("BMP", "*.bmp"));
     // get the current stage
-    Stage stage = (Stage) paneSaveDrawing.getScene().getWindow();
+    Stage stage = (Stage) btnSaveDrawing.getScene().getWindow();
     File file = fileChooser.showSaveDialog(stage);
     if (file != null) {
       fileChooser.setInitialDirectory(file.getParentFile()); // save the image to a file.
@@ -424,9 +380,6 @@ public class CanvasController {
     // Stops the background thread jobs
     future.cancel(true);
 
-    paneEditCanvas.setDisable(true);
-    clearButton.setVisible(false);
-
     // UpdateStats
     if (isWinner) {
       gameoverString = "Congratulations! You WON!";
@@ -436,39 +389,26 @@ public class CanvasController {
         currentUser.setQuickestWin(timerMax - canvasTimer);
       }
     } else {
-      gameoverString =
-          GameSelectionController.gameMode.equals("hidden")
-              ? "Sorry, hidden word was " + lblCategoryTxt.getText()
-              : "Sorry, better luck next time.";
+      gameoverString = "Sorry, better luck next time.";
       currentUser.updateLoss();
       currentUser.resetWinStreak();
     }
     currentUser.saveUserData();
-    getNewCategory(currentUser);
-    // get new definition
-    if (GameSelectionController.gameMode.equals("hidden")) {
-      searchDefinition();
-      btnNewGame.setVisible(false);
-    }
     // Change labels to display win or loss
     lblWinOrLoss.setText(gameoverString);
     // Make buttons visible to save the drawing and reset appear.
     paneGameEnd.setDisable(false);
     paneGameEnd.setVisible(true);
-    paneSaveDrawing.setVisible(true);
     // Hide category display information
     paneCategories.setVisible(false);
-    paneDefinition.setVisible(false);
     // Disable changing the drawing
+    paneEditCanvas.setDisable(true);
+    clearButton.setVisible(false);
 
     paneButtons.setVisible(true);
     paneButtons.setDisable(false);
 
     callTextToSpeech();
-  }
-
-  protected void getNewCategory(UserProfile user) {
-    randomCategory = user.pickCategory();
   }
 
   /**
@@ -518,41 +458,24 @@ public class CanvasController {
   private void reset() {
     // Hide Game End Pane
     paneGameEnd.setVisible(false);
-    paneSaveDrawing.setVisible(false);
     // Clear the canvas
     onClear();
-
-    // resets pane to the right game mode
-    resetMode();
-
+    randomCategory = currentUser.pickCategory();
+    // Replace lblCategoryTxt on the canvas
+    lblCategoryTxt.setText(this.randomCategory);
+    // Hide category display information
+    paneCategories.setVisible(true);
     btnStartTimer.setVisible(true);
     btnStartTimer.setDisable(false);
     clearButton.setVisible(true);
     lblClickStartTimer.setVisible(true);
-    txtFlow.getChildren().setAll(new Text("Your top 10 guesses to your drawing will appear here!"));
-    greenPolygon.setVisible(false);
-    redPolygon.setVisible(false);
-    neutralRectangle.setVisible(true);
-    lblCategoryIndex.setText("000");
+    lblTopTenGuesses.setText("Your top 10 guesses to your drawing will appear here!");
 
     // Reset the timer
     this.canvasTimer = timerMax;
     lblTimer.setText(String.format("%02d:%02d", canvasTimer / 60, canvasTimer % 60));
 
     isWin = false;
-  }
-
-  protected void resetMode() {
-    if (GameSelectionController.gameMode.equals("hidden")) {
-      paneDefinition.setVisible(true);
-      paneCategories.setVisible(false);
-    } else {
-      paneCategories.setVisible(true);
-      paneDefinition.setVisible(false);
-      paneZen.setVisible(false);
-      paneTimer.setVisible(true);
-    }
-    lblCategoryTxt.setText(randomCategory);
   }
 
   /**
@@ -567,7 +490,7 @@ public class CanvasController {
       String category = classification.getClassName().replaceAll("_", " ");
       Text text =
           new Text((i + ".  " + category.substring(0, 1).toUpperCase() + category.substring(1)));
-      if (category.equals(randomCategory) && !GameSelectionController.gameMode.equals("hidden")) {
+      if (category.equals(randomCategory)) {
         text.setFill(Color.GREEN);
         text.setFont(Font.font("Consolas", FontWeight.EXTRA_BOLD, 20));
       }
@@ -592,7 +515,7 @@ public class CanvasController {
 
     // Convert into a binary image.
     final BufferedImage imageBinary =
-        new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+        new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
 
     final Graphics2D graphics = imageBinary.createGraphics();
 
@@ -627,13 +550,6 @@ public class CanvasController {
   /** This method is called when the back button is called and changes scene to main menu */
   @FXML
   private void onBack(ActionEvent event) {
-    if (GameSelectionController.gameMode.equals("zen")) {
-      future.cancel(true);
-      paneEditCanvas.setDisable(true);
-      panePaint.setVisible(false);
-      paintColour = Color.BLACK;
-    }
-    reset();
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU));
@@ -661,41 +577,6 @@ public class CanvasController {
     return imageBinary;
   }
 
-  protected void searchDefinition() {
-    Task<Void> definitionTask = new Task<Void>() { // task run by a background thread
-          @Override
-          protected Void call() throws Exception {
-            String definition = "none";
-
-            while (definition.equals("none")) {
-              try {
-                definition = Dictionary.searchWordInfo(randomCategory);
-              } catch (IOException e) {
-                e.printStackTrace();
-              }
-              if (definition.equals("none")) {
-                getNewCategory(currentUser);
-              }
-            }
-            //            CanvasController.definition = definition;
-            String hidden = "_ ".repeat(randomCategory.length());
-
-            String finalDefinition = definition;
-            Platform.runLater(
-                () -> {
-                  lblHiddenWord.setText(hidden);
-                  lblDefinition.setText(finalDefinition);
-                  btnNewGame.setVisible(true);
-                  imageLoad.setVisible(false);
-                });
-            return null;
-          }
-        };
-    Thread definitionThread =
-        new Thread(definitionTask); // creating new thread for text to speech task
-    definitionThread.start();
-  }
-
   public void setGameDif(UserProfile user) {
     UserSelectionController.users[UserProfile.currentUser] = user;
     currentUser = user;
@@ -707,15 +588,9 @@ public class CanvasController {
   }
 
   private void setCategory() {
-    getNewCategory(currentUser);
+    randomCategory = currentUser.pickCategory();
     // Replace lblCategoryTxt on the canvas
     lblCategoryTxt.setText(this.randomCategory);
-    if (GameSelectionController.gameMode.equals("hidden")) {
-      lblDefinition.setText("");
-      lblHiddenWord.setText("");
-      imageLoad.setVisible(true);
-      searchDefinition();
-    }
   }
 
   private void setTimer() {
@@ -751,44 +626,5 @@ public class CanvasController {
     } else if (currentUser.getConfidenceDifficulty() == Difficulty.MASTER) {
       confidenceLevel = 0.25;
     }
-  }
-
-  protected void enableZenMode() {
-    paneTimer.setVisible(false);
-    panePaint.setVisible(true);
-    paneCategories.setVisible(false);
-    paneDefinition.setVisible(false);
-    paneSaveDrawing.setVisible(true);
-    paneZen.setVisible(true);
-    timerMax = 60 * 60;
-    displayNewCategory();
-    onStartTimer();
-  }
-
-  @FXML
-  private void onZenNextWord() {
-    onClear();
-    displayNewCategory();
-  }
-
-  private void displayNewCategory() {
-    randomCategory = CategorySelector.getHardDifWords().get(new Random().nextInt(340));
-    lblZenTxt.setText(randomCategory);
-  }
-
-  @FXML
-  private void onPaintSelected() {
-    paintColour = paintButton.getValue();
-    LinearGradient paint =
-        new LinearGradient(
-            0.0,
-            1.0,
-            1.0,
-            0.0,
-            true,
-            CycleMethod.NO_CYCLE,
-            new Stop(0.0, Color.WHITE),
-            new Stop(0.9362, paintColour));
-    circlePaint.setFill(paint);
   }
 }

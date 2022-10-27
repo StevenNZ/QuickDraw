@@ -28,7 +28,7 @@
       <Rectangle fx:id="rectUser2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="230.0" layoutX="101.0" layoutY="96.0" stroke="BLACK" strokeType="INSIDE" styleClass="bgRect" width="235.0" />
       <ImageView fx:id="imageProfile" fitHeight="156.0" fitWidth="178.0" layoutX="130.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true" />
       <Text fx:id="txtName" layoutX="106.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="Player" textAlignment="CENTER" wrappingWidth="224.9814453125" />
-      <Button layoutX="118.0" layoutY="568.0" mnemonicParsing="false" onAction="#onStats" prefHeight="40.0" prefWidth="200.0" text="See Stats">
+      <Button layoutX="118.0" layoutY="568.0" mnemonicParsing="false" onAction="#onBack" prefHeight="40.0" prefWidth="200.0" text="See Stats">
          <font>
             <Font name="Consolas" size="22.0" />
          </font>
@@ -57,12 +57,12 @@
                   <Font name="Consolas" size="22.0" />
                </font>
             </Button>
-            <Button layoutX="221.0" layoutY="178.0" mnemonicParsing="false" onAction="#onHiddenMode" prefHeight="50.0" prefWidth="235.0" text="Hidden Word">
+            <Button layoutX="221.0" layoutY="178.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Hidden Word">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
             </Button>
-            <Button layoutX="221.0" layoutY="270.0" mnemonicParsing="false" onAction="#onZenMode" prefHeight="50.0" prefWidth="235.0" text="Zen">
+            <Button layoutX="221.0" layoutY="270.0" mnemonicParsing="false" onAction="#onBack" prefHeight="50.0" prefWidth="235.0" text="Zen">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
