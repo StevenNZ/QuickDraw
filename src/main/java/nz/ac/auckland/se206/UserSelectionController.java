@@ -13,16 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.text.Text;
@@ -39,7 +35,6 @@ public class UserSelectionController {
   @FXML private Canvas canvasUser;
   @FXML private Circle circleEraser;
   @FXML private Circle circlePen;
-  @FXML private Circle circlePaint;
   @FXML private ImageView imageUser1;
   @FXML private ImageView imageUser2;
   @FXML private ImageView imageUser3;
@@ -54,12 +49,9 @@ public class UserSelectionController {
   @FXML private Text txtPlayer6;
   @FXML private ToggleButton togglePen;
   @FXML private ToggleButton toggleEraser;
-  @FXML private ColorPicker colourPick;
   private ImageView currentImageView;
   private Text currentNameLabel;
   private GraphicsContext graphic;
-  private Color penColour = Color.BLACK;
-  private UserProfile.Difficulty currentDifficulty;
 
   @FXML
   public void initialize() {
@@ -85,8 +77,8 @@ public class UserSelectionController {
 
     canvasUser.setOnMousePressed( // canvas implementation for user profile pic drawing
         e -> {
-          if (!toggleEraser.isSelected()) { // pen implementation
-            graphic.setStroke(penColour);
+          if (togglePen.isSelected()) { // pen implementation
+            graphic.setStroke(Color.BLACK);
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
 
@@ -98,7 +90,7 @@ public class UserSelectionController {
         });
     canvasUser.setOnMouseDragged( // event listener of mouse drag for smoother pen
         e -> {
-          if (!toggleEraser.isSelected()) {
+          if (togglePen.isSelected()) {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
           } else if (toggleEraser.isSelected()) {
@@ -110,7 +102,7 @@ public class UserSelectionController {
 
     canvasUser.setOnMouseReleased(
         e -> {
-          if (!toggleEraser.isSelected()) {
+          if (togglePen.isSelected()) {
             graphic.lineTo(e.getX(), e.getY());
             graphic.stroke();
             graphic.closePath();
@@ -132,13 +124,11 @@ public class UserSelectionController {
             : node.getParent().getParent().getId();
     // checks for parent of event source
     UserProfile.currentUser = getProfileById(id);
-    UserProfile user = users[UserProfile.currentUser];
 
     App.gameSelectionInstance.setDifToggles();
 
-    stage.setUserData(user);
+    stage.setUserData(users[UserProfile.currentUser]);
     Scene sceneOfNode = node.getScene();
-
     sceneOfNode.setRoot(
         SceneManager.getUiRoot(
             SceneManager.AppUi.GAME_SELECTION)); // switch to currentUser's canvas
@@ -243,7 +233,7 @@ public class UserSelectionController {
 
     // Convert into a binary image.
     final BufferedImage imageBinary =
-        new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+        new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
 
     final Graphics2D graphics = imageBinary.createGraphics();
 
@@ -283,23 +273,5 @@ public class UserSelectionController {
     paneUserProfile.setVisible(true);
     paneUserCreation.setVisible(false);
     textFieldName.setStyle("-fx-border-color: transparent");
-    circlePaint.setFill(Color.WHITE);
-  }
-
-  @FXML
-  private void onChangeColour() {
-    Color colour = colourPick.getValue();
-    penColour = colour;
-    LinearGradient paint =
-        new LinearGradient(
-            0.0,
-            1.0,
-            1.0,
-            0.076,
-            true,
-            CycleMethod.NO_CYCLE,
-            new Stop(0.255, colour),
-            new Stop(1.0, new Color(1.0, 1.0, 1.0, 1.0)));
-    circlePaint.setFill(paint);
   }
 }

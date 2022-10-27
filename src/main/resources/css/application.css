@@ -17,10 +17,6 @@
     -fx-font-family: "Ink Free";
     -fx-font-size: 40px;
 }
-.heading3 {
-    -fx-font-family: "Ink Free";
-    -fx-font-size: 30px;
-}
 
 .button {
     -fx-background-color: "#faa504";
@@ -39,11 +35,6 @@
     -fx-stroke: "#faa504";
     -fx-stroke-width: 5px;
 
-}
-
-.iconCircleColour {
-    -fx-stroke: "#faa504";
-    -fx-stroke-width: 5px;
 }
 
 .toggleButtonCircle {
@@ -70,71 +61,4 @@
 .predictionsText {
     -fx-font-family: "Consolas";
     -fx-font-size: 20px;
-}
-
-.statsTabBar {
-    -fx-background-color: transparent;
-}
-
-.mainStatsHeading {
-    -fx-font-size: 70;
-    -fx-font-family: Noteworthy;
-}
-
-.mainStatsText {
-    -fx-font-size: 33;
-    -fx-font-family: Noteworthy;
-}
-
-.mainStatsBox {
-    -fx-fill: "#ff9400";
-    -fx-arc-height: 110;
-    -fx-arc-width: 110;
-}
-
-.subStatsBox {
-    -fx-fill: "#e8e6e3";
-    -fx-arc-height: 125;
-    -fx-arc-width: 125;
-}
-
-.subStatsHeading {
-    -fx-font-size: 50;
-    -fx-font-family: Noteworthy;
-}
-
-.subStatsText {
-    -fx-font-size: 26;
-    -fx-font-family: Noteworthy;
-}
-
-.tab-pane .tab-header-area .tab-header-background {
-    -fx-opacity: 0;
-}
-
-.statsTab {
-    -fx-background-color: "#ffecd2";
-    -fx-background-radius: 15;
-    -fx-font-family: Noteworthy;
-    -fx-font-size: 30;
-    -fx-padding: 0 35 0 35;
-}
-
-.textArea {
-    -fx-border-color: "#ff9400";
-    -fx-border-width: 4;
-    -fx-font-size: 28;
-    -fx-font-family: Noteworthy;
-}
-
-.scroll-bar:vertical {
-    -fx-pref-width: 27;
-}
-
-.scroll-bar .decrement-arrow {
-    -fx-padding:5;
-}
-
-.scroll-bar .increment-arrow {
-    -fx-padding:5;
 }

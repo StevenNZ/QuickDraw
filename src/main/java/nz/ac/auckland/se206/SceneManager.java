@@ -14,8 +14,7 @@ public class SceneManager {
     CANVAS_PLAYER3(3),
     CANVAS_PLAYER4(4),
     CANVAS_PLAYER5(5),
-    CANVAS_PLAYER6(6),
-    STATISTICS(7);
+    CANVAS_PLAYER6(6);
 
     public static AppUi getAppUiEnum(int ord) {
       for (AppUi scene : AppUi.values()) {
