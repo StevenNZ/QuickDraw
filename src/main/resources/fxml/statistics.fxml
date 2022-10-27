@@ -283,7 +283,7 @@
                                     </ImageView>
                                     <Label layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
-                                          <Tooltip styleClass="mainStatsText" text="Get 5 master wins" />
+                                          <Tooltip styleClass="mainStatsText" text="Get 5 hidden wins" />
                                        </tooltip>
                                     </Label>
                                  </children>
@@ -297,7 +297,7 @@
                                     </ImageView>
                                     <Label layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
-                                          <Tooltip styleClass="mainStatsText" text="Get 15 master wins" />
+                                          <Tooltip styleClass="mainStatsText" text="Get 15 hidden wins" />
                                        </tooltip>
                                     </Label>
                                  </children>
@@ -311,7 +311,7 @@
                                     </ImageView>
                                     <Label layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
-                                          <Tooltip styleClass="mainStatsText" text="Get 30 master wins" />
+                                          <Tooltip styleClass="mainStatsText" text="Get 30 hidden wins" />
                                        </tooltip>
                                     </Label>
                                  </children>
