@@ -664,6 +664,7 @@ public class CanvasController {
 
   @FXML
   private void onUserProfile(ActionEvent event) {
+    App.gameSelectionInstance.setProfileDetails();
     Scene sceneOfButton = onBackReset(event);
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.GAME_SELECTION));
   }
