@@ -54,8 +54,8 @@ public class UserSelectionController {
   @FXML private ToggleButton toggleEraser;
   @FXML private ColorPicker colourPick;
   @FXML private Slider sliderThick;
-  private ImageView currentImageView;
-  private Text currentNameLabel;
+  protected ImageView currentImageView;
+  protected Text currentNameLabel;
   private GraphicsContext graphic;
   private Color penColour = Color.BLACK;
   private double thickness;

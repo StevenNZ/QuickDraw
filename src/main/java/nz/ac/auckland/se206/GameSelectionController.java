@@ -10,6 +10,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import nz.ac.auckland.se206.user.UserFileHandler;
 import nz.ac.auckland.se206.user.UserProfile;
 import nz.ac.auckland.se206.user.UserProfile.Difficulty;
 
@@ -273,6 +274,19 @@ public class GameSelectionController {
   @FXML
   private void onMusic() {
     MainMenuController.toggleMusic();
+  }
+
+  @FXML
+  private void onDelete(Event event) {
+    UserFileHandler.deleteUserData(UserProfile.currentUser);
+    onResetView();
+
+    App.userSelectionInstance.currentImageView.getParent().setVisible(false);
+    App.userSelectionInstance.currentNameLabel.setText("");
+
+    Node node = (Node) event.getSource();
+    Scene sceneOfNode = node.getScene();
+    sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
   }
 
   //  private void receiveData(){
