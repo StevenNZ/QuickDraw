@@ -192,12 +192,12 @@
                            <children>
                               <Pane>
                                  <children>
-                                    <ImageView fx:id="twentySecondWin" fitHeight="194.0" fitWidth="255.0" layoutX="71.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <ImageView fx:id="twentySecondWin" fitHeight="194.0" fitWidth="255.0" layoutX="71.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/badges/quickest_win_20.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="tt20SecondWin" disable="true" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt20SecondWin" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Win in 20 seconds" />
                                        </tooltip>
@@ -206,12 +206,12 @@
                               </Pane>
                               <Pane GridPane.rowIndex="1">
                                  <children>
-                                    <ImageView fx:id="tenSecondWin" fitHeight="198.0" fitWidth="150.0" layoutX="70.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <ImageView fx:id="tenSecondWin" fitHeight="207.0" fitWidth="155.0" layoutX="66.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/badges/quickest_win_10.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="tt10SecondWin" disable="true" layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt10SecondWin" layoutX="73.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Win in 10 seconds" />
                                        </tooltip>
@@ -220,12 +220,12 @@
                               </Pane>
                               <Pane GridPane.rowIndex="2">
                                  <children>
-                                    <ImageView fx:id="fiveSecondWin" fitHeight="195.0" fitWidth="139.0" layoutX="69.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <ImageView fx:id="fiveSecondWin" fitHeight="195.0" fitWidth="139.0" layoutX="69.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/badges/quickest_win_5.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="tt5SecondWin" disable="true" layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt5SecondWin" layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Win in 5 seconds" />
                                        </tooltip>
@@ -234,12 +234,12 @@
                               </Pane>
                               <Pane GridPane.columnIndex="1">
                                  <children>
-                                    <ImageView fx:id="threeWinStreak" fitHeight="196.0" fitWidth="138.0" layoutX="68.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <ImageView fx:id="threeWinStreak" fitHeight="196.0" fitWidth="138.0" layoutX="68.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/badges/win_streak_3.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="tt3WinStreak" disable="true" layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt3WinStreak" layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get a 3 win streak" />
                                        </tooltip>
@@ -248,12 +248,12 @@
                               </Pane>
                               <Pane GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <ImageView fx:id="sixWinStreak" fitHeight="197.0" fitWidth="146.0" layoutX="68.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <ImageView fx:id="sixWinStreak" fitHeight="197.0" fitWidth="146.0" layoutX="68.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/badges/win_streak_6.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="tt6WinStreak" disable="true" layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt6WinStreak" layoutX="68.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get a 6 win streak" />
                                        </tooltip>
@@ -262,12 +262,12 @@
                               </Pane>
                               <Pane GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
-                                    <ImageView fx:id="tenWinStreak" fitHeight="203.0" fitWidth="144.0" layoutX="68.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <ImageView fx:id="tenWinStreak" fitHeight="203.0" fitWidth="144.0" layoutX="68.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/badges/win_streak_10.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="tt10WinStreak" disable="true" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt10WinStreak" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get a 10 win streak" />
                                        </tooltip>
@@ -276,12 +276,12 @@
                               </Pane>
                               <Pane GridPane.columnIndex="2">
                                  <children>
-                                    <ImageView fx:id="fiveHiddenWins" fitHeight="209.0" fitWidth="153.0" layoutX="66.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <ImageView fx:id="fiveHiddenWins" fitHeight="209.0" fitWidth="153.0" layoutX="66.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/badges/hidden_wins_5.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="tt5HiddenWins" disable="true" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt5HiddenWins" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get 5 hidden wins" />
                                        </tooltip>
@@ -290,12 +290,12 @@
                               </Pane>
                               <Pane GridPane.columnIndex="2" GridPane.rowIndex="1">
                                  <children>
-                                    <ImageView fx:id="fifteenHiddenWins" fitHeight="219.0" fitWidth="196.0" layoutX="62.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <ImageView fx:id="fifteenHiddenWins" fitHeight="219.0" fitWidth="196.0" layoutX="62.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/badges/hidden_wins_15.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="tt15HiddenWins" disable="true" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt15HiddenWins" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get 15 hidden wins" />
                                        </tooltip>
@@ -304,12 +304,12 @@
                               </Pane>
                               <Pane GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <children>
-                                    <ImageView fx:id="thirtyHiddenWins" fitHeight="209.0" fitWidth="158.0" layoutX="66.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <ImageView fx:id="thirtyHiddenWins" fitHeight="209.0" fitWidth="158.0" layoutX="66.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../images/badges/hidden_wins_30.png" />
                                        </image>
                                     </ImageView>
-                                    <Label fx:id="tt30HiddenWins" disable="true" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
+                                    <Label fx:id="tt30HiddenWins" layoutX="70.0" layoutY="19.0" prefHeight="163.0" prefWidth="137.0">
                                        <tooltip>
                                           <Tooltip styleClass="mainStatsText" text="Get 30 hidden wins" />
                                        </tooltip>
