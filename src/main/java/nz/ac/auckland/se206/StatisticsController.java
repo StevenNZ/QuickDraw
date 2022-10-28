@@ -1,12 +1,13 @@
 package nz.ac.auckland.se206;
 
-import java.text.DecimalFormat;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.user.UserProfile;
+import org.json.simple.JSONObject;
 
 public class StatisticsController {
 
@@ -19,10 +20,29 @@ public class StatisticsController {
   @FXML Label lblHiddenWins;
   @FXML Label lblHiddenLosses;
   @FXML Label lblHiddenQuickest;
+
+  @FXML ImageView twentySecondWin;
+  @FXML ImageView tenSecondWin;
+  @FXML ImageView fiveSecondWin;
+  @FXML ImageView threeWinStreak;
+  @FXML ImageView sixWinStreak;
+  @FXML ImageView tenWinStreak;
+  @FXML ImageView fiveHiddenWins;
+  @FXML ImageView fifteenHiddenWins;
+  @FXML ImageView thirtyHiddenWins;
+
+  @FXML Label tt20SecondWin;
+  @FXML Label tt10SecondWin;
+  @FXML Label tt5SecondWin;
+  @FXML Label tt3WinStreak;
+  @FXML Label tt6WinStreak;
+  @FXML Label tt10WinStreak;
+  @FXML Label tt5HiddenWins;
+  @FXML Label tt15HiddenWins;
+  @FXML Label tt30HiddenWins;
+
   private UserProfile currentUserProfile;
   private String lblText;
-
-  private DecimalFormat df = new DecimalFormat("#.00");
 
   public void initialize() {
     currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
@@ -74,6 +94,57 @@ public class StatisticsController {
     if (currentUserProfile.getHiddenQuickest() != 100) {
       lblText = String.valueOf(currentUserProfile.getHiddenQuickest() + "s");
       lblHiddenQuickest.setText(lblText);
+    }
+
+    // Badges initialization
+    JSONObject badges = currentUserProfile.getBadges().getBadgesMap();
+
+    // Quickest win badges
+    if ((boolean) badges.get("twentySecondWin") == true) {
+      twentySecondWin.setVisible(true);
+      tt20SecondWin.setDisable(false);
+    }
+
+    if ((boolean) badges.get("tenSecondWin") == true) {
+      tenSecondWin.setVisible(true);
+      tt10SecondWin.setDisable(false);
+    }
+
+    if ((boolean) badges.get("fiveSecondWin") == true) {
+      fiveSecondWin.setVisible(true);
+      tt5SecondWin.setDisable(false);
+    }
+
+    // Winstreak badges
+    if ((boolean) badges.get("threeWinstreak") == true) {
+      threeWinStreak.setVisible(true);
+      tt3WinStreak.setDisable(false);
+    }
+
+    if ((boolean) badges.get("sixWinstreak") == true) {
+      sixWinStreak.setVisible(true);
+      tt6WinStreak.setDisable(false);
+    }
+
+    if ((boolean) badges.get("tenWinstreak") == true) {
+      tenWinStreak.setVisible(true);
+      tt10WinStreak.setDisable(false);
+    }
+
+    // Hidden wins badges
+    if ((boolean) badges.get("fiveHiddenWins") == true) {
+      fiveHiddenWins.setVisible(true);
+      tt5HiddenWins.setDisable(false);
+    }
+
+    if ((boolean) badges.get("fifteenHiddenWins") == true) {
+      fifteenHiddenWins.setVisible(true);
+      tt15HiddenWins.setDisable(false);
+    }
+
+    if ((boolean) badges.get("thirtyHiddenWins") == true) {
+      thirtyHiddenWins.setVisible(true);
+      tt30HiddenWins.setDisable(false);
     }
   }
 
