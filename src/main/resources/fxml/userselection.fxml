@@ -245,5 +245,14 @@
       </Pane>
       <Text layoutX="233.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="title" text="Pick a user profile" wrappingWidth="478.9814453125" />
       <Text layoutX="735.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="heading" text="...or create one!" wrappingWidth="306.0" />
+      <Button layoutX="1195.0" layoutY="655.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMusic" prefHeight="56.0" prefWidth="58.0" styleClass="musicButton">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/musicNote.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
