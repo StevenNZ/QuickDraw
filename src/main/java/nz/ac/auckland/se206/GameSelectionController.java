@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import java.io.IOException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -243,6 +244,12 @@ public class GameSelectionController {
   @FXML
   private void onStats(Event event) {
     onResetView();
+
+    try {
+      SceneManager.addUi(SceneManager.AppUi.STATISTICS, App.addNode("statistics"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();

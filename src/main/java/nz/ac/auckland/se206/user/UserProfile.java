@@ -18,6 +18,12 @@ public class UserProfile {
   private int totalWins = 0;
   private int totalLoss = 0;
   private int quickestWin = 100;
+  private int normalWins = 0;
+  private int normalLosses = 0;
+  private int normalQuickest = 100;
+  private int hiddenWins = 0;
+  private int hiddenLosses = 0;
+  private int hiddenQuickest = 100;
   private List<String> wordHistory = new ArrayList<>();
   private List<String> availableWords = new ArrayList<>();
   private transient Image profilePic = null;
@@ -162,6 +168,12 @@ public class UserProfile {
     this.totalWins = (int) (long) userData.get("totalWins");
     this.totalLoss = (int) (long) userData.get("totalLoss");
     this.quickestWin = (int) (long) userData.get("quickestWin");
+    this.normalWins = (int) (long) userData.get("normalWins");
+    this.normalLosses = (int) (long) userData.get("normalLosses");
+    this.normalQuickest = (int) (long) userData.get("normalQuickest");
+    this.hiddenWins = (int) (long) userData.get("hiddenWins");
+    this.hiddenLosses = (int) (long) userData.get("hiddenLosses");
+    this.hiddenQuickest = (int) (long) userData.get("hiddenQuickest");
     this.wordHistory = (List<String>) userData.get("wordHistory");
     this.wordDifficulty = Difficulty.toDifficulty((String) userData.get("wordDifficulty"));
     this.accuracyDifficulty = Difficulty.toDifficulty((String) userData.get("accuracyDifficulty"));
@@ -285,5 +297,53 @@ public class UserProfile {
 
   public void resetWinStreak() {
     this.winStreak = 0;
+  }
+
+  public void incrementNormalWins() {
+    this.normalWins++;
+  }
+
+  public int getNormalWins() {
+    return this.normalWins;
+  }
+
+  public void incrementHiddenWins() {
+    this.hiddenWins++;
+  }
+
+  public int getHiddenWins() {
+    return this.hiddenWins;
+  }
+
+  public void setNormalQuickest(int time) {
+    this.normalQuickest = time;
+  }
+
+  public int getNormalQuickest() {
+    return this.normalQuickest;
+  }
+
+  public void setHiddenQuickest(int time) {
+    this.hiddenQuickest = time;
+  }
+
+  public int getHiddenQuickest() {
+    return this.hiddenQuickest;
+  }
+
+  public void incrementNormalLosses() {
+    this.normalLosses++;
+  }
+
+  public int getNormalLosses() {
+    return this.normalLosses;
+  }
+
+  public void incrementHiddenLosses() {
+    this.hiddenLosses++;
+  }
+
+  public int getHiddenLosses() {
+    return this.hiddenLosses;
   }
 }
