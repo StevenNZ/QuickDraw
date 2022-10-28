@@ -346,4 +346,8 @@ public class UserProfile {
   public int getHiddenLosses() {
     return this.hiddenLosses;
   }
+
+  public List<String> getWordHistoryList() {
+    return wordHistory;
+  }
 }
