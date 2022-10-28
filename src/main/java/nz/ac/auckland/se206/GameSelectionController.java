@@ -279,6 +279,7 @@ public class GameSelectionController {
   @FXML
   private void onDelete(Event event) {
     UserFileHandler.deleteUserData(UserProfile.currentUser);
+    UserSelectionController.users[UserProfile.currentUser] = new UserProfile();
     onResetView();
 
     App.userSelectionInstance.currentImageView.getParent().setVisible(false);
