@@ -146,6 +146,8 @@ public class StatisticsController {
       thirtyHiddenWins.setVisible(true);
       tt30HiddenWins.setDisable(false);
     }
+
+    initializeWordHistory(currentUserProfile);
   }
 
   @FXML
@@ -153,5 +155,20 @@ public class StatisticsController {
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.GAME_SELECTION));
+  }
+
+  private void initializeWordHistory(UserProfile currentUserProfile) {
+
+    for (String category : currentUserProfile.getWordHistoryList()) {
+      if (CategorySelector.getEasyDifWords().contains(category)) {
+
+      } else if (CategorySelector.getMediumDifWordsOnly().contains(category)) {
+
+      } else if (CategorySelector.getMasterDifWords().contains(category)) {
+
+      } else {
+        throw new RuntimeException("Played word not found in database");
+      }
+    }
   }
 }
