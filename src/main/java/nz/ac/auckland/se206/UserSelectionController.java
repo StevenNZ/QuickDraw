@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Stack;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -58,6 +59,7 @@ public class UserSelectionController {
   private GraphicsContext graphic;
   private Color penColour = Color.BLACK;
   private double thickness;
+  private Stack<Image> drawingStack = new Stack<>();
 
   @FXML
   public void initialize() {
@@ -94,6 +96,7 @@ public class UserSelectionController {
             graphic.clearRect(
                 e.getX() - lineWidth / 2, e.getY() - lineWidth / 2, lineWidth, lineWidth);
           }
+          saveStroke();
         });
     canvasUser.setOnMouseDragged( // event listener of mouse drag for smoother pen
         e -> {
@@ -303,6 +306,7 @@ public class UserSelectionController {
     thickness = 8;
     sliderThick.setValue(8);
     penColour = Color.BLACK;
+    drawingStack.clear();
   }
 
   @FXML
@@ -331,5 +335,16 @@ public class UserSelectionController {
   @FXML
   private void onMusic() {
     MainMenuController.toggleMusic();
+  }
+
+  private void saveStroke() {
+    drawingStack.add(canvasUser.snapshot(null, null));
+  }
+
+  @FXML
+  private void onUndo() {
+    if (!drawingStack.isEmpty()) {
+      canvasUser.getGraphicsContext2D().drawImage(drawingStack.pop(), 0, 0);
+    }
   }
 }

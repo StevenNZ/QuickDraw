@@ -132,7 +132,16 @@
                   <Image url="@../images/clear.png" />
                </image>
             </ImageView>
-            <Slider fx:id="sliderThick" layoutX="666.0" layoutY="339.0" max="15.0" min="1.0" onMouseReleased="#onSliderReleased" orientation="VERTICAL" prefHeight="195.0" prefWidth="15.0" showTickLabels="true" styleClass="body" value="8.0" />
+            <Slider fx:id="sliderThick" layoutX="674.0" layoutY="319.0" max="15.0" min="1.0" onMouseReleased="#onSliderReleased" orientation="VERTICAL" prefHeight="200.0" prefWidth="21.0" showTickLabels="true" styleClass="body" value="8.0" />
+            <Button layoutX="667.0" layoutY="524.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onUndo" prefHeight="30.0" prefWidth="31.0" style="-fx-background-color: white; -fx-border-color: #faa504#faa504; -fx-border-width: 3; -fx-border-insets: -1;" styleClass="musicButton">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/undo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </Pane>
       <Pane fx:id="paneUserProfile" layoutX="39.0" layoutY="167.0" prefHeight="534.0" prefWidth="1215.0">

@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.Stack;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -124,6 +125,7 @@ public class CanvasController {
   private double thickness;
   private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
   private ScheduledFuture future;
+  private Stack<Image> drawingStack = new Stack<>();
 
   // run by background thread to not cause GUI freezing
   Runnable backgroundThreadTask =
@@ -206,6 +208,7 @@ public class CanvasController {
           } else if (toggleEraser.isSelected()) {
             erasing(e);
           }
+          saveStroke();
         });
     canvas.setOnMouseDragged(
         e -> {
@@ -484,6 +487,9 @@ public class CanvasController {
 
     paneButtons.setVisible(true);
     paneButtons.setDisable(false);
+
+    // clear all images in the drawing stack
+    drawingStack.clear();
 
     callTextToSpeech();
   }
@@ -841,5 +847,16 @@ public class CanvasController {
   @FXML
   private void onMusic() {
     MainMenuController.toggleMusic();
+  }
+
+  private void saveStroke() {
+    drawingStack.add(canvas.snapshot(null, null));
+  }
+
+  @FXML
+  private void onUndo() {
+    if (!drawingStack.isEmpty()) {
+      canvas.getGraphicsContext2D().drawImage(drawingStack.pop(), 0, 0);
+    }
   }
 }

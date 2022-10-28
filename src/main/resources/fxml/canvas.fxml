@@ -137,8 +137,8 @@
             <Polygon fx:id="redPolygon" fill="#ff5d5d" layoutX="1030.0" layoutY="243.0" points="-13.0, 39.0, 5.0, 5.0, -31.0, 5.0" stroke="#c93b3b" strokeType="INSIDE" visible="false" />
             <Pane fx:id="paneEditCanvas" layoutX="39.0" layoutY="195.0" prefHeight="400.0" prefWidth="873.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="393.0" layoutX="136.0" layoutY="-2.0" stroke="#faa504" strokeWidth="5.0" style="-fx-fill: FFFFFF;" width="716.0" />
-                  <Canvas fx:id="canvas" disable="true" height="389.0" layoutX="138.0" width="716.0">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="398.0" layoutX="134.0" layoutY="-4.0" stroke="#faa504" strokeWidth="5.0" style="-fx-fill: FFFFFF;" width="721.0" />
+                  <Canvas fx:id="canvas" disable="true" height="389.0" layoutX="138.0" width="715.0">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -192,6 +192,15 @@
                               <ColorPicker fx:id="paintButton" editable="true" layoutX="32.0" layoutY="5.0" onAction="#onPaintSelected" opacity="0.0" prefHeight="79.0" prefWidth="80.0" />
                            </children>
                         </Pane>
+                        <Button layoutX="79.0" layoutY="354.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onUndo" prefHeight="30.0" prefWidth="31.0" style="-fx-background-color: white; -fx-border-color: #faa504#faa504; -fx-border-width: 3; -fx-border-insets: -1;" styleClass="musicButton">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/undo.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
                      </children>
                   </Pane>
                </children>
