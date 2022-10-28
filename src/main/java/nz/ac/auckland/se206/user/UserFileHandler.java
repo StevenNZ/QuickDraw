@@ -50,7 +50,11 @@ public class UserFileHandler {
   public static Boolean deleteUserData(int userNumber) {
 
     String fileLocation = ".profiles/user" + userNumber + ".json";
+    String badgesLocation = ".profiles/user" + userNumber + "Badges.json";
     File userFile = new File(fileLocation);
+    File badgesFile = new File(badgesLocation);
+
+    badgesFile.delete();
 
     if (userFile.exists()) {
       // Returns true if the target file has been deleted
