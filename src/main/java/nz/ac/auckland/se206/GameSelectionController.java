@@ -95,7 +95,7 @@ public class GameSelectionController {
     setProfileDetails();
   }
 
-  private void setProfileDetails() {
+  protected void setProfileDetails() {
     imageProfile.setImage(currentUserProfile.getProfilePic());
     txtName.setText(currentUserProfile.getName());
     txtStreak.setText(String.valueOf(currentUserProfile.getWinStreak()));
