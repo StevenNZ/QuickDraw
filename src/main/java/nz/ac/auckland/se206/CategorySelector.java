@@ -84,4 +84,8 @@ public class CategorySelector {
   public static ArrayList<String> getMasterDifWords() {
     return getWords("H");
   }
+
+  public static ArrayList<String> getMediumDifWordsOnly() {
+    return getWords("M");
+  }
 }

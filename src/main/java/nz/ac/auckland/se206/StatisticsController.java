@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.user.UserProfile;
 import org.json.simple.JSONObject;
@@ -40,6 +41,10 @@ public class StatisticsController {
   @FXML Label tt5HiddenWins;
   @FXML Label tt15HiddenWins;
   @FXML Label tt30HiddenWins;
+
+  @FXML TextArea txtEasyWords;
+  @FXML TextArea txtMedWords;
+  @FXML TextArea txtHardWords;
 
   private UserProfile currentUserProfile;
   private String lblText;
@@ -146,6 +151,8 @@ public class StatisticsController {
       thirtyHiddenWins.setVisible(true);
       tt30HiddenWins.setDisable(false);
     }
+
+    initializeWordHistory(currentUserProfile);
   }
 
   @FXML
@@ -153,5 +160,20 @@ public class StatisticsController {
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.GAME_SELECTION));
+  }
+
+  private void initializeWordHistory(UserProfile currentUserProfile) {
+
+    for (String category : currentUserProfile.getWordHistoryList()) {
+      if (CategorySelector.getEasyDifWords().contains(category)) {
+        txtEasyWords.appendText(category + "\n");
+      } else if (CategorySelector.getMediumDifWordsOnly().contains(category)) {
+        txtMedWords.appendText(category + "\n");
+      } else if (CategorySelector.getMasterDifWords().contains(category)) {
+        txtHardWords.appendText(category + "\n");
+      } else {
+        throw new RuntimeException("Played word not found in database");
+      }
+    }
   }
 }

@@ -325,11 +325,11 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea editable="false" layoutY="103.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" />
+                        <TextArea fx:id="txtEasyWords" editable="false" layoutY="103.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" />
                         <Label layoutX="114.0" layoutY="13.0" styleClass="subStatsHeading" text="Easy" />
-                        <TextArea editable="false" layoutX="390.0" layoutY="102.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" />
+                        <TextArea fx:id="txtMedWords" editable="false" layoutX="390.0" layoutY="102.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" />
                         <Label layoutX="480.0" layoutY="12.0" styleClass="subStatsHeading" text="Medium" />
-                        <TextArea editable="false" layoutX="776.0" layoutY="101.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" />
+                        <TextArea fx:id="txtHardWords" editable="false" layoutX="776.0" layoutY="101.0" prefHeight="501.0" prefWidth="324.0" styleClass="textArea" />
                         <Label layoutX="887.0" layoutY="11.0" styleClass="subStatsHeading" text="Hard" />
                      </children></AnchorPane>
               </content>
