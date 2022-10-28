@@ -138,3 +138,8 @@
 .scroll-bar .increment-arrow {
     -fx-padding:5;
 }
+
+.musicButton {
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+}
