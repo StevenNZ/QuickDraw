@@ -56,4 +56,9 @@ public class MainMenuController {
     Scene mainMenuScene = thisButton.getScene();
     mainMenuScene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
   }
+
+  @FXML
+  private void onMusic() {
+    toggleMusic();
+  }
 }

@@ -176,4 +176,9 @@ public class StatisticsController {
       }
     }
   }
+
+  @FXML
+  private void onMusic() {
+    MainMenuController.toggleMusic();
+  }
 }
