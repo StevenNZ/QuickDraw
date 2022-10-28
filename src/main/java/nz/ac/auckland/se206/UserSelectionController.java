@@ -327,4 +327,9 @@ public class UserSelectionController {
   private void onSliderReleased() {
     thickness = sliderThick.getValue();
   }
+
+  @FXML
+  private void onMusic() {
+    MainMenuController.toggleMusic();
+  }
 }

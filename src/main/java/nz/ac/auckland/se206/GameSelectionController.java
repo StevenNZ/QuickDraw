@@ -270,6 +270,11 @@ public class GameSelectionController {
     paneEdit.setVisible(user != 0);
   }
 
+  @FXML
+  private void onMusic() {
+    MainMenuController.toggleMusic();
+  }
+
   //  private void receiveData(){
   //    Node node = (Node) fire.getSource();
   //    UserProfile user = (UserProfile) stage.getUserData();
