@@ -1,11 +1,15 @@
 package nz.ac.auckland.se206;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.user.UserProfile;
 import org.json.simple.JSONObject;
@@ -48,6 +52,9 @@ public class StatisticsController {
 
   private UserProfile currentUserProfile;
   private String lblText;
+  private Image winStreakBlack;
+  private Image quickestWinBlack;
+  private Image hiddenWinsBlack;
 
   public void initialize() {
     currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
@@ -104,52 +111,60 @@ public class StatisticsController {
     // Badges initialization
     JSONObject badges = currentUserProfile.getBadges().getBadgesMap();
 
+    try {
+      winStreakBlack =
+          new Image(
+              new FileInputStream(
+                  new File("src\\main\\resources\\images\\badges\\win_streak_black.png")));
+      quickestWinBlack =
+          new Image(
+              new FileInputStream(
+                  new File("src\\main\\resources\\images\\badges\\quickest_win_black.png")));
+      hiddenWinsBlack =
+          new Image(
+              new FileInputStream(
+                  new File("src\\main\\resources\\images\\badges\\hidden_wins_black.png")));
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+
     // Quickest win badges
-    if ((boolean) badges.get("twentySecondWin") == true) {
-      twentySecondWin.setVisible(true);
-      tt20SecondWin.setDisable(false);
+    if ((boolean) badges.get("twentySecondWin") == false) {
+      twentySecondWin.setImage(quickestWinBlack);
     }
 
-    if ((boolean) badges.get("tenSecondWin") == true) {
-      tenSecondWin.setVisible(true);
-      tt10SecondWin.setDisable(false);
+    if ((boolean) badges.get("tenSecondWin") == false) {
+      tenSecondWin.setImage(quickestWinBlack);
     }
 
-    if ((boolean) badges.get("fiveSecondWin") == true) {
-      fiveSecondWin.setVisible(true);
-      tt5SecondWin.setDisable(false);
+    if ((boolean) badges.get("fiveSecondWin") == false) {
+      fiveSecondWin.setImage(quickestWinBlack);
     }
 
     // Winstreak badges
-    if ((boolean) badges.get("threeWinstreak") == true) {
-      threeWinStreak.setVisible(true);
-      tt3WinStreak.setDisable(false);
+    if ((boolean) badges.get("threeWinstreak") == false) {
+      threeWinStreak.setImage(winStreakBlack);
     }
 
-    if ((boolean) badges.get("sixWinstreak") == true) {
-      sixWinStreak.setVisible(true);
-      tt6WinStreak.setDisable(false);
+    if ((boolean) badges.get("sixWinstreak") == false) {
+      sixWinStreak.setImage(winStreakBlack);
     }
 
-    if ((boolean) badges.get("tenWinstreak") == true) {
-      tenWinStreak.setVisible(true);
-      tt10WinStreak.setDisable(false);
+    if ((boolean) badges.get("tenWinstreak") == false) {
+      tenWinStreak.setImage(winStreakBlack);
     }
 
     // Hidden wins badges
-    if ((boolean) badges.get("fiveHiddenWins") == true) {
-      fiveHiddenWins.setVisible(true);
-      tt5HiddenWins.setDisable(false);
+    if ((boolean) badges.get("fiveHiddenWins") == false) {
+      fiveHiddenWins.setImage(hiddenWinsBlack);
     }
 
-    if ((boolean) badges.get("fifteenHiddenWins") == true) {
-      fifteenHiddenWins.setVisible(true);
-      tt15HiddenWins.setDisable(false);
+    if ((boolean) badges.get("fifteenHiddenWins") == false) {
+      fifteenHiddenWins.setImage(hiddenWinsBlack);
     }
 
-    if ((boolean) badges.get("thirtyHiddenWins") == true) {
-      thirtyHiddenWins.setVisible(true);
-      tt30HiddenWins.setDisable(false);
+    if ((boolean) badges.get("thirtyHiddenWins") == false) {
+      thirtyHiddenWins.setImage(hiddenWinsBlack);
     }
 
     initializeWordHistory(currentUserProfile);
