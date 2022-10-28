@@ -306,6 +306,7 @@ public class UserSelectionController {
     thickness = 8;
     sliderThick.setValue(8);
     penColour = Color.BLACK;
+    drawingStack.clear();
   }
 
   @FXML
