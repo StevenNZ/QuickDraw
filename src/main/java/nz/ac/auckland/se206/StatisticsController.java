@@ -128,15 +128,15 @@ public class StatisticsController {
       winStreakBlack =
           new Image(
               new FileInputStream(
-                  new File("src\\main\\resources\\images\\badges\\win_streak_black.png")));
+                  new File("src/main/resources/images/badges/win_streak_black.png")));
       quickestWinBlack =
           new Image(
               new FileInputStream(
-                  new File("src\\main\\resources\\images\\badges\\quickest_win_black.png")));
+                  new File("src/main/resources/images/badges/quickest_win_black.png")));
       hiddenWinsBlack =
           new Image(
               new FileInputStream(
-                  new File("src\\main\\resources\\images\\badges\\hidden_wins_black.png")));
+                  new File("src/main/resources/images/badges/hidden_wins_black.png")));
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }
