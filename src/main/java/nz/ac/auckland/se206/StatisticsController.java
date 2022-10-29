@@ -213,7 +213,7 @@ public class StatisticsController {
 
   /** This method toggles the music button either on or off */
   @FXML
-  private void onMusic() {
+  private void onToggleMusic() {
     MainMenuController.toggleMusic();
   }
 }

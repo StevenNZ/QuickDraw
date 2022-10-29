@@ -342,7 +342,7 @@ public class GameSelectionController {
 
   /** This method toggles the music button, either turns it off or on */
   @FXML
-  private void onMusic() {
+  private void onToggleMusic() {
     MainMenuController.toggleMusic();
   }
 

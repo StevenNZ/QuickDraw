@@ -936,7 +936,7 @@ public class CanvasController {
 
   /** This method toggles the music button by either stopping or looping the music */
   @FXML
-  private void onMusic() {
+  private void onToggleMusic() {
     MainMenuController.toggleMusic();
   }
 

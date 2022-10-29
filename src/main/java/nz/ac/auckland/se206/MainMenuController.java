@@ -68,7 +68,7 @@ public class MainMenuController {
 
   /** This method is called when the music button is pressed and toggles it on or off */
   @FXML
-  private void onMusic() {
+  private void onToggleMusic() {
     toggleMusic();
   }
 }

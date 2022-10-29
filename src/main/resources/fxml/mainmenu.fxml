@@ -28,7 +28,7 @@
          </font>
       </Button>
       <Button fx:id="btnExit" layoutX="740.0" layoutY="338.0" mnemonicParsing="false" onAction="#onExit" prefHeight="63.0" prefWidth="230.0" styleClass="body" stylesheets="@../css/application.css" text="Exit" />
-      <Button layoutX="1195.0" layoutY="655.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMusic" prefHeight="56.0" prefWidth="58.0" styleClass="musicButton">
+      <Button layoutX="1195.0" layoutY="655.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onToggleMusic" prefHeight="56.0" prefWidth="58.0" styleClass="musicButton">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                <image>

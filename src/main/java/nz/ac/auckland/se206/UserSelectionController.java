@@ -411,7 +411,7 @@ public class UserSelectionController {
 
   /** This method toggles the music button either turning it on or off */
   @FXML
-  private void onMusic() {
+  private void onToggleMusic() {
     MainMenuController.toggleMusic();
   }
 
