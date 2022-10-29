@@ -43,6 +43,7 @@ public class GameSelectionController {
 
   public void initialize() {}
 
+  /** This method sets the difficulty toggling buttons depending on the user's saved difficulties */
   public void setDifToggles() {
     currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
 
@@ -95,12 +96,21 @@ public class GameSelectionController {
     setProfileDetails();
   }
 
+  /**
+   * This method sets the user profile details in this scene such as win streak, username, and
+   * profile image
+   */
   protected void setProfileDetails() {
     imageProfile.setImage(currentUserProfile.getProfilePic());
     txtName.setText(currentUserProfile.getName());
     txtStreak.setText(String.valueOf(currentUserProfile.getWinStreak()));
   }
 
+  /**
+   * This method goes back to main menu scene upon pressing the back button
+   *
+   * @param event ActionEvent of the button to get scene
+   */
   @FXML
   private void onBack(Event event) {
     onResetView();
@@ -110,6 +120,7 @@ public class GameSelectionController {
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU));
   }
 
+  /** This method is called when the normal game mode is pressed and toggles the difficulty pane */
   @FXML
   private void onNormal() {
     gameMode = "normal";
@@ -117,12 +128,18 @@ public class GameSelectionController {
     enablePaneDifficulties();
   }
 
+  /** This method is called when the hidden game mode is pressed and toggles the difficulty pane */
   @FXML
   private void onHiddenMode() {
     gameMode = "hidden";
     enablePaneDifficulties();
   }
 
+  /**
+   * This method is called when the zen game mode is pressed and switches straight into canvas
+   *
+   * @param event ActionEvent of the button to get scene
+   */
   @FXML
   private void onZenMode(Event event) {
     gameMode = "zen";
@@ -130,6 +147,10 @@ public class GameSelectionController {
     App.canvasInstances.get(UserProfile.currentUser).enableZenMode();
   }
 
+  /**
+   * This method is called when user selects either normal or hidden game mode and pane difficulties
+   * is visible
+   */
   private void enablePaneDifficulties() {
     paneModes.setVisible(false);
     paneModes.setDisable(true);
@@ -138,6 +159,9 @@ public class GameSelectionController {
     normalModeSelection.setVisible(true);
   }
 
+  /**
+   * This method is called to reset the scene to the initial view when user starts game or go back
+   */
   @FXML
   private void onResetView() {
     paneModes.setDisable(false);
@@ -146,6 +170,11 @@ public class GameSelectionController {
     normalModeSelection.setVisible(false);
   }
 
+  /**
+   * This method is called when user starts game from the pane difficulties or zen mode
+   *
+   * @param event ActionEvent of the button to get scene
+   */
   @FXML
   private void onStartGame(Event event) {
 
@@ -162,12 +191,19 @@ public class GameSelectionController {
     switchToCanvas(event);
   }
 
+  /**
+   * This method is called upon after difficulties has been set and switches from this scene to
+   * canvas
+   *
+   * @param event ActionEvent of the button to get scene
+   */
   private void switchToCanvas(Event event) {
     Node node = (Node) event.getSource();
     node.getScene().setRoot(SceneManager.getUiRoot(getNewRoot(UserProfile.currentUser)));
     onResetView();
   }
 
+  /** This method sets the accuracy difficulty of the current user instance */
   private void setAccuracyDif() {
     if (accuracyEasyToggle.isSelected()) {
       currentUserProfile.setAccuracyDifficulty(Difficulty.EASY);
@@ -180,6 +216,7 @@ public class GameSelectionController {
     }
   }
 
+  /** This method sets the word difficulty of the current user instance */
   private void setWordDif() {
     if (wordEasyToggle.isSelected()) {
       currentUserProfile.setWordDifficulty(Difficulty.EASY);
@@ -194,6 +231,7 @@ public class GameSelectionController {
     }
   }
 
+  /** This method sets the time difficulty of the current user instance */
   private void setTimeDif() {
     if (timeEasyToggle.isSelected()) {
       currentUserProfile.setTimeDifficulty(Difficulty.EASY);
@@ -208,6 +246,7 @@ public class GameSelectionController {
     }
   }
 
+  /** This method sets the confidence difficulty of the current user instance */
   private void setConfidenceDif() {
     if (confidenceEasyToggle.isSelected()) {
       currentUserProfile.setConfidenceDifficulty(Difficulty.EASY);
@@ -222,6 +261,12 @@ public class GameSelectionController {
     }
   }
 
+  /**
+   * This method returns the scene of the current user's canvas via input of the current user id
+   *
+   * @param id current user number from 1-6
+   * @return the canvas scene of the current user's
+   */
   private SceneManager.AppUi getNewRoot(int id) {
     switch (id) { // returns the canvas for corresponding ID
       case 1:
@@ -242,6 +287,11 @@ public class GameSelectionController {
     }
   }
 
+  /**
+   * This method switches scene to the statistics scene
+   *
+   * @param event ActionEvent of the button to get scene
+   */
   @FXML
   private void onStats(Event event) {
     onResetView();
@@ -257,6 +307,12 @@ public class GameSelectionController {
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.STATISTICS));
   }
 
+  /**
+   * This method switches scene to userselection and toggles the user creation pane to allow edits
+   * to profile
+   *
+   * @param event ActionEvent of the button to get scene
+   */
   @FXML
   private void onEdit(Event event) {
     onResetView();
@@ -267,15 +323,26 @@ public class GameSelectionController {
     App.userSelectionInstance.onEditMode();
   }
 
+  /**
+   * This method will set edit mode visible if user is not guest
+   *
+   * @param user current user id where guest is 0
+   */
   protected void setEditMode(int user) {
     paneEdit.setVisible(user != 0);
   }
 
+  /** This method toggles the music button, either turns it off or on */
   @FXML
   private void onMusic() {
     MainMenuController.toggleMusic();
   }
 
+  /**
+   * This method deletes the current user profile and will delete all stats and details
+   *
+   * @param event ActionEvent of the button to get scene
+   */
   @FXML
   private void onDelete(Event event) {
     UserFileHandler.deleteUserData(UserProfile.currentUser);
