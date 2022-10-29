@@ -48,6 +48,7 @@ public class App extends Application {
 
   /**
    * This method is invoked when the application starts. It loads and shows the "Main menu" scene.
+   * It also loads up other scenes; userselection, canvas, and game selection
    *
    * @param stage The primary stage of the application.
    * @throws IOException If "src/main/resources/fxml/canvas.fxml" is not found.
@@ -82,6 +83,14 @@ public class App extends Application {
     stage.show();
   }
 
+  /**
+   * This method loads the fxml file in the resources folder and returns the node associated with
+   * that file
+   *
+   * @param fxml the name of the fxml file without the extension
+   * @return returns the node of the fxml file
+   * @throws IOException If "src/main/resources/fxml/'fxml'" is not found.
+   */
   public static Parent addNode(String fxml) throws IOException {
     return loadFxml(fxml);
   }

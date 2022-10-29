@@ -310,6 +310,12 @@ public class CanvasController {
     getStringOfPredictions(predictionsTen);
   }
 
+  /**
+   * This method finds the category in the input list of predictions and updates the GUI elements;
+   * Will notify if the user is getting closer or further
+   *
+   * @param predictions a list of predictions from highest to lowest percentages
+   */
   private void trackCategory(List<Classifications.Classification> predictions) {
     for (int i = 0; i < predictions.size(); i++) {
       if (predictions.get(i).getClassName().replaceAll("_", " ").equals(randomCategory)) {
@@ -396,7 +402,7 @@ public class CanvasController {
   /**
    * When called, onSaveDrawing brings up a file chooser to decide where to save the drawing
    *
-   * @throws IOException
+   * @throws IOException when there's an error during the writing of ImageIO
    */
   @FXML
   private void onSaveDrawing() throws IOException {
@@ -426,6 +432,8 @@ public class CanvasController {
   /**
    * When the game ends, true or false is passed - Reads a congrats or loss message in text to
    * speech - Updates statistics - Stop the timer - Switch panes
+   *
+   * @param isWinner boolean variable for if user has won (true) or lost (false)
    */
   private void onGameEnd(boolean isWinner) {
 
@@ -499,6 +507,11 @@ public class CanvasController {
     callTextToSpeech();
   }
 
+  /**
+   * This method grabs a new category from the user's available words
+   *
+   * @param user the current user playing the game
+   */
   protected void getNewCategory(UserProfile user) {
     randomCategory = user.pickCategory();
   }
@@ -577,6 +590,10 @@ public class CanvasController {
     isWin = false;
   }
 
+  /**
+   * This method resets the initial view of a game mode from a finished game by toggling visibility
+   * of panes
+   */
   protected void resetMode() {
     // resets the pane depending on the game mode
     if (GameSelectionController.gameMode.equals("hidden")) {
@@ -595,7 +612,9 @@ public class CanvasController {
   /**
    * Retrieve List of predictions This is essentially the same as the printPredictions method in
    * DoodlePredictions.java, but I didn't want to mess with the class as it could potentially break
-   * things.
+   * things. It updates the textFlow control in the game displaying the current top ten predictions
+   *
+   * @param predictionsTen a list of top ten predictions
    */
   private void getStringOfPredictions(List<Classifications.Classification> predictionsTen) {
     TextFlow temp = new TextFlow();
@@ -666,13 +685,23 @@ public class CanvasController {
     toggleEraser.setSelected(true);
   }
 
-  /** This method is called when the back button is called and changes scene to user selection */
+  /**
+   * This method is called when the change user button is called and changes scene to user selection
+   *
+   * @param event ActionEvent of the button to get scene
+   */
   @FXML
   private void onUserSelection(ActionEvent event) {
     Scene sceneOfButton = onBackReset(event);
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
   }
 
+  /**
+   * This method is called when the user profile button is called and changes scene to game
+   * selection
+   *
+   * @param event ActionEvent of the button to get scene
+   */
   @FXML
   private void onUserProfile(ActionEvent event) {
     App.gameSelectionInstance.setProfileDetails();
@@ -680,6 +709,13 @@ public class CanvasController {
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.GAME_SELECTION));
   }
 
+  /**
+   * This method called when going back to user selection or user profile from canvas scene to reset
+   * panes to initial view and returns the canvas scene from the action event listener
+   *
+   * @param event ActionEvent of the button to get scene
+   * @return the scene of the event which is the canvas
+   */
   private Scene onBackReset(ActionEvent event) {
     // resets the zen mode view
     if (GameSelectionController.gameMode.equals("zen")) {
@@ -720,6 +756,10 @@ public class CanvasController {
     return imageBinary;
   }
 
+  /**
+   * This method searches for a definition by calling an api from a method in the dictionary class.
+   * It starts a thread and then the main thread displays definition in game
+   */
   protected void searchDefinition() {
     // task run by a background thread
     Task<Void> definitionTask =
@@ -762,6 +802,11 @@ public class CanvasController {
     definitionThread.start();
   }
 
+  /**
+   * This method sets the game difficulty for the current user from input
+   *
+   * @param user current user playing
+   */
   public void setGameDif(UserProfile user) {
     UserSelectionController.users[UserProfile.currentUser] = user;
     currentUser = user;
@@ -773,6 +818,10 @@ public class CanvasController {
     setConfidence();
   }
 
+  /**
+   * This method sets the category for the current game and if hidden mode, sets the definition as
+   * well
+   */
   private void setCategory() {
     getNewCategory(currentUser);
     // Replace lblCategoryTxt on the canvas
@@ -785,6 +834,7 @@ public class CanvasController {
     }
   }
 
+  /** This method sets the timer for the current game depending on the difficulty chosen by user */
   private void setTimer() {
     if (currentUser.getTimeDifficulty() == Difficulty.EASY) {
       timerMax = 60;
@@ -798,6 +848,7 @@ public class CanvasController {
     lblTimer.setText(String.format("%02d:%02d", timerMax / 60, timerMax % 60)); // updates timer
   }
 
+  /** This method sets the accuracy (top position of the prediction list) */
   private void setAccuracy() {
     // sets if category has to be in top 1, 2 or 3
     if (currentUser.getAccuracyDifficulty() == Difficulty.EASY) {
@@ -809,6 +860,10 @@ public class CanvasController {
     }
   }
 
+  /**
+   * This method sets the confidence level of the game where it must be at least the prediction
+   * percentage to win the game
+   */
   private void setConfidence() {
     // sets required confidence percentage level for win
     if (currentUser.getConfidenceDifficulty() == Difficulty.EASY) {
@@ -822,6 +877,7 @@ public class CanvasController {
     }
   }
 
+  /** This method is called when zen mode is played and enables/disables the appropriate panes */
   protected void enableZenMode() {
     paneTimer.setVisible(false);
     panePaint.setVisible(true);
@@ -836,17 +892,23 @@ public class CanvasController {
     onStartTimer();
   }
 
+  /** This method is called when the user clicks the triangle button to get new word */
   @FXML
   private void onZenNextWord() {
     onClear();
     displayNewCategory();
   }
 
+  /** This method is called to display the new word used in zen mode */
   private void displayNewCategory() {
     randomCategory = CategorySelector.getHardDifWords().get(new Random().nextInt(340));
     lblZenTxt.setText(randomCategory);
   }
 
+  /**
+   * This method changes the pen colour to the user's selected colour and also creates a nice
+   * gradient to the button icon
+   */
   @FXML
   private void onPaintSelected() {
     // colour selected by user
@@ -866,20 +928,27 @@ public class CanvasController {
     onPenSelected();
   }
 
+  /** This method updates the thickness of the pen using a slider */
   @FXML
   private void onSliderReleased() {
     thickness = sliderThick.getValue();
   }
 
+  /** This method toggles the music button by either stopping or looping the music */
   @FXML
   private void onMusic() {
     MainMenuController.toggleMusic();
   }
 
+  /**
+   * This method saves the stroke of the user's drawing by taking a snapshot of the canvas and
+   * adding to a stack
+   */
   private void saveStroke() {
     drawingStack.add(canvas.snapshot(null, null));
   }
 
+  /** This method pops the stack and updates the canvas with the previous drawn image */
   @FXML
   private void onUndo() {
     if (!drawingStack.isEmpty()) {

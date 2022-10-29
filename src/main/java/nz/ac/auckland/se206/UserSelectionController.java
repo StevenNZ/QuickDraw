@@ -61,6 +61,10 @@ public class UserSelectionController {
   private double thickness;
   private Stack<Image> drawingStack = new Stack<>();
 
+  /**
+   * JavaFX calls this method once the GUI elements are loaded. In our case we initialize the
+   * drawing canvas and set up all the local user profiles saved
+   */
   @FXML
   public void initialize() {
     users[0] = new UserProfile("Guest"); // creates an initial instance of user guest
@@ -127,6 +131,11 @@ public class UserSelectionController {
         });
   }
 
+  /**
+   * This method is called when user starts game by pressing their image or guest button
+   *
+   * @param event ActionEvent of the node to get scene
+   */
   @FXML
   private void onStartCanvas(Event event) {
     Node node = (Node) event.getSource();
@@ -150,6 +159,12 @@ public class UserSelectionController {
             SceneManager.AppUi.GAME_SELECTION)); // switch to currentUser's canvas
   }
 
+  /**
+   * This method is called when a user profile has not yet been made and pressing the plus icon
+   * toggles the user creation pane
+   *
+   * @param event ActionEvent of the node to get scene
+   */
   @FXML
   private void onCreateProfile(Event event) {
     String id = ((Node) event.getSource()).getParent().getId();
@@ -158,11 +173,16 @@ public class UserSelectionController {
     changeToUserCreation();
   }
 
+  /** This method hides the user selection pane and brings up the user creation pane */
   private void changeToUserCreation() {
     paneUserProfile.setVisible(false);
     paneUserCreation.setVisible(true);
   }
 
+  /**
+   * This method is called when user wants to edit their profile, so it toggles the user creation
+   * pane and their name and profile image will be set in the GUI controls
+   */
   protected void onEditMode() {
     changeToUserCreation();
 
@@ -172,6 +192,13 @@ public class UserSelectionController {
         .drawImage(users[UserProfile.currentUser].getImageView().getImage(), 0, 0);
   }
 
+  /**
+   * This method grabs the ID of the current user by their string ID when user selects a user
+   * profile. It also sets the current image and name of the current user
+   *
+   * @param id string of their pane ID
+   * @return an int of their ID
+   */
   private int getProfileById(String id) {
 
     switch (id) { // returns current user index as well as it's imageView and label
@@ -204,6 +231,12 @@ public class UserSelectionController {
     }
   }
 
+  /**
+   * This method is called when user presses the save profile button and stores the profile locally
+   * and in game Their image and username will also display
+   *
+   * @throws IOException when an error occurs by saving the image in an incorrect pathed file
+   */
   @FXML
   private void onSaveProfile() throws IOException {
     String name = textFieldName.getText();
@@ -228,6 +261,11 @@ public class UserSelectionController {
     }
   }
 
+  /**
+   * This method is called to save the user's profile image locally into a file
+   *
+   * @throws IOException when an error occurs by saving the image in an incorrect pathed file
+   */
   private void saveProfilePic() throws IOException {
     File profileFolder = new File(".profiles");
 
@@ -248,17 +286,33 @@ public class UserSelectionController {
         profilePicImage); // stores image as an instance variable
   }
 
+  /**
+   * This method displays the userprofile image onto their respective user pane
+   *
+   * @param currentUser ID of the current user
+   */
   private void displayProfilePic(int currentUser) {
     UserProfile user = users[currentUser];
     user.getImageView().setImage(user.getProfilePic()); // set imageView to the user's image
     currentImageView.getParent().setVisible(true);
   }
 
+  /**
+   * This method displays the user profile name onto their respective user pane
+   *
+   * @param currentUser ID of the current user
+   */
   private void displayName(int currentUser) {
     UserProfile user = users[currentUser];
     currentNameLabel.setText(user.getName());
   }
 
+  /**
+   * This method takes a snapshot of the canvas when user saves their profile and returns it as an
+   * image
+   *
+   * @return a bufferedimage of the canvas snapshot
+   */
   private BufferedImage getCurrentSnapshot() {
     final Image snapshot = canvasUser.snapshot(null, null);
     final BufferedImage image = SwingFXUtils.fromFXImage(snapshot, null);
@@ -277,16 +331,21 @@ public class UserSelectionController {
     return imageBinary;
   }
 
+  /** This method clears the drawing canvas */
   @FXML
   private void onClear() {
     graphic.clearRect(0, 0, canvasUser.getWidth(), canvasUser.getHeight());
   }
 
+  /**
+   * This method is called when user goes back instead of saving, and resets the user creation pane
+   */
   @FXML
   private void onBackUserCreation() {
     clearUserCreation();
   }
 
+  /** This method is called when user selects the pen tool icon and notifies them about it */
   @FXML
   private void onPenSelected() {
     circleEraser.setOpacity(1);
@@ -294,6 +353,7 @@ public class UserSelectionController {
     togglePen.setSelected(true);
   }
 
+  /** This method is called when user selections the eraser tool icon and notifies them about it */
   @FXML
   private void onEraserSelected() {
     circlePen.setOpacity(1);
@@ -301,6 +361,10 @@ public class UserSelectionController {
     toggleEraser.setSelected(true);
   }
 
+  /**
+   * This method is called when user leaves the user creation pane back to the user selection pane,
+   * so it resets the initial view of the user creation pane
+   */
   private void clearUserCreation() {
     onClear(); // clear canvas
     textFieldName.clear();
@@ -315,6 +379,10 @@ public class UserSelectionController {
     drawingStack.clear();
   }
 
+  /**
+   * This method is called when the user wants to change colour of their pen by clicking the paint
+   * brush icon. A nice gradient change on the brush icon is also shown
+   */
   @FXML
   private void onChangeColour() {
     // colour selected by user
@@ -335,20 +403,27 @@ public class UserSelectionController {
     onPenSelected();
   }
 
+  /** This method changes the thickness of the pen and eraser tool via a slider */
   @FXML
   private void onSliderReleased() {
     thickness = sliderThick.getValue();
   }
 
+  /** This method toggles the music button either turning it on or off */
   @FXML
   private void onMusic() {
     MainMenuController.toggleMusic();
   }
 
+  /** This method saves the current canvas drawing by taking a snapshot and adding it to a stack */
   private void saveStroke() {
     drawingStack.add(canvasUser.snapshot(null, null));
   }
 
+  /**
+   * This method is called when user wants to undo their drawing by popping the stack and then draw
+   * the popped image
+   */
   @FXML
   private void onUndo() {
     if (!drawingStack.isEmpty()) {

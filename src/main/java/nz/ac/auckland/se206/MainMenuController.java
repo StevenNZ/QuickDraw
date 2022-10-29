@@ -13,6 +13,7 @@ public class MainMenuController {
 
   protected static Clip clip;
 
+  /** This method either stops the music or loop it again */
   protected static void toggleMusic() {
     if (clip.isRunning()) {
       clip.stop();
@@ -21,6 +22,14 @@ public class MainMenuController {
     }
   }
 
+  /**
+   * JavaFX calls this method once the GUI elements are loaded. In our case we create a clip for
+   * music
+   *
+   * @throws UnsupportedAudioFileException when the audio file is invalid and not supported
+   * @throws IOException when the file cannot be opened due to an error in audioInputStream
+   * @throws LineUnavailableException when an error occurs getting the clip of the audio system
+   */
   public void initialize()
       throws UnsupportedAudioFileException, IOException, LineUnavailableException {
     String file = "/sounds/backgroundMusic.wav";
@@ -48,7 +57,7 @@ public class MainMenuController {
   /**
    * On start game it sends you to teh user selection page to create your profile
    *
-   * @param event
+   * @param event ActionEvent of the button to get scene
    */
   @FXML
   private void onStartGame(ActionEvent event) {
@@ -57,6 +66,7 @@ public class MainMenuController {
     mainMenuScene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
   }
 
+  /** This method is called when the music button is pressed and toggles it on or off */
   @FXML
   private void onMusic() {
     toggleMusic();

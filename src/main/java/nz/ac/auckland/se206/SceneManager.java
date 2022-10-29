@@ -17,6 +17,12 @@ public class SceneManager {
     CANVAS_PLAYER6(6),
     STATISTICS(7);
 
+    /**
+     * This method returns the scene that corresponds to its respective ordinal.
+     *
+     * @param ord the ordinal of its scene
+     * @return scene from the enum AppUi
+     */
     public static AppUi getAppUiEnum(int ord) {
       for (AppUi scene : AppUi.values()) {
         if (scene.appOrdinal == ord) {
