@@ -63,7 +63,6 @@ import nz.ac.auckland.se206.user.UserProfile.Difficulty;
  * the canvas and brush sizes, make sure that the prediction works fine.
  */
 public class CanvasController {
-  private static final int DEFAULT_SECONDS = 60;
   protected static String randomCategory;
 
   private int timerMax;
