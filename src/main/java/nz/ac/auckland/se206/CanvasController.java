@@ -720,22 +720,29 @@ public class CanvasController {
   }
 
   protected void searchDefinition() {
-    Task<Void> definitionTask = new Task<Void>() { // task run by a background thread
+    // task run by a background thread
+    Task<Void> definitionTask =
+        new Task<Void>() {
+
           @Override
           protected Void call() throws Exception {
             String definition = "none";
 
+            // while definition not got yet
             while (definition.equals("none")) {
               try {
+                // get the def for the category
                 definition = Dictionary.searchWordInfo(randomCategory);
               } catch (IOException e) {
                 e.printStackTrace();
               }
+              // if no definition get a new category
               if (definition.equals("none")) {
                 getNewCategory(currentUser);
               }
             }
-            //            CanvasController.definition = definition;
+
+            // out _ equal to number of letters in the category
             String hidden = "_ ".repeat(randomCategory.length());
 
             String finalDefinition = definition;
