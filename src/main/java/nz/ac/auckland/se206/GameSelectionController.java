@@ -44,8 +44,10 @@ public class GameSelectionController {
   public void initialize() {}
 
   public void setDifToggles() {
+    // loads the current user data
     currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
 
+    // sets the default toggled option to the previous selected by the user
     if (currentUserProfile.getAccuracyDifficulty() == Difficulty.EASY) {
       accuracyEasyToggle.setSelected(true);
     } else if (currentUserProfile.getAccuracyDifficulty() == Difficulty.MEDIUM) {
@@ -56,6 +58,7 @@ public class GameSelectionController {
       accuracyEasyToggle.setSelected(true);
     }
 
+    // sets the default toggled option to the previous selected by the user
     if (currentUserProfile.getWordDifficulty() == Difficulty.EASY) {
       wordEasyToggle.setSelected(true);
     } else if (currentUserProfile.getWordDifficulty() == Difficulty.MEDIUM) {
@@ -68,6 +71,7 @@ public class GameSelectionController {
       wordEasyToggle.setSelected(true);
     }
 
+    // sets the default toggled option to the previous selected by the user
     if (currentUserProfile.getTimeDifficulty() == Difficulty.EASY) {
       timeEasyToggle.setSelected(true);
     } else if (currentUserProfile.getTimeDifficulty() == Difficulty.MEDIUM) {
@@ -80,6 +84,7 @@ public class GameSelectionController {
       timeEasyToggle.setSelected(true);
     }
 
+    // sets the default toggled option to the previous selected by the user
     if (currentUserProfile.getConfidenceDifficulty() == Difficulty.EASY) {
       confidenceEasyToggle.setSelected(true);
     } else if (currentUserProfile.getConfidenceDifficulty() == Difficulty.MEDIUM) {
@@ -92,6 +97,7 @@ public class GameSelectionController {
       confidenceEasyToggle.setSelected(true);
     }
 
+    // sets the user image and name
     setProfileDetails();
   }
 
