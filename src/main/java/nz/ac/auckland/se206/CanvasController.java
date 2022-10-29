@@ -691,7 +691,7 @@ public class CanvasController {
    * @param event ActionEvent of the button to get scene
    */
   @FXML
-  private void onUserSelection(ActionEvent event) {
+  private void onChangeUser(ActionEvent event) {
     Scene sceneOfButton = onBackReset(event);
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
   }
