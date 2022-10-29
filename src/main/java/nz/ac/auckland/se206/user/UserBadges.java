@@ -61,11 +61,11 @@ public class UserBadges {
       addBadge("threeWinstreak");
     }
 
-    if (user.getWinStreak() >= 3) {
+    if (user.getWinStreak() >= 6) {
       addBadge("sixWinstreak");
     }
 
-    if (user.getWinStreak() >= 3) {
+    if (user.getWinStreak() >= 10) {
       addBadge("tenWinstreak");
     }
 
