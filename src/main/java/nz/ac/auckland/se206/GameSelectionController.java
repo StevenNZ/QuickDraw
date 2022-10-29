@@ -169,6 +169,7 @@ public class GameSelectionController {
   }
 
   private void setAccuracyDif() {
+    // Sets the user's difficulty to the one selected
     if (accuracyEasyToggle.isSelected()) {
       currentUserProfile.setAccuracyDifficulty(Difficulty.EASY);
     } else if (accuracyMedToggle.isSelected()) {
@@ -181,6 +182,7 @@ public class GameSelectionController {
   }
 
   private void setWordDif() {
+    // Sets the user's difficulty to the one selected
     if (wordEasyToggle.isSelected()) {
       currentUserProfile.setWordDifficulty(Difficulty.EASY);
     } else if (wordMedToggle.isSelected()) {
@@ -195,6 +197,7 @@ public class GameSelectionController {
   }
 
   private void setTimeDif() {
+    // Sets the user's difficulty to the one selected
     if (timeEasyToggle.isSelected()) {
       currentUserProfile.setTimeDifficulty(Difficulty.EASY);
     } else if (timeMedToggle.isSelected()) {
@@ -209,6 +212,7 @@ public class GameSelectionController {
   }
 
   private void setConfidenceDif() {
+    // Sets the user's difficulty to the one selected
     if (confidenceEasyToggle.isSelected()) {
       currentUserProfile.setConfidenceDifficulty(Difficulty.EASY);
     } else if (confidenceMedToggle.isSelected()) {
