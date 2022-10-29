@@ -289,10 +289,4 @@ public class GameSelectionController {
     Scene sceneOfNode = node.getScene();
     sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
   }
-
-  //  private void receiveData(){
-  //    Node node = (Node) fire.getSource();
-  //    UserProfile user = (UserProfile) stage.getUserData();
-  //
-  //  }
 }
