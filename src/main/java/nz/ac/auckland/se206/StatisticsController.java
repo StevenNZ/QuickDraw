@@ -63,6 +63,7 @@ public class StatisticsController {
   public void initialize() {
     currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
 
+    // win rate
     if (currentUserProfile.getTotalWins() != 0 || currentUserProfile.getTotalLoss() != 0) {
       lblText =
           String.valueOf(
@@ -82,39 +83,48 @@ public class StatisticsController {
       lblWinRate.setText(lblText);
     }
 
+    // quickest win
     if (currentUserProfile.getQuickestWin() != 100) {
       lblText = String.valueOf(currentUserProfile.getQuickestWin()) + "s";
       lblQuickestWin.setText(lblText);
     }
 
+    // total wins
     lblText = String.valueOf(currentUserProfile.getTotalLoss() + currentUserProfile.getTotalWins());
     lblTotalGames.setText(lblText);
 
+    // normal wins
     lblText = String.valueOf(currentUserProfile.getNormalWins());
     lblNormalWins.setText(lblText);
 
+    // normal loses
     lblText = String.valueOf(currentUserProfile.getNormalLosses());
     lblNormalLosses.setText(lblText);
 
+    // normal quickest
     if (currentUserProfile.getNormalQuickest() != 100) {
       lblText = String.valueOf(currentUserProfile.getNormalQuickest() + "s");
       lblNormalQuickest.setText(lblText);
     }
 
+    // hidden wins
     lblText = String.valueOf(currentUserProfile.getHiddenWins());
     lblHiddenWins.setText(lblText);
 
+    // hidden losses
     lblText = String.valueOf(currentUserProfile.getHiddenLosses());
     lblHiddenLosses.setText(lblText);
 
+    // hidden quickest
     if (currentUserProfile.getHiddenQuickest() != 100) {
       lblText = String.valueOf(currentUserProfile.getHiddenQuickest() + "s");
       lblHiddenQuickest.setText(lblText);
     }
 
-    // Badges initialization
+    // badges initialization
     initializeBadgeStats();
 
+    // word history initialization
     initializeWordHistory(currentUserProfile);
   }
 
@@ -132,8 +142,10 @@ public class StatisticsController {
 
   /** This method initializes the badges to black if it has not been unlocked */
   private void initializeBadgeStats() {
+    // contains which badges the user has earned
     JSONObject badges = currentUserProfile.getBadges().getBadgesMap();
 
+    // the black badge assets
     try {
       winStreakBlack =
           new Image(
@@ -150,6 +162,8 @@ public class StatisticsController {
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }
+
+    // if false replace the specific badge with the black asset
 
     // Quickest win badges
     if ((boolean) badges.get("twentySecondWin") == false) {
@@ -198,11 +212,14 @@ public class StatisticsController {
    */
   private void initializeWordHistory(UserProfile currentUserProfile) {
 
+    // checks the difficulty category of each word played
     for (String category : currentUserProfile.getWordHistoryList()) {
       if (CategorySelector.getEasyDifWords().contains(category)) {
         txtEasyWords.appendText(category + "\n");
       } else if (CategorySelector.getMediumDifWordsOnly().contains(category)) {
         txtMedWords.appendText(category + "\n");
+
+        // master difficulty is hard words only
       } else if (CategorySelector.getMasterDifWords().contains(category)) {
         txtHardWords.appendText(category + "\n");
       } else {
