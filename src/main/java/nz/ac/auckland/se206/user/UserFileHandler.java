@@ -104,11 +104,13 @@ public class UserFileHandler {
   }
 
   public static UserBadges readUserBadges() {
+    // badges file location
     String fileLocation = ".profiles/user" + UserProfile.currentUser + "Badges.json";
     JSONParser jsonParser = new JSONParser();
     UserBadges returnBadges;
 
     try {
+      // opens the file
       FileReader userFileReader = new FileReader(fileLocation);
       returnBadges =
           new Gson().fromJson(jsonParser.parse(userFileReader).toString(), UserBadges.class);
