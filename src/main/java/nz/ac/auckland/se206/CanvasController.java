@@ -316,22 +316,27 @@ public class CanvasController {
         int finalI = i;
         Platform.runLater(
             () -> {
+              // if category has gone up predictions list show green arrow
               if (finalI < categoryIndex) {
                 greenPolygon.setVisible(true);
                 redPolygon.setVisible(false);
                 neutralRectangle.setVisible(false);
+                // if category has gone down predictions list show red arrow
               } else if (finalI > categoryIndex) {
                 redPolygon.setVisible(true);
                 greenPolygon.setVisible(false);
                 neutralRectangle.setVisible(false);
+                // if category hasn't moved in predictions list show neutral sign
               } else {
                 neutralRectangle.setVisible(true);
                 redPolygon.setVisible(false);
                 greenPolygon.setVisible(false);
               }
+              // doesn't show number in list for hidden mode
               if (!GameSelectionController.gameMode.equals("hidden")) {
                 lblCategoryIndex.setText(String.valueOf(finalI + 1));
               }
+              // sets to current value so can be compared next loop
               categoryIndex = finalI;
             });
         break;
