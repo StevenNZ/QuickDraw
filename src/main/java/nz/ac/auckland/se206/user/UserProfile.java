@@ -43,6 +43,7 @@ public class UserProfile {
     MASTER;
 
     public static Difficulty toDifficulty(String word) {
+      // takes the string and converts it to the corresponding enum value
       switch (word) {
         case "NOTSET":
           return NOTSET;
@@ -164,6 +165,7 @@ public class UserProfile {
 
     userData = UserFileHandler.readUserData(currentUser); // read user data from local file
 
+    // all the fields being read from the data returned
     this.name = (String) userData.get("name");
     this.totalWins = (int) (long) userData.get("totalWins");
     this.totalLoss = (int) (long) userData.get("totalLoss");
@@ -182,8 +184,10 @@ public class UserProfile {
         Difficulty.toDifficulty((String) userData.get("confidenceDifficulty"));
     this.winStreak = (int) (long) userData.get("winStreak");
 
+    // reads the user profile image from its file
     this.profilePic = UserFileHandler.readProfileImage(currentUser);
 
+    // reads the user badges from their file
     this.badges = UserFileHandler.readUserBadges();
   }
 
