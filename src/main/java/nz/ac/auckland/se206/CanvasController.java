@@ -252,7 +252,7 @@ public class CanvasController {
     this.canvasTimer = timerMax; // timer to be displayed and condition for the TimerTask ending
     future = executor.scheduleAtFixedRate(backgroundThreadTask, 1, 1, TimeUnit.SECONDS);
     Stage stage = (Stage) canvas.getScene().getWindow();
-    stage.setOnCloseRequest( // text to speech closes upon closing GUI
+    stage.setOnCloseRequest(
         e -> {
           future.cancel(true);
           executor.shutdown();
@@ -524,10 +524,12 @@ public class CanvasController {
 
             TextToSpeech speech = new TextToSpeech();
             Stage stage = (Stage) canvas.getScene().getWindow();
-            stage.setOnCloseRequest( // text to speech closes upon closing GUI
+
+            stage.setOnCloseRequest(
                 e -> {
                   executor.shutdown();
                   Platform.exit();
+                  // text to speech closes upon closing GUI
                   speech.terminate();
                 });
             speech.speak(gameoverString);
@@ -684,8 +686,9 @@ public class CanvasController {
     Button button = (Button) event.getSource();
     return button.getScene();
   }
+
   /**
-   * This method retreives a binary image of the canvas and returns a binary version of the image
+   * This method retrieves a binary image of the canvas and returns a binary version of the image
    *
    * @param snapshot snapshot of the canvas
    * @return imageBinary - a binary version of the snapshot
