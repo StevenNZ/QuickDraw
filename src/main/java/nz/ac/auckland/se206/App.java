@@ -84,6 +84,9 @@ public class App extends Application {
   }
 
   /**
+   * This method loads the fxml file in the resources folder and returns the node associated with
+   * that file
+   *
    * @param fxml the name of the fxml file without the extension
    * @return returns the node of the fxml file
    * @throws IOException If "src/main/resources/fxml/'fxml'" is not found.
