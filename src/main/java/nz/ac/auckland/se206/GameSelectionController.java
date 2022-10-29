@@ -216,6 +216,8 @@ public class GameSelectionController {
       currentUserProfile.setAccuracyDifficulty(Difficulty.MEDIUM);
     } else if (accuracyHardToggle.isSelected()) {
       currentUserProfile.setAccuracyDifficulty(Difficulty.HARD);
+
+      // if no toggle is selected, default to easy
     } else {
       currentUserProfile.setAccuracyDifficulty(Difficulty.EASY);
     }
@@ -232,6 +234,8 @@ public class GameSelectionController {
       currentUserProfile.setWordDifficulty(Difficulty.HARD);
     } else if (wordMasterToggle.isSelected()) {
       currentUserProfile.setWordDifficulty(Difficulty.MASTER);
+
+      // if no toggle is selected, default to easy
     } else {
       currentUserProfile.setWordDifficulty(Difficulty.EASY);
     }
@@ -248,6 +252,8 @@ public class GameSelectionController {
       currentUserProfile.setTimeDifficulty(Difficulty.HARD);
     } else if (timeMasterToggle.isSelected()) {
       currentUserProfile.setTimeDifficulty(Difficulty.MASTER);
+
+      // if no toggle is selected, default to easy
     } else {
       currentUserProfile.setTimeDifficulty(Difficulty.EASY);
     }
@@ -264,6 +270,8 @@ public class GameSelectionController {
       currentUserProfile.setConfidenceDifficulty(Difficulty.HARD);
     } else if (confidenceMasterToggle.isSelected()) {
       currentUserProfile.setConfidenceDifficulty(Difficulty.MASTER);
+
+      // if no toggle is selected, default to easy
     } else {
       currentUserProfile.setConfidenceDifficulty(Difficulty.EASY);
     }
@@ -304,6 +312,7 @@ public class GameSelectionController {
   private void onStats(Event event) {
     onResetView();
 
+    // handles IOException
     try {
       SceneManager.addUi(SceneManager.AppUi.STATISTICS, App.addNode("statistics"));
     } catch (IOException e) {
@@ -312,6 +321,7 @@ public class GameSelectionController {
 
     Button button = (Button) event.getSource();
     Scene sceneOfButton = button.getScene();
+    // open stats page
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.STATISTICS));
   }
 
@@ -327,6 +337,7 @@ public class GameSelectionController {
 
     Node node = (Node) event.getSource();
     Scene sceneOfNode = node.getScene();
+    // goes back to user edit scene
     sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
     App.userSelectionInstance.onEditMode();
   }
@@ -353,7 +364,9 @@ public class GameSelectionController {
    */
   @FXML
   private void onDelete(Event event) {
+    // deletes the user and user badges data
     UserFileHandler.deleteUserData(UserProfile.currentUser);
+    // sets the instance to a new UserProfile
     UserSelectionController.users[UserProfile.currentUser] = new UserProfile();
     onResetView();
 
@@ -362,6 +375,7 @@ public class GameSelectionController {
 
     Node node = (Node) event.getSource();
     Scene sceneOfNode = node.getScene();
+    // goes back to user selection
     sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
   }
 }
