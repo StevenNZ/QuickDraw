@@ -83,7 +83,8 @@ public class UserSelectionController {
     graphic.setLineCap(StrokeLineCap.ROUND);
     circlePen.setOpacity(0.5);
 
-    canvasUser.setOnMousePressed( // canvas implementation for user profile pic drawing
+    // canvas implementation for user profile pic drawing
+    canvasUser.setOnMousePressed(
         e -> {
           graphic.setLineWidth(thickness);
           if (!toggleEraser.isSelected()) { // pen implementation
@@ -98,7 +99,9 @@ public class UserSelectionController {
           }
           saveStroke();
         });
-    canvasUser.setOnMouseDragged( // event listener of mouse drag for smoother pen
+
+    // event listener of mouse drag for smoother pen
+    canvasUser.setOnMouseDragged(
         e -> {
           if (!toggleEraser.isSelected()) {
             graphic.lineTo(e.getX(), e.getY());
