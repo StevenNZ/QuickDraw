@@ -366,7 +366,9 @@ public class UserSelectionController {
    * so it resets the initial view of the user creation pane
    */
   private void clearUserCreation() {
-    onClear(); // clear canvas
+    // clear canvas
+    onClear();
+    // clears the name input
     textFieldName.clear();
     paneUserProfile.setVisible(true);
     paneUserCreation.setVisible(false);
@@ -376,6 +378,7 @@ public class UserSelectionController {
     thickness = 8;
     sliderThick.setValue(8);
     penColour = Color.BLACK;
+    // clears the stack so can't be undone
     drawingStack.clear();
   }
 
