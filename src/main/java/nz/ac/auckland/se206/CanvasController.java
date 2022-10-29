@@ -578,6 +578,7 @@ public class CanvasController {
   }
 
   protected void resetMode() {
+    // resets the pane depending on the game mode
     if (GameSelectionController.gameMode.equals("hidden")) {
       paneDefinition.setVisible(true);
       paneCategories.setVisible(false);
@@ -600,9 +601,11 @@ public class CanvasController {
     TextFlow temp = new TextFlow();
     int i = 1;
     for (Classifications.Classification classification : predictionsTen) {
+      // removes the _ and replaces them with a space
       String category = classification.getClassName().replaceAll("_", " ");
       Text text =
           new Text((i + ".  " + category.substring(0, 1).toUpperCase() + category.substring(1)));
+      // sets the target category to stand out
       if (category.equals(randomCategory) && !GameSelectionController.gameMode.equals("hidden")) {
         text.setFill(Color.GREEN);
         text.setFont(Font.font("Consolas", FontWeight.EXTRA_BOLD, 20));
@@ -611,6 +614,7 @@ public class CanvasController {
       temp.getChildren().add(new Text(System.lineSeparator()));
       i++;
     }
+    // displays the top ten predictions
     Platform.runLater(
         () -> {
           txtFlow.getChildren().setAll(temp);
