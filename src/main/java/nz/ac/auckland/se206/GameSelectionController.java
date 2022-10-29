@@ -41,8 +41,6 @@ public class GameSelectionController {
   @FXML private ToggleButton confidenceMasterToggle;
   @FXML private Button btnStartGame;
 
-  public void initialize() {}
-
   /** This method sets the difficulty toggling buttons depending on the user's saved difficulties */
   public void setDifToggles() {
     currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
