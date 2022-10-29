@@ -56,6 +56,10 @@ public class StatisticsController {
   private Image quickestWinBlack;
   private Image hiddenWinsBlack;
 
+  /**
+   * JavaFX calls this method once the GUI elements are loaded. In our case we update all relevant
+   * current user stats and badges and words played
+   */
   public void initialize() {
     currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
 
@@ -114,6 +118,11 @@ public class StatisticsController {
     initializeWordHistory(currentUserProfile);
   }
 
+  /**
+   * This method goes back to game selection scene via the back button
+   *
+   * @param event ActionEvent of the button to get scene
+   */
   @FXML
   private void onBack(Event event) {
     Button button = (Button) event.getSource();
@@ -121,6 +130,7 @@ public class StatisticsController {
     sceneOfButton.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.GAME_SELECTION));
   }
 
+  /** This method initializes the badges to black if it has not been unlocked */
   private void initializeBadgeStats() {
     JSONObject badges = currentUserProfile.getBadges().getBadgesMap();
 
@@ -181,6 +191,11 @@ public class StatisticsController {
     }
   }
 
+  /**
+   * This method initializes word history of current users for all easy, medium, and hard words
+   *
+   * @param currentUserProfile the current user's instance
+   */
   private void initializeWordHistory(UserProfile currentUserProfile) {
 
     for (String category : currentUserProfile.getWordHistoryList()) {
@@ -196,6 +211,7 @@ public class StatisticsController {
     }
   }
 
+  /** This method toggles the music button either on or off */
   @FXML
   private void onMusic() {
     MainMenuController.toggleMusic();
