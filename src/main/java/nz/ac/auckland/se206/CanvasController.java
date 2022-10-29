@@ -128,7 +128,7 @@ public class CanvasController {
   private Stack<Image> drawingStack = new Stack<>();
 
   // run by background thread to not cause GUI freezing
-  Runnable backgroundThreadTask =
+  private Runnable backgroundThreadTask =
       () -> {
         canvasTimer--;
         Platform.runLater(
