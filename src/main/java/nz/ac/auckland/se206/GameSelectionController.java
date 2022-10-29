@@ -111,20 +111,20 @@ public class GameSelectionController {
   }
 
   @FXML
-  private void onNormal() {
+  private void onSelectedNormal() {
     gameMode = "normal";
     btnStartGame.setDisable(false);
     enablePaneDifficulties();
   }
 
   @FXML
-  private void onHiddenMode() {
+  private void onSelectedHiddenMode() {
     gameMode = "hidden";
     enablePaneDifficulties();
   }
 
   @FXML
-  private void onZenMode(Event event) {
+  private void onSelectedZenMode(Event event) {
     gameMode = "zen";
     switchToCanvas(event);
     App.canvasInstances.get(UserProfile.currentUser).enableZenMode();
