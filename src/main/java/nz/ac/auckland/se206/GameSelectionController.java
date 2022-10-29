@@ -43,8 +43,10 @@ public class GameSelectionController {
 
   /** This method sets the difficulty toggling buttons depending on the user's saved difficulties */
   public void setDifToggles() {
+    // loads the current user data
     currentUserProfile = UserSelectionController.users[UserProfile.currentUser];
 
+    // sets the default toggled option to the previous selected by the user
     if (currentUserProfile.getAccuracyDifficulty() == Difficulty.EASY) {
       accuracyEasyToggle.setSelected(true);
     } else if (currentUserProfile.getAccuracyDifficulty() == Difficulty.MEDIUM) {
@@ -55,6 +57,7 @@ public class GameSelectionController {
       accuracyEasyToggle.setSelected(true);
     }
 
+    // sets the default toggled option to the previous selected by the user
     if (currentUserProfile.getWordDifficulty() == Difficulty.EASY) {
       wordEasyToggle.setSelected(true);
     } else if (currentUserProfile.getWordDifficulty() == Difficulty.MEDIUM) {
@@ -67,6 +70,7 @@ public class GameSelectionController {
       wordEasyToggle.setSelected(true);
     }
 
+    // sets the default toggled option to the previous selected by the user
     if (currentUserProfile.getTimeDifficulty() == Difficulty.EASY) {
       timeEasyToggle.setSelected(true);
     } else if (currentUserProfile.getTimeDifficulty() == Difficulty.MEDIUM) {
@@ -79,6 +83,7 @@ public class GameSelectionController {
       timeEasyToggle.setSelected(true);
     }
 
+    // sets the default toggled option to the previous selected by the user
     if (currentUserProfile.getConfidenceDifficulty() == Difficulty.EASY) {
       confidenceEasyToggle.setSelected(true);
     } else if (currentUserProfile.getConfidenceDifficulty() == Difficulty.MEDIUM) {
@@ -91,6 +96,7 @@ public class GameSelectionController {
       confidenceEasyToggle.setSelected(true);
     }
 
+    // sets the user image and name
     setProfileDetails();
   }
 
@@ -120,7 +126,7 @@ public class GameSelectionController {
 
   /** This method is called when the normal game mode is pressed and toggles the difficulty pane */
   @FXML
-  private void onNormal() {
+  private void onSelectedNormal() {
     gameMode = "normal";
     btnStartGame.setDisable(false);
     enablePaneDifficulties();
@@ -128,7 +134,7 @@ public class GameSelectionController {
 
   /** This method is called when the hidden game mode is pressed and toggles the difficulty pane */
   @FXML
-  private void onHiddenMode() {
+  private void onSelectedHiddenMode() {
     gameMode = "hidden";
     enablePaneDifficulties();
   }
@@ -139,7 +145,7 @@ public class GameSelectionController {
    * @param event ActionEvent of the button to get scene
    */
   @FXML
-  private void onZenMode(Event event) {
+  private void onSelectedZenMode(Event event) {
     gameMode = "zen";
     switchToCanvas(event);
     App.canvasInstances.get(UserProfile.currentUser).enableZenMode();
@@ -203,6 +209,7 @@ public class GameSelectionController {
 
   /** This method sets the accuracy difficulty of the current user instance */
   private void setAccuracyDif() {
+    // Sets the user's difficulty to the one selected
     if (accuracyEasyToggle.isSelected()) {
       currentUserProfile.setAccuracyDifficulty(Difficulty.EASY);
     } else if (accuracyMedToggle.isSelected()) {
@@ -216,6 +223,7 @@ public class GameSelectionController {
 
   /** This method sets the word difficulty of the current user instance */
   private void setWordDif() {
+    // Sets the user's difficulty to the one selected
     if (wordEasyToggle.isSelected()) {
       currentUserProfile.setWordDifficulty(Difficulty.EASY);
     } else if (wordMedToggle.isSelected()) {
@@ -231,6 +239,7 @@ public class GameSelectionController {
 
   /** This method sets the time difficulty of the current user instance */
   private void setTimeDif() {
+    // Sets the user's difficulty to the one selected
     if (timeEasyToggle.isSelected()) {
       currentUserProfile.setTimeDifficulty(Difficulty.EASY);
     } else if (timeMedToggle.isSelected()) {
@@ -246,6 +255,7 @@ public class GameSelectionController {
 
   /** This method sets the confidence difficulty of the current user instance */
   private void setConfidenceDif() {
+    // Sets the user's difficulty to the one selected
     if (confidenceEasyToggle.isSelected()) {
       currentUserProfile.setConfidenceDifficulty(Difficulty.EASY);
     } else if (confidenceMedToggle.isSelected()) {
@@ -354,10 +364,4 @@ public class GameSelectionController {
     Scene sceneOfNode = node.getScene();
     sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
   }
-
-  //  private void receiveData(){
-  //    Node node = (Node) fire.getSource();
-  //    UserProfile user = (UserProfile) stage.getUserData();
-  //
-  //  }
 }

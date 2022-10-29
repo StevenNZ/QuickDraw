@@ -53,17 +53,17 @@
       </Button>
       <Pane fx:id="paneModes" layoutX="423.0" layoutY="199.0" prefHeight="386.0" prefWidth="676.0">
          <children>
-            <Button fx:id="btnNormal" layoutX="221.0" layoutY="83.0" mnemonicParsing="false" onAction="#onNormal" prefHeight="50.0" prefWidth="235.0" text="Normal">
+            <Button fx:id="btnNormal" layoutX="221.0" layoutY="83.0" mnemonicParsing="false" onAction="#onSelectedNormal" prefHeight="50.0" prefWidth="235.0" text="Normal">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
             </Button>
-            <Button layoutX="221.0" layoutY="178.0" mnemonicParsing="false" onAction="#onHiddenMode" prefHeight="50.0" prefWidth="235.0" text="Hidden Word">
+            <Button layoutX="221.0" layoutY="178.0" mnemonicParsing="false" onAction="#onSelectedHiddenMode" prefHeight="50.0" prefWidth="235.0" text="Hidden Word">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>
             </Button>
-            <Button layoutX="221.0" layoutY="270.0" mnemonicParsing="false" onAction="#onZenMode" prefHeight="50.0" prefWidth="235.0" text="Zen">
+            <Button layoutX="221.0" layoutY="270.0" mnemonicParsing="false" onAction="#onSelectedZenMode" prefHeight="50.0" prefWidth="235.0" text="Zen">
                <font>
                   <Font name="Consolas" size="22.0" />
                </font>

@@ -48,6 +48,7 @@ public class CategorySelector {
   public static ArrayList<String> getEasyDifWords() {
     return getWords("E");
   }
+
   /**
    * Retrieves the list of all of the Easy and Medium words from the CSV file
    *
@@ -76,6 +77,7 @@ public class CategorySelector {
 
     return returnCategories;
   }
+
   /**
    * Retrieves the list of all of the Hard words from the CSV file
    *

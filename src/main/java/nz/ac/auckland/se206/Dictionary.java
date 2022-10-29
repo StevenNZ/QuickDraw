@@ -38,10 +38,10 @@ public class Dictionary {
       return "none";
     }
 
-    JSONArray jArray = (JSONArray) new JSONTokener(jsonString).nextValue();
+    JSONArray jsonObjects = (JSONArray) new JSONTokener(jsonString).nextValue();
 
     // getting the first entry of the meanings array
-    JSONObject jsonEntryObj = jArray.getJSONObject(0);
+    JSONObject jsonEntryObj = jsonObjects.getJSONObject(0);
     JSONArray jsonMeanings = jsonEntryObj.getJSONArray("meanings");
 
     // getting the first entry of the definitions array

@@ -87,7 +87,8 @@ public class UserSelectionController {
     graphic.setLineCap(StrokeLineCap.ROUND);
     circlePen.setOpacity(0.5);
 
-    canvasUser.setOnMousePressed( // canvas implementation for user profile pic drawing
+    // canvas implementation for user profile pic drawing
+    canvasUser.setOnMousePressed(
         e -> {
           graphic.setLineWidth(thickness);
           if (!toggleEraser.isSelected()) { // pen implementation
@@ -102,7 +103,9 @@ public class UserSelectionController {
           }
           saveStroke();
         });
-    canvasUser.setOnMouseDragged( // event listener of mouse drag for smoother pen
+
+    // event listener of mouse drag for smoother pen
+    canvasUser.setOnMouseDragged(
         e -> {
           if (!toggleEraser.isSelected()) {
             graphic.lineTo(e.getX(), e.getY());
@@ -237,6 +240,7 @@ public class UserSelectionController {
   @FXML
   private void onSaveProfile() throws IOException {
     String name = textFieldName.getText();
+    // checks if a username has been input
     if (name.strip().equals("")) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Username Error");
@@ -245,8 +249,10 @@ public class UserSelectionController {
       alert.showAndWait();
       textFieldName.setStyle("-fx-border-color: red");
     } else {
+      // saves the user name and profile image to the UserProfile variable
       users[UserProfile.currentUser].setName(name);
       users[UserProfile.currentUser].setImageView(currentImageView);
+      // saves the profile image to local files
       saveProfilePic();
       displayProfilePic(UserProfile.currentUser);
       displayName(UserProfile.currentUser);
@@ -379,6 +385,7 @@ public class UserSelectionController {
    */
   @FXML
   private void onChangeColour() {
+    // colour selected by user
     Color colour = colourPick.getValue();
     penColour = colour;
     LinearGradient paint =
@@ -392,6 +399,7 @@ public class UserSelectionController {
             new Stop(0.255, colour),
             new Stop(1.0, new Color(1.0, 1.0, 1.0, 1.0)));
     circlePaint.setFill(paint);
+    // turns pen function on with the new colour
     onPenSelected();
   }
 
