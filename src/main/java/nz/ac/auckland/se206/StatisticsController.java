@@ -16,39 +16,39 @@ import org.json.simple.JSONObject;
 
 public class StatisticsController {
 
-  @FXML Label lblWinRate;
-  @FXML Label lblQuickestWin;
-  @FXML Label lblTotalGames;
-  @FXML Label lblNormalWins;
-  @FXML Label lblNormalLosses;
-  @FXML Label lblNormalQuickest;
-  @FXML Label lblHiddenWins;
-  @FXML Label lblHiddenLosses;
-  @FXML Label lblHiddenQuickest;
+  @FXML private Label lblWinRate;
+  @FXML private Label lblQuickestWin;
+  @FXML private Label lblTotalGames;
+  @FXML private Label lblNormalWins;
+  @FXML private Label lblNormalLosses;
+  @FXML private Label lblNormalQuickest;
+  @FXML private Label lblHiddenWins;
+  @FXML private Label lblHiddenLosses;
+  @FXML private Label lblHiddenQuickest;
 
-  @FXML ImageView twentySecondWin;
-  @FXML ImageView tenSecondWin;
-  @FXML ImageView fiveSecondWin;
-  @FXML ImageView threeWinStreak;
-  @FXML ImageView sixWinStreak;
-  @FXML ImageView tenWinStreak;
-  @FXML ImageView fiveHiddenWins;
-  @FXML ImageView fifteenHiddenWins;
-  @FXML ImageView thirtyHiddenWins;
+  @FXML private ImageView twentySecondWin;
+  @FXML private ImageView tenSecondWin;
+  @FXML private ImageView fiveSecondWin;
+  @FXML private ImageView threeWinStreak;
+  @FXML private ImageView sixWinStreak;
+  @FXML private ImageView tenWinStreak;
+  @FXML private ImageView fiveHiddenWins;
+  @FXML private ImageView fifteenHiddenWins;
+  @FXML private ImageView thirtyHiddenWins;
 
-  @FXML Label tt20SecondWin;
-  @FXML Label tt10SecondWin;
-  @FXML Label tt5SecondWin;
-  @FXML Label tt3WinStreak;
-  @FXML Label tt6WinStreak;
-  @FXML Label tt10WinStreak;
-  @FXML Label tt5HiddenWins;
-  @FXML Label tt15HiddenWins;
-  @FXML Label tt30HiddenWins;
+  @FXML private Label tt20SecondWin;
+  @FXML private Label tt10SecondWin;
+  @FXML private Label tt5SecondWin;
+  @FXML private Label tt3WinStreak;
+  @FXML private Label tt6WinStreak;
+  @FXML private Label tt10WinStreak;
+  @FXML private Label tt5HiddenWins;
+  @FXML private Label tt15HiddenWins;
+  @FXML private Label tt30HiddenWins;
 
-  @FXML TextArea txtEasyWords;
-  @FXML TextArea txtMedWords;
-  @FXML TextArea txtHardWords;
+  @FXML private TextArea txtEasyWords;
+  @FXML private TextArea txtMedWords;
+  @FXML private TextArea txtHardWords;
 
   private UserProfile currentUserProfile;
   private String lblText;
