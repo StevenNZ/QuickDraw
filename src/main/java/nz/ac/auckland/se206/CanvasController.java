@@ -529,9 +529,12 @@ public class CanvasController {
    * Creates a Text-To-Speech class on win and loss. Also ensures the app gets closed down correctly
    */
   private void callTextToSpeech() {
-    Task<Void> textToSpeechTask = new Task<Void>() { // task run by a background thread
+    // task run by a background thread
+    Task<Void> textToSpeechTask =
+        new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            // plays the corresponding sound
             String file = isWin ? "/sounds/win.wav" : "/sounds/lose.wav";
             AudioInputStream audioInputStream =
                 AudioSystem.getAudioInputStream(this.getClass().getResource(file));
@@ -544,11 +547,13 @@ public class CanvasController {
 
             stage.setOnCloseRequest(
                 e -> {
+                  // stops the background thread actions
                   executor.shutdown();
                   Platform.exit();
                   // text to speech closes upon closing GUI
                   speech.terminate();
                 });
+            // plays the corresponding end game message
             speech.speak(gameoverString);
             return null;
           }
@@ -605,6 +610,7 @@ public class CanvasController {
       paneTimer.setVisible(true);
       btnStartTimer.setVisible(true);
     }
+    // displays the randomly selected category
     lblCategoryTxt.setText(randomCategory);
   }
 
@@ -718,10 +724,12 @@ public class CanvasController {
   private Scene onBackReset(ActionEvent event) {
     // resets the zen mode view
     if (GameSelectionController.gameMode.equals("zen")) {
+      // stops the background thread actions
       future.cancel(true);
       paneEditCanvas.setDisable(true);
       panePaint.setVisible(false);
       sliderThick.setVisible(false);
+      // resets the pen settings to default
       paintColour = Color.BLACK;
       thickness = 10;
       sliderThick.setValue(10);
@@ -878,6 +886,7 @@ public class CanvasController {
 
   /** This method is called when zen mode is played and enables/disables the appropriate panes */
   protected void enableZenMode() {
+    // resets pane to zen mode pane
     paneTimer.setVisible(false);
     panePaint.setVisible(true);
     paneCategories.setVisible(false);
@@ -888,6 +897,7 @@ public class CanvasController {
     // Timer must still be run for execution so large amount of time set
     timerMax = 60 * 60;
     displayNewCategory();
+    // begins the game
     onStartTimer();
   }
 
