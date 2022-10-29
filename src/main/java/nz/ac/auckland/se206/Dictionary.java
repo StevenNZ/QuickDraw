@@ -13,9 +13,19 @@ public class Dictionary {
 
   private static final String API_URL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
+  /**
+   * This method grabs the definition of the input string from a dictionary api and returns that
+   * definition or "none"
+   *
+   * @param query the word being searched for a definition
+   * @return a string of the definition of the input
+   * @throws IOException when an error occurs getting a response from the api
+   */
   public static String searchWordInfo(String query) throws IOException {
 
     String definition;
+
+    // calling the dictionary api
     OkHttpClient client = new OkHttpClient();
     Request request = new Request.Builder().url(API_URL + query).build();
     Response response = client.newCall(request).execute();
@@ -23,21 +33,26 @@ public class Dictionary {
 
     String jsonString = responseBody.string();
 
+    // returns a "none" string if there is no definition for the query
     if (jsonString.contains("title\":\"No Definitions Found")) {
       return "none";
     }
 
     JSONArray jArray = (JSONArray) new JSONTokener(jsonString).nextValue();
 
+    // getting the first entry of the meanings array
     JSONObject jsonEntryObj = jArray.getJSONObject(0);
     JSONArray jsonMeanings = jsonEntryObj.getJSONArray("meanings");
 
+    // getting the first entry of the definitions array
     JSONObject jsonMeaningObj = jsonMeanings.getJSONObject(0);
     JSONArray jsonDefinitions = jsonMeaningObj.getJSONArray("definitions");
 
+    // getting the first definition which is usually a noun and preferred
     JSONObject jsonDefinitionObj = jsonDefinitions.getJSONObject(0);
     definition = jsonDefinitionObj.getString("definition");
 
+    // returns the definition replacing the word with a start
     return definition.replaceAll(query, "*");
   }
 }
