@@ -12,8 +12,8 @@ public class CategorySelector {
   /**
    * Get words retrieves all the words from the CSV file reader and adds them to the categories
    *
-   * @param category
-   * @return
+   * @param category difficulty of words
+   * @return a list of all possible words of the input difficulty
    */
   private static ArrayList<String> getWords(String category) {
 
