@@ -128,7 +128,7 @@ public class CanvasController {
   private Stack<Image> drawingStack = new Stack<>();
 
   // run by background thread to not cause GUI freezing
-  Runnable backgroundThreadTask =
+  private Runnable backgroundThreadTask =
       () -> {
         canvasTimer--;
         Platform.runLater(
@@ -252,7 +252,7 @@ public class CanvasController {
     this.canvasTimer = timerMax; // timer to be displayed and condition for the TimerTask ending
     future = executor.scheduleAtFixedRate(backgroundThreadTask, 1, 1, TimeUnit.SECONDS);
     Stage stage = (Stage) canvas.getScene().getWindow();
-    stage.setOnCloseRequest( // text to speech closes upon closing GUI
+    stage.setOnCloseRequest(
         e -> {
           future.cancel(true);
           executor.shutdown();
@@ -316,22 +316,27 @@ public class CanvasController {
         int finalI = i;
         Platform.runLater(
             () -> {
+              // if category has gone up predictions list show green arrow
               if (finalI < categoryIndex) {
                 greenPolygon.setVisible(true);
                 redPolygon.setVisible(false);
                 neutralRectangle.setVisible(false);
+                // if category has gone down predictions list show red arrow
               } else if (finalI > categoryIndex) {
                 redPolygon.setVisible(true);
                 greenPolygon.setVisible(false);
                 neutralRectangle.setVisible(false);
+                // if category hasn't moved in predictions list show neutral sign
               } else {
                 neutralRectangle.setVisible(true);
                 redPolygon.setVisible(false);
                 greenPolygon.setVisible(false);
               }
+              // doesn't show number in list for hidden mode
               if (!GameSelectionController.gameMode.equals("hidden")) {
                 lblCategoryIndex.setText(String.valueOf(finalI + 1));
               }
+              // sets to current value so can be compared next loop
               categoryIndex = finalI;
             });
         break;
@@ -524,10 +529,12 @@ public class CanvasController {
 
             TextToSpeech speech = new TextToSpeech();
             Stage stage = (Stage) canvas.getScene().getWindow();
-            stage.setOnCloseRequest( // text to speech closes upon closing GUI
+
+            stage.setOnCloseRequest(
                 e -> {
                   executor.shutdown();
                   Platform.exit();
+                  // text to speech closes upon closing GUI
                   speech.terminate();
                 });
             speech.speak(gameoverString);
@@ -571,6 +578,7 @@ public class CanvasController {
   }
 
   protected void resetMode() {
+    // resets the pane depending on the game mode
     if (GameSelectionController.gameMode.equals("hidden")) {
       paneDefinition.setVisible(true);
       paneCategories.setVisible(false);
@@ -593,9 +601,11 @@ public class CanvasController {
     TextFlow temp = new TextFlow();
     int i = 1;
     for (Classifications.Classification classification : predictionsTen) {
+      // removes the _ and replaces them with a space
       String category = classification.getClassName().replaceAll("_", " ");
       Text text =
           new Text((i + ".  " + category.substring(0, 1).toUpperCase() + category.substring(1)));
+      // sets the target category to stand out
       if (category.equals(randomCategory) && !GameSelectionController.gameMode.equals("hidden")) {
         text.setFill(Color.GREEN);
         text.setFont(Font.font("Consolas", FontWeight.EXTRA_BOLD, 20));
@@ -604,6 +614,7 @@ public class CanvasController {
       temp.getChildren().add(new Text(System.lineSeparator()));
       i++;
     }
+    // displays the top ten predictions
     Platform.runLater(
         () -> {
           txtFlow.getChildren().setAll(temp);
@@ -670,6 +681,7 @@ public class CanvasController {
   }
 
   private Scene onBackReset(ActionEvent event) {
+    // resets the zen mode view
     if (GameSelectionController.gameMode.equals("zen")) {
       future.cancel(true);
       paneEditCanvas.setDisable(true);
@@ -684,8 +696,9 @@ public class CanvasController {
     Button button = (Button) event.getSource();
     return button.getScene();
   }
+
   /**
-   * This method retreives a binary image of the canvas and returns a binary version of the image
+   * This method retrieves a binary image of the canvas and returns a binary version of the image
    *
    * @param snapshot snapshot of the canvas
    * @return imageBinary - a binary version of the snapshot
@@ -708,22 +721,29 @@ public class CanvasController {
   }
 
   protected void searchDefinition() {
-    Task<Void> definitionTask = new Task<Void>() { // task run by a background thread
+    // task run by a background thread
+    Task<Void> definitionTask =
+        new Task<Void>() {
+
           @Override
           protected Void call() throws Exception {
             String definition = "none";
 
+            // while definition not got yet
             while (definition.equals("none")) {
               try {
+                // get the def for the category
                 definition = Dictionary.searchWordInfo(randomCategory);
               } catch (IOException e) {
                 e.printStackTrace();
               }
+              // if no definition get a new category
               if (definition.equals("none")) {
                 getNewCategory(currentUser);
               }
             }
-            //            CanvasController.definition = definition;
+
+            // out _ equal to number of letters in the category
             String hidden = "_ ".repeat(randomCategory.length());
 
             String finalDefinition = definition;
@@ -746,6 +766,7 @@ public class CanvasController {
     UserSelectionController.users[UserProfile.currentUser] = user;
     currentUser = user;
 
+    // sets the game difficulty settings the user has chosen
     setCategory();
     setTimer();
     setAccuracy();
@@ -778,6 +799,7 @@ public class CanvasController {
   }
 
   private void setAccuracy() {
+    // sets if category has to be in top 1, 2 or 3
     if (currentUser.getAccuracyDifficulty() == Difficulty.EASY) {
       accuracyLevel = 3;
     } else if (currentUser.getAccuracyDifficulty() == Difficulty.MEDIUM) {
@@ -788,6 +810,7 @@ public class CanvasController {
   }
 
   private void setConfidence() {
+    // sets required confidence percentage level for win
     if (currentUser.getConfidenceDifficulty() == Difficulty.EASY) {
       confidenceLevel = 0.01;
     } else if (currentUser.getConfidenceDifficulty() == Difficulty.MEDIUM) {
@@ -807,6 +830,7 @@ public class CanvasController {
     paneSaveDrawing.setVisible(true);
     paneZen.setVisible(true);
     sliderThick.setVisible(true);
+    // Timer must still be run for execution so large amount of time set
     timerMax = 60 * 60;
     displayNewCategory();
     onStartTimer();
@@ -825,6 +849,7 @@ public class CanvasController {
 
   @FXML
   private void onPaintSelected() {
+    // colour selected by user
     paintColour = paintButton.getValue();
     LinearGradient paint =
         new LinearGradient(
@@ -837,6 +862,7 @@ public class CanvasController {
             new Stop(0.0, Color.WHITE),
             new Stop(0.9362, paintColour));
     circlePaint.setFill(paint);
+    // turns pen function on with the new colour
     onPenSelected();
   }
 

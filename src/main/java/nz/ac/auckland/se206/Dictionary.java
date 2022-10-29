@@ -27,9 +27,9 @@ public class Dictionary {
       return "none";
     }
 
-    JSONArray jArray = (JSONArray) new JSONTokener(jsonString).nextValue();
+    JSONArray jsonObjects = (JSONArray) new JSONTokener(jsonString).nextValue();
 
-    JSONObject jsonEntryObj = jArray.getJSONObject(0);
+    JSONObject jsonEntryObj = jsonObjects.getJSONObject(0);
     JSONArray jsonMeanings = jsonEntryObj.getJSONArray("meanings");
 
     JSONObject jsonMeaningObj = jsonMeanings.getJSONObject(0);
