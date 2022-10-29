@@ -56,6 +56,7 @@ public class UserProfile {
         case "MASTER":
           return MASTER;
       }
+      // reached if the word input is not an enum equivalent
       throw new RuntimeException("Not a difficulty");
     }
   }
