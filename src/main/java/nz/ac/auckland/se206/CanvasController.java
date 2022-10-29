@@ -681,6 +681,7 @@ public class CanvasController {
   }
 
   private Scene onBackReset(ActionEvent event) {
+    // resets the zen mode view
     if (GameSelectionController.gameMode.equals("zen")) {
       future.cancel(true);
       paneEditCanvas.setDisable(true);
@@ -765,6 +766,7 @@ public class CanvasController {
     UserSelectionController.users[UserProfile.currentUser] = user;
     currentUser = user;
 
+    // sets the game difficulty settings the user has chosen
     setCategory();
     setTimer();
     setAccuracy();
@@ -797,6 +799,7 @@ public class CanvasController {
   }
 
   private void setAccuracy() {
+    // sets if category has to be in top 1, 2 or 3
     if (currentUser.getAccuracyDifficulty() == Difficulty.EASY) {
       accuracyLevel = 3;
     } else if (currentUser.getAccuracyDifficulty() == Difficulty.MEDIUM) {
@@ -807,6 +810,7 @@ public class CanvasController {
   }
 
   private void setConfidence() {
+    // sets required confidence percentage level for win
     if (currentUser.getConfidenceDifficulty() == Difficulty.EASY) {
       confidenceLevel = 0.01;
     } else if (currentUser.getConfidenceDifficulty() == Difficulty.MEDIUM) {
@@ -845,6 +849,7 @@ public class CanvasController {
 
   @FXML
   private void onPaintSelected() {
+    // colour selected by user
     paintColour = paintButton.getValue();
     LinearGradient paint =
         new LinearGradient(
@@ -857,6 +862,7 @@ public class CanvasController {
             new Stop(0.0, Color.WHITE),
             new Stop(0.9362, paintColour));
     circlePaint.setFill(paint);
+    // turns pen function on with the new colour
     onPenSelected();
   }
 
