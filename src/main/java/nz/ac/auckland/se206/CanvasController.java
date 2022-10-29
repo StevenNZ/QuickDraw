@@ -810,6 +810,7 @@ public class CanvasController {
     paneSaveDrawing.setVisible(true);
     paneZen.setVisible(true);
     sliderThick.setVisible(true);
+    // Timer must still be run for execution so large amount of time set
     timerMax = 60 * 60;
     displayNewCategory();
     onStartTimer();
