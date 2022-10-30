@@ -15,6 +15,13 @@ import org.json.simple.parser.ParseException;
 
 public class UserFileHandler {
 
+  /**
+   * Saves the users data locally
+   *
+   * @param userData JSONString containing the user's data
+   * @param userNumber The user whos data it is
+   * @throws IOException
+   */
   public static void saveUserData(String userData, int userNumber) throws IOException {
 
     File profileFolder = new File(".profiles");
@@ -35,6 +42,14 @@ public class UserFileHandler {
     userFileWriter.close(); // Closes the data stream
   }
 
+  /**
+   * Loads local user data into a JSONObject
+   *
+   * @param userNumber The user whos data it is
+   * @return The stored users data
+   * @throws IOException
+   * @throws ParseException
+   */
   public static JSONObject readUserData(int userNumber) throws IOException, ParseException {
 
     String fileLocation = ".profiles/user" + userNumber + ".json";
@@ -47,6 +62,12 @@ public class UserFileHandler {
     return returnData;
   }
 
+  /**
+   * Deletes locally stored user data
+   *
+   * @param userNumber The user whos data it is
+   * @return
+   */
   public static Boolean deleteUserData(int userNumber) {
 
     String fileLocation = ".profiles/user" + userNumber + ".json";
@@ -66,6 +87,13 @@ public class UserFileHandler {
     }
   }
 
+  /**
+   * Loads the users profile picture
+   *
+   * @param userNumber The user whos data it is
+   * @return The profile picture
+   * @throws FileNotFoundException
+   */
   public static Image readProfileImage(int userNumber) throws FileNotFoundException {
     String profileImageLocation = ".profiles/user" + userNumber + "image.png";
 
@@ -79,6 +107,11 @@ public class UserFileHandler {
     }
   }
 
+  /**
+   * Saves the users badge data locally
+   *
+   * @param badges The badge data to be saved
+   */
   public static void saveUserBadges(String badges) {
 
     File profileFolder = new File(".profiles");
@@ -103,6 +136,11 @@ public class UserFileHandler {
     }
   }
 
+  /**
+   * Loads local user badge data into a UserBadges instance
+   *
+   * @return The user badge data
+   */
   public static UserBadges readUserBadges() {
     // badges file location
     String fileLocation = ".profiles/user" + UserProfile.currentUser + "Badges.json";
