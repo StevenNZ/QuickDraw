@@ -75,12 +75,7 @@ public class CanvasController {
   @FXML private Label lblCategoryTxt;
   @FXML private Label lblClickStartTimer;
   @FXML private Label lblTimer;
-  @FXML private Label lblTopTenGuesses;
   @FXML private Label lblWinOrLoss;
-  @FXML private Label lblWins;
-  @FXML private Label lblLosses;
-  @FXML private Label lblQuickestWin;
-  @FXML private Label lblWordHistory;
   @FXML private Label lblCategoryIndex;
   @FXML private Label lblDefinition;
   @FXML private Label lblZenTxt;
@@ -91,15 +86,11 @@ public class CanvasController {
   @FXML private Pane paneDefinition;
   @FXML private Pane paneTimer;
   @FXML private Pane paneSaveDrawing;
-  @FXML private Button btnStats;
-  @FXML private Button btnReturnCanvas;
   @FXML private Button btnNewGame;
   @FXML private Circle circleEraser;
   @FXML private Circle circlePen;
   @FXML private Circle circlePaint;
   @FXML private Pane paneButtons;
-  @FXML private Pane paneCanvas;
-  @FXML private Pane paneStats;
   @FXML private Pane paneZen;
   @FXML private Pane panePaint;
   @FXML private ToggleButton togglePen;
