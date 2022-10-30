@@ -118,20 +118,6 @@ public class UserProfile {
     return quickestWin;
   }
 
-  /**
-   * Gets a list of all words played
-   *
-   * @return StringBuilder with all words played by this user
-   */
-  public StringBuilder getWordHistory() {
-    StringBuilder sb = new StringBuilder();
-    // Build a string with all the words played
-    for (String word : wordHistory) {
-      sb.append(word + "  ");
-    }
-    return sb;
-  }
-
   public void setQuickestWin(int newQuickest) {
     this.quickestWin = newQuickest;
   }
@@ -182,8 +168,8 @@ public class UserProfile {
   /**
    * Reads locally stored user data into this instance
    *
-   * @throws IOException
-   * @throws ParseException
+   * @throws IOException when an error occurs reading the file
+   * @throws ParseException when an error occurs parsing the file during reading process
    */
   public void readUserData() throws IOException, ParseException {
     JSONObject userData;
@@ -249,7 +235,7 @@ public class UserProfile {
         }
       }
       if (!found) {
-        this.availableWords.add(category);
+        this.availableWords.add(category); // adds to list of available words
       }
     }
 
