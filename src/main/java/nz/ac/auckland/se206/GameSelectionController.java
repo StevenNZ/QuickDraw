@@ -384,6 +384,13 @@ public class GameSelectionController {
     sceneOfNode.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.USER_SELECTION));
   }
 
+  /**
+   * This method is called when user presses the toggle button triggering a sound effect
+   *
+   * @throws LineUnavailableException when an error occurs getting the clip of the audio system
+   * @throws IOException when the file cannot be opened due to an error in audioInputStream
+   * @throws UnsupportedAudioFileException when the audio file is invalid and not supported
+   */
   @FXML
   private void onPressedToggleButton()
       throws LineUnavailableException, IOException, UnsupportedAudioFileException {
