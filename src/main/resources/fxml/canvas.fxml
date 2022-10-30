@@ -95,7 +95,7 @@
                         <Font name="Consolas" size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblHiddenWord" contentDisplay="CENTER" layoutX="307.0" layoutY="-4.0" prefHeight="37.0" prefWidth="376.0" styleClass="heading3" textAlignment="CENTER">
+                  <Label fx:id="lblHiddenWord" contentDisplay="CENTER" layoutX="317.0" layoutY="-4.0" prefHeight="37.0" prefWidth="376.0" styleClass="heading3" textAlignment="CENTER">
                      <font>
                         <Font name="Consolas" size="25.0" />
                      </font>
