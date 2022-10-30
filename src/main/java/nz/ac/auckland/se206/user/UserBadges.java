@@ -20,12 +20,14 @@ public class UserBadges {
     this.mapBadges();
   }
 
+  /** Saves the badge data locally */
   public void saveBadges() {
     Gson gson = new Gson();
     String badgesData = gson.toJson(this);
     UserFileHandler.saveUserBadges(badgesData);
   }
 
+  /** Maps the UserBadge data into a JSONObject */
   public void mapBadges() {
     Gson gson = new Gson();
     badgesMap = gson.fromJson(gson.toJson(this), JSONObject.class);
@@ -35,10 +37,16 @@ public class UserBadges {
     return badgesMap;
   }
 
+  /**
+   * Changes a badge to true (earned)
+   *
+   * @param badgeName The name of the badge earned
+   */
   public void addBadge(String badgeName) {
     badgesMap.replace(badgeName, true);
   }
 
+  /** Checks if the user has won any badges */
   public void checkBadges() {
 
     UserProfile user = UserSelectionController.users[UserProfile.currentUser];

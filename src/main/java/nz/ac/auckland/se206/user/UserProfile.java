@@ -42,6 +42,12 @@ public class UserProfile {
     HARD,
     MASTER;
 
+    /**
+     * Converts string to Difficulty enum value
+     *
+     * @param word String to be converted
+     * @return The corresponding Difficulty enum value
+     */
     public static Difficulty toDifficulty(String word) {
       // takes the string and converts it to the corresponding enum value
       switch (word) {
@@ -56,10 +62,12 @@ public class UserProfile {
         case "MASTER":
           return MASTER;
       }
+      // reached if the word input is not an enum equivalent
       throw new RuntimeException("Not a difficulty");
     }
   }
 
+  /** If local data exists it loads that into the instance */
   public UserProfile() {
     String userDataLocation = ".profiles/user" + currentUser + ".json";
     File userData = new File(userDataLocation);
@@ -110,9 +118,14 @@ public class UserProfile {
     return quickestWin;
   }
 
+  /**
+   * Gets a list of all words played
+   *
+   * @return StringBuilder with all words played by this user
+   */
   public StringBuilder getWordHistory() {
     StringBuilder sb = new StringBuilder();
-    // Build a string with all the top 10 predictions from the ml api
+    // Build a string with all the words played
     for (String word : wordHistory) {
       sb.append(word + "  ");
     }
@@ -135,6 +148,11 @@ public class UserProfile {
     this.imageView = imageView;
   }
 
+  /**
+   * Adds played word to word history
+   *
+   * @param category Word that has been played
+   */
   public void setWord(String category) {
     for (String listCategory : wordHistory) {
       if (category.equals(listCategory)) {
@@ -145,6 +163,7 @@ public class UserProfile {
     wordHistory.add(category);
   }
 
+  /** Saves this user's data locally */
   public void saveUserData() {
     Gson gson = new Gson();
 
@@ -160,6 +179,12 @@ public class UserProfile {
     UserFileHandler.saveUserBadges(badgesData);
   }
 
+  /**
+   * Reads locally stored user data into this instance
+   *
+   * @throws IOException
+   * @throws ParseException
+   */
   public void readUserData() throws IOException, ParseException {
     JSONObject userData;
 
@@ -191,6 +216,7 @@ public class UserProfile {
     this.badges = UserFileHandler.readUserBadges();
   }
 
+  /** Initializes words that can be played depending on the difficulty and word history. */
   private void initializeAvailableWords() {
     List<String> allReleventWords;
 
@@ -233,6 +259,11 @@ public class UserProfile {
     }
   }
 
+  /**
+   * Randomly picks a category from available words
+   *
+   * @return Category that has been selected
+   */
   public String pickCategory() {
     String pickedCategory;
     int randNumber = getRandomCategoryIndex();
@@ -249,6 +280,11 @@ public class UserProfile {
     return pickedCategory;
   }
 
+  /**
+   * Randomly selects an index from the available words array
+   *
+   * @return Index selected
+   */
   private int getRandomCategoryIndex() {
     Random random = new Random();
     return random.nextInt(availableWords.size()); // pick random entry from the list of categories
