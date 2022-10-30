@@ -1,7 +1,12 @@
+@font-face
+{
+    font-family: Noteworthy;
+    src: url("Noteworthy-Lt.ttf");
+}
+
 .body {
     -fx-font-family: "Consolas";
     -fx-font-size: 18px;
-
 }
 
 .title {
