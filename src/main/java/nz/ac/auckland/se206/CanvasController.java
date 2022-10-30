@@ -354,55 +354,6 @@ public class CanvasController {
   }
 
   /**
-   * This will be deprecated soon but shows stat page and hides canvas page. Updates the stats
-   * labels
-   */
-  @FXML
-  private void onViewStats() {
-    // Update Label for wins
-    lblWins.setText("" + currentUser.getTotalWins());
-    // update label for losses
-    lblLosses.setText("" + currentUser.getTotalLoss());
-    // update label for quickest win
-    if (currentUser.getQuickestWin() == 100) {
-      lblQuickestWin.setText("N/A");
-    } else {
-      lblQuickestWin.setText("" + currentUser.getQuickestWin() + "s");
-    }
-
-    // update label for word history
-    if (lblWordHistory != null) {
-      lblWordHistory.setText(currentUser.getWordHistory().toString());
-    }
-
-    paneCanvas.setDisable(true);
-    paneCanvas.setVisible(false);
-    // hide the see stats button
-    btnStats.setDisable(true);
-    btnStats.setVisible(false);
-    btnReturnCanvas.setVisible(true);
-    btnReturnCanvas.setDisable(false);
-    paneStats.setDisable(false);
-    paneStats.setVisible(true);
-  }
-
-  /** This will be deprecated soon but not before the check hides stat page and shows canvas page */
-  @FXML
-  private void onBackToCanvas() {
-    // Shows the View Statistics
-    btnStats.setDisable(false);
-    btnStats.setVisible(true);
-    // Hides the Back to Canvas button
-    btnReturnCanvas.setVisible(false);
-    btnReturnCanvas.setDisable(true);
-    // Toggles the statistics panes
-    paneStats.setDisable(true);
-    paneStats.setVisible(false);
-    paneCanvas.setDisable(false);
-    paneCanvas.setVisible(true);
-  }
-
-  /**
    * When called, onSaveDrawing brings up a file chooser to decide where to save the drawing
    *
    * @throws IOException when there's an error during the writing of ImageIO
