@@ -498,6 +498,7 @@ public class CanvasController {
                   Platform.exit();
                   // text to speech closes upon closing GUI
                   speech.terminate();
+                  clip.close();
                 });
             // plays the corresponding end game message
             speech.speak(gameoverString);
@@ -714,6 +715,7 @@ public class CanvasController {
    * It starts a thread and then the main thread displays definition in game
    */
   protected void searchDefinition() {
+    btnStartTimer.setDisable(true);
     // task run by a background thread
     Task<Void> definitionTask =
         new Task<Void>() {
@@ -746,6 +748,7 @@ public class CanvasController {
                   lblDefinition.setText(finalDefinition);
                   btnNewGame.setVisible(true);
                   imageLoad.setVisible(false);
+                  btnStartTimer.setDisable(false);
                 });
             return null;
           }

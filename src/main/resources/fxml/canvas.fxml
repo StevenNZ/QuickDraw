@@ -83,7 +83,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="paneDefinition" layoutX="185.0" layoutY="18.0" prefHeight="164.0" prefWidth="761.0">
+            <Pane fx:id="paneDefinition" layoutX="185.0" layoutY="18.0" prefHeight="164.0" prefWidth="761.0" visible="false">
                <children>
                   <Label fx:id="lblDefinition" alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="45.0" prefHeight="105.0" prefWidth="649.0" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                      <font>
