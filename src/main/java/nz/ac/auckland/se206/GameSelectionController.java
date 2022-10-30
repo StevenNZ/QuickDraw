@@ -10,11 +10,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 import nz.ac.auckland.se206.user.UserFileHandler;
 import nz.ac.auckland.se206.user.UserProfile;
 import nz.ac.auckland.se206.user.UserProfile.Difficulty;
@@ -395,9 +391,17 @@ public class GameSelectionController {
   private void onPressedToggleButton()
       throws LineUnavailableException, IOException, UnsupportedAudioFileException {
     String file = "/sounds/toggleButton.wav";
+    // gets music audio
     AudioInputStream audioInputStream =
         AudioSystem.getAudioInputStream(this.getClass().getResource(file));
     Clip clip = AudioSystem.getClip();
     clip.open(audioInputStream);
+    FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+    // music settings
+    float range = gainControl.getMaximum() - gainControl.getMinimum();
+    float gain = (range * 0.73f) + gainControl.getMinimum();
+    gainControl.setValue(gain);
+    // start playing music
+    clip.start();
   }
 }
