@@ -29,7 +29,6 @@
 
 .button {
     -fx-background-color: "#faa504";
-    -fx-font-family: "Consolas";
     -fx-font-size: 28px;
 }
 
@@ -73,7 +72,6 @@
 }
 
 .predictionsText {
-    -fx-font-family: "Consolas";
     -fx-font-size: 20px;
 }
 
