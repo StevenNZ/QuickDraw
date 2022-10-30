@@ -20,7 +20,7 @@ public class UserFileHandler {
    *
    * @param userData JSONString containing the user's data
    * @param userNumber The user whos data it is
-   * @throws IOException
+   * @throws IOException when an error occurs closing the file writer or writing the file
    */
   public static void saveUserData(String userData, int userNumber) throws IOException {
 
@@ -47,8 +47,8 @@ public class UserFileHandler {
    *
    * @param userNumber The user whos data it is
    * @return The stored users data
-   * @throws IOException
-   * @throws ParseException
+   * @throws IOException when an error occurs closing the file reader or reading the file
+   * @throws ParseException when error occurs while parsing
    */
   public static JSONObject readUserData(int userNumber) throws IOException, ParseException {
 
@@ -66,7 +66,7 @@ public class UserFileHandler {
    * Deletes locally stored user data
    *
    * @param userNumber The user whos data it is
-   * @return
+   * @return whether the file has been deleted with no issues or not as a boolean
    */
   public static Boolean deleteUserData(int userNumber) {
 
@@ -92,7 +92,7 @@ public class UserFileHandler {
    *
    * @param userNumber The user whos data it is
    * @return The profile picture
-   * @throws FileNotFoundException
+   * @throws FileNotFoundException when file is not found in profiles folder
    */
   public static Image readProfileImage(int userNumber) throws FileNotFoundException {
     String profileImageLocation = ".profiles/user" + userNumber + "image.png";
