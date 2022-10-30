@@ -745,12 +745,12 @@ public class CanvasController {
               }
             }
 
-            // out _ equal to number of letters in the category
-            String hidden = "   " + "_ ".repeat(randomCategory.length());
-
             String finalDefinition = definition;
             Platform.runLater(
                 () -> {
+                  // out _ equal to number of letters in the category
+                  String hidden = "_ ".repeat(randomCategory.length());
+
                   lblHiddenWord.setText(hidden);
                   lblDefinition.setText(finalDefinition);
                   btnNewGame.setVisible(true);
