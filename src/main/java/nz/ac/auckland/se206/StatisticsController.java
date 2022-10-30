@@ -35,17 +35,6 @@ public class StatisticsController {
   @FXML private ImageView fiveHiddenWins;
   @FXML private ImageView fifteenHiddenWins;
   @FXML private ImageView thirtyHiddenWins;
-
-  @FXML private Label tt20SecondWin;
-  @FXML private Label tt10SecondWin;
-  @FXML private Label tt5SecondWin;
-  @FXML private Label tt3WinStreak;
-  @FXML private Label tt6WinStreak;
-  @FXML private Label tt10WinStreak;
-  @FXML private Label tt5HiddenWins;
-  @FXML private Label tt15HiddenWins;
-  @FXML private Label tt30HiddenWins;
-
   @FXML private TextArea txtEasyWords;
   @FXML private TextArea txtMedWords;
   @FXML private TextArea txtHardWords;
