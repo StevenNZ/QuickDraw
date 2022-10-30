@@ -192,6 +192,19 @@ public class GameSelectionController {
 
     App.canvasInstances.get(UserProfile.currentUser).resetMode();
 
+    String file = "/sounds/gameStart.wav";
+    // gets music audio
+    try {
+      AudioInputStream audioInputStream =
+          AudioSystem.getAudioInputStream(this.getClass().getResource(file));
+      Clip clip = AudioSystem.getClip();
+      clip.open(audioInputStream);
+      // start playing music
+      clip.start();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
     // Go to player canvas
     switchToCanvas(event);
   }
