@@ -43,7 +43,11 @@
             <TextField fx:id="textFieldName" layoutX="392.0" layoutY="191.0" prefHeight="45.0" prefWidth="565.0" styleClass="predictionsText" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="360.0" layoutX="238.0" layoutY="262.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="410.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#faa504" height="53.0" layoutX="662.0" layoutY="262.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="bgRect" width="312.0" />
-            <Text layoutX="675.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="body" text="Draw an icon that represents you!" wrappingWidth="292.0" />
+            <Text layoutX="671.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Draw an icon that represents you!" wrappingWidth="292.0">
+               <font>
+               		<Font size="18" />
+               </font>
+            </Text>
             <Button layoutX="665.0" layoutY="564.0" mnemonicParsing="false" onAction="#onSaveProfile" prefHeight="53.0" prefWidth="309.0" text="Save Profile" />
             <Canvas fx:id="canvasUser" height="350.0" layoutX="242.0" layoutY="267.0" width="400.0" />
             <Button layoutX="45.0" layoutY="30.0" mnemonicParsing="false" onAction="#onBackUserCreation" style="-fx-background-color: white;" text="Back">
