@@ -43,10 +43,7 @@ public class MainMenuController {
     float range = gainControl.getMaximum() - gainControl.getMinimum();
     float gain = (range * 0.68f) + gainControl.getMinimum();
     gainControl.setValue(gain);
-    try {
-      clip.wait(4000);
-    } catch (Exception ignored) {
-    }
+    // start playing music
     clip.loop(Integer.MAX_VALUE);
   }
 
