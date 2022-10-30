@@ -136,7 +136,7 @@ public class CanvasController {
                   String.format("%02d:%02d", canvasTimer / 60, canvasTimer % 60)); // updates timer
             });
 
-        if (isStartPredictions && snapshot != null) {
+        if (isStartPredictions && snapshot != null) { // start predicting when user draws
           if (isStartPredictions) {
             try {
               onPredict();
@@ -164,9 +164,9 @@ public class CanvasController {
         int hiddenLength = hidden.replaceAll("_ ", "").length();
         if (canvasTimer % 10 == 1
             && randomCategory.length() - hiddenLength / 2 > hiddenLength / 2
-            && GameSelectionController.gameMode.equals("hidden")) {
+            && GameSelectionController.gameMode.equals("hidden")) { // conditions for hint to appear
           Random random = new Random();
-          int index = random.nextInt(randomCategory.length()) * 2;
+          int index = random.nextInt(randomCategory.length()) * 2; // letter is revealed randomly
           Platform.runLater(
               () -> {
                 lblHiddenWord.setText(
@@ -188,7 +188,7 @@ public class CanvasController {
 
     graphic = canvas.getGraphicsContext2D();
     graphic.setLineWidth(10);
-    graphic.setLineCap(StrokeLineCap.ROUND);
+    graphic.setLineCap(StrokeLineCap.ROUND); // initially sets the pen width
     circlePen.setOpacity(0.5);
 
     canvas.setOnMousePressed(
@@ -200,7 +200,7 @@ public class CanvasController {
             graphic.beginPath();
             graphic.lineTo(e.getX(), e.getY());
           } else if (toggleEraser.isSelected()) {
-            erasing(e);
+            erasing(e); // erasing function
           }
           saveStroke();
         });
@@ -260,7 +260,7 @@ public class CanvasController {
     btnStartTimer.setDisable(true);
     btnStartTimer.setVisible(false);
 
-    if (!GameSelectionController.gameMode.equals("zen")) {
+    if (!GameSelectionController.gameMode.equals("zen")) { // only normal and hidden game mode
       lblClickStartTimer.setVisible(false);
 
       paneButtons.setVisible(false);
@@ -412,7 +412,7 @@ public class CanvasController {
       gameoverString =
           GameSelectionController.gameMode.equals("hidden")
               ? "Sorry, hidden word was " + lblCategoryTxt.getText()
-              : "Sorry, better luck next time.";
+              : "Sorry, better luck next time."; // game over text to display
       currentUser.updateLoss();
       currentUser.resetWinStreak();
 

@@ -36,7 +36,7 @@ public class App extends Application {
   private static Parent loadFxml(final String fxml) throws IOException {
     FXMLLoader loader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
     Parent parent = loader.load();
-    if (fxml.equals("canvas")) {
+    if (fxml.equals("canvas")) { // stores the controller instance
       canvasInstances.add(loader.getController());
     } else if (fxml.equals("gameselection")) {
       gameSelectionInstance = loader.getController();
@@ -80,7 +80,7 @@ public class App extends Application {
         new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MAINMENU), 1280, 720);
 
     stage.setScene(mainMenuScene);
-    stage.show();
+    stage.show(); // shows the main menu scene
   }
 
   /**

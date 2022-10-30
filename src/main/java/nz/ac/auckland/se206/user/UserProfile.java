@@ -162,7 +162,7 @@ public class UserProfile {
       e.printStackTrace();
     }
 
-    UserFileHandler.saveUserBadges(badgesData);
+    UserFileHandler.saveUserBadges(badgesData); // save user badges into local file
   }
 
   /**

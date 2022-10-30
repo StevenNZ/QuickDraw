@@ -152,7 +152,7 @@ public class UserSelectionController {
     UserProfile.currentUser = getProfileById(id);
     UserProfile user = users[UserProfile.currentUser];
 
-    App.gameSelectionInstance.setDifToggles();
+    App.gameSelectionInstance.setDifToggles(); // presets user difficulties from last game played
     App.gameSelectionInstance.setEditMode(UserProfile.currentUser);
 
     stage.setUserData(user);
